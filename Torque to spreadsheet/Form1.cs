@@ -4978,6 +4978,7 @@ namespace WindowsFormsApplication1
         {
             if (testSetup_comboBox.SelectedIndex > 0) //User select 1 of the saved Test
             {
+                testLabel.Text = testSetups[0].testOrder.ToString();
                 currTestIndex = testSetup_comboBox.SelectedIndex - 1;
                 initCurrTestSetup(currTestIndex);
 
@@ -5045,6 +5046,7 @@ namespace WindowsFormsApplication1
             testID_txt.Enabled = true;
             maxPoint_txt.Enabled = true;
             limitEngPercent_comboBox.SelectedIndex = 0;
+            
             AF_chkbox.Checked = true;
             CW_chkbox.Checked = true;
             AL_chkbox.Checked = true;
@@ -5060,9 +5062,9 @@ namespace WindowsFormsApplication1
         }
         //Assign TestSetup from TestSetups Collection at passed in index
         //Also set the value of the test on screen
+        //changed 2/26/19
         private TestSetup initCurrTestSetup(int index)
         {
-            newTestLoad = true;
             TestSetup thisTestSetup=new TestSetup();
             thisTestSetup = testSetups[index];
             
@@ -5171,9 +5173,10 @@ namespace WindowsFormsApplication1
         }
 
         //Pass in testOrderStr, change state of orderTest Checked and write to testGrid
+        //changed 2/26/19
         private void updateTestOrderChecked(string testOrderStr)
         {
-            
+            newTestLoad = true;
             AF_chkbox.Checked = false;
             AL_chkbox.Checked = false;
             CW_chkbox.Checked = false;
@@ -7223,7 +7226,7 @@ namespace WindowsFormsApplication1
                 catch { }
             }
         }
-
+        //changed 2/26/19
         private void toolID_comboBox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             //if testSetup_groupbox is not enable, that means test is running
@@ -7273,12 +7276,12 @@ namespace WindowsFormsApplication1
                     }
                     try
                     {
-                        testSetup_comboBox.SelectedIndex = 0;
+                        //testSetup_comboBox.SelectedIndex = 0;
                         testSetup_comboBox.SelectedItem = thisRow[pack.testID_colName].ToString();
                     }
                     catch
                     {
-                        testSetup_comboBox.SelectedIndex = 0;
+                        //testSetup_comboBox.SelectedIndex = 0;
                     }
 
                     //change mode of tester if tool setup is defined

@@ -413,6 +413,7 @@ namespace WindowsFormsApplication1
             this.testTarget_lbl = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
+            this.testLabel = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -3250,6 +3251,7 @@ namespace WindowsFormsApplication1
             // 
             // groupBox17
             // 
+            this.groupBox17.Controls.Add(this.testLabel);
             this.groupBox17.Controls.Add(this.exportAverage_chckbox);
             this.groupBox17.Controls.Add(this.excelExport_calTab_btn);
             this.groupBox17.Controls.Add(this.copyAllStruct_btn);
@@ -4473,6 +4475,15 @@ namespace WindowsFormsApplication1
             this.label13.TabIndex = 0;
             this.label13.Text = "Next Target";
             // 
+            // testLabel
+            // 
+            this.testLabel.AutoSize = true;
+            this.testLabel.Location = new System.Drawing.Point(610, 16);
+            this.testLabel.Name = "testLabel";
+            this.testLabel.Size = new System.Drawing.Size(41, 14);
+            this.testLabel.TabIndex = 62;
+            this.testLabel.Text = "label44";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -4970,6 +4981,7 @@ namespace WindowsFormsApplication1
         private TextBox LSL_txt;
         private Label label43;
         private Label label33;
+        private Label testLabel;
     }
 }
 
