@@ -70,6 +70,7 @@ namespace WindowsFormsApplication1
             this.forceAutoClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoUpdateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printToolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tester_Type_Label = new System.Windows.Forms.Label();
             this.checkBox_millivolt = new System.Windows.Forms.CheckBox();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -212,6 +213,11 @@ namespace WindowsFormsApplication1
             this.dsad = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.useLimit_chkbox = new System.Windows.Forms.CheckBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.toolID_SC_comboBox = new System.Windows.Forms.ComboBox();
+            this.average_lbl = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.USL_txt = new System.Windows.Forms.TextBox();
@@ -298,6 +304,7 @@ namespace WindowsFormsApplication1
             this.continue_pauseTest_btn = new System.Windows.Forms.Button();
             this.captureBtn_calTab = new System.Windows.Forms.Button();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.testLabel = new System.Windows.Forms.Label();
             this.exportAverage_chckbox = new System.Windows.Forms.CheckBox();
             this.excelExport_calTab_btn = new System.Windows.Forms.Button();
             this.copyAllStruct_btn = new System.Windows.Forms.Button();
@@ -413,7 +420,7 @@ namespace WindowsFormsApplication1
             this.testTarget_lbl = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
-            this.testLabel = new System.Windows.Forms.Label();
+            this.notNumberWarning_lbl = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -539,10 +546,11 @@ namespace WindowsFormsApplication1
             this.openMenuItem,
             this.toolsManagerToolStripMenuItem,
             this.testManagerToolStripMenuItem,
-            this.optionsToolStripMenuItem});
+            this.optionsToolStripMenuItem,
+            this.printToolToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1877, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1690, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -737,10 +745,17 @@ namespace WindowsFormsApplication1
             this.updateToolStripMenuItem.Visible = false;
             this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
             // 
+            // printToolToolStripMenuItem
+            // 
+            this.printToolToolStripMenuItem.Name = "printToolToolStripMenuItem";
+            this.printToolToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.printToolToolStripMenuItem.Text = "Print Tool";
+            this.printToolToolStripMenuItem.Click += new System.EventHandler(this.printToolToolStripMenuItem_Click);
+            // 
             // Tester_Type_Label
             // 
             this.Tester_Type_Label.AutoSize = true;
-            this.Tester_Type_Label.Location = new System.Drawing.Point(1743, 845);
+            this.Tester_Type_Label.Location = new System.Drawing.Point(1539, 845);
             this.Tester_Type_Label.Name = "Tester_Type_Label";
             this.Tester_Type_Label.Size = new System.Drawing.Size(63, 14);
             this.Tester_Type_Label.TabIndex = 11;
@@ -750,7 +765,7 @@ namespace WindowsFormsApplication1
             // checkBox_millivolt
             // 
             this.checkBox_millivolt.AutoSize = true;
-            this.checkBox_millivolt.Location = new System.Drawing.Point(1757, 808);
+            this.checkBox_millivolt.Location = new System.Drawing.Point(1553, 808);
             this.checkBox_millivolt.Name = "checkBox_millivolt";
             this.checkBox_millivolt.Size = new System.Drawing.Size(120, 18);
             this.checkBox_millivolt.TabIndex = 12;
@@ -768,7 +783,7 @@ namespace WindowsFormsApplication1
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.flowLayoutPanel1);
-            this.groupBox1.Location = new System.Drawing.Point(1383, 799);
+            this.groupBox1.Location = new System.Drawing.Point(1179, 799);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(494, 71);
             this.groupBox1.TabIndex = 14;
@@ -1738,7 +1753,7 @@ namespace WindowsFormsApplication1
             this.read_graph_col.Controls.Add(this.groupBox3);
             this.read_graph_col.Location = new System.Drawing.Point(4, 34);
             this.read_graph_col.Name = "read_graph_col";
-            this.read_graph_col.Size = new System.Drawing.Size(1869, 883);
+            this.read_graph_col.Size = new System.Drawing.Size(1682, 885);
             this.read_graph_col.TabIndex = 4;
             this.read_graph_col.Text = "Single Channel";
             this.read_graph_col.UseVisualStyleBackColor = true;
@@ -2307,6 +2322,12 @@ namespace WindowsFormsApplication1
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.notNumberWarning_lbl);
+            this.groupBox3.Controls.Add(this.useLimit_chkbox);
+            this.groupBox3.Controls.Add(this.label46);
+            this.groupBox3.Controls.Add(this.toolID_SC_comboBox);
+            this.groupBox3.Controls.Add(this.average_lbl);
+            this.groupBox3.Controls.Add(this.label47);
             this.groupBox3.Controls.Add(this.label43);
             this.groupBox3.Controls.Add(this.label33);
             this.groupBox3.Controls.Add(this.USL_txt);
@@ -2335,87 +2356,131 @@ namespace WindowsFormsApplication1
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Current Run\'s Readings";
             // 
+            // useLimit_chkbox
+            // 
+            this.useLimit_chkbox.AutoSize = true;
+            this.useLimit_chkbox.Location = new System.Drawing.Point(394, 133);
+            this.useLimit_chkbox.Name = "useLimit_chkbox";
+            this.useLimit_chkbox.Size = new System.Drawing.Size(118, 18);
+            this.useLimit_chkbox.TabIndex = 141;
+            this.useLimit_chkbox.Text = "Use Low/High Limit";
+            this.useLimit_chkbox.UseVisualStyleBackColor = true;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(392, 67);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(59, 14);
+            this.label46.TabIndex = 152;
+            this.label46.Text = "Select Tool";
+            // 
+            // toolID_SC_comboBox
+            // 
+            this.toolID_SC_comboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.toolID_SC_comboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.toolID_SC_comboBox.FormattingEnabled = true;
+            this.toolID_SC_comboBox.Location = new System.Drawing.Point(394, 85);
+            this.toolID_SC_comboBox.Name = "toolID_SC_comboBox";
+            this.toolID_SC_comboBox.Size = new System.Drawing.Size(133, 22);
+            this.toolID_SC_comboBox.TabIndex = 139;
+            // 
+            // average_lbl
+            // 
+            this.average_lbl.AutoSize = true;
+            this.average_lbl.Location = new System.Drawing.Point(437, 358);
+            this.average_lbl.Name = "average_lbl";
+            this.average_lbl.Size = new System.Drawing.Size(49, 14);
+            this.average_lbl.TabIndex = 151;
+            this.average_lbl.Text = "Average";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(391, 358);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(30, 14);
+            this.label47.TabIndex = 150;
+            this.label47.Text = "Ave.";
+            // 
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(403, 149);
+            this.label43.Location = new System.Drawing.Point(392, 229);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(26, 14);
-            this.label43.TabIndex = 114;
+            this.label43.TabIndex = 149;
             this.label43.Text = "LSL";
             // 
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(402, 109);
+            this.label33.Location = new System.Drawing.Point(391, 189);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(27, 14);
-            this.label33.TabIndex = 113;
+            this.label33.TabIndex = 148;
             this.label33.Text = "USL";
             // 
             // USL_txt
             // 
-            this.USL_txt.Location = new System.Drawing.Point(436, 106);
+            this.USL_txt.Location = new System.Drawing.Point(425, 186);
             this.USL_txt.Name = "USL_txt";
             this.USL_txt.Size = new System.Drawing.Size(100, 20);
-            this.USL_txt.TabIndex = 112;
-            this.USL_txt.TextChanged += new System.EventHandler(this.USL_txt_TextChanged);
+            this.USL_txt.TabIndex = 142;
             // 
             // LSL_txt
             // 
-            this.LSL_txt.Location = new System.Drawing.Point(436, 146);
+            this.LSL_txt.Location = new System.Drawing.Point(425, 226);
             this.LSL_txt.Name = "LSL_txt";
             this.LSL_txt.Size = new System.Drawing.Size(100, 20);
-            this.LSL_txt.TabIndex = 111;
-            this.LSL_txt.TextChanged += new System.EventHandler(this.LSL_txt_TextChanged);
+            this.LSL_txt.TabIndex = 143;
             // 
             // showCMK_chkBox
             // 
             this.showCMK_chkBox.AutoSize = true;
             this.showCMK_chkBox.Checked = true;
             this.showCMK_chkBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.showCMK_chkBox.Location = new System.Drawing.Point(396, 71);
+            this.showCMK_chkBox.Location = new System.Drawing.Point(394, 113);
             this.showCMK_chkBox.Name = "showCMK_chkBox";
             this.showCMK_chkBox.Size = new System.Drawing.Size(119, 18);
-            this.showCMK_chkBox.TabIndex = 110;
+            this.showCMK_chkBox.TabIndex = 140;
             this.showCMK_chkBox.Text = "Show CM and CMK";
             this.showCMK_chkBox.UseVisualStyleBackColor = true;
-            this.showCMK_chkBox.CheckedChanged += new System.EventHandler(this.showCMK_chkBox_CheckedChanged);
             // 
             // CMKVal_lbl
             // 
             this.CMKVal_lbl.AutoSize = true;
-            this.CMKVal_lbl.Location = new System.Drawing.Point(448, 238);
+            this.CMKVal_lbl.Location = new System.Drawing.Point(437, 318);
             this.CMKVal_lbl.Name = "CMKVal_lbl";
             this.CMKVal_lbl.Size = new System.Drawing.Size(58, 14);
-            this.CMKVal_lbl.TabIndex = 109;
+            this.CMKVal_lbl.TabIndex = 147;
             this.CMKVal_lbl.Text = "CMK value";
             // 
             // CMK_lbl
             // 
             this.CMK_lbl.AutoSize = true;
-            this.CMK_lbl.Location = new System.Drawing.Point(402, 238);
+            this.CMK_lbl.Location = new System.Drawing.Point(391, 318);
             this.CMK_lbl.Name = "CMK_lbl";
             this.CMK_lbl.Size = new System.Drawing.Size(32, 14);
-            this.CMK_lbl.TabIndex = 108;
+            this.CMK_lbl.TabIndex = 146;
             this.CMK_lbl.Text = "CMK:";
             // 
             // CMVal_lbl
             // 
             this.CMVal_lbl.AutoSize = true;
-            this.CMVal_lbl.Location = new System.Drawing.Point(448, 194);
+            this.CMVal_lbl.Location = new System.Drawing.Point(437, 274);
             this.CMVal_lbl.Name = "CMVal_lbl";
             this.CMVal_lbl.Size = new System.Drawing.Size(51, 14);
-            this.CMVal_lbl.TabIndex = 107;
+            this.CMVal_lbl.TabIndex = 145;
             this.CMVal_lbl.Text = "CM value";
             // 
             // CM_lbl
             // 
             this.CM_lbl.AutoSize = true;
-            this.CM_lbl.Location = new System.Drawing.Point(402, 194);
+            this.CM_lbl.Location = new System.Drawing.Point(391, 274);
             this.CM_lbl.Name = "CM_lbl";
             this.CM_lbl.Size = new System.Drawing.Size(25, 14);
-            this.CM_lbl.TabIndex = 106;
+            this.CM_lbl.TabIndex = 144;
             this.CM_lbl.Text = "CM:";
             // 
             // runNameErrorLabel
@@ -2966,7 +3031,7 @@ namespace WindowsFormsApplication1
             this.TabPages.Multiline = true;
             this.TabPages.Name = "TabPages";
             this.TabPages.SelectedIndex = 0;
-            this.TabPages.Size = new System.Drawing.Size(1877, 921);
+            this.TabPages.Size = new System.Drawing.Size(1690, 923);
             this.TabPages.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabPages.TabIndex = 27;
             // 
@@ -3283,6 +3348,15 @@ namespace WindowsFormsApplication1
             this.groupBox17.Size = new System.Drawing.Size(1160, 510);
             this.groupBox17.TabIndex = 29;
             this.groupBox17.TabStop = false;
+            // 
+            // testLabel
+            // 
+            this.testLabel.AutoSize = true;
+            this.testLabel.Location = new System.Drawing.Point(610, 16);
+            this.testLabel.Name = "testLabel";
+            this.testLabel.Size = new System.Drawing.Size(41, 14);
+            this.testLabel.TabIndex = 62;
+            this.testLabel.Text = "label44";
             // 
             // exportAverage_chckbox
             // 
@@ -4475,14 +4549,14 @@ namespace WindowsFormsApplication1
             this.label13.TabIndex = 0;
             this.label13.Text = "Next Target";
             // 
-            // testLabel
+            // notNumberWarning_lbl
             // 
-            this.testLabel.AutoSize = true;
-            this.testLabel.Location = new System.Drawing.Point(610, 16);
-            this.testLabel.Name = "testLabel";
-            this.testLabel.Size = new System.Drawing.Size(41, 14);
-            this.testLabel.TabIndex = 62;
-            this.testLabel.Text = "label44";
+            this.notNumberWarning_lbl.AutoSize = true;
+            this.notNumberWarning_lbl.ForeColor = System.Drawing.Color.Red;
+            this.notNumberWarning_lbl.Location = new System.Drawing.Point(399, 159);
+            this.notNumberWarning_lbl.Name = "notNumberWarning_lbl";
+            this.notNumberWarning_lbl.Size = new System.Drawing.Size(0, 14);
+            this.notNumberWarning_lbl.TabIndex = 153;
             // 
             // Form1
             // 
@@ -4972,16 +5046,23 @@ namespace WindowsFormsApplication1
         private ToolStripMenuItem updateToolStripMenuItem;
         private ToolStripMenuItem autoUpdateMenuItem;
         private Button startTest_btn;
-        private Label CM_lbl;
+        private Label testLabel;
+        private ToolStripMenuItem printToolToolStripMenuItem;
+        private CheckBox useLimit_chkbox;
+        private Label label46;
+        private ComboBox toolID_SC_comboBox;
+        private Label average_lbl;
+        private Label label47;
+        private Label label43;
+        private Label label33;
+        private TextBox USL_txt;
+        private TextBox LSL_txt;
         private CheckBox showCMK_chkBox;
         private Label CMKVal_lbl;
         private Label CMK_lbl;
         private Label CMVal_lbl;
-        private TextBox USL_txt;
-        private TextBox LSL_txt;
-        private Label label43;
-        private Label label33;
-        private Label testLabel;
+        private Label CM_lbl;
+        private Label notNumberWarning_lbl;
     }
 }
 

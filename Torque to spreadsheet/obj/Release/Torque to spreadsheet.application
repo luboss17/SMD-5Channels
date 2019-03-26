@@ -14,14 +14,14 @@
     <framework targetVersion="4.0" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Torque to spreadsheet.exe.manifest" size="5128">
+    <dependentAssembly dependencyType="install" codebase="Torque to spreadsheet.exe.manifest" size="5752">
       <assemblyIdentity name="Torque to spreadsheet.exe" version="6.0.0.5" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>tWROeu2JQyG+jVz7y7NWRWoIEjI=</dsig:DigestValue>
+        <dsig:DigestValue>5sT+oIl0+I01VA9Vd3REGxRwRQc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

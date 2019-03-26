@@ -54,14 +54,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Torque to spreadsheet.exe" size="620544">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.Dymo.dll" size="45056">
+      <assemblyIdentity name="Interop.Dymo" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>cJd33nHlXqABLgBL1bploTQ3Xqc=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Torque to spreadsheet.exe" size="631808">
       <assemblyIdentity name="Torque to spreadsheet" version="6.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>h93S/rIC/Ji8I/xt1Pr28aP1hm0=</dsig:DigestValue>
+        <dsig:DigestValue>FsskA4fGI5xqHp/fExoYhhuDnrk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

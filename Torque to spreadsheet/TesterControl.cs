@@ -16,6 +16,7 @@ namespace WindowsFormsApplication1
         private int currPeakBlank;
         private bool currSignLock;
         private int currUnitCode;
+        private const string forward = "!*F;", reverse = "!*R;", stop = "!*S;";
 
         public TesterControl()
         {
@@ -32,13 +33,13 @@ namespace WindowsFormsApplication1
         /// <param modeMsg="write_command("?M",serialport)"></param>
         /// <param capMsg="write_command("?C",serialport)"></param>
         /// <param unitMsg="write_command("?U",serialport)"></param>
-        public void setModeAndUnitClass(string modeMsg,string capMsg,string unitMsg)
+        public void setModeAndUnitClass(string modeMsg, string capMsg, string unitMsg)
         {
             setInfo(modeMsg);//get AutoClear, Filter Frequency,Peak Blanking, Sign Lock
             setCap(capMsg);
             setUnit(unitMsg);
         }
-        
+
         public string getcurrUnitClass()
         {
             return currUnitClass;
@@ -212,7 +213,18 @@ namespace WindowsFormsApplication1
                     return "";
             }
         }
-
+        public string getForwardCommand()
+        {
+            return forward;
+        }
+        public string getReverseCommand()
+        {
+            return reverse;
+        }
+        public string getStopCommand()
+        {
+            return stop;
+        }
         private void setUnit(string message)
         {
             if (message.Length > 0)
@@ -266,7 +278,7 @@ namespace WindowsFormsApplication1
             char char_peakBlank = message[2];
             try
             {
-                peakBlank = char_peakBlank-' ';
+                peakBlank = char_peakBlank - ' ';
             }
             catch
             {
@@ -290,7 +302,7 @@ namespace WindowsFormsApplication1
             string str_HexValue = convertCharToHexStr(char_SL);
             if (str_HexValue[str_HexValue.Length - 1] == '8')
                 signLock = true;
-            
+
             return signLock;
         }
         string ADflag_binary = "";
@@ -298,9 +310,9 @@ namespace WindowsFormsApplication1
         private void setCap(string message)
         {
             int unitClassChar_pos = 5;//the char possition that determine Unit Class from message passed in should be 5, change this if there is any change in Mserial
-            message=message.Trim();
+            message = message.Trim();
             char ADflag = message[unitClassChar_pos];
-            
+
             ADflag_binary = Convert.ToString(ADflag, 2).PadLeft(8, '0');//convert the char to binary and parse to string (fill the left with 0 if the binary is shorter than 8)
             ADflag_binary = ADflag_binary.Substring(4, 2);
             switch (ADflag_binary)
@@ -322,7 +334,7 @@ namespace WindowsFormsApplication1
         //Pass in message return from sending ?M;, return the current mode of the tester
         private int setMode(string message)
         {
-            int mode =-1;
+            int mode = -1;
             if (message != "")
             {
                 char modeChr = message[0];
@@ -330,7 +342,7 @@ namespace WindowsFormsApplication1
             }
             return mode;
         }
-        
+
         //set value for AC
         private int setAC(string message)
         {
@@ -339,6 +351,7 @@ namespace WindowsFormsApplication1
             Int32.TryParse(ACchar.ToString(), out AC);
             return AC;
         }
+
 
     }
 }

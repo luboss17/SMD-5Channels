@@ -45,8 +45,8 @@ namespace WindowsFormsApplication1
         public static string serialData = "";
         public bool beep = true;
         public int casenum = -99;
-        public static DataTable singleTable=new DataTable(), noCurrentTable=new DataTable();
-        public static DataTable dualTable= new DataTable(),noCurrentDualTable=new DataTable();
+        public static DataTable singleTable = new DataTable(), noCurrentTable = new DataTable();
+        public static DataTable dualTable = new DataTable(), noCurrentDualTable = new DataTable();
         private DataTable currToolTable = new DataTable();//Contain info of currTool
         public float low = 0;
         public float high = 0;
@@ -54,12 +54,12 @@ namespace WindowsFormsApplication1
         public bool isHighLow = false;
         public bool isSerial = false;
         private string currColumn = "Reading";
-        private BindingSource tableBinding = new BindingSource(),secondtableBinding=new BindingSource(),noCurrentTableBinding=new BindingSource(),dualTableBinding=new BindingSource(),noCurrentDualTableBinding=new BindingSource(),serieBinding=new BindingSource();
+        private BindingSource tableBinding = new BindingSource(), secondtableBinding = new BindingSource(), noCurrentTableBinding = new BindingSource(), dualTableBinding = new BindingSource(), noCurrentDualTableBinding = new BindingSource(), serieBinding = new BindingSource();
         private const int maxRuns = 10;//Limit how many runs the users can take
         private string secondChannelReading = "";
         private DataTable secondChannelTable = new DataTable();
-        private string secondUnit,firstUnit;//decoded unit for live channel
-        private float secondReading,firstReading;//decoded reading for live channel
+        private string secondUnit, firstUnit;//decoded unit for live channel
+        private float secondReading, firstReading;//decoded reading for live channel
         private bool readSuccess = false;//true if successfully read from second channel
         private string firstChannelFullCap = "";
         private bool pauseLiveReading1 = false;
@@ -68,15 +68,15 @@ namespace WindowsFormsApplication1
         private string FSUnit;
         private const string noComConnectMessage = "No Transducer is connected";
         public static List<string> arr_dualSeries = new List<string>();
-        public static List<string> arr_singleSeries=new List<string>();
-        private const string tail_Channel1 = "-CH1", tail_Channel2="-CH2";//used to affix or remove to connecting Com to Channel1 or 2
-        public static TesterControl chann1Control=new TesterControl();
-        public static TesterControl chann2Control=new TesterControl();
-        public static TesterControl commonChanControl=new TesterControl();
-        private const int TTS = 0, smdSingle=2,smdDual=5;//use to set registry value for defaultTab
+        public static List<string> arr_singleSeries = new List<string>();
+        private const string tail_Channel1 = "-CH1", tail_Channel2 = "-CH2";//used to affix or remove to connecting Com to Channel1 or 2
+        public static TesterControl chann1Control = new TesterControl();
+        public static TesterControl chann2Control = new TesterControl();
+        public static TesterControl commonChanControl = new TesterControl();
+        private const int TTS = 0, smdSingle = 2, smdDual = 5;//use to set registry value for defaultTab
         private const string userRoot = "HKEY_CURRENT_USER";
-        private const string CertManagerParentLoc= "C:\\Cert Manager\\Cert Manager.xls";
-        
+        private const string CertManagerParentLoc = "C:\\Cert Manager\\Cert Manager.xls";
+
         //Keys for Registry
         private const string defaultSaveLoc_keyName = userRoot + "\\" + "SaveLocations";
         private const string defaultTab_keyName = userRoot + "\\" + "DefaultTabs";
@@ -87,7 +87,7 @@ namespace WindowsFormsApplication1
         private const string defaultTab_valueName = "defaultTab";
         private const string defaultBigReadingFontSize_valueName = "bigReadingFontSize";
         private const string defaultAutoUpdate_valueName = "Yes";
-        
+
 
         private string saveLocation = "";
         private bool isMasterSave = false;
@@ -116,8 +116,8 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             activateJetCellLicense();
-            firstChannelGrid.Scroll+=new ScrollEventHandler(makeSecondGridScroll);
-            secondChannelGridView.Scroll+=new ScrollEventHandler(makeFirstGridScroll);
+            firstChannelGrid.Scroll += new ScrollEventHandler(makeSecondGridScroll);
+            secondChannelGridView.Scroll += new ScrollEventHandler(makeFirstGridScroll);
         }
         //Open Virtual Keyboard, for tablet
         public static void openVirtualKeyboard(object sender, EventArgs e)
@@ -152,12 +152,12 @@ namespace WindowsFormsApplication1
         }
         private void makeSecondGridScroll(object sender, ScrollEventArgs e)
         {
-            unifyScroll(ref firstChannelGrid,ref secondChannelGridView);
+            unifyScroll(ref firstChannelGrid, ref secondChannelGridView);
         }
 
         private void makeFirstGridScroll(object sender, ScrollEventArgs e)
         {
-            unifyScroll(ref secondChannelGridView,ref firstChannelGrid);
+            unifyScroll(ref secondChannelGridView, ref firstChannelGrid);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -167,13 +167,13 @@ namespace WindowsFormsApplication1
             singleChannel_gridView.RowsAdded += Gridview1_RowsAdded;
             firstChannelGrid.RowsAdded += FirstChannelGrid_RowsAdded;
             noCurrentTableBinding.ResetBindings(false);
-            
+
             //noCurrentDualTableBinding.ResetBindings(false);
 
             controlTabVisibility();//select visibility of each tab
             InitTimer();//init timer2 to lively display reading
             loadSettings();
-            
+
             bindTable();
             comListRefresh_Click(this, e);//refresh comlist
             loadPorts();//load ports into tool strip
@@ -186,9 +186,9 @@ namespace WindowsFormsApplication1
             {
                 TabPages.SelectedIndex = 0;
             }
-            
+
             changeWinSize(TabPages.SelectedTab.Name);//set default Win Size
-            
+
             singleTable.Columns.Add("Point", typeof(int));//default first column of table for our Single Channel is always Point
             createNewSerie_SingleChannel(currColumn);//Add new currColumn="Reading" to Single Channel dataTable when App loads
             PreventGridSort(ref masterGridView);//prevent masterGridView from being sortable by Users
@@ -197,11 +197,11 @@ namespace WindowsFormsApplication1
 
             //Show Series on checked list for single Channel
             arr_singleSeries = getListOfSeriesName(singleChart);
-            AddSerieToCheckList(ref singleSeriesListView,arr_singleSeries);
-            updateListViewColor(ref singleSeriesListView,singleChart);//update color for seriesListView
+            AddSerieToCheckList(ref singleSeriesListView, arr_singleSeries);
+            updateListViewColor(ref singleSeriesListView, singleChart);//update color for seriesListView
 
             //Show Series on checked list for dual Channel
-            AddSerieToCheckList(ref dualSeriesListView,arr_dualSeries);
+            AddSerieToCheckList(ref dualSeriesListView, arr_dualSeries);
             //update color for seriesListView
             updateListViewColor(ref dualSeriesListView, dualChart);
 
@@ -223,7 +223,7 @@ namespace WindowsFormsApplication1
             {
                 autoUpdateMenuItem.Checked = false;
             }
-            startTest_btn.Location= new Point(909, 150);
+            startTest_btn.Location = new Point(909, 150);
             menuStrip1.Focus();
             Runbgw();
         }
@@ -237,7 +237,7 @@ namespace WindowsFormsApplication1
         {
             string returnPassFailStr = "";
             float target = 0, lowLimit, highLimit, highLimitCriteria = 0, lowLimitCriteria = 0;
-            int lowSign = -1,highSign = 1;
+            int lowSign = -1, highSign = 1;
             bool istargetConvert, ishighConvert, islowConvert;
             //Parse in target, low, high
             try
@@ -304,10 +304,10 @@ namespace WindowsFormsApplication1
         }
         //calculate low or high limit (low is -1 high is +1 for posOrneg) for bigReading tab
         //isPercent: 0 is percent, 1 is eng unit
-        private float calculatelowHighLimit(float target,float limitOffset,int posOrneg,int isPercent)
+        private float calculatelowHighLimit(float target, float limitOffset, int posOrneg, int isPercent)
         {
             float returnVal;
-            if (isPercent==0)//calculate by %
+            if (isPercent == 0)//calculate by %
             {
                 returnVal = target + (target * limitOffset / 100) * posOrneg;
             }
@@ -337,17 +337,17 @@ namespace WindowsFormsApplication1
         {
             singleChannel_gridView.FirstDisplayedScrollingRowIndex = singleChannel_gridView.RowCount - 1;
         }
-        
+
 
         //Set all default values for our Regitries
         private void setDefaultRegistries()
         {
             //Set Default Save Loc to Program Directory if it hasn't been set before
-            if (getRegistryValue(defaultSaveLoc_keyName,saveLoc_valueName)=="")       
-                 setRegistryValue(defaultSaveLoc_keyName,saveLoc_valueName, Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
+            if (getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName) == "")
+                setRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));//Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
 
-            setRegistryValue(defaultTab_keyName,defaultTab_valueName,TTS.ToString());
-            
+            setRegistryValue(defaultTab_keyName, defaultTab_valueName, TTS.ToString());
+
             //Set autoUpdate to Yes if not set yet
             if (getRegistryValue(defaultAutoUpdate_keyName, defaultAutoUpdate_valueName) == "")
                 setRegistryValue(defaultAutoUpdate_keyName, defaultAutoUpdate_valueName, autoUpdate_yesStr);
@@ -361,9 +361,9 @@ namespace WindowsFormsApplication1
         }
 
         //Set value to Registry
-        private void setRegistryValue(string keyName,string valueName, string value)
+        private void setRegistryValue(string keyName, string valueName, string value)
         {
-            Registry.SetValue(keyName,valueName,value);
+            Registry.SetValue(keyName, valueName, value);
         }
 
         private System.Drawing.Color readingColor = Color.Blue;
@@ -372,7 +372,7 @@ namespace WindowsFormsApplication1
             //PreventGridSort(ref noCurrDualMasterGrid);
             noCurrDualMasterGrid.AutoGenerateColumns = true;
             //seriesListView.ItemCheck += new ItemCheckEventHandler(SeriesListView_ItemCheck);
-            
+
             //enableSoundsToolStripMenuItem.Checked = Properties.Settings.Default.Enable_sounds_setting;
             autoConnectToolStripMenuItem.Checked = Properties.Settings.Default.Auto_Connect;
             showALLCOMAvailableToolStripMenuItem.Checked = false;//Show COM List with FullScale or just COM
@@ -384,29 +384,29 @@ namespace WindowsFormsApplication1
             singleChannel_gridView.ReadOnly = false;
             singleChannel_gridView.EditMode = DataGridViewEditMode.EditOnEnter;
             gridview.ReadOnly = false;
-            gridview.EditMode=DataGridViewEditMode.EditOnEnter;
+            gridview.EditMode = DataGridViewEditMode.EditOnEnter;
             firstChannelGrid.ReadOnly = false;
-            firstChannelGrid.EditMode=DataGridViewEditMode.EditOnEnter;
+            firstChannelGrid.EditMode = DataGridViewEditMode.EditOnEnter;
             masterGridView.ReadOnly = true;
             //masterGridView.EditMode = DataGridViewEditMode.EditOnEnter;
             high_percent.Checked = true;
             low_percent.Checked = true;
             draw_limit.Enabled = false;
-            
+
             //change color of Reading Color and Unit Color
-            DataTTS_lbl.ForeColor =  readingColor;
+            DataTTS_lbl.ForeColor = readingColor;
             Label_Data1.ForeColor = readingColor;
             DataSMDSingle_lbl.ForeColor = readingColor;
             dataCh1DualChanTab_lbl.ForeColor = readingColor;
-            dataCh2DualChTab_lbl.ForeColor=readingColor;
+            dataCh2DualChTab_lbl.ForeColor = readingColor;
 
             unitTTS_lbl.ForeColor = readingColor;
             unitSingleCH_lbl.ForeColor = readingColor;
             unitCH1DualCHTab_lbl.ForeColor = readingColor;
             unitCH2DualCHTab_lbl.ForeColor = readingColor;
-            updateFirstChannelLive(0,"");
-            updateSecondChannelLive(0,"");
-            
+            updateFirstChannelLive(0, "");
+            updateSecondChannelLive(0, "");
+
             updatexyAxisButtonText();
 
             if (autoConnectToolStripMenuItem.Checked)
@@ -442,17 +442,17 @@ namespace WindowsFormsApplication1
         dualChannelTab*/
         private void controlTabVisibility()
         {
-            
+
             HideTabPage(simple_col);
             //HideTabPage(big_reading);
             HideTabPage(big_graph);
-            
+
             //HideTabPage(simple_reading);
             //HideTabPage(read_graph_col);
             //HideTabPage(dualChannelTab);
             //HideTabPage(calibrationTab);
         }
-        
+
         //getSerialList is called when User refresh comList, to get serial Number of connected tester
         private void getSerialList()
         {
@@ -460,15 +460,15 @@ namespace WindowsFormsApplication1
             FSList.Clear();
             foreach (string com in testerList)
             {
-                if (serialPort1.PortName!=com)
+                if (serialPort1.PortName != com)
                     serialPort1.PortName = com;
                 try
                 {
-                    if (serialPort1.IsOpen==false)
+                    if (serialPort1.IsOpen == false)
                         serialPort1.Open();
                     fullscale = write_command("?F;", serialPort1);
-                    commonChanControl=new TesterControl();
-                    commonChanControl.setModeAndUnitClass(write_command("?M;",serialPort1),write_command("?C;",serialPort1),write_command("?U;",serialPort1));
+                    commonChanControl = new TesterControl();
+                    commonChanControl.setModeAndUnitClass(write_command("?M;", serialPort1), write_command("?C;", serialPort1), write_command("?U;", serialPort1));
                     serialPort1.Close();
                     serialPort1.PortName = "COM101";
                 }
@@ -480,10 +480,10 @@ namespace WindowsFormsApplication1
                 resetFSReading();
                 if (fullscale != "")
                 {
-                    decodeMessage(fullscale,commonChanControl.getcurrUnitClass(), 0);
+                    decodeMessage(fullscale, commonChanControl.getcurrUnitClass(), 0);
                 }
-                if ((FSReading!=0)&&(FSUnit!=""))
-                    FSList.Add(com+": "+FSReading+" "+FSUnit);
+                if ((FSReading != 0) && (FSUnit != ""))
+                    FSList.Add(com + ": " + FSReading + " " + FSUnit);
             }
             bindcomList(FSList);//bind FullScale to all the ComList
         }
@@ -505,7 +505,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-///////////////////Taylors Code for changing GUI behaviors////////////////////////////////////
+        ///////////////////Taylors Code for changing GUI behaviors////////////////////////////////////
         private void Taylor_settings()
         {
             try
@@ -650,7 +650,7 @@ namespace WindowsFormsApplication1
         }
 
         //Update back color of listview with series color
-        private void updateListViewColor(ref ListView listView,Chart thisChart)
+        private void updateListViewColor(ref ListView listView, Chart thisChart)
         {
             thisChart.ApplyPaletteColors();
             foreach (ListViewItem listItem in listView.Items)
@@ -675,7 +675,7 @@ namespace WindowsFormsApplication1
             }
             catch { }
         }
-        private void AddSerieToCheckList(ref ListView listView,List<string> updatedItemList)
+        private void AddSerieToCheckList(ref ListView listView, List<string> updatedItemList)
         {
             //Add New Serie from arr_dualSeries to checkbox
             foreach (string newItem in updatedItemList)
@@ -684,7 +684,7 @@ namespace WindowsFormsApplication1
                 bool okToAdd = true;
                 foreach (ListViewItem listItem in listView.Items)
                 {
-                    if (listItem.Text==newItem)
+                    if (listItem.Text == newItem)
                     {
                         okToAdd = false;
                     }
@@ -715,14 +715,14 @@ namespace WindowsFormsApplication1
         {
             try
             {
-                int indexToDelete=-1;
+                int indexToDelete = -1;
                 foreach (ListViewItem itemList in checkedList.Items)
                 {
                     if (itemList.Text == toDelete)
                         indexToDelete = itemList.Index;
                 }
 
-                if (indexToDelete>=0)
+                if (indexToDelete >= 0)
                     checkedList.Items.RemoveAt(indexToDelete);
             }
             catch (Exception exception)
@@ -732,13 +732,13 @@ namespace WindowsFormsApplication1
         }
         private void initSecondChannelTable()
         {
-            secondChannelTable=new DataTable();
+            secondChannelTable = new DataTable();
             secondChannelTable.Columns.Add("Reading", typeof(float));
-            secondChannelTable.Columns.Add("Unit",typeof(string));
+            secondChannelTable.Columns.Add("Unit", typeof(string));
             //bind second channel gridview to second table
             bindSecondChannelTable();
         }
-        
+
         //bind mastergridview to Datatable table, and nocurrentTable to mastergrid_nocurrent
         private void bindTable()
         {
@@ -749,9 +749,9 @@ namespace WindowsFormsApplication1
             //bind noCurrentTable to masterGrid_noCurrent. This grid is visible to user
             noCurrentTableBinding.DataSource = noCurrentTable;
             masterGrid_noCurrent.DataSource = noCurrentTableBinding;
-            
+
         }
-        
+
         //Control Visibility of tab page
         private void HideTabPage(TabPage tp)
         {
@@ -764,13 +764,13 @@ namespace WindowsFormsApplication1
         {
             ShowTabPage(tp, TabPages.TabPages.Count);
         }
-        
+
         private void ShowTabPage(TabPage tp, int index)
         {
             if (TabPages.TabPages.Contains(tp)) return;
             InsertTabPage(tp, index);
         }
-        
+
         private void InsertTabPage(TabPage tabpage, int index)
         {
             if (index < 0 || index > TabPages.TabCount)
@@ -808,7 +808,7 @@ namespace WindowsFormsApplication1
                 write_command("z", thisPort);
         }
 
-        
+
         //change the size of window when different tab is selected
         //simple_reading
         //simple_col
@@ -833,25 +833,25 @@ namespace WindowsFormsApplication1
                     pingTester(serialPort1);//Lock UI from Tester
                     break;
                 case "big_reading":
-                    this.Size = new Size(1305,954);
+                    this.Size = new Size(1305, 954);
                     break;
                 case "big_graph":
-                    this.Size = new Size(1305,1100);
+                    this.Size = new Size(1305, 1100);
                     break;
                 case SMDDualTabName:
-                    this.Size=new Size(1475, 943);
+                    this.Size = new Size(1475, 943);
                     this.Text = "SMD  Dual";
                     pingTester(serialPort1);//Lock UI from Tester
                     pingTester(serialPort2);//Lock UI from Tester
                     break;
                 case calTabName:
-                    this.Size=new Size(1475, 943);
+                    this.Size = new Size(1475, 943);
                     this.Text = "Calibration";
                     pingTester(serialPort1);//Lock UI from Tester
                     pingTester(serialPort2);//Lock UI from Tester
                     break;
                 default:
-                    this.Size = new Size(792+130, 338);
+                    this.Size = new Size(792 + 130, 338);
                     break;
 
             }
@@ -909,7 +909,7 @@ namespace WindowsFormsApplication1
             changeWinSize(currTab);
             menuStrip1.Focus();
         }
-        
+
         //if background worker hasnt been opened then open and run it
         private void Runbgw()
         {
@@ -919,7 +919,7 @@ namespace WindowsFormsApplication1
 
         //if passed in ComtoDisconnect contain -Channel1 or -Channel2(depends on channelNumber passed in), then remove that part
         //This method is called after a Comlist is closed
-        private BindingList<string> removeChannelfromComList(int channelNumber,BindingList<string> list,int index)
+        private BindingList<string> removeChannelfromComList(int channelNumber, BindingList<string> list, int index)
         {
             string channel = "DMSOMDJNFSDSNDKJW";//Bogus string, just for the heck of it
             if (channelNumber == 1)
@@ -927,17 +927,17 @@ namespace WindowsFormsApplication1
             else if (channelNumber == 2)
                 channel = tail_Channel2;
             list[index] = list[index].Replace(channel, "");
-            
+
             return list;
         }
-        
+
         private void updateDisconnectCOMList(string Com, int channel)
         {
             for (int index = 0; index < comList.Items.Count; index++)
             {
                 if (extractCOM(FSList[index]) == Com)
                 {
-                    FSList= removeChannelfromComList(channel, FSList, index);
+                    FSList = removeChannelfromComList(channel, FSList, index);
                     bindcomList(FSList);
                 }
             }
@@ -974,7 +974,7 @@ namespace WindowsFormsApplication1
                             resetFSReading();
 
                             //Initiate chann1Control
-                            
+
                             chann1Control = new TesterControl();
                             string modeMsg = "", CapMsg = "", UnitMsg = "";
                             modeMsg = write_command("?M;", serialPort1);
@@ -1029,7 +1029,7 @@ namespace WindowsFormsApplication1
             pauseLiveReading1 = false;
         }
         //Open or close 2nd Com for Dual channel
-        private void opencloseSecondCom(string currentPort,ListBox list)
+        private void opencloseSecondCom(string currentPort, ListBox list)
         {
             bool readCapSuccess;
             string secondChannelSerialNum = "";
@@ -1039,7 +1039,7 @@ namespace WindowsFormsApplication1
             toolStripStatusLabel1.Text = "Port: " + currentPort;
             if ((serialPort2.IsOpen == false) || (portcheck == false))
             {//if serial port is not open, OR current selected port is not is different from the SerialPort2
-                if ((serialPort1.PortName == currentPort) && (serialPort1.IsOpen==false))
+                if ((serialPort1.PortName == currentPort) && (serialPort1.IsOpen == false))
                 {
                     serialPort1.PortName = "COM101";
                 }
@@ -1052,14 +1052,14 @@ namespace WindowsFormsApplication1
                     resetFSReading();
                     //Initiate chann2Control
                     chann2Control = new TesterControl();
-                    string modeMsg = "", CapMsg = "",UnitMsg="";
+                    string modeMsg = "", CapMsg = "", UnitMsg = "";
                     modeMsg = write_command("?M;", serialPort2);
                     CapMsg = write_command("?C;", serialPort2);
                     UnitMsg = write_command("?U;", serialPort2);
 
-                    chann2Control.setModeAndUnitClass(modeMsg, CapMsg,UnitMsg);//set the currUnitMode and currUnitClass
-                    
-                    decodeMessage(secondChannelFS,chann2Control.getcurrUnitClass(), 0);//decode query got back from asking for Full Scale, then pass to FSReading and FSUnit-indicated by passing in 0 value for 2nd param
+                    chann2Control.setModeAndUnitClass(modeMsg, CapMsg, UnitMsg);//set the currUnitMode and currUnitClass
+
+                    decodeMessage(secondChannelFS, chann2Control.getcurrUnitClass(), 0);//decode query got back from asking for Full Scale, then pass to FSReading and FSUnit-indicated by passing in 0 value for 2nd param
 
                     if (FSReading == 0)//if FSReading is 0, that means fail to read FS of tester
                         readCapSuccess = false;
@@ -1071,7 +1071,7 @@ namespace WindowsFormsApplication1
                         displaySNandFS = serialPort2.PortName + ": S/N " + secondChannelSerialNum;
                     }
                     else*/
-                        displaySNandFS = serialPort2.PortName+":";
+                    displaySNandFS = serialPort2.PortName + ":";
                     if (readCapSuccess)
                         displaySNandFS += " " + FSReading + " " + FSUnit;
                     displaySNandFS += " connected";
@@ -1114,7 +1114,7 @@ namespace WindowsFormsApplication1
             FSReading = 0;
             FSUnit = "";
         }
-        
+
         private void Button_Serial_Click(object sender, EventArgs e)
         {
             opencloseFirstCOM(ref comList);
@@ -1241,7 +1241,7 @@ namespace WindowsFormsApplication1
             //updateTableandChart(ref chart1, singleChannel_gridView);
             updateTableandChart(ref singleChart, singleChannel_gridView);
         }
-        
+
         //remove row at index from passed in gridview
         private void removeRowFrGridAtIndex(ref DataGridView thisGrid, int rowIndex)
         {
@@ -1265,7 +1265,7 @@ namespace WindowsFormsApplication1
                 {
                     thisGrid.Rows.Insert(rowIndex, data);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -1343,7 +1343,7 @@ namespace WindowsFormsApplication1
             }
         }
         //displays data and sends it as keyboard input
-        private void process_data(string serialData) 
+        private void process_data(string serialData)
         {
             string[] data;
             newdata = false;
@@ -1354,10 +1354,10 @@ namespace WindowsFormsApplication1
 
                 //Add new row to gridview
                 int dataLen = data.Length;
-                string[] tempData=new string[dataLen];
-                data.CopyTo(tempData,0);
+                string[] tempData = new string[dataLen];
+                data.CopyTo(tempData, 0);
                 addrow(tempData);
-                
+
                 testerType.Text = tester_Type;
                 if (tester_Type == "Millivolt Tester" && checkBox_millivolt.Checked)
                 {
@@ -1458,14 +1458,14 @@ namespace WindowsFormsApplication1
             data = data.Trim();
             data = Regex.Replace(data, @"\s+", " ");//replace all double or more white space with single white space
 
-            data = data.Replace(",","");//delete all ","
+            data = data.Replace(",", "");//delete all ","
             data = data.Replace("- ", "-");//Some readings are passed in as "- ###", delete the space in between the sign and number
             dataArray = data.Split(null);
-            
+
             return dataArray;
         }
-        
-        private bool ch1CMCMKReCalculate = false;//determine if ch1 value was changed/recorded
+
+        private bool ch1CMCMKReCalculate = true;//determine if ch1 value was changed/recorded
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             /* Uncomment this to go back to get back to older way of capturing readings
@@ -1527,7 +1527,7 @@ namespace WindowsFormsApplication1
                 }
             }
         }
-        
+
         CMCMKCal ch1CM_CMK = new CMCMKCal();
         float LSL, USL;
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -1652,7 +1652,7 @@ namespace WindowsFormsApplication1
             }
             pauseLiveReading2 = false;//resume live reading from channel2
         }
-        
+
         //update Live Channel Reading for first Channel
         private void updateFirstChannelLive(float ReadingFloat, string unit)
         {
@@ -1713,12 +1713,12 @@ namespace WindowsFormsApplication1
         //Trigger when timer tick
         private void timer2_Tick(object sender, EventArgs e)
         {
-            
+
             if (enableLiveReadingToolStripMenuItem.Checked)
             {
                 updateChannelsReadings();
             }
-            
+
             try
             {
                 displayCMCMK();
@@ -1727,33 +1727,47 @@ namespace WindowsFormsApplication1
         }
 
         //Handle show or not show CM CMK Huy added 3/16/18
+        //changed 7/31/18
         private void displayCMCMK()
         {
             //Calculate CM and CMK Huy added 3/16/18
-            if ((showCMK_chkBox.Checked == true) && (ch1CMCMKReCalculate == true))
+            if (ch1CMCMKReCalculate == true)
             {
                 try
                 {
                     int readingColIndex = 1;
-
-                    LSL = Single.Parse(LSL_txt.Text.ToString());
-
-                    USL = Single.Parse(USL_txt.Text.ToString());
-
-                    ch1CMCMKReCalculate = false;
                     List<float> ch1ReadingList = getDataColfromDataGrid(singleChannel_gridView, readingColIndex);
+                    if ((showCMK_chkBox.Checked == true) && (LSL_txt.Text != "") && (USL_txt.Text.ToString() != ""))
+                    {
+                        LSL = Single.Parse(LSL_txt.Text.ToString());
 
-                    ch1CM_CMK.calculate_CMK(LSL, USL, ch1ReadingList);
-                    CMVal_lbl.Text = ch1CM_CMK.calculate_CM(LSL, USL, ch1ReadingList).ToString();
-                    CMKVal_lbl.Text = ch1CM_CMK.calculate_CMK(LSL, USL, ch1ReadingList).ToString();
+                        USL = Single.Parse(USL_txt.Text.ToString());
+
+                        //ch1CM_CMK.calculate_CMK(LSL, USL, ch1ReadingList);
+                        CMVal_lbl.Text = ch1CM_CMK.calculate_CM(LSL, USL, ch1ReadingList).ToString();
+                        CMKVal_lbl.Text = ch1CM_CMK.calculate_CMK(LSL, USL, ch1ReadingList).ToString();
+                    }
+                    average_lbl.Text = ch1CM_CMK.calculate_average(ch1ReadingList).ToString();
+                    notNumberWarning_lbl.Text = "";
+                }
+                catch (FormatException)
+                {
+                    notNumberWarning_lbl.Text = "Input needs to be number";
+                    clearCMCMKAve();
                 }
                 catch (Exception ex)
                 {
+                    clearCMCMKAve();
                 }
-
+                ch1CMCMKReCalculate = false;
             }
         }
-
+        private void clearCMCMKAve()
+        {
+            CMVal_lbl.Text = "";
+            CMKVal_lbl.Text = "";
+            average_lbl.Text = "";
+        }
         //timerCounter is used to stop disconnected Cable from hanging the UI
         //return timerCounter as 5 if no respond from tester (which timer 2 would have to count down till 0 till it can check for tester again)
         //reset timerCounter as 0 if there is respond from tester 
@@ -1768,13 +1782,13 @@ namespace WindowsFormsApplication1
         }
 
         private string lastReading = "";
-        private float autoClearCountDown=-5,autoClearInterval=-5;
+        private float autoClearCountDown = -5, autoClearInterval = -5;
         //Check if is time to autoclear-in case reading is the same, if reading is not the same then reset autoClearTick
         private void checkIfAutoClear(string lastReading, string thisReading)
         {
-            if ((autoClearInterval>0) && (forceAutoClearToolStripMenuItem.Checked==true))
+            if ((autoClearInterval > 0) && (forceAutoClearToolStripMenuItem.Checked == true))
             {
-                if (thisReading==lastReading)
+                if (thisReading == lastReading)
                 {
                     if (autoClearCountDown <= 0)//Time to capture
                     {
@@ -1786,7 +1800,7 @@ namespace WindowsFormsApplication1
                         else//caltupre for all other tabs
                         {
                             captureReadingsFromBothChannel();
-                            if (aquire && formActive==false && firstReading!=0)
+                            if (aquire && formActive == false && firstReading != 0)
                             {
                                 string[] data = new string[2] { firstReading.ToString(), firstUnit };
                                 sendDataToKeyboardOutPut(data);
@@ -1794,7 +1808,7 @@ namespace WindowsFormsApplication1
                         }
                     }
                     else//count down autoClearCountDown
-                        autoClearCountDown =autoClearCountDown- (tickInterval / 1000.00f);
+                        autoClearCountDown = autoClearCountDown - (tickInterval / 1000.00f);
                 }
                 else
                 {//reset auto Clear Countdown if reading changed
@@ -1822,7 +1836,7 @@ namespace WindowsFormsApplication1
 
                     //save Reading from tester1 to ch1Message
                     ch1Message = write_command("D", serialPort1);
-                    
+
                     CH1Timercounter = changeTimerCounter(ch1Message);//change ch1Timercounter to indicate whether tester is connected physically or not
                     decodeMessage(ch1Message, chann1Control.getcurrUnitClass(), 1);
 
@@ -1839,7 +1853,7 @@ namespace WindowsFormsApplication1
                     updateFirstChannelLive(ReadingToDisplay, firstUnit);
                     updateBigReadingPassFail(ReadingToDisplay);
 
-                    if (ReadingToDisplay!=0)
+                    if (ReadingToDisplay != 0)
                         checkIfAutoClear(lastReading, ch1Message);//if user set forceAutoClear and reading has been the same for autoClearInteval time then capture data
                 }
                 if ((serialPort2.IsOpen) && (CH2Timercounter <= 0) && (pauseLiveReading2 == false))
@@ -1864,7 +1878,7 @@ namespace WindowsFormsApplication1
 
                     updateSecondChannelLive(ReadingToDisplay, secondUnit);
                 }
-                
+
                 //Happens when readings from pressing Enter and software send command at same time. This also indicates tester just got pressed Enter
                 if (ch1Message.Length > 15)
                 {
@@ -1892,7 +1906,7 @@ namespace WindowsFormsApplication1
         }
 
         //Return the trough reading
-        private float getTroughPoint(float otherChReading,float thisChLiveReading, ref List<float> thisTroughList)
+        private float getTroughPoint(float otherChReading, float thisChLiveReading, ref List<float> thisTroughList)
         {
             float returnTroughPoint;
             if (otherChReading == 0)//if the other Chan Reading went back to 0, restart the trough list
@@ -1907,27 +1921,27 @@ namespace WindowsFormsApplication1
             }
             return returnTroughPoint;
         }
-        private float ch1TroughPoint=-1, ch2TroughPoint=-1;//Contain the final trough reading, -1 indicate hasnt been assigned yet
-        private List<float> ch1TroughList=new List<float>(),ch2TroughList=new List<float>(); //Contain list of all readings when the opposite channel escape 0 threshold
-        
+        private float ch1TroughPoint = -1, ch2TroughPoint = -1;//Contain the final trough reading, -1 indicate hasnt been assigned yet
+        private List<float> ch1TroughList = new List<float>(), ch2TroughList = new List<float>(); //Contain list of all readings when the opposite channel escape 0 threshold
+
         //Reformat serialData, cut off all extra stuff 
         private string reFormatserialData(string serialData)
         {
             serialData = serialData.Trim();
             int cutIndex = serialData.IndexOf('\r');
-            serialData= serialData.Substring(0, cutIndex);
-            
+            serialData = serialData.Substring(0, cutIndex);
+
             serialData = Regex.Replace(serialData, @"\s+", " ");//replace all double or more white space with single white space
-            /*int secondSpaceIndex = 0;
-            try
-            {
-                secondSpaceIndex=serialData.IndexOf(' ', serialData.IndexOf(' ') + 1);
-                serialData = serialData.Substring(0, secondSpaceIndex);
-            }
-            catch { }*/
-            //int cutIndex= serialData.IndexOf("\r\n");
-            
-            
+                                                                /*int secondSpaceIndex = 0;
+                                                                try
+                                                                {
+                                                                    secondSpaceIndex=serialData.IndexOf(' ', serialData.IndexOf(' ') + 1);
+                                                                    serialData = serialData.Substring(0, secondSpaceIndex);
+                                                                }
+                                                                catch { }*/
+                                                                //int cutIndex= serialData.IndexOf("\r\n");
+
+
             return serialData;
         }
         //Passed in ch1message and ch2message got from Sending Command D to Tester
@@ -1938,7 +1952,7 @@ namespace WindowsFormsApplication1
             bool ch2Enter = (ch2Message != "") && (ch2Message[0] == 'E');
 
             //If User press Enter on caltab , then call captureReadingsCalTab, which is same as pressing Capture_btn on calTab
-            if ((ch1Enter || ch2Enter) && (TabPages.SelectedTab.Name == calTabName) && (pauseTest==false))
+            if ((ch1Enter || ch2Enter) && (TabPages.SelectedTab.Name == calTabName) && (pauseTest == false))
             {
                 captureReadingsCalTab();
             }
@@ -2030,7 +2044,7 @@ namespace WindowsFormsApplication1
             else
                 return "";
         }
-        private void addToSecondTable(string unit,float reading)
+        private void addToSecondTable(string unit, float reading)
         {
             secondChannelTable.Rows.Add(reading, unit);
 
@@ -2042,7 +2056,7 @@ namespace WindowsFormsApplication1
         /// </summary>
         /// <param Raw Reading="thismessage"></param>
         /// <param channel "0 for FullScale", "1" or "2"="channel"></param>
-        private void decodeMessage(string thismessage,string unitClass, int channel)
+        private void decodeMessage(string thismessage, string unitClass, int channel)
         {
             try
             {
@@ -2052,7 +2066,7 @@ namespace WindowsFormsApplication1
                     firstUnit = "";
                 }
 
-                thismessage= thismessage.TrimEnd(' ');
+                thismessage = thismessage.TrimEnd(' ');
                 //thismessage = thismessage.TrimStart(' ');
                 thismessage = thismessage.Replace(",", "");//delete , for reading that has too many digits
                 if (thismessage[thismessage.Length - 1] == ';')//remove ; at the end of message
@@ -2064,11 +2078,11 @@ namespace WindowsFormsApplication1
                 try
                 {
                     reading_str = (thismessage.Substring(2)).Replace(" ", "");
-                    reading_str=reading_str.Replace("\r", "");
+                    reading_str = reading_str.Replace("\r", "");
                     reading_str = reading_str.Replace("\n", "");
                     reading = Single.Parse(reading_str);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     reading = 0;
                 }
@@ -2098,10 +2112,10 @@ namespace WindowsFormsApplication1
             secondUnit = "";
             secondReading = 0;
             //message=<peak flag><unit><sign><reading>
-            
+
             try
             {
-                secondUnit = getUnit(message[1],chann2Control.getcurrUnitClass());
+                secondUnit = getUnit(message[1], chann2Control.getcurrUnitClass());
                 secondReading = Convert.ToSingle(getSign(message[2]) + message.Substring(3));
                 readSuccess = true;
             }
@@ -2115,7 +2129,7 @@ namespace WindowsFormsApplication1
                 }
             }
         }
-        
+
         private void includeTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             includeTimeToolStripMenuItem.Checked = (includeTimeToolStripMenuItem.Checked == false);//toggle time stamp            
@@ -2140,7 +2154,7 @@ namespace WindowsFormsApplication1
         public string[] ports = SerialPort.GetPortNames();
         string currPort = "";//store current COM number
         string received_message = "";
-        static int serialLen=7;
+        static int serialLen = 7;
 
         // code
         private void Closebgw()
@@ -2158,7 +2172,7 @@ namespace WindowsFormsApplication1
             try
             {
                 serialPort2.Open();
-                
+
             }
             catch
             { MessageBox.Show("Can't open port"); }
@@ -2223,8 +2237,8 @@ namespace WindowsFormsApplication1
             }
 
             Console.WriteLine(received_message);
- //           receive_text.Text = received_message;
- //           tester_list.Items.Add(received_message);
+            //           receive_text.Text = received_message;
+            //           tester_list.Items.Add(received_message);
 
         }
         //Initialize the port, prameter: portnum
@@ -2264,7 +2278,7 @@ namespace WindowsFormsApplication1
         {
             refreshComList();
         }
-        private List<string> testerList=new List<string>();
+        private List<string> testerList = new List<string>();
         private void refreshComList()
         {
             isRefresh = true;
@@ -2344,7 +2358,8 @@ namespace WindowsFormsApplication1
         //When user selects different COM from comList box, close old COM, open new COM
         private void comList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 if (autoConnectToolStripMenuItem.Checked)
                 {
                     autoConnectHandle(extractCOM(comList.SelectedItem.ToString()));
@@ -2353,9 +2368,9 @@ namespace WindowsFormsApplication1
             catch { }
         }
 
-        private void updateSampleNuminGrid(ref DataGridView grid,int rowIndex)
+        private void updateSampleNuminGrid(ref DataGridView grid, int rowIndex)
         {
-            while ((rowIndex<grid.RowCount-1)&&(rowIndex>=0))
+            while ((rowIndex < grid.RowCount - 1) && (rowIndex >= 0))
             {
                 grid.Rows[rowIndex].Cells[0].Value = rowIndex + 1;
                 rowIndex++;
@@ -2370,17 +2385,17 @@ namespace WindowsFormsApplication1
                 singleChannel_gridView.Rows.RemoveAt(index);
                 firstChannelGrid.Rows.RemoveAt(index);
             }
-            updateSampleNuminGrid(ref singleChannel_gridView,index);
-            updateSampleNuminGrid(ref firstChannelGrid,index);
+            updateSampleNuminGrid(ref singleChannel_gridView, index);
+            updateSampleNuminGrid(ref firstChannelGrid, index);
 
             //updateTableandChart(ref chart1,singleChannel_gridView);
-            updateTableandChart(ref singleChart,singleChannel_gridView);
+            updateTableandChart(ref singleChart, singleChannel_gridView);
         }
         private void delete_Click(object sender, EventArgs e)
         {
             if (gridview.RowCount > 0)
                 deleteRow(gridview.CurrentCell.RowIndex);
-            
+
         }
         private void clearGrid(ref DataGridView grid)
         {
@@ -2390,7 +2405,7 @@ namespace WindowsFormsApplication1
             }
             askToClearData = true;
             //updateTableandChart(ref chart1,singleChannel_gridView);
-            updateTableandChart(ref singleChart,singleChannel_gridView);
+            updateTableandChart(ref singleChart, singleChannel_gridView);
         }
 
         //Clear all readings in gridview
@@ -2398,7 +2413,7 @@ namespace WindowsFormsApplication1
         {
             clearGrid(ref gridview);
         }
-        
+
         //write to specific cell into excel workbook
         //Prameter: cell number, what to write to that cell, excel work book
         private ExcelWorkbook writecel(string cell, string data, ExcelWorkbook wbook)
@@ -2409,15 +2424,16 @@ namespace WindowsFormsApplication1
                 dataToWrite = Convert.ToSingle(data);
                 wbook.Worksheets[0].Cells[cell].Value = dataToWrite;
             }
-            else {//data is string, write to excel as string
+            else
+            {//data is string, write to excel as string
                 string dataToWrite = data;
                 wbook.Worksheets[0].Cells[cell].Value = dataToWrite;
             }
 
-            
+
             return wbook;
         }
-        
+
         //populate Excel file with the reading. 
         //pass in list of possitive points in string format
         //pass in list of negative points in string format
@@ -2427,19 +2443,19 @@ namespace WindowsFormsApplication1
             ExcelWorkbook wbook = new ExcelWorkbook();
             wbook.Worksheets.Add("Sheet1");
             //Write headers to Excel worksheet
-            wbook = writecel("A1","Memory Location",wbook);
-            wbook = writecel("B1","Reading",wbook);
+            wbook = writecel("A1", "Memory Location", wbook);
+            wbook = writecel("B1", "Reading", wbook);
             wbook = writecel("C1", "Unit", wbook);
             int excelRow = 1;
-            
-            for (int rowindex=0;rowindex<(singleChannel_gridView.RowCount-1);rowindex++)
+
+            for (int rowindex = 0; rowindex < (singleChannel_gridView.RowCount - 1); rowindex++)
             {
                 if (!singleChannel_gridView.Rows[rowindex].IsNewRow)
                 {
                     excelRow = rowindex + 2;
                     wbook = writecel(String.Concat("A", excelRow.ToString()), singleChannel_gridView.Rows[rowindex].Cells[0].Value.ToString(), wbook);//write memory location to A column
-                    wbook= writecel(String.Concat("B", excelRow.ToString()), singleChannel_gridView.Rows[rowindex].Cells[1].Value.ToString(), wbook);//write reading to B column
-                    wbook= writecel(String.Concat("C", excelRow.ToString()), singleChannel_gridView.Rows[rowindex].Cells[2].Value.ToString(), wbook);//write unit to C column
+                    wbook = writecel(String.Concat("B", excelRow.ToString()), singleChannel_gridView.Rows[rowindex].Cells[1].Value.ToString(), wbook);//write reading to B column
+                    wbook = writecel(String.Concat("C", excelRow.ToString()), singleChannel_gridView.Rows[rowindex].Cells[2].Value.ToString(), wbook);//write unit to C column
                 }
             }
 
@@ -2451,10 +2467,10 @@ namespace WindowsFormsApplication1
         {
             int index = 0;
             //check how many possitive or negative, use index to initiate string[] result
-            for (int count = 0; count < (gridview.RowCount-1); count++)
+            for (int count = 0; count < (gridview.RowCount - 1); count++)
             {
                 string value = gridview.Rows[count].Cells[1].Value.ToString();
-                if (((sign==true) && (!value.Contains("-"))) || ((sign == false) && (value.Contains("-"))))//look for sign=true and possitive num, or sign=false and negative num
+                if (((sign == true) && (!value.Contains("-"))) || ((sign == false) && (value.Contains("-"))))//look for sign=true and possitive num, or sign=false and negative num
                 {
                     index++;
                 }
@@ -2462,11 +2478,11 @@ namespace WindowsFormsApplication1
             string[] result = new string[index];
 
             index = 0;//reset index for later use
-            for (int count=0;count<(gridview.RowCount-1);count++)
+            for (int count = 0; count < (gridview.RowCount - 1); count++)
             {
                 if (!gridview.Rows[count].IsNewRow)
                 {
-                    
+
                     string value = gridview.Rows[count].Cells[1].Value.ToString();
                     if (((sign == true) && (!value.Contains("-"))) || ((sign == false) && (value.Contains("-"))))
                     {
@@ -2475,16 +2491,16 @@ namespace WindowsFormsApplication1
                     }
                 }
             }
-            
+
             return result;
         }
-        
+
         //return the unit of tester (ex: inlbs, inoz, etc.)
         private string getExcelUnit()
         {
             string value = "";
-           
-            if (!gridview.Rows[0].IsNewRow) 
+
+            if (!gridview.Rows[0].IsNewRow)
                 value = gridview.Rows[0].Cells[2].Value.ToString();
             return value;
         }
@@ -2493,10 +2509,10 @@ namespace WindowsFormsApplication1
         {
             string[] possitive = getpoint(true);//populate all possitive point into positive
             string[] negative = getpoint(false);//populate all negative point into negative
-            string filename= "result-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")+".xls";
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+@"\Torque_To_Spreadsheet_Export";//set path of export file to MyDocuments\Torque_To_Spreadsheet_Export folder
-            
-            string fullpath =Path.Combine(getRegistryValue(defaultSaveLoc_keyName,saveLoc_valueName), filename);//location folder AND filename
+            string filename = "result-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xls";
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Torque_To_Spreadsheet_Export";//set path of export file to MyDocuments\Torque_To_Spreadsheet_Export folder
+
+            string fullpath = Path.Combine(getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName), filename);//location folder AND filename
 
             /*
             //if the folder for path hasn't been created, create it
@@ -2507,17 +2523,17 @@ namespace WindowsFormsApplication1
 
             ExcelWorkbook wbook = populateExcel();
             wbook.WriteXLS(@fullpath);
-            var openfile = MessageBox.Show("File successfully saved into " + fullpath + "\n\nOpen folder? ", "Open File Location",MessageBoxButtons.YesNo);
-            if (openfile==DialogResult.Yes)
+            var openfile = MessageBox.Show("File successfully saved into " + fullpath + "\n\nOpen folder? ", "Open File Location", MessageBoxButtons.YesNo);
+            if (openfile == DialogResult.Yes)
             {
                 string argument = @"/select, " + fullpath;
                 System.Diagnostics.Process.Start("explorer.exe", argument);
-            }       
+            }
         }
 
         //Name changed from initChart 8/27/17
         //Catch error, changed 8/28/18
-        private void initChartSerie(ref Chart chart,string name)
+        private void initChartSerie(ref Chart chart, string name)
         {
             try
             {
@@ -2525,8 +2541,8 @@ namespace WindowsFormsApplication1
             }
             catch { }
         }
-        
-        private void clearTableColumn(ref DataTable thisTable,int colIndex)
+
+        private void clearTableColumn(ref DataTable thisTable, int colIndex)
         {
             try
             {
@@ -2538,10 +2554,10 @@ namespace WindowsFormsApplication1
             catch { }
         }
         //Assign look for the chart
-        private Chart setChart(Chart chart,string serie,int chartype)
+        private Chart setChart(Chart chart, string serie, int chartype)
         {
             //set graph type to Line chart or Point
-            if (chartype==1)//Use FastLine
+            if (chartype == 1)//Use FastLine
                 chart.Series[serie].ChartType = SeriesChartType.FastLine;
             else//set graph type to FastPoint
             {
@@ -2568,16 +2584,16 @@ namespace WindowsFormsApplication1
                     if (!(thisTable.Rows[rowIndex].IsNull(colIndex)))
                         isrowEmpty = false;
                 }
-                if (isrowEmpty==true)
+                if (isrowEmpty == true)
                     thisTable.Rows.RemoveAt(rowIndex);
             }
         }
-        
+
         //Copy girdview from first Channel reading to last Column of table
         private void updateTable_SingleChannel(DataGridView thisGrid)
         {
             //clear all value from last collumn of table
-            clearTableColumn(ref singleTable, singleTable.Columns.Count-1);
+            clearTableColumn(ref singleTable, singleTable.Columns.Count - 1);
 
             //copy all values from current gridview into table[currColumn]
             for (int i = 0; i < thisGrid.Rows.Count; i++)
@@ -2595,7 +2611,7 @@ namespace WindowsFormsApplication1
                     try
                     {
                         singleTable.Columns[currColumn].ReadOnly = false;
-                        float tempReading= Convert.ToSingle(thisGrid.Rows[i].Cells[1].Value.ToString());
+                        float tempReading = Convert.ToSingle(thisGrid.Rows[i].Cells[1].Value.ToString());
                         singleTable.Columns[currColumn].ReadOnly = false;
                         singleTable.Rows[i].SetField(currColumn, tempReading);
                         //singleTable.Rows[i][currColumn] = tempReading;
@@ -2606,7 +2622,7 @@ namespace WindowsFormsApplication1
                     }
                 }
             }
-            
+
             masterGridView.Refresh();
         }
 
@@ -2623,12 +2639,12 @@ namespace WindowsFormsApplication1
         //Changed 8/27/17
         private void updateChart(ref Chart chart)
         {
-            
+
             //update actual reading
             int pointColIndex = singleTable.Columns.IndexOf("Point");
             bindChartXYwithTableHeader(ref singleTable, 0, singleTable.Columns.Count - 1, ref chart, currColumn);
 
-            chart = setChart(chart,currColumn,1);//assign what the chart look like
+            chart = setChart(chart, currColumn, 1);//assign what the chart look like
 
 
             int maxRowCount = singleTable.Rows.Count;
@@ -2651,7 +2667,7 @@ namespace WindowsFormsApplication1
             //If draw limit is on, draw it and compare max min with limit
             if (isHighLow)
             {
-                chart = drawChartLimit(chart,0,maxRowCount,low,high,target_value);
+                chart = drawChartLimit(chart, 0, maxRowCount, low, high, target_value);
                 max = Math.Max(high, max);
                 min = Math.Min(low, min);
             }
@@ -2663,8 +2679,8 @@ namespace WindowsFormsApplication1
                 min = 1;
 
             //Give max and min 1 buffer
-            max+=1;
-            min-=1;
+            max += 1;
+            min -= 1;
             int maxInt = (int)Math.Ceiling(max);
             int minInt = (int)Math.Floor(min);
             //Draw graph again with new Y Axis limit
@@ -2681,7 +2697,7 @@ namespace WindowsFormsApplication1
 
         //draw Limit for chart
         //Only call this if chart has Series high low and target already existed
-        private Chart drawChartLimit(Chart chart,float X_commonMin, float X_commonMax,float Y_low,float Y_high, float Y_target)
+        private Chart drawChartLimit(Chart chart, float X_commonMin, float X_commonMax, float Y_low, float Y_high, float Y_target)
         {
             chart.Series["high"].Points.Clear();
             chart.Series["low"].Points.Clear();
@@ -2722,7 +2738,7 @@ namespace WindowsFormsApplication1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Button_Aquire_Click(this,e);
+            Button_Aquire_Click(this, e);
         }
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
@@ -2735,12 +2751,12 @@ namespace WindowsFormsApplication1
         private void numericUpDown1_ValueChanged_1(object sender, EventArgs e)
         {
             RowCountMax.Value = numericUpDown1.Value;
-            numericUpDown2.Value= numericUpDown1.Value; 
+            numericUpDown2.Value = numericUpDown1.Value;
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            button1_Click(this,e);
+            button1_Click(this, e);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -2788,12 +2804,12 @@ namespace WindowsFormsApplication1
         {
             opencloseFirstCOM(ref comList3);
             channel1MenuButtonUpdate();
-            
+
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            Button_Aquire_Click(this,e);
+            Button_Aquire_Click(this, e);
         }
 
         private void checkBox7_CheckedChanged(object sender, EventArgs e)
@@ -2805,7 +2821,7 @@ namespace WindowsFormsApplication1
 
         private void button11_Click(object sender, EventArgs e)
         {
-            button1_Click(this,e);
+            button1_Click(this, e);
         }
 
         private void deleteRow_SingleTab_Click(object sender, EventArgs e)
@@ -2814,13 +2830,19 @@ namespace WindowsFormsApplication1
                 try
                 {
                     deleteRow(singleChannel_gridView.CurrentCell.RowIndex);
+
                 }
                 catch { }
+            ch1CMCMKReCalculate = true;
         }
-
+        //changed 10/2/18
         private void clearRun_SingleTab_Click(object sender, EventArgs e)
         {
             clearGrid(ref singleChannel_gridView);
+            USL_txt.Text = "";
+            LSL_txt.Text = "";
+            ch1CMCMKReCalculate = true;
+            clear_limit_Click(this, e);
         }
 
         private float[,] dataToExcel(DataGridView thisGrid)
@@ -2848,7 +2870,7 @@ namespace WindowsFormsApplication1
             int index = pathName.Length - 1;
             if (pathName.Contains(".xls"))
             {
-                while ((pathName[index] != '\\') && (index>0))
+                while ((pathName[index] != '\\') && (index > 0))
                 {
                     pathName = pathName.Substring(0, index);
                     index--;
@@ -2859,20 +2881,20 @@ namespace WindowsFormsApplication1
         //Show save dialog box and return path name
         private static string getSavePathName(string defaultName)
         {
-            
+
             SaveFileDialog saveDlg = new SaveFileDialog();
             saveDlg.InitialDirectory = lastPathName;
-            saveDlg.Filter="Excel|*.xls";
+            saveDlg.Filter = "Excel|*.xls";
             saveDlg.FileName = defaultName;
             saveDlg.ShowDialog();
             string path = "";
             path = saveDlg.FileName;
             if (path != "")
-                lastPathName =extractPathFromExcelPathName(path);
+                lastPathName = extractPathFromExcelPathName(path);
             return path;
         }
 
-        //changed 3/23/18
+        //changed 7/31/18
         private void saveExcel(string path, DataTable thisTable, int chartType)
         {
             string currTab = TabPages.SelectedTab.Name;
@@ -2898,32 +2920,36 @@ namespace WindowsFormsApplication1
             string range_data, range_high, range_low, range_target;
             try
             {
-                string begin_reading,begin_high, begin_low, begin_target;
-                int startRow,startCol;
+                string begin_reading, begin_high, begin_low, begin_target;
+                int startRow, startCol;
                 startCol = 1;
                 startRow = getStartRowExcelData(TabPages.SelectedTab.Name);
 
                 // Get an Excel Range of the same dimensions
                 begin_reading = "B" + startRow;
-                begin_high = "C"+startRow;
+                begin_high = "C" + startRow;
                 begin_low = "D" + startRow;
                 begin_target = "E" + startRow;
 
                 //Note that since we use singleChannel_gridView, it has extra new row so subtract 1
-                range_data = "B" + (singleChannel_gridView.RowCount - 1+ startRow-1);
+                range_data = "B" + (singleChannel_gridView.RowCount - 1 + startRow - 1);
                 range_high = "C" + (singleChannel_gridView.RowCount - 1 + startRow - 1);
                 range_low = "D" + (singleChannel_gridView.RowCount - 1 + startRow - 1);
                 range_target = "E" + (singleChannel_gridView.RowCount - 1 + startRow - 1);
-                
+
 
                 //init Chart setting
                 Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlWorkSheet.ChartObjects(Type.Missing);
                 Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(200, 80, 500, 250);
                 Excel.Chart chartPage = myChart.Chart;
-                if (chartType == lineChart)
+
+                //For now use Line Chart for all Chart
+                /*if (chartType == lineChart)
                     chartPage.ChartType = Excel.XlChartType.xlXYScatterLines;
                 else
-                    chartPage.ChartType = Excel.XlChartType.xlXYScatter;
+                    chartPage.ChartType = Excel.XlChartType.xlXYScatter;*/
+                chartPage.ChartType = Excel.XlChartType.xlXYScatterLines;
+
                 chartPage.HasTitle = true;
                 chartPage.ChartTitle.Text = "File saved at " + path;
                 chartPage.ChartTitle.Font.Size = 12;
@@ -2950,13 +2976,13 @@ namespace WindowsFormsApplication1
                     if (isMasterSave)
                     {
                         //if this save is for MasterGrid, change the range of high low target
-                        begin_high = getColLetter(thisTable.Columns.Count - 1) + "3";
-                        begin_low = getColLetter(thisTable.Columns.Count) + "3";
-                        begin_target = getColLetter(thisTable.Columns.Count + 1) + "3";
+                        begin_high = getColLetter(thisTable.Columns.Count - 1) + (startRow + 1);
+                        begin_low = getColLetter(thisTable.Columns.Count) + (startRow + 1);
+                        begin_target = getColLetter(thisTable.Columns.Count + 1) + (startRow + 1);
 
-                        range_high = getColLetter(thisTable.Columns.Count - 1) + (thisTable.Rows.Count + 2);
-                        range_low = getColLetter(thisTable.Columns.Count) + (thisTable.Rows.Count + 2);
-                        range_target = getColLetter(thisTable.Columns.Count + 1) + (thisTable.Rows.Count + 2);
+                        range_high = getColLetter(thisTable.Columns.Count - 1) + (thisTable.Rows.Count + startRow);
+                        range_low = getColLetter(thisTable.Columns.Count) + (thisTable.Rows.Count + startRow);
+                        range_target = getColLetter(thisTable.Columns.Count + 1) + (thisTable.Rows.Count + startRow);
 
                     }
 
@@ -2974,9 +3000,16 @@ namespace WindowsFormsApplication1
                 if (isMasterSave == false)
                 {//Write gridview readings to excel
 
-                    //Todo: Write CM CMK value
-                    const int startCMCMKRow = 2,startCMCMKCol=1;
+                    const int startCMCMKRow = 2, startCMCMKCol = 1;
                     xlWorkSheet = writeCMCMKtoExcel(xlWorkSheet, startCMCMKRow, startCMCMKCol);
+
+                    // Find the last real row
+                    int excelLastRow = xlWorkSheet.Cells.Find("*", System.Reflection.Missing.Value,
+                    System.Reflection.Missing.Value, System.Reflection.Missing.Value, Excel.XlSearchOrder.xlByRows, Excel.XlSearchDirection.xlPrevious, false, System.Reflection.Missing.Value, System.Reflection.Missing.Value).Row;
+
+                    //Write tool info to last row
+                    if (toolID_SC_comboBox.SelectedIndex >= 0)
+                        xlWorkSheet = writeToolsInfoToSCExcel(xlWorkSheet, excelLastRow + 1);
 
                     Excel.Range datarange = (Excel.Range)xlWorkSheet.Cells[startRow, startCol];
                     datarange = datarange.get_Resize(rowCount - 1, colCount);
@@ -2991,16 +3024,21 @@ namespace WindowsFormsApplication1
 
                     reading.Values = reading_range;
                     //add heading for Excel file 
-                    xlWorkSheet.Cells[startRow-1, startCol] = "Point";
-                    xlWorkSheet.Cells[startRow-1, startCol+1] = colName;
-                    xlWorkSheet.Cells[startRow - 1, startCol+2] = "High";
-                    xlWorkSheet.Cells[startRow - 1, startCol+3] = "Low";
-                    xlWorkSheet.Cells[startRow - 1, startCol+4] = "Target";
+                    xlWorkSheet.Cells[startRow - 1, startCol] = "Point";
+                    xlWorkSheet.Cells[startRow - 1, startCol + 1] = colName;
+                    xlWorkSheet.Cells[startRow - 1, startCol + 2] = "High";
+                    xlWorkSheet.Cells[startRow - 1, startCol + 3] = "Low";
+                    xlWorkSheet.Cells[startRow - 1, startCol + 4] = "Target";
                 }
                 else //write master readings to Excel instead
                 {
                     ///////////////Write from table to Excel
                     int rowIndex = 2, colIndex = 0;
+
+                    //Write tool info to last row
+                    if (toolID_SC_comboBox.SelectedIndex >= 0)
+                        xlWorkSheet = writeToolsInfoToSCExcel(xlWorkSheet, rowIndex);
+                    rowIndex = startRow;
 
                     //This loop assign the header name of each column in table into Excel
                     foreach (DataColumn dc in thisTable.Columns)
@@ -3025,9 +3063,9 @@ namespace WindowsFormsApplication1
                         xlWorkSheet.Cells[rowIndex, colIndex + 2] = low;
                         xlWorkSheet.Cells[rowIndex, colIndex + 3] = target_value;
                     }
-                    xlWorkSheet.Cells[2, colIndex + 1] = "High Limit";
-                    xlWorkSheet.Cells[2, colIndex + 2] = "Low Limit";
-                    xlWorkSheet.Cells[2, colIndex + 3] = "Target";
+                    xlWorkSheet.Cells[startRow, colIndex + 1] = "High Limit";
+                    xlWorkSheet.Cells[startRow, colIndex + 2] = "Low Limit";
+                    xlWorkSheet.Cells[startRow, colIndex + 3] = "Target";
                     ////////////////End writing datas//////////////////////////////
 
                     //Do graph for multiple series
@@ -3056,8 +3094,8 @@ namespace WindowsFormsApplication1
                         }
                         /////End Assigning///
                         //Assign X and Y Range for colList[serie]
-                        YRange = xlWorkSheet.get_Range(YcolLetter + "3:" + YcolLetter + (thisTable.Rows.Count + 2));
-                        XRange = xlWorkSheet.get_Range(XcolLetter + "3:" + XcolLetter + (thisTable.Rows.Count + 2));
+                        YRange = xlWorkSheet.get_Range(YcolLetter + (startRow + 1) + ":" + YcolLetter + (thisTable.Rows.Count + startRow));
+                        XRange = xlWorkSheet.get_Range(XcolLetter + (startRow + 1) + ":" + XcolLetter + (thisTable.Rows.Count + startRow));
                         colList[colListIndex].Values = YRange;
                         colList[colListIndex].XValues = XRange;
 
@@ -3092,57 +3130,128 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Unable to save readings to Excel file.\n\nThere may be no reading recorded, or the Excel file is currently opened");
             }
         }
+
+        //Write tool info into SC Xcel
+        private Excel.Worksheet writeToolsInfoToSCExcel(Excel.Worksheet wsheet, int startRow)
+        {
+            string labelCol = "A";//write the header of tools to Column A 
+            string valueCol = "B";//write value of tools header to Column B
+            int rowIndex = startRow;
+
+            foreach (DataRow thisRow in toolsDataTable.Rows)
+            {
+                //if thisRow is the same toolID user select
+                if (toolID_SC_comboBox.Text == thisRow[pack.toolID_colName].ToString())
+                {
+                    DataTable selectedToolTable = toolsDataTable.Clone();
+                    selectedToolTable.ImportRow(thisRow);
+
+                    //Write Tools Info to wsheet
+                    wsheet = writeCellToExcelWorkBook(labelCol + rowIndex, toolID_lbl.Text, wsheet);
+                    wsheet = writeCellToExcelWorkBook(valueCol + rowIndex, thisRow[pack.toolID_colName].ToString(), wsheet);
+                    rowIndex++;
+
+                    wsheet = writeCellToExcelWorkBook(labelCol + rowIndex, toolSN_lbl.Text, wsheet);
+                    wsheet = writeCellToExcelWorkBook(valueCol + rowIndex, thisRow[pack.SN_colName].ToString(), wsheet);
+                    rowIndex++;
+
+                    wsheet = writeCellToExcelWorkBook(labelCol + rowIndex, model_lbl.Text, wsheet);
+                    wsheet = writeCellToExcelWorkBook(valueCol + rowIndex, thisRow[pack.model_colName].ToString(), wsheet);
+                    rowIndex++;
+
+                    wsheet = writeCellToExcelWorkBook(labelCol + rowIndex, manu_lbl.Text, wsheet);
+                    wsheet = writeCellToExcelWorkBook(valueCol + rowIndex, thisRow[pack.manufacturer_colName].ToString(), wsheet);
+                    rowIndex++;
+
+                    wsheet = writeCellToExcelWorkBook(labelCol + rowIndex, certLot_lbl.Text, wsheet);
+                    wsheet = writeCellToExcelWorkBook(valueCol + rowIndex, thisRow[pack.lotID_colName].ToString(), wsheet);
+                    rowIndex++;
+
+                }
+            }
+            return wsheet;
+        }
+
         //check if 1st channel tab, and showCMCMK checked, then write value to excel
         //Passed in rowIndex and colIndex of where CM CMK will be written
         //Will be written as 
         //      col1 col2
         //row1  CM:  CM_val
         //row2  CMK: CM_val
-        //Added 3/227/18
+        //changed 7/31/18
         private Excel.Worksheet writeCMCMKtoExcel(Excel.Worksheet wSheet, int rowIndex, int colIndex)
         {
-            if (TabPages.SelectedTab.Name==SMDSingleTabName && showCMK_chkBox.Checked==true)
-            {
-                wSheet.Cells[rowIndex, colIndex] = "CM:";
-                wSheet.Cells[rowIndex + 1, colIndex] = "CMK:";
-                try
-                {
-                    int readingColIndex = 1;
-                    LSL = Single.Parse(LSL_txt.Text.ToString());
-                    USL = Single.Parse(USL_txt.Text.ToString());
-                    List<float> ch1ReadingList = getDataColfromDataGrid(singleChannel_gridView, readingColIndex);
+            int readingColIndex = 1;
+            List<float> ch1ReadingList = getDataColfromDataGrid(singleChannel_gridView, readingColIndex);
 
-                    //write CM val
+            if (TabPages.SelectedTab.Name == SMDSingleTabName)
+            {
+                if (showCMK_chkBox.Checked == true)
+                {
+                    wSheet.Cells[rowIndex, colIndex] = "CM:";
+                    wSheet.Cells[rowIndex + 1, colIndex] = "CMK:";
+                    wSheet.Cells[rowIndex + 2, colIndex] = "Average";
                     try
                     {
-                        double CM_val = ch1CM_CMK.calculate_CM(LSL, USL, ch1ReadingList);
-                        wSheet.Cells[rowIndex, colIndex + 1] = Math.Round(CM_val, 2);
+                        LSL = Single.Parse(LSL_txt.Text.ToString());
+                        USL = Single.Parse(USL_txt.Text.ToString());
+
+                        //write CM,CMK, ave val
+                        try
+                        {
+                            double CM_val = ch1CM_CMK.calculate_CM(LSL, USL, ch1ReadingList);
+                            wSheet.Cells[rowIndex, colIndex + 1] = Math.Round(CM_val, 2);
+                        }
+                        catch { }
+                        try
+                        {
+                            double CMK_val = ch1CM_CMK.calculate_CMK(LSL, USL, ch1ReadingList);
+                            wSheet.Cells[rowIndex + 1, colIndex + 1] = Math.Round(CMK_val, 2);
+                        }
+                        catch { }
                     }
                     catch { }
                     try
                     {
-                        double CMK_val = ch1CM_CMK.calculate_CMK(LSL, USL, ch1ReadingList);
-                        wSheet.Cells[rowIndex+1, colIndex + 1] = Math.Round(CMK_val, 2);
+                        double average = ch1CM_CMK.calculate_average(ch1ReadingList);
+                        wSheet.Cells[rowIndex + 2, colIndex + 1] = Math.Round(average, 2);
                     }
                     catch { }
                 }
-                catch { }
+                else
+                {
+                    try
+                    {
+                        double average = ch1CM_CMK.calculate_average(ch1ReadingList);
+                        wSheet.Cells[rowIndex, colIndex] = "Average";
+                        wSheet.Cells[rowIndex, colIndex + 1] = Math.Round(average, 2);
+                    }
+                    catch { }
+                }
             }
             return wSheet;
         }
 
         //return the row number that excel start to write the Readings (not counting header)
-        //Added 3/27/18
+        //Changed 7/31/18
         private int getStartRowExcelData(string tabName)
         {
-            int returnRow=3;//1st row is tab name, 2nd row is column header
+            const int toolRowCount = 5;
+            int returnRow = 3;//1st row is tab name, 2nd row is column header
 
             switch (tabName)
             {
                 case SMDSingleTabName://if smd single, check if CM and CMK value is checked
                     //if it's checked, add 2 more rows for CM and CMK
-                    if (showCMK_chkBox.Checked==true)
-                        returnRow += 2;
+                    if (showCMK_chkBox.Checked == true)
+                        returnRow += 3;
+                    else
+                        returnRow += 1;//for average row
+                    //if Tool is selected, add 5 more rows for tools info
+                    if (toolID_SC_comboBox.SelectedIndex >= 0)
+                    {
+                        returnRow += toolRowCount;
+                    }
                     break;
                 default:
                     break;
@@ -3271,7 +3380,7 @@ namespace WindowsFormsApplication1
         {
             string path = getSavePathName(currColumn);
             if ((path != "") && (path.Contains(".xls")))
-                saveExcel(path,singleTable,lineChart);
+                saveExcel(path, singleTable, lineChart);
         }
 
         private void refresh2_Click(object sender, EventArgs e)
@@ -3281,26 +3390,26 @@ namespace WindowsFormsApplication1
         private const string quickExportError = "Please go into File-Define Quick Export Path to state the default Saved Location for this function";
         private void quickExport_Click_1(object sender, EventArgs e)
         {
-                string fileName = currColumn + "-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xls";
-                string path = Path.Combine(getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName), fileName);
-                quickExportToExcel(path, singleTable, lineChart);
+            string fileName = currColumn + "-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xls";
+            string path = Path.Combine(getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName), fileName);
+            quickExportToExcel(path, singleTable, lineChart);
         }
 
         //quick export Datatable into Excel
         //Changed 1/3/18
-        private void quickExportToExcel(string path,DataTable thisTable,int chartType)
+        private void quickExportToExcel(string path, DataTable thisTable, int chartType)
         {
             try
             {
                 try
-                    {
-                        saveExcel(path, thisTable, chartType);
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Unable to save file. Please make sure the program has access to save to " + path);
-                    }
-                
+                {
+                    saveExcel(path, thisTable, chartType);
+                }
+                catch
+                {
+                    MessageBox.Show("Unable to save file. Please make sure the program has access to save to " + path);
+                }
+
             }
             catch (NullReferenceException nullError)
             {
@@ -3310,6 +3419,34 @@ namespace WindowsFormsApplication1
             {
                 MessageBox.Show("Unable to Export to Excel due to error: \n" + error.Message);
             }
+        }
+        private LowHighTarget setHighLowTarget()
+        {
+            LowHighTarget returnLowHighTarget = new LowHighTarget();
+            float lowLimit, highLimit, target_float;
+            target_float = Convert.ToSingle(target.Text);
+            target_value = target_float;
+            highLimit = Convert.ToSingle(high_limit.Text);
+            lowLimit = Convert.ToSingle(low_limit.Text);
+            if (high_percent.Checked == true)//when high_percent is checked
+            {
+                returnLowHighTarget.high = target_float + target_float * highLimit / 100;
+            }
+            else//when high_unit is checked
+            {
+                returnLowHighTarget.high = highLimit;
+            }
+
+            if (low_percent.Checked == true)//when low_percent is checked
+            {
+                returnLowHighTarget.low = target_float - target_float * lowLimit / 100;
+            }
+            else//when low_unit is checked
+            {
+                returnLowHighTarget.low = lowLimit;
+            }
+
+            return returnLowHighTarget;
         }
         private void drawLimit_singleChannel()
         {
@@ -3322,30 +3459,13 @@ namespace WindowsFormsApplication1
                 initChartSerie(ref singleChart, "low");
                 initChartSerie(ref singleChart, "high");
             }
+
             isHighLow = true;
 
-            float lowLimit, highLimit, target_float;
-            target_float = Convert.ToSingle(target.Text);
-            target_value = target_float;
-            highLimit = Convert.ToSingle(high_limit.Text);
-            lowLimit = Convert.ToSingle(low_limit.Text);
-            if (high_percent.Checked == true)//when high_percent is checked
-            {
-                high = target_float + target_float * highLimit / 100;
-            }
-            else//when high_unit is checked
-            {
-                high = highLimit;
-            }
+            LowHighTarget lowhightarget = setHighLowTarget();
+            high = lowhightarget.high;
+            low = lowhightarget.low;
 
-            if (low_percent.Checked == true)//when low_percent is checked
-            {
-                low = target_float - target_float * lowLimit / 100;
-            }
-            else//when low_unit is checked
-            {
-                low = lowLimit;
-            }
             //updateTableandChart(ref chart1, singleChannel_gridView);
             updateTableandChart(ref singleChart, singleChannel_gridView);
         }
@@ -3360,7 +3480,7 @@ namespace WindowsFormsApplication1
             RowCountMax.Value = numericUpDown2.Value;
             numericUpDown1.Value = numericUpDown2.Value;
         }
-        private void removeSerie(ref Chart chart,string serieName)
+        private void removeSerie(ref Chart chart, string serieName)
         {
             Series serie = chart.Series[serieName];
             chart.Series.Remove(serie);
@@ -3386,7 +3506,7 @@ namespace WindowsFormsApplication1
         //only enable Draw Limit button when all fields target, high, low are filled out
         private void updateInterface()
         {
-            draw_limit.Enabled= !string.IsNullOrWhiteSpace(this.target.Text) && !string.IsNullOrWhiteSpace(this.low_limit.Text) && !string.IsNullOrWhiteSpace(this.high_limit.Text);
+            draw_limit.Enabled = !string.IsNullOrWhiteSpace(this.target.Text) && !string.IsNullOrWhiteSpace(this.low_limit.Text) && !string.IsNullOrWhiteSpace(this.high_limit.Text);
         }
 
         private void target_TextChanged(object sender, EventArgs e)
@@ -3420,7 +3540,7 @@ namespace WindowsFormsApplication1
         }
         //Param: Command to write to Serial Port and which serial port to write to
         //Return feed back from tester
-        public static string write_command(string command,SerialPort port)
+        public static string write_command(string command, SerialPort port)
         {
             string returnvalue = "";
             string err;
@@ -3433,8 +3553,9 @@ namespace WindowsFormsApplication1
                     returnvalue = port.ReadTo(";");
 
                 }
-                catch (Exception e){
-                    
+                catch (Exception e)
+                {
+
                 }
             }
             return returnvalue;
@@ -3465,12 +3586,12 @@ namespace WindowsFormsApplication1
             {
                 //initChartSerie(ref chart1, serieName);
                 initChartSerie(ref singleChart, serieName);
-                DataColumn column= new DataColumn(serieName);
+                DataColumn column = new DataColumn(serieName);
                 column.AllowDBNull = true;
 
                 singleTable.Columns.Add(column);
                 currColumn = serieName;
-                }
+            }
             catch (System.Exception excep)
             {
                 MessageBox.Show(excep.Message);
@@ -3510,7 +3631,7 @@ namespace WindowsFormsApplication1
             AddSerieToCheckList(ref singleSeriesListView, arr_singleSeries);
             updateListViewColor(ref singleSeriesListView, singleChart);//update color for seriesListView
 
-            changeGridAutoColumnSize(ref masterGrid_noCurrent,colThreshold);
+            changeGridAutoColumnSize(ref masterGrid_noCurrent, colThreshold);
         }
 
         //delete serie from a chart
@@ -3524,7 +3645,7 @@ namespace WindowsFormsApplication1
         //Changed 8/27/17
         private void delete_column_Click(object sender, EventArgs e)
         {
-            Form_Delete frm=new Form_Delete();
+            Form_Delete frm = new Form_Delete();
             frm.ShowDialog();
 
             string deleteColumn = Form_Delete.deleteColumn;
@@ -3538,10 +3659,10 @@ namespace WindowsFormsApplication1
                     singleTable.Columns.Remove(deleteColumn);
                     noCurrentTable.Columns.Remove(deleteColumn);
                     masterGridView.Refresh();
-                        
+
                     //updateTableandChart(ref chart1,singleChannel_gridView);
-                    updateTableandChart(ref singleChart,singleChannel_gridView);
-                        
+                    updateTableandChart(ref singleChart, singleChannel_gridView);
+
                     //}
                     removeSerieFrCheckList(deleteColumn, ref singleSeriesListView);
                     //update color for seriesListView
@@ -3556,11 +3677,11 @@ namespace WindowsFormsApplication1
         }
 
         //return true if passed in colname can be used
-        public static Boolean checkColumnNameCanBeUsed(string colName,DataTable thisTable)
+        public static Boolean checkColumnNameCanBeUsed(string colName, DataTable thisTable)
         {
             if (colName == "") //|| (thisTable.Columns.Count<=0))
                 return false;
-            for (int i=0; i<thisTable.Columns.Count; i++)
+            for (int i = 0; i < thisTable.Columns.Count; i++)
             {
                 if (thisTable.Columns[i].ColumnName == colName)
                     return false;
@@ -3569,9 +3690,9 @@ namespace WindowsFormsApplication1
         }
 
         //return true if passed in serieName can be used for passed in dualChart
-        public static Boolean checkSerieNameCanBeUsed(string serieName,List<string> serieList)
+        public static Boolean checkSerieNameCanBeUsed(string serieName, List<string> serieList)
         {
-            if (serieName=="")
+            if (serieName == "")
                 return false;
             bool nameCheck = true;
             foreach (var ListSerie in serieList)
@@ -3597,7 +3718,7 @@ namespace WindowsFormsApplication1
             updateTableandChart(ref singleChart, singleChannel_gridView);
         }
         //change column name of passed in grid and the index of the column, this also changes the "table" structure(used for mastergridview)
-        private void ChangeColName(string oldColName, string newName, int colIndex,ref DataTable thisTable)
+        private void ChangeColName(string oldColName, string newName, int colIndex, ref DataTable thisTable)
         {
             if (colIndex > -1)
             {
@@ -3605,12 +3726,12 @@ namespace WindowsFormsApplication1
                 thisTable.Columns[colIndex].ColumnName = newName;
 
                 //change nocurrenttable w new Column name too
-                if (checkColumnNameCanBeUsed(oldColName, noCurrentTable)==false)
+                if (checkColumnNameCanBeUsed(oldColName, noCurrentTable) == false)
                 {
                     noCurrentTable.Columns[colIndex].ColumnName = newName;
                 }
             }
-            
+
         }
 
         //change name of column for mastergrid and table
@@ -3620,8 +3741,8 @@ namespace WindowsFormsApplication1
             frm.ShowDialog();
             if ((frm.newName.Length > 0) && (frm.oldName.Length > 0))
             {
-                ChangeColName(frm.oldName, frm.newName, frm.columnIndex,ref singleTable);
-                changeCh1ChartName(frm.oldName,frm.newName);
+                ChangeColName(frm.oldName, frm.newName, frm.columnIndex, ref singleTable);
+                changeCh1ChartName(frm.oldName, frm.newName);
                 updateCurrentRunAndSingleChanLabel(currColumn);
             }
             bindTable();
@@ -3632,7 +3753,7 @@ namespace WindowsFormsApplication1
             arr_singleSeries = getListOfSeriesName(singleChart);
             //removeSerieFrCheckList(frm.oldName,ref singleSeriesListView);//Remove the old one
             //AddSerieToCheckList(ref singleSeriesListView, arr_singleSeries);
-            renameSerieInListView(frm.oldName,frm.newName,ref singleSeriesListView);
+            renameSerieInListView(frm.oldName, frm.newName, ref singleSeriesListView);
             updateListViewColor(ref singleSeriesListView, singleChart);//update color for seriesListView
         }
 
@@ -3643,11 +3764,11 @@ namespace WindowsFormsApplication1
             testName_Text.Clear();
             //if user doesn't enter test name, default to TTS_export-date
             if (fileName.Length == 0)
-                fileName = "TTS_export-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")+".xls";
+                fileName = "TTS_export-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xls";
             if (noCurrentTable.Rows.Count > 0)
             {
                 isMasterSave = true;
-                string path = Path.Combine(getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName), fileName+".xls");
+                string path = Path.Combine(getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName), fileName + ".xls");
                 quickExportToExcel(path, noCurrentTable, lineChart);
             }
         }
@@ -3660,7 +3781,7 @@ namespace WindowsFormsApplication1
                 isMasterSave = true;
                 string path = getSavePathName(testName_Text.Text);
                 if ((path != "") && (path.Contains(".xls")))
-                    saveExcel(path,noCurrentTable,lineChart);
+                    saveExcel(path, noCurrentTable, lineChart);
             }
         }
         private void openCloseSecondPort_Click(object sender, EventArgs e)
@@ -3675,7 +3796,7 @@ namespace WindowsFormsApplication1
             opencloseSecondCom(currentPort, thisList);
             changeWinSize(TabPages.SelectedTab.Name);//Call this to ping or unping tester
             channel2MenuButtonUpdate();
-            
+
         }
         //Change Menu button and Mode appearance for Second Channel
         private void channel2MenuButtonUpdate()
@@ -3738,18 +3859,18 @@ namespace WindowsFormsApplication1
         private void saveCurrent_button_Click(object sender, EventArgs e)
         {
             clearEmptyRow(ref singleTable);
-            copyTable(ref singleTable,ref noCurrentTable);
+            copyTable(ref singleTable, ref noCurrentTable);
             bindTable();
-            
-            changeGridAutoColumnSize(ref masterGrid_noCurrent,colThreshold);
+
+            changeGridAutoColumnSize(ref masterGrid_noCurrent, colThreshold);
         }
-        
+
         private void addDualRun_Click(object sender, EventArgs e)
         {
             //Show Form to ask for Serie Name, CHan1 and Chan2 names
             FormAddDualRun frm = new FormAddDualRun();
             frm.ShowDialog();
-            if (frm.allNamesValid==true)
+            if (frm.allNamesValid == true)
             {
                 //Save the Last Run to noCurrDualTable
                 saveToNoCurrDualTable();
@@ -3758,7 +3879,7 @@ namespace WindowsFormsApplication1
                 currentDualSerie = frm.newRunName;
                 currRunName1 = frm.chan1Name;
                 currRunName2 = frm.chan2Name;
-                
+
                 if (xAxis == 1)
                 {//if Channel1 is x, add channel1, then add channel2 to dualTable
                     tableAddCol(ref dualTable, currRunName1, 0);
@@ -3769,7 +3890,7 @@ namespace WindowsFormsApplication1
                     tableAddCol(ref dualTable, currRunName2, 0);
                     tableAddCol(ref dualTable, currRunName1, 1);
                 }
-                
+
                 //clear Current reading for both channels
                 clearGrid(ref firstChannelGrid);
 
@@ -3779,13 +3900,13 @@ namespace WindowsFormsApplication1
                 //Add New Series to Graph
                 initChartSerie(ref dualChart, currentDualSerie);
                 //Assign X and Y for currentDualSerie
-                updateDualChartSerieXY(currentDualSerie,ref dualChart,dualTable,0,1);
+                updateDualChartSerieXY(currentDualSerie, ref dualChart, dualTable, 0, 1);
                 //Save list of Series from dualChart into ar_dualSeries
                 arr_dualSeries = getListOfSeriesName(dualChart);
                 //Update the listView with passed in array of List String
                 AddSerieToCheckList(ref dualSeriesListView, arr_dualSeries);
                 //update color for seriesListView
-                updateListViewColor(ref dualSeriesListView,dualChart);
+                updateListViewColor(ref dualSeriesListView, dualChart);
 
                 PreventGridSort(ref noCurrDualMasterGrid);
             }
@@ -3800,9 +3921,9 @@ namespace WindowsFormsApplication1
         }
 
         //remove a row from secondChannelTable
-        private void removeSecondTableRow (int index)
+        private void removeSecondTableRow(int index)
         {
-            if (index<secondChannelTable.Rows.Count)
+            if (index < secondChannelTable.Rows.Count)
             {
                 secondChannelTable.Rows.RemoveAt(index);
             }
@@ -3811,7 +3932,7 @@ namespace WindowsFormsApplication1
         //delete button for second channel gridview 
         private void deleteSecond_Click(object sender, EventArgs e)
         {
-            if (secondChannelGridView.Rows.Count>0)
+            if (secondChannelGridView.Rows.Count > 0)
                 removeSecondTableRow(secondChannelGridView.CurrentCell.RowIndex);
             updateDualTableAndChart();
         }
@@ -3830,7 +3951,7 @@ namespace WindowsFormsApplication1
             {
                 tableChan1Name = thisChart.Series[serieToDelete].YValueMembers;
                 tableChan2Name = thisChart.Series[serieToDelete].XValueMember;
-                
+
                 //remove 2 Column that associated with serie
                 thisTable.Columns.Remove(tableChan1Name);
                 thisTable.Columns.Remove(tableChan2Name);
@@ -3838,15 +3959,15 @@ namespace WindowsFormsApplication1
                 //remove serie
                 removeSerie(ref thisChart, serieToDelete);
             }
-            catch 
+            catch
             {
-                MessageBox.Show("Unable to delete Serie "+serieToDelete);
+                MessageBox.Show("Unable to delete Serie " + serieToDelete);
             }
         }
-        
+
         private void deleteDualRun_Button_Click(object sender, EventArgs e)
         {
-            Form_DualDelete frm=new Form_DualDelete();
+            Form_DualDelete frm = new Form_DualDelete();
             frm.ShowDialog();
             string SerieToDelete = "";
             SerieToDelete = frm.deleteSerie;
@@ -3855,7 +3976,7 @@ namespace WindowsFormsApplication1
                 deleteSerie_and_Table(ref dualChart, ref dualTable, SerieToDelete);
                 saveToNoCurrDualTable();//update noCurrDualTable
                 arr_dualSeries = getListOfSeriesName(dualChart);
-                removeSerieFrCheckList(SerieToDelete,ref dualSeriesListView);
+                removeSerieFrCheckList(SerieToDelete, ref dualSeriesListView);
                 //update color for seriesListView
                 updateListViewColor(ref dualSeriesListView, dualChart);
             }
@@ -3869,12 +3990,12 @@ namespace WindowsFormsApplication1
             opencloseFirstCOM(ref comList4);
             channel1MenuButtonUpdate();
         }
-        
+
         //Control the visibilities of the passed in Chart's series, based on passed in listBox selection
         private void ShowHideChartSeries(ListView listBox, ref Chart thisChart)
         {
             string itemTxt = "";
-            for (int index=0;index<listBox.Items.Count;index++)
+            for (int index = 0; index < listBox.Items.Count; index++)
             {
                 itemTxt = listBox.Items[index].Text;
                 if (listBox.Items[index].Checked == true)
@@ -3907,7 +4028,7 @@ namespace WindowsFormsApplication1
                 return oldSt;
             }
         }
-        
+
         private void test_save_button_Click(object sender, EventArgs e)
         {
             clearEmptyRow(ref dualTable);
@@ -3916,7 +4037,7 @@ namespace WindowsFormsApplication1
                 isMasterSave = true;
                 string path = getSavePathName(dualTestName_Text.Text);
                 if ((path != "") && (path.Contains(".xls")))
-                    saveExcel(path, dualTable,pointChart);
+                    saveExcel(path, dualTable, pointChart);
             }
         }
 
@@ -3931,13 +4052,13 @@ namespace WindowsFormsApplication1
             {
                 isMasterSave = true;
                 string path = Path.Combine(getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName), fileName + ".xls");
-                saveExcel(path, dualTable,pointChart);
+                saveExcel(path, dualTable, pointChart);
             }
         }
 
         private void defineTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
         //Zero The Tester
         public static void zeroControl(SerialPort port)
@@ -3977,13 +4098,13 @@ namespace WindowsFormsApplication1
         }
         private void unitControl_button_Click(object sender, EventArgs e)
         {
-            unitControl(serialPort1,ref chann1Control);
+            unitControl(serialPort1, ref chann1Control);
         }
 
         private void command_text_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                test_label.Text=write_command(command_text.Text,serialPort1);
+                test_label.Text = write_command(command_text.Text, serialPort1);
         }
 
         //Call to change savestart button appearance
@@ -4040,7 +4161,7 @@ namespace WindowsFormsApplication1
         //Handle event AFTER Key has been pressed
         private void lowLimit_txt_Keydown(object sender, KeyEventArgs e)
         {
-            changeQuadrantsWhenFieldsChange(e.KeyCode,Keys.Enter);
+            changeQuadrantsWhenFieldsChange(e.KeyCode, Keys.Enter);
         }
         private void highLimit_txt_Keydown(object sender, KeyEventArgs e)
         {
@@ -4095,11 +4216,11 @@ namespace WindowsFormsApplication1
         }
         private void modeControl_button_Click(object sender, EventArgs e)
         {
-            modeControl_button.Text= modeControl(serialPort1,ref chann1Control);
+            modeControl_button.Text = modeControl(serialPort1, ref chann1Control);
         }
         //Capture by remote Control, pass in the serialPort and testerControl and channel number. 
         //If channel 1 then also add to first channel gridview, not support for channel=2 yet
-        private void readFromFirstChannel(SerialPort thisPort,TesterControl testerControl,int channel)
+        private void readFromFirstChannel(SerialPort thisPort, TesterControl testerControl, int channel)
         {
             pauseLiveReading1 = true;
             string ChannMessage = "";
@@ -4118,27 +4239,27 @@ namespace WindowsFormsApplication1
         private void enterControl_button_Click(object sender, EventArgs e)
         {
             if (serialPort1.IsOpen)
-                readFromFirstChannel(serialPort1,chann1Control,1);
-         
+                readFromFirstChannel(serialPort1, chann1Control, 1);
+
         }
-        
+
         /// <summary>
         /// This method is called when Menu button is clicked for TesterControl.
         /// </summary>
         /// <param name="serialPort"></param>
         /// <param name="TesterControl"></param>
-        private void menuControl(SerialPort thisPort,ref TesterControl thisTesterControl,string channel)
+        private void menuControl(SerialPort thisPort, ref TesterControl thisTesterControl, string channel)
         {
             if (thisPort.IsOpen)
             {
-                Form_MenuControl frm=new Form_MenuControl(thisPort,ref thisTesterControl,channel);
+                Form_MenuControl frm = new Form_MenuControl(thisPort, ref thisTesterControl, channel);
                 frm.ShowDialog();
 
             }
         }
         private void menuControl_button_Click(object sender, EventArgs e)
         {
-            menuControl(serialPort1,ref chann1Control,channel1);
+            menuControl(serialPort1, ref chann1Control, channel1);
         }
         //copy 1 gridview to another.
         private void copyGridView(DataGridView fromGrid, ref DataGridView toGrid)
@@ -4146,7 +4267,7 @@ namespace WindowsFormsApplication1
             //Make both grids have the same amount of rows
             while (toGrid.RowCount != fromGrid.RowCount)
             {
-                if (toGrid.RowCount<fromGrid.RowCount)
+                if (toGrid.RowCount < fromGrid.RowCount)
                     toGrid.Rows.Add();
                 else
                 {
@@ -4155,14 +4276,14 @@ namespace WindowsFormsApplication1
             }
 
             //Copy the actual data to toGrid
-            for (int rowIndex=0;rowIndex<fromGrid.Rows.Count;rowIndex++)
+            for (int rowIndex = 0; rowIndex < fromGrid.Rows.Count; rowIndex++)
             {
                 for (int colIndex = 0; colIndex < fromGrid.ColumnCount; colIndex++)
                     toGrid.Rows[rowIndex].Cells[colIndex].Value = fromGrid.Rows[rowIndex].Cells[colIndex].Value;
             }
-            
+
         }
-        
+
         //When 1 of the firstChannel Grid change, change all grid for first channel
         //changed 3/27/18
         private void copyAllFirstChannelGridView(DataGridView thisGrid)
@@ -4174,15 +4295,15 @@ namespace WindowsFormsApplication1
             copyGridView(thisGrid, ref firstChannelGrid);
             */
         }
-///////////////////////Handle User changing value from our gridview        
+        ///////////////////////Handle User changing value from our gridview        
         private void gridview1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             //updateTableandChart(ref chart1,singleChannel_gridView);
-            updateTableandChart(ref singleChart,singleChannel_gridView);
+            updateTableandChart(ref singleChart, singleChannel_gridView);
             copyAllFirstChannelGridView(singleChannel_gridView);
             updateSampleNuminGrid(ref singleChannel_gridView, singleChannel_gridView.RowCount - 2);
             updateSampleNuminGrid(ref firstChannelGrid, firstChannelGrid.RowCount - 2);
-            
+
         }
         private void gridview_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -4200,21 +4321,21 @@ namespace WindowsFormsApplication1
 
             int afterRowCount = firstChannelGrid.RowCount;
 
-            if ((serialPort2.IsOpen) && (afterRowCount>beforeRowCount))
+            if ((serialPort2.IsOpen) && (afterRowCount > beforeRowCount))
                 readFromSecondChannel();
 
-            updateSampleNuminGrid(ref singleChannel_gridView, singleChannel_gridView.RowCount-2);
-            updateSampleNuminGrid(ref firstChannelGrid, firstChannelGrid.RowCount-2);
+            updateSampleNuminGrid(ref singleChannel_gridView, singleChannel_gridView.RowCount - 2);
+            updateSampleNuminGrid(ref firstChannelGrid, firstChannelGrid.RowCount - 2);
         }
 
         private void secondChannelGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             updateDualTableAndChart();
-            if (firstChannelGrid.CurrentRow.Index>=0)
-                FocusGridViewRow(ref secondChannelGridView,firstChannelGrid.CurrentRow.Index);
+            if (firstChannelGrid.CurrentRow.Index >= 0)
+                FocusGridViewRow(ref secondChannelGridView, firstChannelGrid.CurrentRow.Index);
         }
         //Focus on a row of gridview
-        private void FocusGridViewRow(ref DataGridView thisGrid , int rowIndex)
+        private void FocusGridViewRow(ref DataGridView thisGrid, int rowIndex)
         {
             try
             {
@@ -4237,7 +4358,7 @@ namespace WindowsFormsApplication1
         {
             string signLockValue = "";
             byte[] SLbytes = BitConverter.GetBytes(charToConvert);
-            signLockValue = BitConverter.ToString(SLbytes,0,1);
+            signLockValue = BitConverter.ToString(SLbytes, 0, 1);
             return signLockValue;
         }
         private void button10_Click(object sender, EventArgs e)
@@ -4258,7 +4379,7 @@ namespace WindowsFormsApplication1
             clearEmptyRow(ref dualTable);
             copyTable(ref dualTable, ref noCurrentDualTable);
             bindDualTable();
-            changeGridAutoColumnSize(ref noCurrDualMasterGrid,colThreshold);
+            changeGridAutoColumnSize(ref noCurrDualMasterGrid, colThreshold);
         }
         //save noCurrentDual Run to grid to display
         private void saveRun_button_Click(object sender, EventArgs e)
@@ -4278,32 +4399,32 @@ namespace WindowsFormsApplication1
 
         private void chan1_unitControl_button_Click(object sender, EventArgs e)
         {
-            unitControl(serialPort1,ref chann1Control);
+            unitControl(serialPort1, ref chann1Control);
         }
 
         private void chan2_unitControl_button_Click(object sender, EventArgs e)
         {
-            unitControl(serialPort2,ref chann2Control);
+            unitControl(serialPort2, ref chann2Control);
         }
 
         private void chan1_modeControl_button_Click(object sender, EventArgs e)
         {
-            chan1_modeControl_button.Text= modeControl(serialPort1,ref chann1Control);
+            chan1_modeControl_button.Text = modeControl(serialPort1, ref chann1Control);
         }
 
         private void chan2_modeControl_button_Click(object sender, EventArgs e)
         {
-            chan2_modeControl_button.Text= modeControl(serialPort2,ref chann2Control);
+            chan2_modeControl_button.Text = modeControl(serialPort2, ref chann2Control);
         }
 
         private void chan1_menuControl_button_Click(object sender, EventArgs e)
         {
-            menuControl(serialPort1,ref chann1Control,channel1);
+            menuControl(serialPort1, ref chann1Control, channel1);
         }
 
         private void chan2_menuControl_button_Click(object sender, EventArgs e)
         {
-            menuControl(serialPort2,ref chann2Control,channel2);
+            menuControl(serialPort2, ref chann2Control, channel2);
         }
 
         private void captureReadingsFromBothChannel()
@@ -4322,7 +4443,7 @@ namespace WindowsFormsApplication1
 
         private string showFolderBrowserDialog()
         {
-            FolderBrowserDialog fbd=new FolderBrowserDialog();
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
             DialogResult result = fbd.ShowDialog();
             string path = "";
             path = fbd.SelectedPath;
@@ -4334,7 +4455,7 @@ namespace WindowsFormsApplication1
             defaultPath = showFolderBrowserDialog();
             if (defaultPath != "")
             {
-                setRegistryValue(defaultSaveLoc_keyName,saveLoc_valueName,defaultPath);
+                setRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName, defaultPath);
             }
 
             test_label.Text = getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName);
@@ -4362,17 +4483,17 @@ namespace WindowsFormsApplication1
 
         private void showALLCOMAvailableToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            comListRefresh_Click(this,e);
+            comListRefresh_Click(this, e);
         }
 
         //Stream data only has 2 locations, make it 3 to add to gridview 
         private void processStreamLine(string line)
         {
-            string[] data= huy_parseData(line);
-            if (data.Length<=2)
-                Array.Resize(ref data,3);
-            
-            addrow(data); 
+            string[] data = huy_parseData(line);
+            if (data.Length <= 2)
+                Array.Resize(ref data, 3);
+
+            addrow(data);
         }
         private void readStreamFile()
         {
@@ -4389,7 +4510,7 @@ namespace WindowsFormsApplication1
 
             file.Close();
         }
-        
+
         private void streamDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool wasChan1Open = false;
@@ -4441,7 +4562,7 @@ namespace WindowsFormsApplication1
                 quickDualExport_button.Enabled = false;
             }
         }
-        
+
         private void currentRunText_KeyDown(object sender, KeyEventArgs e)
         {
             if ((e.KeyCode == Keys.Enter) || (e.KeyCode == Keys.Tab))
@@ -4452,7 +4573,7 @@ namespace WindowsFormsApplication1
                         runNameErrorLabel.Text = err_uniqueRunName;
                     else
                     {
-                        ChangeColName(currColumn, currentRunText.Text, singleTable.Columns.IndexOf(currColumn),ref singleTable);
+                        ChangeColName(currColumn, currentRunText.Text, singleTable.Columns.IndexOf(currColumn), ref singleTable);
                         changeCh1ChartName(currColumn, currentRunText.Text);
                         runNameErrorLabel.Text = "";
                         this.ActiveControl = null;//move focus out of the currentRunText
@@ -4474,7 +4595,7 @@ namespace WindowsFormsApplication1
         //update Ch1 ColName after pressing Enter on currentRunText
         private void dualCh1RunName_Text_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.KeyCode == Keys.Enter) || (e.KeyCode==Keys.Tab))
+            if ((e.KeyCode == Keys.Enter) || (e.KeyCode == Keys.Tab))
             {
                 if (dualCh1RunName_Text.Text != currRunName1)
                 {
@@ -4482,7 +4603,7 @@ namespace WindowsFormsApplication1
                         dualRunName1ErrorLabel.Text = err_uniqueRunName;
                     else
                     {
-                        ChangeColName(currRunName1, dualCh1RunName_Text.Text, dualTable.Columns.IndexOf(currRunName1),ref dualTable);
+                        ChangeColName(currRunName1, dualCh1RunName_Text.Text, dualTable.Columns.IndexOf(currRunName1), ref dualTable);
                         currRunName1 = dualCh1RunName_Text.Text;//update currRunName1
                         dualRunName1ErrorLabel.Text = "";
                         this.ActiveControl = null;//move focus out of the dualRunName1Err...
@@ -4564,7 +4685,7 @@ namespace WindowsFormsApplication1
                     "Restart Application", MessageBoxButtons.YesNoCancel);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    setRegistryValue(defaultTab_keyName,defaultTab_valueName,TabPages.SelectedIndex.ToString());//Set current defaultTab registry
+                    setRegistryValue(defaultTab_keyName, defaultTab_valueName, TabPages.SelectedIndex.ToString());//Set current defaultTab registry
                     closeport(serialPort1.PortName);
                     closeSecondport(serialPort2.PortName);
                     Process.Start(Application.ExecutablePath);
@@ -4589,14 +4710,14 @@ namespace WindowsFormsApplication1
             temp = xAxis;
             xAxis = yAxis;
             yAxis = temp;
-            switchTableHeaders(ref dualTable,0,1);
+            switchTableHeaders(ref dualTable, 0, 1);
             updateDualTableAndChart();
             updatexyAxisButtonText();
         }
         //copy and return data table that only has Columns index that are passed in
-        private DataTable copyColumnsFromTable(DataTable fromTable,int frColIndex, int toColIndex)
+        private DataTable copyColumnsFromTable(DataTable fromTable, int frColIndex, int toColIndex)
         {
-            DataTable returnTable=new DataTable();
+            DataTable returnTable = new DataTable();
             //in case passed in frColindex is smaller than toColindex, switch them
             if (frColIndex > toColIndex)
             {
@@ -4607,7 +4728,7 @@ namespace WindowsFormsApplication1
             returnTable = fromTable.Copy();
             for (int index = 0; index < fromTable.Columns.Count; index++)
             {
-                if ((index<frColIndex) || (index>toColIndex))
+                if ((index < frColIndex) || (index > toColIndex))
                     returnTable.Columns.Remove(fromTable.Columns[index].ColumnName);
             }
             return returnTable;
@@ -4629,10 +4750,10 @@ namespace WindowsFormsApplication1
         {
             string path = getSavePathName(currentDualSerie);
             DataTable tempTable = (copyColumnsFromTable(dualTable, 0, 1)).Copy();
-            if ((path != "")&&(tempTable.Rows.Count > 0))
+            if ((path != "") && (tempTable.Rows.Count > 0))
             {
                 isMasterSave = true;
-                saveExcel(path, tempTable, pointChart);                
+                saveExcel(path, tempTable, pointChart);
             }
         }
 
@@ -4674,12 +4795,12 @@ namespace WindowsFormsApplication1
                 noCurrentDualTable.Columns[oldChan2Name].ColumnName = newChan2Name;
             if (noCurrentTable.Columns.Contains(oldChan1Name))
                 noCurrentDualTable.Columns[oldChan1Name].ColumnName = newChan1Name;
-            
+
             //update arr_dualSeries and Checkedlist
             arr_dualSeries = getListOfSeriesName(dualChart);
-            
+
             //Rename the serie in dualSeriesListView
-            renameSerieInListView(oldSerie,newSerie,ref dualSeriesListView);
+            renameSerieInListView(oldSerie, newSerie, ref dualSeriesListView);
             //update color for seriesListView
             updateListViewColor(ref dualSeriesListView, dualChart);
         }
@@ -4687,7 +4808,7 @@ namespace WindowsFormsApplication1
         public List<string> copydataTableColToList(System.Data.DataTable thisTable, int colIndex)
         {
             List<string> returnStr = new List<string>();
-            
+
             foreach (DataRow dr in thisTable.Rows)
             {
                 returnStr.Add(dr[colIndex].ToString());
@@ -4695,10 +4816,10 @@ namespace WindowsFormsApplication1
 
             return returnStr;
         }
-        
+
         private void renameDualRun_Click(object sender, EventArgs e)
         {
-            Form_DualRename frm=new Form_DualRename();
+            Form_DualRename frm = new Form_DualRename();
             frm.ShowDialog();
             if ((frm.oldRunName != "") && ((frm.newRunName != "") || (frm.chan1Name != "") || (frm.chan2Name != "")))
             {
@@ -4710,7 +4831,7 @@ namespace WindowsFormsApplication1
 
         ////////////////////////Dual Table codes//////////////////////////
         //add new Column Header to Datatable, pass in colname and location of where to add the column 
-        private void tableAddCol(ref DataTable thisTable,string colName, int index)
+        private void tableAddCol(ref DataTable thisTable, string colName, int index)
         {
             if (checkColumnNameCanBeUsed(colName, dualTable) == true)
             {
@@ -4734,17 +4855,17 @@ namespace WindowsFormsApplication1
         //Also call to bind to dualMasterGrid
         private void initDualTable()
         {
-            tableAddCol(ref dualTable,currRunName1,0);
-            tableAddCol(ref dualTable,currRunName2,0);
-            initChartSerie(ref dualChart,currentDualSerie);//Add thisSerie to dualChart
-            updateDualChartSerieXY("Reading",ref dualChart, dualTable,0,1);
+            tableAddCol(ref dualTable, currRunName1, 0);
+            tableAddCol(ref dualTable, currRunName2, 0);
+            initChartSerie(ref dualChart, currentDualSerie);//Add thisSerie to dualChart
+            updateDualChartSerieXY("Reading", ref dualChart, dualTable, 0, 1);
             arr_dualSeries = getListOfSeriesName(dualChart);//copy dualChart Series Collection Names into arr_dualSeries, this is used to check whether newly added Serie Name already existed
             bindDualTable();
         }
         //copy the readings from current grid passed in and write it to datatable at colIndex Column
-        private void copyCurrentColToDualTable(ref DataTable thisTable, int colIndex, DataGridView grid,int gridIndex)
+        private void copyCurrentColToDualTable(ref DataTable thisTable, int colIndex, DataGridView grid, int gridIndex)
         {
-            for (int row = 0; row < grid.RowCount;row++)
+            for (int row = 0; row < grid.RowCount; row++)
             {
                 if (!grid.Rows[row].IsNewRow)
                 {
@@ -4761,14 +4882,14 @@ namespace WindowsFormsApplication1
                     }
                 }
             }
-               
+
         }
         //Copy current first and second ChannelGrid reading to dualTable
         private void updateDualChanTable()
         {
             int dualColIndex_CH1, dualColIndex_CH2;
-            clearTableColumn(ref dualTable,0);//clear the first column of dualTable
-            clearTableColumn(ref dualTable,1);//clear the second column of dualTable
+            clearTableColumn(ref dualTable, 0);//clear the first column of dualTable
+            clearTableColumn(ref dualTable, 1);//clear the second column of dualTable
             if (xAxis == 1)
             {
                 dualColIndex_CH1 = 0;
@@ -4779,15 +4900,15 @@ namespace WindowsFormsApplication1
                 dualColIndex_CH1 = 1;
                 dualColIndex_CH2 = 0;
             }
-            
-            copyCurrentColToDualTable(ref dualTable,dualColIndex_CH1,firstChannelGrid,1);//copy firstChannelGrid Reading to dualtable
-            copyCurrentColToDualTable(ref dualTable,dualColIndex_CH2,secondChannelGridView,0);//copy secondChannelGrid Reading to dualtable
+
+            copyCurrentColToDualTable(ref dualTable, dualColIndex_CH1, firstChannelGrid, 1);//copy firstChannelGrid Reading to dualtable
+            copyCurrentColToDualTable(ref dualTable, dualColIndex_CH2, secondChannelGridView, 0);//copy secondChannelGrid Reading to dualtable
 
         }
         //return List<string> of all Series Name from passed in chart 
         private List<string> getListOfSeriesName(Chart thisChart)
         {
-            List<string>thisList=new List<string>();
+            List<string> thisList = new List<string>();
             foreach (Series serie in thisChart.Series)
             {
                 thisList.Add(serie.Name);
@@ -4807,11 +4928,11 @@ namespace WindowsFormsApplication1
         //Changed 8/29/17
         private void updateDualChart(ref Chart chart)
         {
-            updateDualChartSerieXY(currentDualSerie,ref dualChart,dualTable,0,1);   
-            
-            chart = setChart(chart,currentDualSerie,2);
+            updateDualChartSerieXY(currentDualSerie, ref dualChart, dualTable, 0, 1);
+
+            chart = setChart(chart, currentDualSerie, 2);
             arr_dualSeries = getListOfSeriesName(chart);
-            
+
             // This block draw chart only from min Y to max Y. Disable it now because I don't think dualChart needs it
             float max = Single.MinValue;
             float min = Single.MaxValue;
@@ -4819,7 +4940,7 @@ namespace WindowsFormsApplication1
             {
                 for (int colIndex = 0; colIndex < dualTable.Columns.Count; colIndex++)
                 {
-                    if ((colIndex%2 == 0) && (tableRow[colIndex] != DBNull.Value))
+                    if ((colIndex % 2 == 0) && (tableRow[colIndex] != DBNull.Value))
                     {
                         max = Math.Max(Single.Parse(tableRow[colIndex].ToString()), max);
                         min = Math.Min(Single.Parse(tableRow[colIndex].ToString()), min);
@@ -4833,8 +4954,8 @@ namespace WindowsFormsApplication1
                 min = 1;
             max += 1;
             min -= 1;
-            int maxInt = (int) Math.Ceiling(max);
-            int minInt = (int) Math.Floor(min);
+            int maxInt = (int)Math.Ceiling(max);
+            int minInt = (int)Math.Floor(min);
             try
             {
                 chart.ChartAreas[0].AxisX.Maximum = maxInt;
@@ -4844,30 +4965,30 @@ namespace WindowsFormsApplication1
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
         //Display the current Run Name and and current DUAL Channel name
         private void updateDualCurrentRunAndChanLabel()
         {
             const string labelStr = "Current Run: ";
-            dualCurrRun_label1.Text = labelStr+ currentDualSerie;
+            dualCurrRun_label1.Text = labelStr + currentDualSerie;
             dualCurrRun_Label2.Text = labelStr + currentDualSerie;
 
             dualCh1RunName_Text.Text = currRunName1;
             dualCh2RunName_Text.Text = currRunName2;
         }
-        
+
         //Check if there are more than 1 Dual Series, then disable XY Axis switch button
         private void Enable_Disable_xyButton()
         {
             if (arr_dualSeries.Count > 1)
             {
-                xySwitch_button.FlatStyle= FlatStyle.Standard;
+                xySwitch_button.FlatStyle = FlatStyle.Standard;
                 xySwitch_button.Enabled = false;
             }
             else
             {
-                xySwitch_button.FlatStyle=FlatStyle.Flat;
+                xySwitch_button.FlatStyle = FlatStyle.Flat;
                 xySwitch_button.Enabled = true;
             }
         }
@@ -4891,7 +5012,7 @@ namespace WindowsFormsApplication1
 
                 file.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             { }
             return returnListStr;
         }
@@ -4900,7 +5021,7 @@ namespace WindowsFormsApplication1
         ///Some button click Method may be randomly put somewhere else////////////////////////////////////////////////////////////////////
         //Return a BindingList<string> that has order of Test Sequence
         private int testType = 0;//1 for Single Channel Test, 2 for Dual Channel Test
-        private Color highColor = Color.Red, lowColor = Color.Yellow,passColor =SystemColors.HighlightText;
+        private Color highColor = Color.Red, lowColor = Color.Yellow, passColor = SystemColors.HighlightText;
         private string pointNum_colName, chan1Readings_colName, chan2Readings_colName, target_colName, low_colName, high_colName;//Represent column name of the test Sequence GridView
         private const string AFCW = "As Found-CW", AFCCW = "As Found-CCW", ALCW = "As Left-CW", ALCCW = "As Left-CCW";
         private int dragIndex = -1, dropIndex = -1;
@@ -4970,15 +5091,14 @@ namespace WindowsFormsApplication1
         {
 
         }
-        
+
         private int currNumberOfTests = 0;
         private int currTestIndex = -1;
-        TestSetup currTestSetup=new TestSetup();
+        TestSetup currTestSetup = new TestSetup();
         private void testSetup_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (testSetup_comboBox.SelectedIndex > 0) //User select 1 of the saved Test
             {
-                testLabel.Text = testSetups[0].testOrder.ToString();
                 currTestIndex = testSetup_comboBox.SelectedIndex - 1;
                 initCurrTestSetup(currTestIndex);
 
@@ -5003,8 +5123,8 @@ namespace WindowsFormsApplication1
             try//check if the numbers in test Fields are valid
             {
                 int intTemp;
-                if (currTestIndex<0)//if new test, maxPoint need to be entered
-                    Int32.TryParse(maxPoint_txt.Text,out intTemp);
+                if (currTestIndex < 0)//if new test, maxPoint need to be entered
+                    Int32.TryParse(maxPoint_txt.Text, out intTemp);
                 Int32.TryParse(sampleNum_txt.Text, out intTemp);
 
                 float floatTemp;
@@ -5046,13 +5166,12 @@ namespace WindowsFormsApplication1
             testID_txt.Enabled = true;
             maxPoint_txt.Enabled = true;
             limitEngPercent_comboBox.SelectedIndex = 0;
-            
             AF_chkbox.Checked = true;
             CW_chkbox.Checked = true;
             AL_chkbox.Checked = true;
             CCW_chkbox.Checked = true;
             newTestLoad = false;//restore checkbox trigger writetogrid
-            currTestSetup=new TestSetup();
+            currTestSetup = new TestSetup();
             currTestSetup.defaultTest = notDefaultTest;
 
             AFCW_grid.Rows.Clear();
@@ -5062,12 +5181,11 @@ namespace WindowsFormsApplication1
         }
         //Assign TestSetup from TestSetups Collection at passed in index
         //Also set the value of the test on screen
-        //changed 2/26/19
         private TestSetup initCurrTestSetup(int index)
         {
-            TestSetup thisTestSetup=new TestSetup();
+            TestSetup thisTestSetup = new TestSetup();
             thisTestSetup = testSetups[index];
-            
+
             //Show test Values on Screen
             testID_txt.Text = thisTestSetup.testID;
             FS_txt.Text = thisTestSetup.FullScale;
@@ -5077,7 +5195,7 @@ namespace WindowsFormsApplication1
             ch2Unit_txt.Text = ch2UnitLabel_calTab.Text;
             maxPoint_txt.Text = thisTestSetup.pointAmount;
             sampleNum_txt.Text = thisTestSetup.sampleNum;
-            
+
             if (thisTestSetup.percent_unit.Contains("Eng. Unit"))
             {
                 limitEngPercent_comboBox.SelectedIndex = 1;
@@ -5089,7 +5207,7 @@ namespace WindowsFormsApplication1
 
             try
             {
-                testType_comboBox.SelectedIndex = Int32.Parse(thisTestSetup.testType)-1;
+                testType_comboBox.SelectedIndex = Int32.Parse(thisTestSetup.testType) - 1;
             }
             catch
             {
@@ -5100,10 +5218,10 @@ namespace WindowsFormsApplication1
             currTestSetup = testSetups[currTestIndex];
             updateTestOrderChecked(thisTestSetup.testOrder);
             checkDefaultTestSelected(currTestSetup);//check if default test then not allow to change certain field
-            
+
             return thisTestSetup;
         }
-        
+
         //Check if it is default test then not allow to change testID and maxpoint
         private void checkDefaultTestSelected(TestSetup thisTest)
         {
@@ -5119,7 +5237,7 @@ namespace WindowsFormsApplication1
             }
         }
         //Repopulate all the test Grid after a new test is selected
-        private void updateTestGrid(DataTable thisTable,BindingList<string>listOrder )
+        private void updateTestGrid(DataTable thisTable, BindingList<string> listOrder)
         {
             //Reset all Test gridview
             AFCW_grid.Rows.Clear();
@@ -5141,7 +5259,7 @@ namespace WindowsFormsApplication1
                 {
                     case "1"://Write to AFCW grid
                         if (listOrder.Contains(AFCW))
-                            writeRowToTestGrid(ref AFCW_grid,row[pointCol].ToString(),row[lowCol].ToString(),row[targetCol].ToString(),row[highCol].ToString());
+                            writeRowToTestGrid(ref AFCW_grid, row[pointCol].ToString(), row[lowCol].ToString(), row[targetCol].ToString(), row[highCol].ToString());
                         break;
                     case "2"://Write to AFCCW grid
                         if (listOrder.Contains(AFCCW))
@@ -5160,7 +5278,7 @@ namespace WindowsFormsApplication1
         }
 
         //Write passed in Data to test Grid
-        private void writeRowToTestGrid(ref DataGridView thisGrid,string point,string low,string target,string high)
+        private void writeRowToTestGrid(ref DataGridView thisGrid, string point, string low, string target, string high)
         {
             try
             {
@@ -5168,12 +5286,11 @@ namespace WindowsFormsApplication1
             }
             catch
             {
-                
+
             }
         }
 
         //Pass in testOrderStr, change state of orderTest Checked and write to testGrid
-        //changed 2/26/19
         private void updateTestOrderChecked(string testOrderStr)
         {
             newTestLoad = true;
@@ -5183,7 +5300,7 @@ namespace WindowsFormsApplication1
             CCW_chkbox.Checked = false;
 
             //Populate order Test 
-            BindingList<string> thisTestOrder =new BindingList<string>();
+            BindingList<string> thisTestOrder = new BindingList<string>();
             foreach (char chr in testOrderStr)
             {
                 switch (chr)
@@ -5243,7 +5360,7 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Test Setup File can't be found. Please restart the application and Run as Administrator if this is your first time running the application.");
             }
             testSetups = load_testSetups(currNumberOfTests, fileIn);//Initiate List of testSetup
-            
+
         }
 
         //Call after already loaded to testSetups
@@ -5281,10 +5398,10 @@ namespace WindowsFormsApplication1
                 catch
                 {
                 }
-                
+
             }
         }
-        
+
         //Assign testID to drop down list
         private void refreshTestIDComboBox()
         {
@@ -5310,10 +5427,10 @@ namespace WindowsFormsApplication1
         }
 
         //return collection of testSetups based on how many setUpCount there are and the file read in from TestSequences.csv
-        private List<TestSetup> load_testSetups(int setUpCount,List<string> strList )
+        private List<TestSetup> load_testSetups(int setUpCount, List<string> strList)
         {
             List<TestSetup> thisTestSetups = new List<TestSetup>();
-            TestSetup currTestSetup=new TestSetup();
+            TestSetup currTestSetup = new TestSetup();
             int testIndex = -1;
             bool startTestTable = false;
             //Go through each line and add to header or testTable
@@ -5326,13 +5443,13 @@ namespace WindowsFormsApplication1
                 {
                     if (strLine.StartsWith("Test ID,"))//Set up a new TestSetup
                     {
-                        if (testIndex>=0)
+                        if (testIndex >= 0)
                             thisTestSetups.Add(currTestSetup);
-                        currTestSetup=new TestSetup();
+                        currTestSetup = new TestSetup();
                         testIndex += 1;
                         startTestTable = false;
                     }
-                    
+
                     if (testIndex >= 0)
                     {
                         if (startTestTable == false)
@@ -5343,7 +5460,7 @@ namespace WindowsFormsApplication1
 
                                 //check if line start with right header and write to that header value
                                 currTestSetup = assignTestHeaderValue(currTestSetup,
-                                    strLine.Substring(0, valueIndexStart-1),
+                                    strLine.Substring(0, valueIndexStart - 1),
                                     strLine.Substring(valueIndexStart, strLine.Length - valueIndexStart));
                             }
                         }
@@ -5358,7 +5475,7 @@ namespace WindowsFormsApplication1
                         }
                     }
                 }
-                
+
             }
 
             //Add the last currTestSetup that didn't get added
@@ -5366,13 +5483,13 @@ namespace WindowsFormsApplication1
 
             return thisTestSetups;
         }
-        
+
         //Pass in string consist of float number, separated by ','
         //parse the float array into DataRow thisrow and return it 
-        private DataRow returnFloatListfrStr(string strOfFloat,DataRow thisrow)
+        private DataRow returnFloatListfrStr(string strOfFloat, DataRow thisrow)
         {
             int startIndex = 0;
-            float number=0;
+            float number = 0;
             int colIndex = 0;
             for (int endIndex = 0; endIndex <= strOfFloat.Length; endIndex++)
             {
@@ -5407,7 +5524,7 @@ namespace WindowsFormsApplication1
         }
 
         //check which header the passed in headerName is and assign its value in TestSetup appropriately
-        private TestSetup assignTestHeaderValue(TestSetup thisTestSetup, string headerName,string headerValue)
+        private TestSetup assignTestHeaderValue(TestSetup thisTestSetup, string headerName, string headerValue)
         {
             if (headerName == thisTestSetup.get_testIDHeader())
                 thisTestSetup.testID = headerValue;
@@ -5456,9 +5573,9 @@ namespace WindowsFormsApplication1
             initTestGridView(ref AFCCW_grid);
             initTestGridView(ref ALCW_grid);
             initTestGridView(ref ALCCW_grid);
-            
+
         }
-        
+
         //set all Appearance Setting for all objects in this Form
         private void calTabMiscSetting()
         {
@@ -5466,15 +5583,15 @@ namespace WindowsFormsApplication1
             calTabTestSetUp_Reset();//Reset all fields in testSetup and grids
             highColor_label.BackColor = highColor;
             lowColor_label.BackColor = lowColor;
-            
+
             //Show List of comPort
             comList_calibration.DataSource = FSList;
 
             //Append testList to testOrder_list
             testOrder_list.DataSource = testList;
-            
+
             setGridColName(AFCW_grid);//Set column Name for Test Sequence GridView
-            
+
             showActiveTestGrid('0');//0 would make all 4 grids greyed out, but still can be editted
 
             //Set auto complete for testSetup_comboBox
@@ -5537,9 +5654,9 @@ namespace WindowsFormsApplication1
 
             //change what happen when go from test setup mode to run mode and vice versa
             testSetup_groupBox.EnabledChanged += TestSetup_groupBox_EnabledChanged;
-           
+
         }
-        
+
         //Call when user manually change target for a gridtest row
         //Update low and high for that row
         private void rewriteLowHigh_gridRow(ref DataGridView thisGrid, int rowIndex)
@@ -5553,8 +5670,8 @@ namespace WindowsFormsApplication1
 
                 if (limitEngPercent_comboBox.SelectedIndex == 0) //calculate low and high by %
                 {
-                    low_fl = (100 - Single.Parse(lowLimit_txt.Text))/100*target_fl;
-                    high_fl = (100 + Single.Parse(highLimit_txt.Text))/100*target_fl;
+                    low_fl = (100 - Single.Parse(lowLimit_txt.Text)) / 100 * target_fl;
+                    high_fl = (100 + Single.Parse(highLimit_txt.Text)) / 100 * target_fl;
                 }
                 else //calculate by Eng Unit
                 {
@@ -5566,25 +5683,25 @@ namespace WindowsFormsApplication1
                 thisGrid.Rows[rowIndex].Cells[lowGridCol].Value = low_fl;
                 thisGrid.Rows[rowIndex].Cells[highGridCol].Value = high_fl;
             }
-            catch  (Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
 
         //update testTable when 1 of the testGrid got changed while in testSetup Mode
         //quadrant=1,2,3,4
-        private DataTable updateTestTablewhenGridChanged(DataGridView frGrid, DataTable thistestTable,int quadrant)
+        private DataTable updateTestTablewhenGridChanged(DataGridView frGrid, DataTable thistestTable, int quadrant)
         {
             thistestTable.AcceptChanges();
             foreach (DataRow tableRow in thistestTable.Rows)
             {
-                
+
                 //if order of this row is same as quadrant, delete it
-                if (tableRow[currTestSetup.get_orderTableHeader()].ToString()==quadrant.ToString())
+                if (tableRow[currTestSetup.get_orderTableHeader()].ToString() == quadrant.ToString())
                     tableRow.Delete();
-                
+
             }
             thistestTable.AcceptChanges();
             //Add each gridrow into testTable
@@ -5594,7 +5711,7 @@ namespace WindowsFormsApplication1
                 if (!gridRow.IsNewRow)
                 {
                     DataRow tableRow = thistestTable.NewRow();
-                    
+
                     //assign values from grid to tableRow
                     tableRow[currTestSetup.get_pointTableHeader()] = gridRow.Cells[pointGridCol].Value;
                     tableRow[currTestSetup.get_targetTableHeader()] = gridRow.Cells[targetGridCol].Value;
@@ -5605,7 +5722,7 @@ namespace WindowsFormsApplication1
                     thistestTable.Rows.Add(tableRow);
                 }
             }
-            
+
             return thistestTable;
         }
         private void AFCW_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -5627,9 +5744,9 @@ namespace WindowsFormsApplication1
                 currTestGridNum = lookForActiveTestGrid();
                 showActiveTestGrid(currTestGridNum);
             }
-            if (testSetup_groupBox.Enabled==false)
-                reevaluatePassFailData(ref AFCW_grid,1);
-            
+            if (testSetup_groupBox.Enabled == false)
+                reevaluatePassFailData(ref AFCW_grid, 1);
+
         }
 
         private void AFCCW_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -5652,7 +5769,7 @@ namespace WindowsFormsApplication1
                 showActiveTestGrid(currTestGridNum);
             }
             if (testSetup_groupBox.Enabled == false)
-                reevaluatePassFailData(ref AFCCW_grid,-1);
+                reevaluatePassFailData(ref AFCCW_grid, -1);
         }
         private void ALCW_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -5674,7 +5791,7 @@ namespace WindowsFormsApplication1
                 showActiveTestGrid(currTestGridNum);
             }
             if (testSetup_groupBox.Enabled == false)
-                reevaluatePassFailData(ref ALCW_grid,1);
+                reevaluatePassFailData(ref ALCW_grid, 1);
         }
         private void ALCCW_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -5696,7 +5813,7 @@ namespace WindowsFormsApplication1
                 showActiveTestGrid(currTestGridNum);
             }
             if (testSetup_groupBox.Enabled == false)
-                reevaluatePassFailData(ref ALCCW_grid,-1);
+                reevaluatePassFailData(ref ALCCW_grid, -1);
         }
         //Handle drag drop for testOrder_list
         private void testOrder_list_MouseDown(object sender, MouseEventArgs e)
@@ -5744,7 +5861,7 @@ namespace WindowsFormsApplication1
         {
             set_testOrderList();
         }
-        
+
         private void testType_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (testType_comboBox.SelectedIndex == 0)//Single Channel test
@@ -5772,7 +5889,7 @@ namespace WindowsFormsApplication1
         }
 
         //return BindingList string that contains the actual string of test order to show to user
-        private BindingList<string> testOrdersCreate(BindingList<string> ori_List )
+        private BindingList<string> testOrdersCreate(BindingList<string> ori_List)
         {
             BindingList<string> testList = new BindingList<string>();
             string checkedOrder = "";
@@ -5801,7 +5918,7 @@ namespace WindowsFormsApplication1
                 return newList;
             else
             {
-                BindingList<string> returnList = new BindingList<string>(), newList_copy=new BindingList<string>();
+                BindingList<string> returnList = new BindingList<string>(), newList_copy = new BindingList<string>();
                 //copy newlist to newlist_copy
                 foreach (string item in newList)
                     newList_copy.Add(item);
@@ -5843,10 +5960,10 @@ namespace WindowsFormsApplication1
             testList = testOrdersCreate(testList);
             testOrder_list.DataSource = testList;
             currTestSetup.testOrder = createTestOrderStr(testList);
-            
-            if ((currTestSetup.testTable.Rows.Count > 0)&&(newTestLoad==false))
+
+            if ((currTestSetup.testTable.Rows.Count > 0) && (newTestLoad == false))
             {
-                updateTestGrid(currTestSetup.testTable,testList);
+                updateTestGrid(currTestSetup.testTable, testList);
             }
         }
 
@@ -5885,16 +6002,16 @@ namespace WindowsFormsApplication1
 
         private void copyCW_btn_Click(object sender, EventArgs e)
         {
-            var result= MessageBox.Show("Any Data(if any) from As Left Clockwise will be replaced with As Found Data. Proceed?","Caution!",MessageBoxButtons.YesNo);
-            if (result==DialogResult.Yes)
-                copyGridView(AFCW_grid,ref ALCW_grid);
+            var result = MessageBox.Show("Any Data(if any) from As Left Clockwise will be replaced with As Found Data. Proceed?", "Caution!", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+                copyGridView(AFCW_grid, ref ALCW_grid);
         }
 
         private void copyCCW_btn_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show("Any Data(if any) from As Left CounterClockwise will be replaced with As Found Data. Proceed?", "Caution!", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
-                copyGridView(AFCCW_grid,ref ALCCW_grid);
+                copyGridView(AFCCW_grid, ref ALCCW_grid);
         }
 
         private void copyAllStruct_btn_Click(object sender, EventArgs e)
@@ -5907,9 +6024,9 @@ namespace WindowsFormsApplication1
                 ALCCW_grid.Rows.Clear();
             }
             currTestSetup.testTable = updateTestUsing1QuadRant(currTestSetup.testTable, 1); //1 represent AFCW quadrant
-            
+
             //repopulate testGrid to show to user
-            updateTestGrid(currTestSetup.testTable,testList);
+            updateTestGrid(currTestSetup.testTable, testList);
         }
 
         //Update passedin testable using datas from just 1 quadrant
@@ -5938,7 +6055,7 @@ namespace WindowsFormsApplication1
             //if same as midTable quadrant, copy. If not, copyorflip
             for (int quadrantIndex = 1; quadrantIndex <= 4; quadrantIndex++)
             {
-                int copyOrFlip = Math.Abs(quadrantIndex - Ori_quadrant)%2;//0=copy, 1=flip
+                int copyOrFlip = Math.Abs(quadrantIndex - Ori_quadrant) % 2;//0=copy, 1=flip
                 try
                 {
                     foreach (DataRow dataRow in thisTestTable.Rows)
@@ -5960,11 +6077,11 @@ namespace WindowsFormsApplication1
                                 newRow[currTestSetup.get_pointTableHeader()] =
                                     dataRow[currTestSetup.get_pointTableHeader()];
                                 newRow[currTestSetup.get_targetTableHeader()] =
-                                    Single.Parse(dataRow[currTestSetup.get_targetTableHeader()].ToString())*-1;
+                                    Single.Parse(dataRow[currTestSetup.get_targetTableHeader()].ToString()) * -1;
                                 newRow[currTestSetup.get_lowTableHeader()] =
-                                    Single.Parse(dataRow[currTestSetup.get_lowTableHeader()].ToString())*-1;
+                                    Single.Parse(dataRow[currTestSetup.get_lowTableHeader()].ToString()) * -1;
                                 newRow[currTestSetup.get_highTableHeader()] =
-                                    Single.Parse(dataRow[currTestSetup.get_highTableHeader()].ToString())*-1;
+                                    Single.Parse(dataRow[currTestSetup.get_highTableHeader()].ToString()) * -1;
                                 newRow[currTestSetup.get_orderTableHeader()] = quadrantIndex;
                             }
                             catch
@@ -6022,7 +6139,7 @@ namespace WindowsFormsApplication1
             Point point = testOrder_list.PointToClient(new Point(e.X, e.Y));
             int index = this.testOrder_list.IndexFromPoint(point);
             if (index < 0) index = this.testOrder_list.Items.Count - 1;
-            
+
             dropIndex = index;
             string tempStr = testOrder_list.Items[dragIndex].ToString();
             testList.RemoveAt(dragIndex);
@@ -6032,13 +6149,13 @@ namespace WindowsFormsApplication1
 
         private void restartTest_btn_Click(object sender, EventArgs e)
         {
-            var dialogresult=MessageBox.Show("All existing readings for this test will be deleted. Proceed?", "Delete all readings?",
+            var dialogresult = MessageBox.Show("All existing readings for this test will be deleted. Proceed?", "Delete all readings?",
                 MessageBoxButtons.OKCancel);
-            if ((dialogresult==DialogResult.OK)&&(testSetup_groupBox.Enabled == false))
+            if ((dialogresult == DialogResult.OK) && (testSetup_groupBox.Enabled == false))
             {
                 showOnGrid(); //Repopulate testGrid
                 showActiveTestGrid(currTestSetup.testOrder[0]); //Set first quadrant in testList as active
-                
+
                 //update Active Target if it is single channel test
                 if (currTestSetup.testType == "1")
                 {
@@ -6052,7 +6169,7 @@ namespace WindowsFormsApplication1
         //Delete last test Reading
         private void deleteLastTestRow(ref DataGridView testGrid)
         {
-            for (int rowIndex = testGrid.RowCount-1; rowIndex >= 0; rowIndex--)
+            for (int rowIndex = testGrid.RowCount - 1; rowIndex >= 0; rowIndex--)
             {
                 //if not new row and ch1Reading or ch2Reading is not empty then delete readings, update currTestGrid and return
                 if ((!testGrid.Rows[rowIndex].IsNewRow) &&
@@ -6084,7 +6201,7 @@ namespace WindowsFormsApplication1
         {
             testNameStr_arr = get_listOfTestName(testSetups);
             //Ask for new Name for this test, assign to newTestName
-            getSaveAsTestSetupNameForm frm=new getSaveAsTestSetupNameForm(testNameStr_arr);
+            getSaveAsTestSetupNameForm frm = new getSaveAsTestSetupNameForm(testNameStr_arr);
             frm.ShowDialog();
 
             string newTestName = frm.testName;
@@ -6096,7 +6213,7 @@ namespace WindowsFormsApplication1
                 try
                 {
                     testSetups.Add(saveThisTest(currTestSetup.defaultTest)); //Save the New Test to end of Test List
-                    
+
                     refreshTestIDComboBox(); //Refresh test id list
                     testSetup_comboBox.SelectedIndex = testSetups.Count;//Select the newly saved Test
                     saveAllTestsToCSV();//Write to CSV file
@@ -6129,7 +6246,7 @@ namespace WindowsFormsApplication1
         private bool saveTestReadingsToCert()
         {
             bool saveSucceed;
-            bool readyToSave=true;
+            bool readyToSave = true;
             string errorMsg = "Unable to Save to Cert. Following fields can not be empty:\n";
 
             //Check to see if any empty field is empty
@@ -6138,7 +6255,7 @@ namespace WindowsFormsApplication1
                 readyToSave = false;
                 errorMsg += "Tool ID\n";
             }
-            if (toolSN_txt.Text=="")
+            if (toolSN_txt.Text == "")
             {
                 readyToSave = false;
                 errorMsg += "Tool SN\n";
@@ -6151,17 +6268,18 @@ namespace WindowsFormsApplication1
                     errorMsg += "Operator ID\n";
                 }
             }
-            catch {
+            catch
+            {
                 //Do nothing, since error occurs when user not using the setup Tool but just manually type in instead
             }
             if (readyToSave == false)
             {
-                
+
                 MessageBox.Show(errorMsg);
                 return false;
             }
-            
-            
+
+
 
             int singleOrDual = 1;
             string timeStamp = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
@@ -6233,14 +6351,18 @@ namespace WindowsFormsApplication1
         }
         private void saveTestToCert_btn_Click(object sender, EventArgs e)
         {
-            if (testSetup_groupBox.Enabled == false)
+            if (isReadyToSaveCert() == false)
             {
-                var dialogResult= MessageBox.Show("Export Data to Cert would also clear all Tools Info fields. Continue?",
+                MessageBox.Show("Please complete the test before saving To Cert");
+            }
+            else if (testSetup_groupBox.Enabled == false)
+            {
+                var dialogResult = MessageBox.Show("Export Data to Cert would also clear all Tools Info fields. Continue?",
                     "Confirm Export Data", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    bool certSavedSuccess=saveTestReadingsToCert();
-                    if (certSavedSuccess==true)
+                    bool certSavedSuccess = saveTestReadingsToCert();
+                    if (certSavedSuccess == true)
                         clearAllToolsInfo();
                 }
             }
@@ -6263,7 +6385,7 @@ namespace WindowsFormsApplication1
             toolProcedure_txt.Text = "";
             toolOperatorID_txt.Text = "";
         }
-        private List<string> appendListStrFromGridTestColumn(DataGridView thisGrid,int gridColIndex)
+        private List<string> appendListStrFromGridTestColumn(DataGridView thisGrid, int gridColIndex)
         {
             List<string> returnListStr = new List<string>();
             try
@@ -6273,18 +6395,18 @@ namespace WindowsFormsApplication1
                 else //Export average for sample points
                 {
                     string currPointNum = thisGrid.Rows[0].Cells[pointGridCol].Value.ToString();//Assign the first Point Number of this grid to currPointNum
-                    List<float> totalPerPoint=new List<float>();
+                    List<float> totalPerPoint = new List<float>();
                     foreach (DataGridViewRow gridRow in thisGrid.Rows)
                     {
-                        if ((gridRow.IsNewRow) || (gridRow.Cells[pointGridCol].Value.ToString() != currPointNum) )
+                        if ((gridRow.IsNewRow) || (gridRow.Cells[pointGridCol].Value.ToString() != currPointNum))
                         //If moved on to next Point, add average of totalPerPoint into returnListStr, update currPointNum
                         {
-                            float avg = totalPerPoint.Sum()/totalPerPoint.Count;
+                            float avg = totalPerPoint.Sum() / totalPerPoint.Count;
                             returnListStr.Add(avg.ToString());
                             totalPerPoint.Clear();
 
                             if (!gridRow.IsNewRow)
-                                currPointNum= gridRow.Cells[pointGridCol].Value.ToString();//update currPointNum
+                                currPointNum = gridRow.Cells[pointGridCol].Value.ToString();//update currPointNum
 
                         }
 
@@ -6307,11 +6429,11 @@ namespace WindowsFormsApplication1
 
             return returnListStr;
         }
-        
+
         //Copy data from column in gridview into List<string> and return it
         private List<string> copygridTableToListStr(DataGridView testGrid, int gridColIndex)
         {
-            List<string> returnStrList=new List<string>();
+            List<string> returnStrList = new List<string>();
             foreach (DataGridViewRow gridRow in testGrid.Rows)
             {
                 if (!gridRow.IsNewRow)
@@ -6343,22 +6465,22 @@ namespace WindowsFormsApplication1
                 tempTestSetups.Add(testSetups[index]);
             }
 
-            testSetups=tempTestSetups;
+            testSetups = tempTestSetups;
         }
 
         private List<string> returnDefaultTestListName()
         {
-            List<string> returnStrList=new List<string>();
+            List<string> returnStrList = new List<string>();
             foreach (TestSetup thisTestSetup in testSetups)
             {
-                if (thisTestSetup.defaultTest==isDefaultTest)
+                if (thisTestSetup.defaultTest == isDefaultTest)
                     returnStrList.Add(thisTestSetup.testID);
             }
             return returnStrList;
         }
         private void testSequenceManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TestSequenceManager_form frm=new TestSequenceManager_form(testSetups);
+            TestSequenceManager_form frm = new TestSequenceManager_form(testSetups);
             frm.ShowDialog();
             testSetups = frm.returnTestSetups();
             /*
@@ -6436,15 +6558,15 @@ namespace WindowsFormsApplication1
         }
         private void captureBtn_calTab_Click(object sender, EventArgs e)
         {
-            if (pauseTest==false)
+            if (pauseTest == false)
                 captureReadingsCalTab();
         }
 
         //write a value to Excel.Worksheet-this uses C# built in Excel Interlope
-        private Excel.Worksheet writeCellToExcelWorkBook(string cellID,string cellValue,Excel.Worksheet wsheet)
+        private Excel.Worksheet writeCellToExcelWorkBook(string cellID, string cellValue, Excel.Worksheet wsheet)
         {
             int rowIndex = Int32.Parse(cellID.Substring(1));
-            string colID = cellID.Substring(0,1);
+            string colID = cellID.Substring(0, 1);
             try//Write as float
             {
                 float dataToWrite;
@@ -6459,21 +6581,21 @@ namespace WindowsFormsApplication1
 
             return wsheet;
         }
-        
+
         //Write all tools headers and values into Excel Worksheet-using Excel Interlope
         //Change 8/31/19
         private Excel.Worksheet writeAllToolsInfoExcelWorkbook(Excel.Worksheet wsheet, int rowIndex)
         {
-            
+
             string labelCol = "A";//write the header of tools to Column A 
             string valueCol = "B";//write value of tools header to Column B
-            
+
             //Write Cal Cert Name into Excel
             wsheet = writeCellToExcelWorkBook(labelCol + rowIndex, calTabName, wsheet);
             rowIndex++;
-            
-            wsheet= writeCellToExcelWorkBook(labelCol + rowIndex, toolID_lbl.Text, wsheet);
-            wsheet = writeCellToExcelWorkBook(valueCol + rowIndex, toolID_comboBox.Text,wsheet);
+
+            wsheet = writeCellToExcelWorkBook(labelCol + rowIndex, toolID_lbl.Text, wsheet);
+            wsheet = writeCellToExcelWorkBook(valueCol + rowIndex, toolID_comboBox.Text, wsheet);
             rowIndex++;
 
             wsheet = writeCellToExcelWorkBook(labelCol + rowIndex, testID_lbl.Text, wsheet);
@@ -6488,7 +6610,7 @@ namespace WindowsFormsApplication1
             wsheet = writeCellToExcelWorkBook(valueCol + rowIndex, recall_txt.Text, wsheet);
             rowIndex++;
 
-            wsheet = writeCellToExcelWorkBook(labelCol + rowIndex, temperature_lbl.Text,wsheet);
+            wsheet = writeCellToExcelWorkBook(labelCol + rowIndex, temperature_lbl.Text, wsheet);
             wsheet = writeCellToExcelWorkBook(valueCol + rowIndex, temperature_txt.Text, wsheet);
             rowIndex++;
 
@@ -6617,11 +6739,11 @@ namespace WindowsFormsApplication1
             }
             return returnVal;
         }
-        
+
         //Put all readings from passed in Gridview into 2 dimensions array float
-        private float[,] convertGridDatatoFloats(DataGridView thisGrid,int rowCount, int colCount)
+        private float[,] convertGridDatatoFloats(DataGridView thisGrid, int rowCount, int colCount)
         {
-            float[,] returnFloats=new float[rowCount,colCount];
+            float[,] returnFloats = new float[rowCount, colCount];
             for (int rowIndex = 0; rowIndex < thisGrid.RowCount - 1; rowIndex++)
             {
                 if (!thisGrid.Rows[rowIndex].IsNewRow)
@@ -6633,7 +6755,7 @@ namespace WindowsFormsApplication1
                             float reading = Single.Parse(thisGrid.Rows[rowIndex].Cells[colIndex].Value.ToString());
                             returnFloats[rowIndex, colIndex] = reading;
                         }
-                        catch 
+                        catch
                         {
                             //do nothing
                         }
@@ -6646,7 +6768,7 @@ namespace WindowsFormsApplication1
 
         //Write passed in Datagridview into worksheet
         //Changed 9/12/18
-        private Excel.Worksheet writeSingleGridToExcel(ref DataGridView thisGrid, string quadrantName, Excel.Worksheet wsheet, int startCol,int startRow)
+        private Excel.Worksheet writeSingleGridToExcel(ref DataGridView thisGrid, string quadrantName, Excel.Worksheet wsheet, int startCol, int startRow)
         {
             int colNum = startCol;
             int colRange = thisGrid.ColumnCount;
@@ -6657,7 +6779,7 @@ namespace WindowsFormsApplication1
             //Todo: before write the reading, write quadrantName
             //Write quadrant Name
             string cellID = "";
-            cellID= convertNumToColCharExcel(colNum).ToString() + rowNum;
+            cellID = convertNumToColCharExcel(colNum).ToString() + rowNum;
             wsheet = writeCellToExcelWorkBook(cellID, quadrantName, wsheet);
 
             //Write the reading of the quadrant
@@ -6665,16 +6787,16 @@ namespace WindowsFormsApplication1
             foreach (DataGridViewColumn gridCol in thisGrid.Columns)
             {
                 cellID = convertNumToColCharExcel(colNum).ToString() + rowNum;
-                wsheet= writeCellToExcelWorkBook(cellID,gridCol.HeaderText,wsheet);
+                wsheet = writeCellToExcelWorkBook(cellID, gridCol.HeaderText, wsheet);
                 colNum++;
             }
             colNum = startCol;//reset colNum to A
             rowNum++;//go to next row
-            
+
             float[,] floatArr = convertGridDatatoFloats(thisGrid, rowRange, colRange);
-            Excel.Range datarange = (Excel.Range) wsheet.Cells[rowNum, convertNumToColCharExcel(colNum).ToString()];//Set initial cell of datarange
+            Excel.Range datarange = (Excel.Range)wsheet.Cells[rowNum, convertNumToColCharExcel(colNum).ToString()];//Set initial cell of datarange
             datarange = datarange.get_Resize(rowRange, colRange);//Set the size of ddddatarange
-            datarange.set_Value(Excel.XlRangeValueDataType.xlRangeValueDefault,floatArr);
+            datarange.set_Value(Excel.XlRangeValueDataType.xlRangeValueDefault, floatArr);
 
             rowNum += rowRange;
             nextAvaiExcelRow = rowNum;//update nextAvaiExcelRow
@@ -6685,15 +6807,15 @@ namespace WindowsFormsApplication1
         //Changed 9/12/18
         private Excel.Worksheet writeAllTestGridsToExcelWsheet(Excel.Worksheet wsheet, string testOrder)
         {
-            
+
             foreach (char chrTestOrder in testOrder)
             {
                 int startCol = 0;
-                int startRow = nextAvaiExcelRow+1;
+                int startRow = nextAvaiExcelRow + 1;
                 switch (chrTestOrder)
                 {
                     case '1':
-                        wsheet= writeSingleGridToExcel(ref AFCW_grid, AFCW, wsheet,startCol,startRow);
+                        wsheet = writeSingleGridToExcel(ref AFCW_grid, AFCW, wsheet, startCol, startRow);
                         break;
                     case '2':
                         wsheet = writeSingleGridToExcel(ref AFCCW_grid, AFCCW, wsheet, startCol, startRow);
@@ -6710,7 +6832,7 @@ namespace WindowsFormsApplication1
         }
 
         private int nextAvaiExcelRow;
-        
+
         //Write Tools info and testGridView Readings into Excel file
         private void saveTestResultExcel(string excelPath, string testOrder)
         {
@@ -6724,9 +6846,9 @@ namespace WindowsFormsApplication1
             xlApp.DisplayAlerts = false;
             xlWorkBook = xlApp.Workbooks.Add(misValue);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-            
+
             //Write Tools headers and Tools value
-            xlWorkSheet = writeAllToolsInfoExcelWorkbook(xlWorkSheet,nextAvaiExcelRow);
+            xlWorkSheet = writeAllToolsInfoExcelWorkbook(xlWorkSheet, nextAvaiExcelRow);
 
             //Write all testGrid to excelworksheet
             xlWorkSheet = writeAllTestGridsToExcelWsheet(xlWorkSheet, testOrder);
@@ -6747,14 +6869,14 @@ namespace WindowsFormsApplication1
         {
             string fileName = currentDualSerie + "-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xls";
             string path = Path.Combine(getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName), fileName);
-            
+
             if (getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName) == "")
             {
                 MessageBox.Show(quickExportError, "Define Quick Export (File --> Define Quick Export)");
             }
             else
             {
-                nextAvaiExcelRow = 1; 
+                nextAvaiExcelRow = 1;
                 try
                 {
                     saveTestResultExcel(path, currTestSetup.testOrder);
@@ -6777,12 +6899,12 @@ namespace WindowsFormsApplication1
 
         private void ch1Trough_chckbox_CheckedChanged(object sender, EventArgs e)
         {
-            if ((ch1Trough_chckbox.Checked==true) && (ch2Trough_chckbox.Checked == true))
+            if ((ch1Trough_chckbox.Checked == true) && (ch2Trough_chckbox.Checked == true))
                 ch2Trough_chckbox.Checked = false;
             if (ch1Trough_chckbox.Checked == true)
             {
                 string trackModeCommand = "!M1;";
-                write_command(trackModeCommand,serialPort1);//Set track mode for chan1 if Trough Mode
+                write_command(trackModeCommand, serialPort1);//Set track mode for chan1 if Trough Mode
                 ch1ModeControlBtn_calTab.Text = modeControl(serialPort1, ref chann1Control);//update text on Mode button
             }
         }
@@ -6799,7 +6921,7 @@ namespace WindowsFormsApplication1
                 ch2ModeControlBtn_calTab.Text = modeControl(serialPort2, ref chann2Control);//update text on Mode button
             }
         }
-        
+
 
         private void excelExport_calTab_btn_Click(object sender, EventArgs e)
         {
@@ -6812,13 +6934,13 @@ namespace WindowsFormsApplication1
         private void command_btn_Click(object sender, EventArgs e)
         {
             string command = command_txt.Text;
-            commandResult_txt.Text= write_command(command, serialPort1);
+            commandResult_txt.Text = write_command(command, serialPort1);
         }
 
         private void deleteLastTestRow_btn_Click(object sender, EventArgs e)
         {
             char lastTestGridChr = '0';
-            lastTestGridChr=lookForActiveTestGrid();
+            lastTestGridChr = lookForActiveTestGrid();
             DataGridView lastGrid = testGridFromChar(lastTestGridChr);
             //if not a new row and ch1reading and ch2reading on first Row are both empty
             //then lastTestGrid is the 1 before this currTestGrid
@@ -6837,7 +6959,7 @@ namespace WindowsFormsApplication1
             //update lastGrid and delete last row of lastGrid
             lastGrid = testGridFromChar(lastTestGridChr);
             deleteLastTestRow(ref lastGrid);
-            
+
             //update currTestGridNum
             currTestGridNum = lookForActiveTestGrid();
 
@@ -6849,7 +6971,7 @@ namespace WindowsFormsApplication1
             {
                 plusOrMinus = -1;
             }
-            
+
             //if it is single channel, update active Target
             if (currTestSetup.testType == "1")
             {
@@ -6858,85 +6980,96 @@ namespace WindowsFormsApplication1
                 activeTarget = getActiveTargetfrTestGridChr(activeTestGridChr);
                 testTarget_lbl.Text = activeTarget.ToString();
             }
-            
+
             //Reevaluate color
-            reevaluatePassFailData(ref lastGrid,plusOrMinus);            
+            reevaluatePassFailData(ref lastGrid, plusOrMinus);
         }
 
-        
+
         //Assign color code for each Data Row of passed in gridview
-        private void reevaluatePassFailData(ref DataGridView thisGrid,int posOrneg)
+        private void reevaluatePassFailData(ref DataGridView thisGrid, int posOrneg)
         {
-            testType = testType_comboBox.SelectedIndex + 1;
-
-            float ch1Reading = 0, ch2Reading = 0, target = 0, low = 0, high = 0;
-            int gridRowIndex = 0;
-
-            foreach (DataGridViewRow gridRow in thisGrid.Rows)
+            try
             {
-                bool floatValid = true;
-                if (testType == 1)//Single Channel test, compare Channel 1 Reading with Target
-                {
-                    //Try to get the float value of Reading, target,low, high
-                    try
-                    {
-                        ch1Reading = Single.Parse(gridRow.Cells[chan1Readings_colName].Value.ToString()) * posOrneg;
-                        target = Single.Parse(gridRow.Cells[target_colName].Value.ToString()) * posOrneg;
-                        low = Single.Parse(gridRow.Cells[low_colName].Value.ToString()) * posOrneg;
-                        high = Single.Parse(gridRow.Cells[high_colName].Value.ToString()) * posOrneg;
-                    }
-                    catch
-                    {
-                        floatValid = false;
-                    }
+                testType = testType_comboBox.SelectedIndex + 1;
 
-                    if (floatValid == true)
-                    {
-                        changeGridColor(ref thisGrid, gridRowIndex,ch1Reading,target,low,high);
-                    }
-                    else//if the datas can't be converted to float, clear out the color
-                    {
-                        ch1Reading = 0;
-                        target = 0;
-                        low = 0;
-                        high = 0;
-                        changeGridColor(ref thisGrid, gridRowIndex, ch1Reading, target, low, high);
-                    }
-                }
-                if (testType == 2)
-                {
-                    //Dual Channel Test
-                    try
-                    {
-                        ch2Reading = Single.Parse(gridRow.Cells[chan2Readings_colName].Value.ToString()) * posOrneg;
-                        target = Single.Parse(gridRow.Cells[target_colName].Value.ToString()) * posOrneg;
-                        low = Single.Parse(gridRow.Cells[low_colName].Value.ToString()) * posOrneg;
-                        high = Single.Parse(gridRow.Cells[high_colName].Value.ToString()) * posOrneg;
-                    }
-                    catch
-                    {
-                        floatValid = false;
-                    }
+                float ch1Reading = 0, ch2Reading = 0, target = 0, low = 0, high = 0;
+                int gridRowIndex = 0;
 
-                    if (floatValid == true)
+                foreach (DataGridViewRow gridRow in thisGrid.Rows)
+                {
+                    bool floatValid = true;
+                    if (testType == 1)//Single Channel test, compare Channel 1 Reading with Target
                     {
-                        changeGridColor(ref thisGrid, gridRowIndex, ch2Reading, target, low, high);
+                        //Try to get the float value of Reading, target,low, high
+                        try
+                        {
+                            ch1Reading = Single.Parse(gridRow.Cells[chan1Readings_colName].Value.ToString()) * posOrneg;
+                            target = Single.Parse(gridRow.Cells[target_colName].Value.ToString()) * posOrneg;
+                            low = Single.Parse(gridRow.Cells[low_colName].Value.ToString()) * posOrneg;
+                            high = Single.Parse(gridRow.Cells[high_colName].Value.ToString()) * posOrneg;
+                        }
+                        catch
+                        {
+                            floatValid = false;
+                        }
+
+                        if (floatValid == true)
+                        {
+                            changeGridColor(ref thisGrid, gridRowIndex, ch1Reading, target, low, high);
+                        }
+                        else//if the datas can't be converted to float, clear out the color
+                        {
+                            ch1Reading = 0;
+                            target = 0;
+                            low = 0;
+                            high = 0;
+                            changeGridColor(ref thisGrid, gridRowIndex, ch1Reading, target, low, high);
+                        }
                     }
-                    else
+                    if (testType == 2)
                     {
-                        ch2Reading = 0;
-                        target = 0;
-                        low = 0;
-                        high = 0;
-                        changeGridColor(ref thisGrid, gridRowIndex, ch2Reading, target, low, high);
+                        //Dual Channel Test
+                        try
+                        {
+                            ch2Reading = Single.Parse(gridRow.Cells[chan2Readings_colName].Value.ToString()) * posOrneg;
+                            target = Single.Parse(gridRow.Cells[target_colName].Value.ToString()) * posOrneg;
+                            low = Single.Parse(gridRow.Cells[low_colName].Value.ToString()) * posOrneg;
+                            high = Single.Parse(gridRow.Cells[high_colName].Value.ToString()) * posOrneg;
+                        }
+                        catch
+                        {
+                            floatValid = false;
+                        }
+
+                        if (floatValid == true)
+                        {
+                            changeGridColor(ref thisGrid, gridRowIndex, ch2Reading, target, low, high);
+                        }
+                        else
+                        {
+                            ch2Reading = 0;
+                            target = 0;
+                            low = 0;
+                            high = 0;
+                            changeGridColor(ref thisGrid, gridRowIndex, ch2Reading, target, low, high);
+                        }
                     }
+                    gridRowIndex++;
                 }
-                gridRowIndex++;
+            }
+            catch (NullReferenceException e)
+            {
+                //Do nothing
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
             }
         }
 
         //Change color of testGrid Row based on whether passed in reading is within limit
-        private void changeGridColor(ref DataGridView thisGrid, int rowIndex,float reading, float target, float low, float high)
+        private void changeGridColor(ref DataGridView thisGrid, int rowIndex, float reading, float target, float low, float high)
         {
             int passFail = 0; //0=pass,-1=low,1=high
             if ((reading == target) ||
@@ -7019,7 +7152,7 @@ namespace WindowsFormsApplication1
             PreventGridSort(ref thisGrid);
             thisGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             thisGrid.Columns[0].Width = 25;
-            int colWidth = (thisGrid.Width - thisGrid.Columns[0].Width-37)/5;
+            int colWidth = (thisGrid.Width - thisGrid.Columns[0].Width - 37) / 5;
             thisGrid.Columns[1].Width = colWidth;
             thisGrid.Columns[2].Width = colWidth;
             thisGrid.Columns[3].Width = colWidth;
@@ -7033,10 +7166,10 @@ namespace WindowsFormsApplication1
         //return Datatable that has current testTable in GridView
         private DataTable saveTestTable()
         {
-            DataTable thisTable=new DataTable();
-            
+            DataTable thisTable = new DataTable();
+
             //Create tempGridView that represent each empty test Grid to save to testTable from testSetup
-            DataGridView[] tempGrids_arr =new DataGridView[] {AFCW_grid,AFCCW_grid,ALCW_grid,ALCCW_grid};
+            DataGridView[] tempGrids_arr = new DataGridView[] { AFCW_grid, AFCCW_grid, ALCW_grid, ALCCW_grid };
             for (int gridIndex = 0; gridIndex < tempGrids_arr.Length; gridIndex++)
             {
                 //if 1 grid is not empty, use that to fill in empty ones
@@ -7047,7 +7180,7 @@ namespace WindowsFormsApplication1
                     {
                         if (tempGrids_arr[secondGridIndex].Rows[0].IsNewRow)//if secondgrid is empty, fill it
                         {
-                            DataGridView tempGrid=new DataGridView();
+                            DataGridView tempGrid = new DataGridView();
                             tempGrid = tempGrids_arr[gridIndex];
                             tempGrids_arr[secondGridIndex] = fillTestGrid(tempGrid, gridIndex,
                                 secondGridIndex);
@@ -7060,7 +7193,7 @@ namespace WindowsFormsApplication1
             thisTable = converttestGridsToTable(tempGrids_arr);
             return thisTable;
         }
-        
+
         //Return Datatable with testTable structure and Datas copied from grid_arr
         private DataTable converttestGridsToTable(DataGridView[] grid_arr)
         {
@@ -7094,7 +7227,7 @@ namespace WindowsFormsApplication1
             DataGridView returnGrid = new DataGridView();
             initTestGridView(ref returnGrid);
 
-            int copyOrFlip = Math.Abs(oriGridIndex-returnGridIndex) % 2;//0=copy, 1=flip
+            int copyOrFlip = Math.Abs(oriGridIndex - returnGridIndex) % 2;//0=copy, 1=flip
             if (copyOrFlip == 0) //Copy exactly
             {
                 returnGrid = oriGrid;
@@ -7109,9 +7242,9 @@ namespace WindowsFormsApplication1
                         {
                             //flip sign for target,low,high
                             float point = Int32.Parse(gridRow.Cells[pointGridCol].Value.ToString()),
-                                target = Single.Parse(gridRow.Cells[targetGridCol].Value.ToString())*-1,
-                                high = Single.Parse(gridRow.Cells[highGridCol].Value.ToString())*-1,
-                                low = Single.Parse(gridRow.Cells[lowGridCol].Value.ToString())*-1;
+                                target = Single.Parse(gridRow.Cells[targetGridCol].Value.ToString()) * -1,
+                                high = Single.Parse(gridRow.Cells[highGridCol].Value.ToString()) * -1,
+                                low = Single.Parse(gridRow.Cells[lowGridCol].Value.ToString()) * -1;
 
                             returnGrid.Rows.Add(point, "", "", target, low, high);
                         }
@@ -7125,14 +7258,14 @@ namespace WindowsFormsApplication1
 
             return returnGrid;
         }
-        
+
         //Return a testSetup with All current Setting on the screen
         private TestSetup saveThisTest(string isDefaultTest)
         {
-            TestSetup returnSetup=new TestSetup();
+            TestSetup returnSetup = new TestSetup();
             returnSetup.testID = testID_txt.Text;
-            returnSetup.testType = (testType_comboBox.SelectedIndex+1).ToString();
-            
+            returnSetup.testType = (testType_comboBox.SelectedIndex + 1).ToString();
+
             returnSetup.percent_unit = limitEngPercent_comboBox.SelectedItem.ToString();
             returnSetup.FullScale = FS_txt.Text;
             returnSetup.low = lowLimit_txt.Text;
@@ -7144,7 +7277,7 @@ namespace WindowsFormsApplication1
             returnSetup.sampleNum = sampleNum_txt.Text;
             returnSetup.testOrder = getTestOrderStr(testList);
             returnSetup.testTable = saveTestTable();
-            
+
             return returnSetup;
         }
 
@@ -7162,7 +7295,7 @@ namespace WindowsFormsApplication1
         }
 
         //Update the text when mode is changed for both channel
-        private void updateModeText ()
+        private void updateModeText()
         {
             try
             {
@@ -7212,7 +7345,7 @@ namespace WindowsFormsApplication1
                             updateModeText();
                             break;
                         case 3://Trough
-                            if (passedinChannel.PortName==serialPort1.PortName)
+                            if (passedinChannel.PortName == serialPort1.PortName)
                             {
                                 ch1Trough_chckbox.Checked = true;
                             }
@@ -7226,14 +7359,14 @@ namespace WindowsFormsApplication1
                 catch { }
             }
         }
-        //changed 2/26/19
+        //changed 3/8/19 to fix test setup order when switching between tool
         private void toolID_comboBox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             //if testSetup_groupbox is not enable, that means test is running
             //ask first before clear and the current test
-            if (testSetup_groupBox.Enabled==false)
+            if (testSetup_groupBox.Enabled == false)
             {
-                var result=MessageBox.Show("Select new tool will clear current test. Proceed?","Warning", MessageBoxButtons.YesNo);
+                var result = MessageBox.Show("Select new tool will clear current test. Proceed?", "Warning", MessageBoxButtons.YesNo);
                 //if Answer is no, do not change 
                 if (result == DialogResult.No)
                     return;
@@ -7260,8 +7393,6 @@ namespace WindowsFormsApplication1
                     toolProcedure_txt.Text = thisRow[pack.procedure_colName].ToString();
 
                     //change Mode for connected Testers
-
-
                     if (thisRow[pack.scanOperator_colName].ToString() == "1")
                     {
                         operatorID_lbl.Font = new Font(operatorID_lbl.Font, FontStyle.Bold);
@@ -7291,7 +7422,7 @@ namespace WindowsFormsApplication1
                     int chan2ModeIndex = -1;
                     try
                     {
-                        chan1ModeIndex= Int32.Parse(thisRow[pack.mode_colName].ToString());
+                        chan1ModeIndex = Int32.Parse(thisRow[pack.mode_colName].ToString());
                     }
                     catch { }
                     try
@@ -7299,12 +7430,12 @@ namespace WindowsFormsApplication1
                         chan2ModeIndex = Int32.Parse(thisRow[pack.imode_colName].ToString());
                     }
                     catch { }
-                    
-                    if (chan1ModeIndex>=0)
+
+                    if (chan1ModeIndex >= 0)
                     {
                         changeMode(serialPort1, chan1ModeIndex);
                     }
-                    if (chan2ModeIndex>=0)
+                    if (chan2ModeIndex >= 0)
                     {
                         changeMode(serialPort2, chan2ModeIndex);
                     }
@@ -7319,13 +7450,13 @@ namespace WindowsFormsApplication1
             bool proceed = false;
             if (testSetup_comboBox.SelectedIndex > 0) //Not new test, maxPoint text can be empty
             {
-                string []arrStr=new string[] {sampleNum_txt.Text,FS_txt.Text,lowLimit_txt.Text,highLimit_txt.Text};
+                string[] arrStr = new string[] { sampleNum_txt.Text, FS_txt.Text, lowLimit_txt.Text, highLimit_txt.Text };
                 if (checkNoStrEmpty(arrStr) == true)
                     proceed = true;
             }
             else if (testSetup_comboBox.SelectedIndex == 0) //new test, maxPoint text CAN NOT be empty
             {
-                string[] arrStr = new string[] {maxPoint_txt.Text, sampleNum_txt.Text, FS_txt.Text, lowLimit_txt.Text, highLimit_txt.Text };
+                string[] arrStr = new string[] { maxPoint_txt.Text, sampleNum_txt.Text, FS_txt.Text, lowLimit_txt.Text, highLimit_txt.Text };
                 if (checkNoStrEmpty(arrStr) == true)
                     proceed = true;
             }
@@ -7343,11 +7474,11 @@ namespace WindowsFormsApplication1
                 int sampleNum = Int32.Parse(sampleNum_txt.Text);
 
                 //default to % if not selected
-                if (limitEngPercent_comboBox.SelectedIndex <0)
+                if (limitEngPercent_comboBox.SelectedIndex < 0)
                     limitEngPercent_comboBox.SelectedIndex = 0;
                 int limitPercentEng = limitEngPercent_comboBox.SelectedIndex;//0 is percent, 1 is eng.unit
-                int maxPoint=0;
-                
+                int maxPoint = 0;
+
                 try//if max point is determined by user, use it as maxpoint
                 {
                     maxPoint = Int32.Parse(maxPoint_txt.Text);
@@ -7355,25 +7486,25 @@ namespace WindowsFormsApplication1
                 catch
                 {
                     //find testGrid with largest row count, use it as maxpoint
-                    maxPoint = Math.Max(maxPoint, AFCW_grid.RowCount-1);
-                    maxPoint = Math.Max(maxPoint, AFCCW_grid.RowCount-1);
-                    maxPoint = Math.Max(maxPoint, ALCW_grid.RowCount-1);
-                    maxPoint = Math.Max(maxPoint, ALCCW_grid.RowCount-1);
+                    maxPoint = Math.Max(maxPoint, AFCW_grid.RowCount - 1);
+                    maxPoint = Math.Max(maxPoint, AFCCW_grid.RowCount - 1);
+                    maxPoint = Math.Max(maxPoint, ALCW_grid.RowCount - 1);
+                    maxPoint = Math.Max(maxPoint, ALCCW_grid.RowCount - 1);
                 }
 
                 //Assign new Value to currTestSetup.testTable
-                currTestSetup.testTable= updateTestTable(currTestSetup.testTable,maxPoint, newFS, newLow, newHigh,limitPercentEng,sampleNum,currTestSetup.defaultTest);
+                currTestSetup.testTable = updateTestTable(currTestSetup.testTable, maxPoint, newFS, newLow, newHigh, limitPercentEng, sampleNum, currTestSetup.defaultTest);
 
                 //Display to Grid
-                updateTestGrid(currTestSetup.testTable,testList);
+                updateTestGrid(currTestSetup.testTable, testList);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Unable to read in user Input, please make sure value input is Float format");
             }
         }
-        
-        private int[] pointsBracket_arr=new int[] {1,2,3,5,6,7,10,11,20};
+
+        private int[] pointsBracket_arr = new int[] { 1, 2, 3, 5, 6, 7, 10, 11, 20 };
         private void testManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TestSequenceManager_form frm = new TestSequenceManager_form(testSetups);
@@ -7443,7 +7574,7 @@ namespace WindowsFormsApplication1
         private void upSize_btn_Click(object sender, EventArgs e)
         {
             float bigReadingFontSize = reading_bigReading_lbl.Font.Size + 2;
-            reading_bigReading_lbl.Font =ChangeFontSize(reading_bigReading_lbl.Font, bigReadingFontSize);
+            reading_bigReading_lbl.Font = ChangeFontSize(reading_bigReading_lbl.Font, bigReadingFontSize);
             setRegistryValue(defaultBigReadingFontSize_keyName, defaultBigReadingFontSize_valueName, bigReadingFontSize.ToString());
         }
 
@@ -7478,7 +7609,7 @@ namespace WindowsFormsApplication1
         //pause or continue test. Also change the text on continue_pauseTest_btn
         private void changePauseContinueTestState()
         {
-            if (pauseTest==false)
+            if (pauseTest == false)
             {//switch to Pause Test
                 pauseTest = true;
                 continue_pauseTest_btn.Text = "Continue Test";
@@ -7498,7 +7629,7 @@ namespace WindowsFormsApplication1
 
         private void forceAutoClearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (forceAutoClearToolStripMenuItem.Checked==true)
+            if (forceAutoClearToolStripMenuItem.Checked == true)
             {
                 autoClearInterval = -5;
                 autoClearCountDown = -5;
@@ -7667,7 +7798,7 @@ namespace WindowsFormsApplication1
         //This method is called whenever a test setup is saved
         private void saveAllTestsToCSV()
         {
-            List<string> strToWriteTestCSV=new List<string>();
+            List<string> strToWriteTestCSV = new List<string>();
 
             //Add total count of testSetup
             strToWriteTestCSV.Add(testSetups.Count.ToString());
@@ -7691,7 +7822,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-        
+
 
         private void saveStartTest_btn_Click(object sender, EventArgs e)
         {
@@ -7699,97 +7830,97 @@ namespace WindowsFormsApplication1
             {
                 saveTest_calCert();
             }
-            else if (saveStartTest_btn.Text=="Start")
+            else if (saveStartTest_btn.Text == "Start")
             {//Implement start test
                 startTest_calCert();
             }
         }
 
-            //Save Test in Calcert
-            private void saveTest_calCert()
-            {
-                if (testSetup_comboBox.SelectedIndex > 0) //Not a New Test, Save to currTestID in TestSetups
-                {
-                    try
-                    {
-
-                        testSetups[currTestIndex] = saveThisTest(testSetups[currTestIndex].defaultTest); //pass in TestSetup into TestSetups[currTestIndex]
-                        currTestSetup = testSetups[currTestIndex]; //update the currTestSetup
-                        refreshTestIDComboBox();
-                        initCurrTestSetup(currTestIndex);
-
-                        MessageBox.Show("Test successfully saved");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Unable to save due to error:\n\n" + ex.Message);
-                    }
-                }
-                else if (testSetup_comboBox.SelectedIndex == 0) //New Test, Save to a new TestSetup in TestSetups
-                {
-                    try
-                    {
-                        testSetups.Add(saveThisTest(notDefaultTest)); //Save the New Test to end of Test List
-                        refreshTestIDComboBox(); //Refresh test id list
-                        testSetup_comboBox.SelectedIndex = testSetups.Count;
-
-                        //Select the last test(new test just got saved)
-                        MessageBox.Show("Test successfully saved");
-
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Unable to save New Test due to error:\n\n" + ex.Message);
-                    }
-                }
-
-                //Save all test to CSV
-                saveAllTestsToCSV();
-            }
-
-            //Start test in Cal Cert Tab
-            private void startTest_calCert()
+        //Save Test in Calcert
+        private void saveTest_calCert()
+        {
+            if (testSetup_comboBox.SelectedIndex > 0) //Not a New Test, Save to currTestID in TestSetups
             {
                 try
                 {
-                    //Still save first before running the test
+
                     testSetups[currTestIndex] = saveThisTest(testSetups[currTestIndex].defaultTest); //pass in TestSetup into TestSetups[currTestIndex]
                     currTestSetup = testSetups[currTestIndex]; //update the currTestSetup
+                    refreshTestIDComboBox();
+                    initCurrTestSetup(currTestIndex);
 
-                    //Disable all testSetup Field
-                    testSetup_groupBox.Enabled = false;
+                    MessageBox.Show("Test successfully saved");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unable to save due to error:\n\n" + ex.Message);
+                }
+            }
+            else if (testSetup_comboBox.SelectedIndex == 0) //New Test, Save to a new TestSetup in TestSetups
+            {
+                try
+                {
+                    testSetups.Add(saveThisTest(notDefaultTest)); //Save the New Test to end of Test List
+                    refreshTestIDComboBox(); //Refresh test id list
+                    testSetup_comboBox.SelectedIndex = testSetups.Count;
 
-                    //Disable the copy button for cw and ccw if it is not valid
-                    if (currTestSetup.testOrder.Contains("1") && (currTestSetup.testOrder.Contains("3")))
-                        copyCW_btn.Enabled = true;
-                    else
-                    {
-                        copyCW_btn.Enabled = false;
-                    }
-                    if (currTestSetup.testOrder.Contains("2") && (currTestSetup.testOrder.Contains("4")))
-                        copyCCW_btn.Enabled = true;
-                    else
-                    {
-                        copyCCW_btn.Enabled = false;
-                    }
-
-                    //Activate the first testGrid in testOrder
-                    showActiveTestGrid(currTestSetup.testOrder[0]);
-
-                    //if it is single channel,display active Target
-                    if (currTestSetup.testType == "1")
-                    {
-                        float activeTarget;
-                        activeTarget = getActiveTargetfrTestGridChr(currTestSetup.testOrder[0]);
-                        testTarget_lbl.Text = activeTarget.ToString();
-                    }
+                    //Select the last test(new test just got saved)
+                    MessageBox.Show("Test successfully saved");
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unable to start test due to error: \n\n" + ex.Message);
+                    MessageBox.Show("Unable to save New Test due to error:\n\n" + ex.Message);
                 }
             }
+
+            //Save all test to CSV
+            saveAllTestsToCSV();
+        }
+
+        //Start test in Cal Cert Tab
+        private void startTest_calCert()
+        {
+            try
+            {
+                //Still save first before running the test
+                testSetups[currTestIndex] = saveThisTest(testSetups[currTestIndex].defaultTest); //pass in TestSetup into TestSetups[currTestIndex]
+                currTestSetup = testSetups[currTestIndex]; //update the currTestSetup
+
+                //Disable all testSetup Field
+                testSetup_groupBox.Enabled = false;
+
+                //Disable the copy button for cw and ccw if it is not valid
+                if (currTestSetup.testOrder.Contains("1") && (currTestSetup.testOrder.Contains("3")))
+                    copyCW_btn.Enabled = true;
+                else
+                {
+                    copyCW_btn.Enabled = false;
+                }
+                if (currTestSetup.testOrder.Contains("2") && (currTestSetup.testOrder.Contains("4")))
+                    copyCCW_btn.Enabled = true;
+                else
+                {
+                    copyCCW_btn.Enabled = false;
+                }
+
+                //Activate the first testGrid in testOrder
+                showActiveTestGrid(currTestSetup.testOrder[0]);
+
+                //if it is single channel,display active Target
+                if (currTestSetup.testType == "1")
+                {
+                    float activeTarget;
+                    activeTarget = getActiveTargetfrTestGridChr(currTestSetup.testOrder[0]);
+                    testTarget_lbl.Text = activeTarget.ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to start test due to error: \n\n" + ex.Message);
+            }
+        }
         //Attempt to write reading to end of passed in testGrid using colName
         //Return true or false of success write
         private bool writeToTestGrid(ref DataGridView thisGrid, string[] readings)
@@ -7798,7 +7929,7 @@ namespace WindowsFormsApplication1
             int rowIndex = 0;
             foreach (DataGridViewRow row in thisGrid.Rows)
             {
-                if ((!row.IsNewRow) && (row.Cells[ch1ReadingGridCol].Value.ToString() =="") && (row.Cells[ch2ReadingGridCol].Value.ToString()==""))//if not a new row and both ch1 and ch2 column for that row is empty, write next reading to it
+                if ((!row.IsNewRow) && (row.Cells[ch1ReadingGridCol].Value.ToString() == "") && (row.Cells[ch2ReadingGridCol].Value.ToString() == ""))//if not a new row and both ch1 and ch2 column for that row is empty, write next reading to it
                 {
                     row.Cells[ch1ReadingGridCol].Value = readings[0];
                     if (readings.Length > 1) //DualTest
@@ -7808,7 +7939,7 @@ namespace WindowsFormsApplication1
                     try
                     {
                         thisGrid.Focus();
-                        thisGrid.CurrentCell = thisGrid.Rows[row.Index+1].Cells[pointGridCol];
+                        thisGrid.CurrentCell = thisGrid.Rows[row.Index + 1].Cells[pointGridCol];
                     }
                     catch
                     {
@@ -7839,10 +7970,10 @@ namespace WindowsFormsApplication1
             return success;
         }
         //if passed in cell index is 0 or 1, return false or true
-        private bool getBoolValofTableCell(DataTable thisTable, int rowIndex,string colIndex)
+        private bool getBoolValofTableCell(DataTable thisTable, int rowIndex, string colIndex)
         {
             bool returnVal = false;
-            if (thisTable.Rows[rowIndex][colIndex].ToString()=="1")
+            if (thisTable.Rows[rowIndex][colIndex].ToString() == "1")
             {
                 returnVal = true;
             }
@@ -7880,7 +8011,7 @@ namespace WindowsFormsApplication1
             switch (activeGridNum)
             {
                 case '1':
-                    returnTarget=getActiveTargetfrTestGridName(ref AFCW_grid);
+                    returnTarget = getActiveTargetfrTestGridName(ref AFCW_grid);
                     break;
                 case '2':
                     returnTarget = getActiveTargetfrTestGridName(ref AFCCW_grid);
@@ -7907,47 +8038,58 @@ namespace WindowsFormsApplication1
         //return the char that indicates the active testGrid Number (1=AFCW, 2=AFCCW, etc.)
         private char lookForActiveTestGrid()
         {
-            foreach (char gridIndexChr in currTestSetup.testOrder)
+            try
             {
-                switch (gridIndexChr)
+                foreach (char gridIndexChr in currTestSetup.testOrder)
                 {
-                    case '1':
-                        foreach (DataGridViewRow row in AFCW_grid.Rows)
-                        {
-                            if ((!row.IsNewRow) && (row.Cells[ch1ReadingGridCol].Value.ToString() == "") &&
-                                (row.Cells[ch2ReadingGridCol].Value.ToString() == ""))
-                                return gridIndexChr;
-                        }
-                        break;
-                    case '2':
-                        foreach (DataGridViewRow row in AFCCW_grid.Rows)
-                        {
-                            if ((!row.IsNewRow) && (row.Cells[ch1ReadingGridCol].Value.ToString() == "") &&
-                                (row.Cells[ch2ReadingGridCol].Value.ToString() == ""))
-                                return gridIndexChr;
-                        }
-                        break;
-                    case '3':
-                        foreach (DataGridViewRow row in ALCW_grid.Rows)
-                        {
-                            if ((!row.IsNewRow) && (row.Cells[ch1ReadingGridCol].Value.ToString() == "") &&
-                                (row.Cells[ch2ReadingGridCol].Value.ToString() == ""))
-                                return gridIndexChr;
-                        }
-                        break;
-                    case '4':
-                        foreach (DataGridViewRow row in ALCCW_grid.Rows)
-                        {
-                            if ((!row.IsNewRow) && (row.Cells[ch1ReadingGridCol].Value.ToString() == "") &&
-                                (row.Cells[ch2ReadingGridCol].Value.ToString() == ""))
-                                return gridIndexChr;
-                        }
-                        break;
+                    switch (gridIndexChr)
+                    {
+                        case '1':
+                            foreach (DataGridViewRow row in AFCW_grid.Rows)
+                            {
+                                if ((!row.IsNewRow) && (row.Cells[ch1ReadingGridCol].Value.ToString() == "") &&
+                                    (row.Cells[ch2ReadingGridCol].Value.ToString() == ""))
+                                    return gridIndexChr;
+                            }
+                            break;
+                        case '2':
+                            foreach (DataGridViewRow row in AFCCW_grid.Rows)
+                            {
+                                if ((!row.IsNewRow) && (row.Cells[ch1ReadingGridCol].Value.ToString() == "") &&
+                                    (row.Cells[ch2ReadingGridCol].Value.ToString() == ""))
+                                    return gridIndexChr;
+                            }
+                            break;
+                        case '3':
+                            foreach (DataGridViewRow row in ALCW_grid.Rows)
+                            {
+                                if ((!row.IsNewRow) && (row.Cells[ch1ReadingGridCol].Value.ToString() == "") &&
+                                    (row.Cells[ch2ReadingGridCol].Value.ToString() == ""))
+                                    return gridIndexChr;
+                            }
+                            break;
+                        case '4':
+                            foreach (DataGridViewRow row in ALCCW_grid.Rows)
+                            {
+                                if ((!row.IsNewRow) && (row.Cells[ch1ReadingGridCol].Value.ToString() == "") &&
+                                    (row.Cells[ch2ReadingGridCol].Value.ToString() == ""))
+                                    return gridIndexChr;
+                            }
+                            break;
+                    }
                 }
             }
-            return currTestSetup.testOrder[currTestSetup.testOrder.Length-1];//return the last quadrant in testOrder
+            catch (NullReferenceException e)
+            {
+                MessageBox.Show("Null Reference Error Occured");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            return currTestSetup.testOrder[currTestSetup.testOrder.Length - 1];//return the last quadrant in testOrder
         }
-        
+
         //Passed in the number of current active testGrid (in char format) to show to user the current active Grid
         private void showActiveTestGrid(char activeGridNum)
         {
@@ -7971,8 +8113,8 @@ namespace WindowsFormsApplication1
                     ALCWactive_label.Visible = false;
                     ALCCWactive_label.Visible = false;
 
-                    AFCW_grid.BorderStyle=BorderStyle.FixedSingle;
-                    AFCCW_grid.BorderStyle=BorderStyle.None;
+                    AFCW_grid.BorderStyle = BorderStyle.FixedSingle;
+                    AFCCW_grid.BorderStyle = BorderStyle.None;
                     ALCW_grid.BorderStyle = BorderStyle.None;
                     ALCCW_grid.BorderStyle = BorderStyle.None;
                     break;
@@ -8072,7 +8214,7 @@ namespace WindowsFormsApplication1
 
             }
         }
-
+        //changed 07/31/18
         private void showHideCMK(bool isShown)
         {
             CM_lbl.Visible = isShown;
@@ -8080,11 +8222,12 @@ namespace WindowsFormsApplication1
             CMK_lbl.Visible = isShown;
             CMKVal_lbl.Visible = isShown;
         }
+        //changed 07/31/18
         private void showCMK_chkBox_CheckedChanged(object sender, EventArgs e)
         {
             //show or hide CM and CMK value
             showHideCMK(showCMK_chkBox.Checked);
-            if (showCMK_chkBox.Checked==false)
+            if (showCMK_chkBox.Checked == false)
             {
                 USL_txt.Text = "";
                 LSL_txt.Text = "";
@@ -8099,6 +8242,25 @@ namespace WindowsFormsApplication1
         private void LSL_txt_TextChanged(object sender, EventArgs e)
         {
             ch1CMCMKReCalculate = true;
+        }
+
+        //Added 7/18/18
+        private void forward_btn_Click(object sender, EventArgs e)
+        {
+            string forwardCommand = chann1Control.getForwardCommand();
+            write_command(forwardCommand, serialPort1);
+        }
+        //Added 7/18/18
+        private void reverse_btn_Click(object sender, EventArgs e)
+        {
+            string reverseCommand = chann1Control.getForwardCommand();
+            write_command(reverseCommand, serialPort1);
+        }
+        //Added 7/18/18
+        private void stop_btn_Click(object sender, EventArgs e)
+        {
+            string stopCommand = chann1Control.getStopCommand();
+            write_command(stopCommand, serialPort1);
         }
 
         //set flag that ch1valuechanged= true
@@ -8117,7 +8279,7 @@ namespace WindowsFormsApplication1
 
             bool writeSucceed = false;
             currTestGridNum = lookForActiveTestGrid();//Assign the current grid Index to currAvaiGridChr
-            
+
             //write the reading to active grid
             switch (currTestGridNum)
             {
@@ -8146,12 +8308,12 @@ namespace WindowsFormsApplication1
 
         //passed in array of readings(max is 2 readings, 1 for chan1 and 1 for chan2)
         //Todo: still need to implement
-        private void showReadingsToUser(string[] readings,string[] unit)
+        private void showReadingsToUser(string[] readings, string[] unit)
         {
             switch (TabPages.SelectedTab.Name)
             {
                 case TTSTabName:
-                    DataTTS_lbl.Text=readings[0];
+                    DataTTS_lbl.Text = readings[0];
                     unitTTS_lbl.Text = unit[0];
                     break;
                 case SMDSingleTabName:
@@ -8172,9 +8334,9 @@ namespace WindowsFormsApplication1
         //Handle when user press Enter from channel tester
         private void processData_calTab(string Ch1TesterResponse)
         {
-            
+
             string ch1Reading = "";//contain 1st Channel reading to write to testGrid
-            string[] reading_arr=new string[] {""};
+            string[] reading_arr = new string[] { "" };
 
             if ((ch1Trough_chckbox.Checked == false) || (ch1TroughList.Count == 0))
             {//if trough mode is NOT on, or if it was on but the other channel has not escaped threshold 0 yet
@@ -8186,7 +8348,7 @@ namespace WindowsFormsApplication1
                     else
                     {
                         ch1Reading = data[0];
-                        
+
                     }
                 }
             }
@@ -8195,9 +8357,9 @@ namespace WindowsFormsApplication1
                 ch1Reading = ch1TroughPoint.ToString();
             }
 
-            if (currTestSetup.testType=="1")//single channel test
-                reading_arr=new string[] {ch1Reading};
-            else if (currTestSetup.testType=="2")
+            if (currTestSetup.testType == "1")//single channel test
+                reading_arr = new string[] { ch1Reading };
+            else if (currTestSetup.testType == "2")
             {//Dual Channel Test
                 //capture ch2
                 string ch2Reading = "";
@@ -8214,14 +8376,39 @@ namespace WindowsFormsApplication1
                         ch2Reading = ch2TroughPoint.ToString();
                     }
                 }
-                reading_arr=new string[] {ch1Reading,ch2Reading};
+                reading_arr = new string[] { ch1Reading, ch2Reading };
             }
 
             //write array of reading into testGrid
-            writeReadingsToTest(reading_arr,currTestSetup.testOrder);
+            writeReadingsToTest(reading_arr, currTestSetup.testOrder);
 
         }
-
+        ////added 10/2/18
+        private void useLimit_chkbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (useLimit_chkbox.Checked)
+            {
+                USL_txt.Enabled = false;
+                LSL_txt.Enabled = false;
+                try
+                {
+                    LowHighTarget lowhightarget = setHighLowTarget();
+                    LSL_txt.Text = lowhightarget.low.ToString();
+                    USL_txt.Text = lowhightarget.high.ToString();
+                }
+                catch
+                {
+                    LSL_txt.Text = "0";
+                    USL_txt.Text = "0";
+                }
+            }
+            else
+            {
+                USL_txt.Enabled = true;
+                LSL_txt.Enabled = true;
+            }
+        }
+        
         /////**********************************Start Connect and Handle Tools Database****************************************
         //Variables for Tools Database Connect
         private TcpClient clientSocket = new TcpClient();
@@ -8233,8 +8420,8 @@ namespace WindowsFormsApplication1
         private BindingList<string> toolsIDListSearch = new BindingList<string>();
         private void toolsManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-            Form_ToolsManager toolForm = new Form_ToolsManager(pack,testSetups);
+
+            Form_ToolsManager toolForm = new Form_ToolsManager(pack, testSetups);
             toolForm.ShowDialog();
             pack = toolForm.pack;
             updateAndBindToolsList();
@@ -8260,7 +8447,7 @@ namespace WindowsFormsApplication1
         {
             connectServer();
             if (clientSocket.Connected)//if socket is connected with server, log on
-            {   
+            {
                 pack.sendCommand("conn");
                 pack.sendCommand("user");
                 //userInputText.Clear();
@@ -8333,7 +8520,7 @@ namespace WindowsFormsApplication1
             BindingList<string> returnTooList = new BindingList<string>(getDataColfromDataTable(toolsDataTable, pack.toolID_colName));
             return returnTooList;
         }
-        
+
         //return Table of Tools that has valid toolID only
         private DataTable extractToolsDataTable(DataTable toolsAndModelTable)
         {
@@ -8349,33 +8536,67 @@ namespace WindowsFormsApplication1
             }
             return returnTable;
         }
-        
+
 
         //update the toolsDatatable, then bind toolsIDList to toolID column of toolsDatatable
+        //Changed 8/14/18 to bind toolID in SC
         private void updateAndBindToolsList()
         {
-            DataTable toolsModelTable= getAllTools(pack).Copy();//Update toolsDatatable with all of Tools and Models Info
+            DataTable toolsModelTable = getAllTools(pack).Copy();//Update toolsDatatable with all of Tools and Models Info
             toolsDataTable = extractToolsDataTable(toolsModelTable).Copy();//Get only tools Data into toolsDataTable
             toolsIdList = updateToolIDList(toolsDataTable);//update tools_id list.
             toolID_comboBox.Items.Clear();
             toolID_comboBox.Items.AddRange(toolsIdList.ToArray());//Bind toolID_comboBox to toolsIDList
+
+            toolID_SC_comboBox.Items.Clear();
+            toolID_SC_comboBox.Items.AddRange(toolsIdList.ToArray());
+
         }
 
-        /// ***********************************End Connect and Handle Tools Database******************************************
-        
-        //Start handle opening old Test
-
-        //parse readings from wbook into Data Table and return it
-        //Used by SC and DC tab
-        //Todo: Handle open old excel with CM CMK
-        private DataTable getTableFromExcel(ExcelWorkbook wbook)
+        //get the row that contains header for opening SC Excel
+        private int getHeaderRowIndex_SC(ExcelWorkbook wbook)
         {
-            int startReadingRowIndexExcel = 2;
-            int headerRowIndexExcel = 1;
-            int startColIndexExcel = 0;
-            
+            int returnHeaderRowIndex = 1;
+            int colIndex = 0;
+            for (int rowIndex = returnHeaderRowIndex; rowIndex < wbook.Worksheets[0].Rows.Count; rowIndex++)
+            {
+                string headerName = wbook.Worksheets[0].Cells[rowIndex, colIndex].Value.ToString();
+                switch (headerName)
+                {
+                    case "Point":
+                        returnHeaderRowIndex = rowIndex;
+                        break;
+                }
+            }
+            //if cant find the row with header row, just return default start row=1
+            return returnHeaderRowIndex;
+        }
+
+        //Auto Select Tool in SC when open Excel file
+        private void getToolIDWhenOpenExcelSC(ExcelWorkbook wbook, int lastRow)
+        {
+            //find and select Tool Name
+            for (int rowIndexCSV = 0; rowIndexCSV < lastRow; rowIndexCSV++)
+            {
+                const int headerColIndex = 0;
+                string headerName = wbook.Worksheets[0].Cells[rowIndexCSV, headerColIndex].Value.ToString();
+                switch (headerName)
+                {
+                    case "Tool Name *":
+                        string toolID = wbook.Worksheets[0].Cells[rowIndexCSV, headerColIndex + 1].Value.ToString();
+                        int toolIndex = -1;
+                        toolIndex = toolID_SC_comboBox.FindStringExact(toolID);
+                        toolID_SC_comboBox.SelectedIndex = toolIndex;
+                        break;
+
+                }
+            }
+        }
+
+        //get Headers and Data for SC Table when open old Excel SC
+        private DataTable getHeaderAndDataFromExcel_SC(ExcelWorkbook wbook, int headerRowIndexExcel, int startReadingRowIndexExcel, int startColIndexExcel)
+        {
             DataTable returnTable = new DataTable();
-            
             //Create header for datatable
             for (int colIndexCSV = startColIndexExcel; colIndexCSV < wbook.Worksheets[0].Columns.Count; colIndexCSV++)
             {
@@ -8383,35 +8604,41 @@ namespace WindowsFormsApplication1
                 string tempText = wbook.Worksheets[0].Cells[headerRowIndexExcel + 1, colIndexCSV].Value.ToString();
                 switch (headerName)
                 {
-                    case "High Limit":
+                    case "High":
                         if ((tempText != "") && (tempText != "0"))
+                        {
                             high_limit.Text = tempText;
+                            high_unit.Select();
+                        }
                         break;
-                    case "Low Limit":
+                    case "Low":
                         if ((tempText != "") && (tempText != "0"))
-                            low_limit.Text = wbook.Worksheets[0].Cells[headerRowIndexExcel + 1, colIndexCSV].Value.ToString();
+                        {
+                            low_limit.Text = tempText;
+                            low_unit.Select();
+                        }
                         break;
                     case "Target":
                         if ((tempText != "") && (tempText != "0"))
-                            target.Text= wbook.Worksheets[0].Cells[headerRowIndexExcel + 1, colIndexCSV].Value.ToString();
+                            target.Text = tempText;
                         break;
+
                     default://Write to datatable to return
                         returnTable.Columns.Add(wbook.Worksheets[0].Cells[headerRowIndexExcel, colIndexCSV].Value.ToString());
                         break;
                 }
-                
             }
 
             //Put values into tables
-            for (int colIndexCSV=startColIndexExcel;colIndexCSV< wbook.Worksheets[0].Columns.Count;colIndexCSV++)
+            for (int colIndexCSV = startColIndexExcel; colIndexCSV < wbook.Worksheets[0].Columns.Count; colIndexCSV++)
             {
                 for (int rowIndexCSV = startReadingRowIndexExcel; rowIndexCSV < wbook.Worksheets[0].Rows.Count; rowIndexCSV++)
                 {
                     float value;
                     try
                     {
-                        value= Single.Parse(wbook.Worksheets[0].Cells[rowIndexCSV, colIndexCSV].Value.ToString());
-                        if ((rowIndexCSV - startReadingRowIndexExcel)>(returnTable.Rows.Count-1))
+                        value = Single.Parse(wbook.Worksheets[0].Cells[rowIndexCSV, colIndexCSV].Value.ToString());
+                        if ((rowIndexCSV - startReadingRowIndexExcel) > (returnTable.Rows.Count - 1))
                             returnTable.Rows.Add();
                         returnTable.Rows[rowIndexCSV - startReadingRowIndexExcel][colIndexCSV - startColIndexExcel] = value;
                     }
@@ -8428,15 +8655,44 @@ namespace WindowsFormsApplication1
 
             return returnTable;
         }
+        /// ***********************************End Connect and Handle Tools Database******************************************
+
+        //Start handle opening old Test
+
+        //parse readings from wbook into Data Table and return it
+        //Used by SC and DC tab
+        //Todo: Handle open old excel with CM CMK
+        //Changed 7/31/18
+        //working
+        private DataTable getTableFromExcel(ExcelWorkbook wbook)
+        {
+            string xcellTabName = wbook.Worksheets[0].Cells[0, 0].Value.ToString();
+            int headerRowIndexExcel = 1;
+            if (xcellTabName == SMDSingleTabName)
+                headerRowIndexExcel = getHeaderRowIndex_SC(wbook);
+            else if (xcellTabName == SMDDualTabName)
+                headerRowIndexExcel = 1;
+
+            int startReadingRowIndexExcel = headerRowIndexExcel + 1;
+            int startColIndexExcel = 0;
+
+            //select tool ID that was associated with the test
+            getToolIDWhenOpenExcelSC(wbook, headerRowIndexExcel);
+
+            DataTable returnTable = new DataTable();
+            returnTable = getHeaderAndDataFromExcel_SC(wbook, headerRowIndexExcel, startReadingRowIndexExcel, startColIndexExcel).Copy();
+
+            return returnTable;
+        }
 
         //Add value of table column into 1st channel gridview
         private void populateGridwithDataColumn(ref DataGridView thisGrid, DataTable table, int colIndex)
         {
             thisGrid.Rows.Clear();
             thisGrid.Refresh();
-            for (int rowIndex=0; rowIndex<table.Rows.Count;rowIndex++)
+            for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++)
             {
-                string[] strToadd =new string[1];
+                string[] strToadd = new string[1];
                 strToadd[0] = table.Rows[rowIndex][colIndex].ToString();
                 addRowWithoutUpdateChart(strToadd);
             }
@@ -8458,13 +8714,14 @@ namespace WindowsFormsApplication1
                 catch { }
             }
         }
+
         //openTest for Single Channel
         private void openTest_SC(ExcelWorkbook wbook)
         {
             DataTable tempTable = getTableFromExcel(wbook).Copy();
             copyTable(ref tempTable, ref singleTable);
             copyTable(ref tempTable, ref noCurrentTable);
-            
+
             //Delete all the series from old singleChart
             deleteAllSeriesFrChart(ref singleChart);
 
@@ -8488,18 +8745,18 @@ namespace WindowsFormsApplication1
                     singleChart = setChart(singleChart, currSerieName, 1);
                 }
             }
-            
+
             //Show Series on checked list for single Channel
             arr_singleSeries = getListOfSeriesName(singleChart);
             singleSeriesListView.Items.Clear();
             AddSerieToCheckList(ref singleSeriesListView, arr_singleSeries);
             updateListViewColor(ref singleSeriesListView, singleChart);//update color for seriesListView
-            
+
             //Assign header of last column in single table to currColumn
             currColumn = singleTable.Columns[singleTable.Columns.Count - 1].ColumnName;
             //Write last column of single table to singleChannel_gridview
             populateGridwithDataColumn(ref singleChannel_gridView, singleTable, singleTable.Columns.Count - 1);
-            
+
             bindTable();
         }
 
@@ -8514,16 +8771,15 @@ namespace WindowsFormsApplication1
             deleteAllSeriesFrChart(ref dualChart);
             string tempCurrDualSerie = "";
             //init series for dualchart
-            for (int colIndex=0; colIndex<dualTable.Columns.Count;colIndex++)
+            for (int colIndex = 0; colIndex < dualTable.Columns.Count; colIndex++)
             {
-                if ((colIndex % 2)==0)
+                if ((colIndex % 2) == 0)
                 {
-                    
                     string serieName = "Run" + ((colIndex / 2) + 1);
                     if (tempCurrDualSerie == "")
                         tempCurrDualSerie = serieName;
                     initChartSerie(ref dualChart, serieName);
-                    
+
                     //Assign x and y for each serie
                     updateDualChartSerieXY(serieName, ref dualChart, dualTable, colIndex, colIndex + 1);
                     dualChart = setChart(dualChart, serieName, 2);
@@ -8546,7 +8802,7 @@ namespace WindowsFormsApplication1
             copyTableByColIndex(dualTable, 1, ref secondChannelTable, 0);
             bindSecondChannelTable();
         }
-        
+
         //Main method used to open old test for Cal Cert
         private void openTest_CalCert(ExcelWorkbook wbook)
         {
@@ -8557,7 +8813,7 @@ namespace WindowsFormsApplication1
 
             toolIDLabel = wbook.Worksheets[0].Cells[1, 0].Value.ToString();
             tempTestIDLabel = wbook.Worksheets[0].Cells[2, 0].Value.ToString();
-            if ((toolIDLabel==toolID_lbl.Text) && (tempTestIDLabel==testID_lbl.Text))
+            if ((toolIDLabel == toolID_lbl.Text) && (tempTestIDLabel == testID_lbl.Text))
             {
                 //Start reading tool ID and test ID                                                 
                 string toolID = wbook.Worksheets[0].Cells[1, 1].Value.ToString();
@@ -8571,15 +8827,15 @@ namespace WindowsFormsApplication1
                 startTest_calCert();
 
                 //Populate all test Grid Data
-                
-                for (int rowIndex=0; rowIndex<wbook.Worksheets[0].Rows.Count; rowIndex++)
+
+                for (int rowIndex = 0; rowIndex < wbook.Worksheets[0].Rows.Count; rowIndex++)
                 {
                     try
                     {
                         string cellValue = "";
-                        
+
                         cellValue = wbook.Worksheets[0].Cells[rowIndex, 0].Value.ToString();
-                        
+
                         switch (cellValue)
                         {
                             case AFCW:
@@ -8598,7 +8854,7 @@ namespace WindowsFormsApplication1
                                 break;
                         }
                     }
-                    catch(NullReferenceException e)
+                    catch (NullReferenceException e)
                     {
                         //Do nothing, since it is just empty line in excel that throw this    
                     }
@@ -8616,7 +8872,7 @@ namespace WindowsFormsApplication1
 
         //Populate test grid with excel data, only deal w 1 quadrant at a time
         //changed 05/01/18 to not write 0 point from old test
-        private void populateTestGridwithDataFromExcel(ExcelWorksheet wsheet,int startRow,ref DataGridView testGrid)
+        private void populateTestGridwithDataFromExcel(ExcelWorksheet wsheet, int startRow, ref DataGridView testGrid)
         {
             try
             {
@@ -8629,9 +8885,9 @@ namespace WindowsFormsApplication1
                     point = Int32.Parse(wsheet.Cells[rowIndex, pointColIndex].Value.ToString());
                     ch1Reading = Single.Parse(wsheet.Cells[rowIndex, ch1ColIndex].Value.ToString());
                     ch2Reading = Single.Parse(wsheet.Cells[rowIndex, ch2ColIndex].Value.ToString());
-                    if (ch1Reading!=0)
+                    if (ch1Reading != 0)
                         testGrid[ch1ColIndex, point - 1].Value = ch1Reading;
-                    if (ch2Reading!=0)
+                    if (ch2Reading != 0)
                         testGrid[ch2ColIndex, point - 1].Value = ch2Reading;
 
                     rowIndex++;
@@ -8646,7 +8902,7 @@ namespace WindowsFormsApplication1
             foreach (DataRow tableRow in frTable.Rows)
             {
                 string readingCell = tableRow[frColIndex].ToString();
-                if (rowIndex>=toTable.Rows.Count)
+                if (rowIndex >= toTable.Rows.Count)
                 {
                     toTable.Rows.Add();
                 }
@@ -8654,14 +8910,14 @@ namespace WindowsFormsApplication1
                 rowIndex++;
             }
         }
-        
+
         //Open old Test for SC, DC and SMD-Tools, pass in path of excel file
         //Changed 3/29/18
         private void openOldTestExcel(string path)
         {
             ExcelWorkbook wbook = ExcelWorkbook.ReadXLS(path);
 
-            string xcellTabName= wbook.Worksheets[0].Cells[0, 0].Value.ToString();
+            string xcellTabName = wbook.Worksheets[0].Cells[0, 0].Value.ToString();
             //See first cell if it has SMD Tab header
             try
             {
@@ -8690,12 +8946,12 @@ namespace WindowsFormsApplication1
                         break;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show("Unable to load file due to error:\n" + e.Message, "Error");
             }
         }
-        
+
         //show dialog box to get Excel path to open
         private string getOpenPathName(string defaultName)
         {
@@ -8718,6 +8974,72 @@ namespace WindowsFormsApplication1
                 openOldTestExcel(path);
                 updateTableandChart(ref singleChart, singleChannel_gridView);
             }
+        }
+
+        //check each grid in Calcert, if not empty then see if test is complete
+        private bool checkGridIsDone(DataGridView thisGrid)
+        {
+            bool isComplete = true;
+            //if grid is empty, this grid is complete
+            if (thisGrid.Rows.Count == 1)
+                isComplete = true;
+            else
+            {
+
+                foreach (DataGridViewRow thisRow in thisGrid.Rows)
+                {
+                    try
+                    {
+                        if (thisRow.IsNewRow)
+                            break;
+                        //Chan1 needs to be filled
+                        if (thisRow.Cells[1].Value.ToString() == "")
+                        {
+                            isComplete = false;
+                            break;
+                        }
+
+                        //Chan2 only needs to be filled if Dual Channel Test
+                        if ((testType_comboBox.SelectedIndex == 1) && (thisRow.Cells[2].Value.ToString() == ""))
+                        {
+                            isComplete = false;
+                            break;
+                        }
+                    }
+                    catch (NullReferenceException e)
+                    {
+                        MessageBox.Show("Null Exception");
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message);
+                    }
+                }
+            }
+            return isComplete;
+        }
+
+        //Check if current Test in Calcert is complete before allow Save to Cert
+        private bool isReadyToSaveCert()
+        {
+            bool isReadyToSave = true;
+            //Check each gridview
+            if (checkGridIsDone(AFCW_grid) == false)
+                isReadyToSave = false;
+            else if (checkGridIsDone(AFCCW_grid) == false)
+                isReadyToSave = false;
+            else if (checkGridIsDone(ALCW_grid) == false)
+                isReadyToSave = false;
+            else if (checkGridIsDone(ALCCW_grid) == false)
+                isReadyToSave = false;
+            return isReadyToSave;
+        }
+
+        private void printToolToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string testStr = "12345";
+            PrintLabel printTool = new PrintLabel(testStr);
+            printTool.ShowDialog();
         }
     }
 
