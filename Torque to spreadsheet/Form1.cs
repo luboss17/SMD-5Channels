@@ -27,7 +27,7 @@ using System.Net.Sockets;
 using System.Deployment.Application;
 using System.Security.Principal;
 using System.Data.OleDb;
-
+using Dymo;
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
@@ -6304,7 +6304,7 @@ namespace WindowsFormsApplication1
             }
 
             //Init all headers for currCert
-            currCert.setAllHeaders(toolID_comboBox.Text, timeStamp, duedate, recall_txt.Text, temperature_txt.Text, humid_txt.Text, equipment, toolModel_txt.Text, toolManufacture_txt.Text, capacity, accuracy, testID, toolSN_txt.Text, toolCertLot_txt.Text, toolProcedure_txt.Text, unit, toolOperatorID_txt.Text);
+            currCert.setAllHeaders(toolID_comboBox.Text, timeStamp, duedate, recall_txt.Text+" Months", temperature_txt.Text, humid_txt.Text, equipment, toolModel_txt.Text, toolManufacture_txt.Text, capacity, accuracy, testID, toolSN_txt.Text, toolCertLot_txt.Text, toolProcedure_txt.Text, unit, toolOperatorID_txt.Text);
 
             //Loop through each grid quadrant, if not empty, write as 1 block to CSV for CM
             DataGridView[] tempGrids_arr = new DataGridView[] { AFCW_grid, AFCCW_grid, ALCW_grid, ALCCW_grid };
@@ -8414,6 +8414,7 @@ namespace WindowsFormsApplication1
         private TcpClient clientSocket = new TcpClient();
         private static Client pack;
         private const string IP = "";
+
         private const int portNum = 58008;
         private const int major = 1;
         private const int minor = 0;
@@ -8455,6 +8456,7 @@ namespace WindowsFormsApplication1
         }
 
         //establish connection with Server. Do not confused this with logon, client still need to logon as Guest or clientName later to query from server
+        //changed 4/22/19
         private void connectServer()
         {
             //Connect to server
@@ -8463,17 +8465,30 @@ namespace WindowsFormsApplication1
             clientSocket = new System.Net.Sockets.TcpClient();
             try
             {
-                clientSocket.Connect(IP, portNum);
-                if (clientSocket.Connected)//true if found server, false if server is not running
+                tryToConnectToolDatabase();
+
+            }
+            catch (Exception e)
+            {
+                Thread.Sleep(3000);
+                try
                 {
-                    //serverMsgTxt.Text += "\nServer is connected";
-                    pack = new Client(clientSocket.GetStream(), major, minor);
+                    tryToConnectToolDatabase();
+                }
+                catch
+                {
+                    MessageBox.Show("Fail to connect to Tools Database, please check to see if Tools server is installed");
                 }
             }
-            catch
+        }
+        //added 4/22/19
+        private void tryToConnectToolDatabase()
+        {
+            clientSocket.Connect(IP, portNum);
+            if (clientSocket.Connected)//true if found server, false if server is not running
             {
-                //serverMsgTxt.Text += "\nSocket fail to connect, please check to see if the server is installed";
-                MessageBox.Show("Fail to connect to Tools Database, please check to see if Tools server is installed");
+                //serverMsgTxt.Text += "\nServer is connected";
+                pack = new Client(clientSocket.GetStream(), major, minor);
             }
         }
 
@@ -9034,12 +9049,67 @@ namespace WindowsFormsApplication1
                 isReadyToSave = false;
             return isReadyToSave;
         }
+        private string parseToolInfoToStr(string toolID)
+        {
+            string toolInfoStr = "";
+            string newline = Environment.NewLine;
+            foreach (DataRow thisRow in toolsDataTable.Rows)
+            {
+                //if thisRow is the same toolID user select
+                if (toolID == thisRow[pack.toolID_colName].ToString())
+                {
+                    toolInfoStr += "Tool ID: " + thisRow[pack.toolID_colName].ToString() + newline;
+                    toolInfoStr += "Serial: " + thisRow[pack.SN_colName].ToString() + newline;
+                    if (TabPages.SelectedTab.Name == calTabName)
+                    {
+                        if (toolOperatorID_txt.Text != "")
+                            toolInfoStr += "Operator: " + toolOperatorID_txt.Text+newline;
 
+                        DateTime today = DateTime.Now;
+                        toolInfoStr += "Cal Date: " + today.ToString("MM-dd-yyyy")+newline;
+                        if (recall_txt.Text != "")
+                        {
+                            int duration = 0;
+                            try
+                            {
+                                duration = Int16.Parse(recall_txt.Text);
+                            }
+                            catch (Exception e)
+                            {
+                                Debug.Write(e.Message);
+                            }
+                            DateTime dueDate = today.AddMonths(duration);
+                            toolInfoStr +="Due Date: "+dueDate.ToString("MM-dd-yyyy") + newline;
+                        }
+                    }
+                }
+            }
+            return toolInfoStr;
+        }
         private void printToolToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string testStr = "12345";
-            PrintLabel printTool = new PrintLabel(testStr);
-            printTool.ShowDialog();
+            string toolInfos = "";
+            if (TabPages.SelectedTab.Name == SMDSingleTabName)
+                toolInfos = parseToolInfoToStr(toolID_SC_comboBox.Text);
+            else if (TabPages.SelectedTab.Name == calTabName)
+                toolInfos = parseToolInfoToStr(toolID_comboBox.Text);
+            if (toolInfos != "")
+            {
+                try
+                {
+                    PrintDymo printTool = new PrintDymo(toolInfos);
+                    printTool.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unable to detect any Dymo printer. Please make sure Dymo Label Printer is connected, and Dymo Driver is properly installed.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid Tool is selected");
+            }
+
         }
     }
 

@@ -102,3 +102,5 @@ C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Excel.xml
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csprojResolveAssemblyReference.cache
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Interop.Dymo.dll
+C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.PrintLabel2.resources
+C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.PrintDymo.resources

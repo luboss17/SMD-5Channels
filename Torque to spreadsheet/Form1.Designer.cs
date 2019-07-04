@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-
+using Dymo;
 namespace WindowsFormsApplication1
 {
     partial class Form1
@@ -213,6 +213,7 @@ namespace WindowsFormsApplication1
             this.dsad = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.notNumberWarning_lbl = new System.Windows.Forms.Label();
             this.useLimit_chkbox = new System.Windows.Forms.CheckBox();
             this.label46 = new System.Windows.Forms.Label();
             this.toolID_SC_comboBox = new System.Windows.Forms.ComboBox();
@@ -420,7 +421,6 @@ namespace WindowsFormsApplication1
             this.testTarget_lbl = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
-            this.notNumberWarning_lbl = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -919,7 +919,7 @@ namespace WindowsFormsApplication1
             this.dualChannelTab.Controls.Add(this.firstChannelGrid);
             this.dualChannelTab.Location = new System.Drawing.Point(4, 34);
             this.dualChannelTab.Name = "dualChannelTab";
-            this.dualChannelTab.Size = new System.Drawing.Size(1869, 883);
+            this.dualChannelTab.Size = new System.Drawing.Size(1682, 885);
             this.dualChannelTab.TabIndex = 5;
             this.dualChannelTab.Text = "Dual Channel";
             this.dualChannelTab.UseVisualStyleBackColor = true;
@@ -1703,7 +1703,7 @@ namespace WindowsFormsApplication1
             this.big_graph.Controls.Add(this.chart1);
             this.big_graph.Location = new System.Drawing.Point(4, 34);
             this.big_graph.Name = "big_graph";
-            this.big_graph.Size = new System.Drawing.Size(1869, 883);
+            this.big_graph.Size = new System.Drawing.Size(1682, 885);
             this.big_graph.TabIndex = 3;
             this.big_graph.Text = "Big Reading with Graph";
             this.big_graph.UseVisualStyleBackColor = true;
@@ -1718,7 +1718,7 @@ namespace WindowsFormsApplication1
             this.Label_Data3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.Label_Data3.Location = new System.Drawing.Point(0, 0);
             this.Label_Data3.Name = "Label_Data3";
-            this.Label_Data3.Size = new System.Drawing.Size(1869, 430);
+            this.Label_Data3.Size = new System.Drawing.Size(1682, 432);
             this.Label_Data3.TabIndex = 26;
             this.Label_Data3.Text = "0.0000";
             this.Label_Data3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1730,9 +1730,9 @@ namespace WindowsFormsApplication1
             this.chart1.Dock = System.Windows.Forms.DockStyle.Bottom;
             legend2.Name = "Legend1";
             this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(0, 430);
+            this.chart1.Location = new System.Drawing.Point(0, 432);
             this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(1869, 453);
+            this.chart1.Size = new System.Drawing.Size(1682, 453);
             this.chart1.TabIndex = 25;
             this.chart1.Text = "chart1";
             // 
@@ -2356,6 +2356,15 @@ namespace WindowsFormsApplication1
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Current Run\'s Readings";
             // 
+            // notNumberWarning_lbl
+            // 
+            this.notNumberWarning_lbl.AutoSize = true;
+            this.notNumberWarning_lbl.ForeColor = System.Drawing.Color.Red;
+            this.notNumberWarning_lbl.Location = new System.Drawing.Point(399, 159);
+            this.notNumberWarning_lbl.Name = "notNumberWarning_lbl";
+            this.notNumberWarning_lbl.Size = new System.Drawing.Size(0, 14);
+            this.notNumberWarning_lbl.TabIndex = 153;
+            // 
             // useLimit_chkbox
             // 
             this.useLimit_chkbox.AutoSize = true;
@@ -2365,6 +2374,7 @@ namespace WindowsFormsApplication1
             this.useLimit_chkbox.TabIndex = 141;
             this.useLimit_chkbox.Text = "Use Low/High Limit";
             this.useLimit_chkbox.UseVisualStyleBackColor = true;
+            this.useLimit_chkbox.CheckedChanged += new System.EventHandler(this.useLimit_chkbox_CheckedChanged);
             // 
             // label46
             // 
@@ -2620,7 +2630,7 @@ namespace WindowsFormsApplication1
             this.simple_col.Location = new System.Drawing.Point(4, 34);
             this.simple_col.Name = "simple_col";
             this.simple_col.Padding = new System.Windows.Forms.Padding(3);
-            this.simple_col.Size = new System.Drawing.Size(1869, 883);
+            this.simple_col.Size = new System.Drawing.Size(1682, 885);
             this.simple_col.TabIndex = 1;
             this.simple_col.Text = "Simple Reading with Option to Save";
             this.simple_col.UseVisualStyleBackColor = true;
@@ -2818,7 +2828,7 @@ namespace WindowsFormsApplication1
             this.simple_reading.Location = new System.Drawing.Point(4, 34);
             this.simple_reading.Name = "simple_reading";
             this.simple_reading.Padding = new System.Windows.Forms.Padding(3);
-            this.simple_reading.Size = new System.Drawing.Size(1869, 883);
+            this.simple_reading.Size = new System.Drawing.Size(1682, 885);
             this.simple_reading.TabIndex = 0;
             this.simple_reading.Text = "Torque To Spreadsheet";
             this.simple_reading.UseVisualStyleBackColor = true;
@@ -3044,7 +3054,7 @@ namespace WindowsFormsApplication1
             this.big_reading.Controls.Add(this.reading_bigReading_lbl);
             this.big_reading.Location = new System.Drawing.Point(4, 34);
             this.big_reading.Name = "big_reading";
-            this.big_reading.Size = new System.Drawing.Size(1869, 883);
+            this.big_reading.Size = new System.Drawing.Size(1682, 885);
             this.big_reading.TabIndex = 2;
             this.big_reading.Text = "Big Reading";
             // 
@@ -3067,9 +3077,9 @@ namespace WindowsFormsApplication1
             this.panel3.Controls.Add(this.refreshCOMList_btn_bigReading);
             this.panel3.Controls.Add(this.comList_bigReading);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 448);
+            this.panel3.Location = new System.Drawing.Point(0, 450);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1869, 435);
+            this.panel3.Size = new System.Drawing.Size(1682, 435);
             this.panel3.TabIndex = 26;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
@@ -3252,7 +3262,7 @@ namespace WindowsFormsApplication1
             this.reading_bigReading_lbl.Location = new System.Drawing.Point(0, 0);
             this.reading_bigReading_lbl.Name = "reading_bigReading_lbl";
             this.reading_bigReading_lbl.Padding = new System.Windows.Forms.Padding(0, 0, 100, 430);
-            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1869, 883);
+            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1682, 885);
             this.reading_bigReading_lbl.TabIndex = 27;
             this.reading_bigReading_lbl.Text = "0.0000";
             this.reading_bigReading_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3271,7 +3281,7 @@ namespace WindowsFormsApplication1
             this.calibrationTab.Controls.Add(this.target_groupBox);
             this.calibrationTab.Location = new System.Drawing.Point(4, 34);
             this.calibrationTab.Name = "calibrationTab";
-            this.calibrationTab.Size = new System.Drawing.Size(1869, 883);
+            this.calibrationTab.Size = new System.Drawing.Size(1682, 885);
             this.calibrationTab.TabIndex = 6;
             this.calibrationTab.Text = "Cal Cert";
             this.calibrationTab.UseVisualStyleBackColor = true;
@@ -4549,19 +4559,9 @@ namespace WindowsFormsApplication1
             this.label13.TabIndex = 0;
             this.label13.Text = "Next Target";
             // 
-            // notNumberWarning_lbl
-            // 
-            this.notNumberWarning_lbl.AutoSize = true;
-            this.notNumberWarning_lbl.ForeColor = System.Drawing.Color.Red;
-            this.notNumberWarning_lbl.Location = new System.Drawing.Point(399, 159);
-            this.notNumberWarning_lbl.Name = "notNumberWarning_lbl";
-            this.notNumberWarning_lbl.Size = new System.Drawing.Size(0, 14);
-            this.notNumberWarning_lbl.TabIndex = 153;
-            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.AutoScrollMinSize = new System.Drawing.Size(1473, 945);
             this.AutoSize = true;

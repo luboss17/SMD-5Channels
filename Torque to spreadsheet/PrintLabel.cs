@@ -146,7 +146,7 @@ namespace WindowsFormsApplication1
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(188, 16);
 			this.label3.TabIndex = 2;
-			this.label3.Text = "Set label object data here:";
+			this.label3.Text = "Tool Infos:";
 			// 
 			// label2
 			// 
@@ -247,9 +247,9 @@ namespace WindowsFormsApplication1
 			this.Controls.Add(this.BrowseBtn);
 			this.Controls.Add(this.FileNameEdit);
 			this.Controls.Add(this.label1);
-			this.Name = "Form1";
+			this.Name = "LabelPrinter_Form";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "DYMO SDK C# Sample";
+			this.Text = "DYMO Printer";
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.Closed += new System.EventHandler(this.Form1_Closed);
 			this.groupBox1.ResumeLayout(false);
