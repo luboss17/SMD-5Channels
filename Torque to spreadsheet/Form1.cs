@@ -8470,7 +8470,15 @@ namespace WindowsFormsApplication1
         private void openOldStream_btn_Click(object sender, EventArgs e)
         {
             bool isOpenOldStream = true;
-            char quadrantToViewStream = '1';//For now, hard code to use AFCW
+            char quadrantToViewStream = '1';
+            if (AFCWChart_radio.Checked==true)
+                quadrantToViewStream = '1';
+            else if (AFCCWChart_radio.Checked == true)
+                quadrantToViewStream = '2';
+            else if (ALCWChart_radio.Checked == true)
+                quadrantToViewStream = '3';
+            else if (ALCCWChart_radio.Checked == true)
+                quadrantToViewStream = '4';
             startQuadrantStream(quadrantToViewStream,isOpenOldStream);
         }
 

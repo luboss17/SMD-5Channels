@@ -33,12 +33,12 @@ namespace WindowsFormsApplication1
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -514,7 +514,7 @@ namespace WindowsFormsApplication1
             // 
             this.toolStripStatusLabel1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(75, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(40, 17);
             this.toolStripStatusLabel1.Text = "Port: ";
             this.toolStripStatusLabel1.MouseHover += new System.EventHandler(this.toolStripStatusLabel1_MouseHover);
             // 
@@ -523,7 +523,7 @@ namespace WindowsFormsApplication1
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(22, 20);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(13, 20);
             this.toolStripDropDownButton1.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripDropDownButton1_DropDownItemClicked);
             this.toolStripDropDownButton1.Click += new System.EventHandler(this.toolStripDropDownButton1_Click);
             this.toolStripDropDownButton1.MouseHover += new System.EventHandler(this.toolStripDropDownButton1_MouseHover);
@@ -532,21 +532,21 @@ namespace WindowsFormsApplication1
             // 
             this.toolStripStatusLabel2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(188, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(98, 17);
             this.toolStripStatusLabel2.Text = " Status: Closed";
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(245, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(125, 17);
             this.toolStripStatusLabel3.Text = " Spreadsheet Mode:";
             // 
             // SpreadSheetModeLabel
             // 
             this.SpreadSheetModeLabel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SpreadSheetModeLabel.Name = "SpreadSheetModeLabel";
-            this.SpreadSheetModeLabel.Size = new System.Drawing.Size(150, 17);
+            this.SpreadSheetModeLabel.Size = new System.Drawing.Size(75, 17);
             this.SpreadSheetModeLabel.Text = "Deactivated";
             // 
             // menuStrip1
@@ -560,7 +560,7 @@ namespace WindowsFormsApplication1
             this.printToolToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1784, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1731, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -576,34 +576,34 @@ namespace WindowsFormsApplication1
             this.exitToolStripMenuItem});
             this.openMenuItem.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openMenuItem.Name = "openMenuItem";
-            this.openMenuItem.Size = new System.Drawing.Size(58, 36);
+            this.openMenuItem.Size = new System.Drawing.Size(35, 20);
             this.openMenuItem.Text = "File";
             // 
             // openStripMenuItem
             // 
             this.openStripMenuItem.Name = "openStripMenuItem";
-            this.openStripMenuItem.Size = new System.Drawing.Size(350, 38);
+            this.openStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.openStripMenuItem.Text = "Open";
             this.openStripMenuItem.Click += new System.EventHandler(this.openStripMenuItem_Click);
             // 
             // newTestToolStripMenuItem
             // 
             this.newTestToolStripMenuItem.Name = "newTestToolStripMenuItem";
-            this.newTestToolStripMenuItem.Size = new System.Drawing.Size(350, 38);
+            this.newTestToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.newTestToolStripMenuItem.Text = "Restart App";
             this.newTestToolStripMenuItem.Click += new System.EventHandler(this.newTestToolStripMenuItem_Click);
             // 
             // defineQuickExportPathToolStripMenuItem
             // 
             this.defineQuickExportPathToolStripMenuItem.Name = "defineQuickExportPathToolStripMenuItem";
-            this.defineQuickExportPathToolStripMenuItem.Size = new System.Drawing.Size(350, 38);
+            this.defineQuickExportPathToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.defineQuickExportPathToolStripMenuItem.Text = "Define Quick Export Path";
             this.defineQuickExportPathToolStripMenuItem.Click += new System.EventHandler(this.defineQuickExportPathToolStripMenuItem_Click);
             // 
             // streamDataToolStripMenuItem
             // 
             this.streamDataToolStripMenuItem.Name = "streamDataToolStripMenuItem";
-            this.streamDataToolStripMenuItem.Size = new System.Drawing.Size(350, 38);
+            this.streamDataToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.streamDataToolStripMenuItem.Text = "Stream Data";
             this.streamDataToolStripMenuItem.Visible = false;
             this.streamDataToolStripMenuItem.Click += new System.EventHandler(this.streamDataToolStripMenuItem_Click);
@@ -611,28 +611,28 @@ namespace WindowsFormsApplication1
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(350, 38);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(350, 38);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // toolsManagerToolStripMenuItem
             // 
             this.toolsManagerToolStripMenuItem.Name = "toolsManagerToolStripMenuItem";
-            this.toolsManagerToolStripMenuItem.Size = new System.Drawing.Size(184, 36);
+            this.toolsManagerToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
             this.toolsManagerToolStripMenuItem.Text = "Tools Manager";
             this.toolsManagerToolStripMenuItem.Click += new System.EventHandler(this.toolsManagerToolStripMenuItem_Click);
             // 
             // testManagerToolStripMenuItem
             // 
             this.testManagerToolStripMenuItem.Name = "testManagerToolStripMenuItem";
-            this.testManagerToolStripMenuItem.Size = new System.Drawing.Size(171, 36);
+            this.testManagerToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
             this.testManagerToolStripMenuItem.Text = "Test Manager";
             this.testManagerToolStripMenuItem.Click += new System.EventHandler(this.testManagerToolStripMenuItem_Click);
             // 
@@ -649,7 +649,7 @@ namespace WindowsFormsApplication1
             this.autoUpdateMenuItem,
             this.updateToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(111, 36);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // autoConnectToolStripMenuItem
@@ -658,7 +658,7 @@ namespace WindowsFormsApplication1
             this.autoConnectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startMinimizedToolStripMenuItem});
             this.autoConnectToolStripMenuItem.Name = "autoConnectToolStripMenuItem";
-            this.autoConnectToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.autoConnectToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.autoConnectToolStripMenuItem.Text = "Auto Connect";
             this.autoConnectToolStripMenuItem.Visible = false;
             this.autoConnectToolStripMenuItem.Click += new System.EventHandler(this.autoConnectToolStripMenuItem_Click);
@@ -668,7 +668,7 @@ namespace WindowsFormsApplication1
             this.startMinimizedToolStripMenuItem.CheckOnClick = true;
             this.startMinimizedToolStripMenuItem.Enabled = false;
             this.startMinimizedToolStripMenuItem.Name = "startMinimizedToolStripMenuItem";
-            this.startMinimizedToolStripMenuItem.Size = new System.Drawing.Size(282, 38);
+            this.startMinimizedToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.startMinimizedToolStripMenuItem.Text = "Start Minimized";
             this.startMinimizedToolStripMenuItem.Click += new System.EventHandler(this.startMinimizedToolStripMenuItem_Click);
             this.startMinimizedToolStripMenuItem.EnabledChanged += new System.EventHandler(this.startMinimizedToolStripMenuItem_EnabledChanged);
@@ -677,7 +677,7 @@ namespace WindowsFormsApplication1
             // 
             this.alwaysOnTopToolStripMenuItem.CheckOnClick = true;
             this.alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
-            this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.alwaysOnTopToolStripMenuItem.Text = "Always on Top";
             this.alwaysOnTopToolStripMenuItem.Click += new System.EventHandler(this.alwaysOnTopToolStripMenuItem_Click);
             // 
@@ -687,20 +687,20 @@ namespace WindowsFormsApplication1
             this.includeTimeToolStripMenuItem,
             this.includeDateToolStripMenuItem});
             this.includeDateStampToolStripMenuItem.Name = "includeDateStampToolStripMenuItem";
-            this.includeDateStampToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.includeDateStampToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.includeDateStampToolStripMenuItem.Text = "Time/Date Stamp";
             // 
             // includeTimeToolStripMenuItem
             // 
             this.includeTimeToolStripMenuItem.Name = "includeTimeToolStripMenuItem";
-            this.includeTimeToolStripMenuItem.Size = new System.Drawing.Size(252, 38);
+            this.includeTimeToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.includeTimeToolStripMenuItem.Text = "Include Time";
             this.includeTimeToolStripMenuItem.Click += new System.EventHandler(this.includeTimeToolStripMenuItem_Click);
             // 
             // includeDateToolStripMenuItem
             // 
             this.includeDateToolStripMenuItem.Name = "includeDateToolStripMenuItem";
-            this.includeDateToolStripMenuItem.Size = new System.Drawing.Size(252, 38);
+            this.includeDateToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.includeDateToolStripMenuItem.Text = "Include Date";
             this.includeDateToolStripMenuItem.Click += new System.EventHandler(this.includeDateToolStripMenuItem_Click);
             // 
@@ -710,7 +710,7 @@ namespace WindowsFormsApplication1
             this.showALLCOMAvailableToolStripMenuItem.CheckOnClick = true;
             this.showALLCOMAvailableToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showALLCOMAvailableToolStripMenuItem.Name = "showALLCOMAvailableToolStripMenuItem";
-            this.showALLCOMAvailableToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.showALLCOMAvailableToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.showALLCOMAvailableToolStripMenuItem.Text = "Show ALL COM available";
             this.showALLCOMAvailableToolStripMenuItem.Click += new System.EventHandler(this.showALLCOMAvailableToolStripMenuItem_Click);
             // 
@@ -720,20 +720,20 @@ namespace WindowsFormsApplication1
             this.enableLiveReadingToolStripMenuItem.CheckOnClick = true;
             this.enableLiveReadingToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.enableLiveReadingToolStripMenuItem.Name = "enableLiveReadingToolStripMenuItem";
-            this.enableLiveReadingToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.enableLiveReadingToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.enableLiveReadingToolStripMenuItem.Text = "Enable Live Reading";
             // 
             // overwriteDataAtCursorToolStripMenuItem
             // 
             this.overwriteDataAtCursorToolStripMenuItem.CheckOnClick = true;
             this.overwriteDataAtCursorToolStripMenuItem.Name = "overwriteDataAtCursorToolStripMenuItem";
-            this.overwriteDataAtCursorToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.overwriteDataAtCursorToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.overwriteDataAtCursorToolStripMenuItem.Text = "Overwrite Data at Cursor";
             // 
             // forceAutoClearToolStripMenuItem
             // 
             this.forceAutoClearToolStripMenuItem.Name = "forceAutoClearToolStripMenuItem";
-            this.forceAutoClearToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.forceAutoClearToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.forceAutoClearToolStripMenuItem.Text = "Force Auto-Clear";
             this.forceAutoClearToolStripMenuItem.Click += new System.EventHandler(this.forceAutoClearToolStripMenuItem_Click);
             // 
@@ -743,14 +743,14 @@ namespace WindowsFormsApplication1
             this.autoUpdateMenuItem.CheckOnClick = true;
             this.autoUpdateMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoUpdateMenuItem.Name = "autoUpdateMenuItem";
-            this.autoUpdateMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.autoUpdateMenuItem.Size = new System.Drawing.Size(206, 22);
             this.autoUpdateMenuItem.Text = "Auto Update";
             this.autoUpdateMenuItem.Click += new System.EventHandler(this.autoUpdateMenuItem_Click);
             // 
             // updateToolStripMenuItem
             // 
             this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.updateToolStripMenuItem.Text = "Manual Update";
             this.updateToolStripMenuItem.Visible = false;
             this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
@@ -758,7 +758,7 @@ namespace WindowsFormsApplication1
             // printToolToolStripMenuItem
             // 
             this.printToolToolStripMenuItem.Name = "printToolToolStripMenuItem";
-            this.printToolToolStripMenuItem.Size = new System.Drawing.Size(128, 36);
+            this.printToolToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.printToolToolStripMenuItem.Text = "Print Tool";
             this.printToolToolStripMenuItem.Click += new System.EventHandler(this.printToolToolStripMenuItem_Click);
             // 
@@ -767,7 +767,7 @@ namespace WindowsFormsApplication1
             this.Tester_Type_Label.AutoSize = true;
             this.Tester_Type_Label.Location = new System.Drawing.Point(1539, 845);
             this.Tester_Type_Label.Name = "Tester_Type_Label";
-            this.Tester_Type_Label.Size = new System.Drawing.Size(126, 25);
+            this.Tester_Type_Label.Size = new System.Drawing.Size(63, 14);
             this.Tester_Type_Label.TabIndex = 11;
             this.Tester_Type_Label.Text = "Tester Type";
             this.Tester_Type_Label.Visible = false;
@@ -777,7 +777,7 @@ namespace WindowsFormsApplication1
             this.checkBox_millivolt.AutoSize = true;
             this.checkBox_millivolt.Location = new System.Drawing.Point(1553, 808);
             this.checkBox_millivolt.Name = "checkBox_millivolt";
-            this.checkBox_millivolt.Size = new System.Drawing.Size(231, 29);
+            this.checkBox_millivolt.Size = new System.Drawing.Size(120, 18);
             this.checkBox_millivolt.TabIndex = 12;
             this.checkBox_millivolt.Text = "Show Millivolts only";
             this.checkBox_millivolt.UseVisualStyleBackColor = true;
@@ -820,7 +820,7 @@ namespace WindowsFormsApplication1
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(3, 3);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(149, 29);
+            this.checkBox1.Size = new System.Drawing.Size(80, 18);
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -829,9 +829,9 @@ namespace WindowsFormsApplication1
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(158, 3);
+            this.checkBox2.Location = new System.Drawing.Point(89, 3);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(149, 29);
+            this.checkBox2.Size = new System.Drawing.Size(80, 18);
             this.checkBox2.TabIndex = 1;
             this.checkBox2.Text = "checkBox2";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -840,9 +840,9 @@ namespace WindowsFormsApplication1
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(313, 3);
+            this.checkBox3.Location = new System.Drawing.Point(175, 3);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(149, 29);
+            this.checkBox3.Size = new System.Drawing.Size(80, 18);
             this.checkBox3.TabIndex = 2;
             this.checkBox3.Text = "checkBox3";
             this.checkBox3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -852,9 +852,9 @@ namespace WindowsFormsApplication1
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(468, 3);
+            this.checkBox4.Location = new System.Drawing.Point(261, 3);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(149, 29);
+            this.checkBox4.Size = new System.Drawing.Size(80, 18);
             this.checkBox4.TabIndex = 3;
             this.checkBox4.Text = "checkBox4";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -863,9 +863,9 @@ namespace WindowsFormsApplication1
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(623, 3);
+            this.checkBox5.Location = new System.Drawing.Point(347, 3);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(149, 29);
+            this.checkBox5.Size = new System.Drawing.Size(80, 18);
             this.checkBox5.TabIndex = 4;
             this.checkBox5.Text = "checkBox5";
             this.checkBox5.UseVisualStyleBackColor = true;
@@ -883,7 +883,7 @@ namespace WindowsFormsApplication1
             this.testerType.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.testerType.Location = new System.Drawing.Point(15, 217);
             this.testerType.Name = "testerType";
-            this.testerType.Size = new System.Drawing.Size(0, 44);
+            this.testerType.Size = new System.Drawing.Size(0, 24);
             this.testerType.TabIndex = 22;
             // 
             // serialPort2
@@ -927,9 +927,9 @@ namespace WindowsFormsApplication1
             this.dualChannelTab.Controls.Add(this.clearFirst);
             this.dualChannelTab.Controls.Add(this.deleteLineFirst);
             this.dualChannelTab.Controls.Add(this.firstChannelGrid);
-            this.dualChannelTab.Location = new System.Drawing.Point(8, 38);
+            this.dualChannelTab.Location = new System.Drawing.Point(4, 34);
             this.dualChannelTab.Name = "dualChannelTab";
-            this.dualChannelTab.Size = new System.Drawing.Size(1768, 1060);
+            this.dualChannelTab.Size = new System.Drawing.Size(1723, 1152);
             this.dualChannelTab.TabIndex = 5;
             this.dualChannelTab.Text = "Dual Channel";
             this.dualChannelTab.UseVisualStyleBackColor = true;
@@ -941,6 +941,7 @@ namespace WindowsFormsApplication1
             this.dualSeriesListView.CheckBoxes = true;
             this.dualSeriesListView.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dualSeriesListView.GridLines = true;
+            this.dualSeriesListView.HideSelection = false;
             this.dualSeriesListView.Location = new System.Drawing.Point(811, 561);
             this.dualSeriesListView.Name = "dualSeriesListView";
             this.dualSeriesListView.Size = new System.Drawing.Size(154, 240);
@@ -955,7 +956,7 @@ namespace WindowsFormsApplication1
             this.dualRunName2ErrorLabel.ForeColor = System.Drawing.Color.Red;
             this.dualRunName2ErrorLabel.Location = new System.Drawing.Point(530, 325);
             this.dualRunName2ErrorLabel.Name = "dualRunName2ErrorLabel";
-            this.dualRunName2ErrorLabel.Size = new System.Drawing.Size(0, 25);
+            this.dualRunName2ErrorLabel.Size = new System.Drawing.Size(0, 14);
             this.dualRunName2ErrorLabel.TabIndex = 103;
             // 
             // dualRunName1ErrorLabel
@@ -964,7 +965,7 @@ namespace WindowsFormsApplication1
             this.dualRunName1ErrorLabel.ForeColor = System.Drawing.Color.Red;
             this.dualRunName1ErrorLabel.Location = new System.Drawing.Point(227, 325);
             this.dualRunName1ErrorLabel.Name = "dualRunName1ErrorLabel";
-            this.dualRunName1ErrorLabel.Size = new System.Drawing.Size(0, 25);
+            this.dualRunName1ErrorLabel.Size = new System.Drawing.Size(0, 14);
             this.dualRunName1ErrorLabel.TabIndex = 102;
             // 
             // dualMasterGrid
@@ -995,7 +996,7 @@ namespace WindowsFormsApplication1
             this.label16.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.Location = new System.Drawing.Point(24, 5);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(63, 29);
+            this.label16.Size = new System.Drawing.Size(32, 15);
             this.label16.TabIndex = 87;
             this.label16.Text = "Axis";
             // 
@@ -1018,7 +1019,7 @@ namespace WindowsFormsApplication1
             this.dualCurrRun_Label2.Location = new System.Drawing.Point(530, 346);
             this.dualCurrRun_Label2.MaximumSize = new System.Drawing.Size(190, 14);
             this.dualCurrRun_Label2.Name = "dualCurrRun_Label2";
-            this.dualCurrRun_Label2.Size = new System.Drawing.Size(188, 14);
+            this.dualCurrRun_Label2.Size = new System.Drawing.Size(99, 14);
             this.dualCurrRun_Label2.TabIndex = 99;
             this.dualCurrRun_Label2.Text = "Current Run-CH2";
             // 
@@ -1029,7 +1030,7 @@ namespace WindowsFormsApplication1
             this.dualCurrRun_label1.Location = new System.Drawing.Point(227, 346);
             this.dualCurrRun_label1.MaximumSize = new System.Drawing.Size(190, 14);
             this.dualCurrRun_label1.Name = "dualCurrRun_label1";
-            this.dualCurrRun_label1.Size = new System.Drawing.Size(188, 14);
+            this.dualCurrRun_label1.Size = new System.Drawing.Size(99, 14);
             this.dualCurrRun_label1.TabIndex = 98;
             this.dualCurrRun_label1.Text = "Current Run-CH1";
             // 
@@ -1037,7 +1038,7 @@ namespace WindowsFormsApplication1
             // 
             this.dualCh2RunName_Text.Location = new System.Drawing.Point(730, 343);
             this.dualCh2RunName_Text.Name = "dualCh2RunName_Text";
-            this.dualCh2RunName_Text.Size = new System.Drawing.Size(100, 33);
+            this.dualCh2RunName_Text.Size = new System.Drawing.Size(100, 20);
             this.dualCh2RunName_Text.TabIndex = 3;
             this.dualCh2RunName_Text.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dualCh2RunName_Text_KeyDown);
             // 
@@ -1045,7 +1046,7 @@ namespace WindowsFormsApplication1
             // 
             this.dualCh1RunName_Text.Location = new System.Drawing.Point(427, 343);
             this.dualCh1RunName_Text.Name = "dualCh1RunName_Text";
-            this.dualCh1RunName_Text.Size = new System.Drawing.Size(100, 33);
+            this.dualCh1RunName_Text.Size = new System.Drawing.Size(100, 20);
             this.dualCh1RunName_Text.TabIndex = 2;
             this.dualCh1RunName_Text.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dualCh1RunName_Text_KeyDown);
             // 
@@ -1162,7 +1163,7 @@ namespace WindowsFormsApplication1
             this.dataCh2DualChTab_lbl.Font = new System.Drawing.Font("OCR A Extended", 65F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataCh2DualChTab_lbl.Location = new System.Drawing.Point(49, 37);
             this.dataCh2DualChTab_lbl.Name = "dataCh2DualChTab_lbl";
-            this.dataCh2DualChTab_lbl.Size = new System.Drawing.Size(711, 180);
+            this.dataCh2DualChTab_lbl.Size = new System.Drawing.Size(362, 89);
             this.dataCh2DualChTab_lbl.TabIndex = 73;
             this.dataCh2DualChTab_lbl.Text = "0.0000";
             // 
@@ -1172,7 +1173,7 @@ namespace WindowsFormsApplication1
             this.secondComConnect.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.secondComConnect.Location = new System.Drawing.Point(49, 16);
             this.secondComConnect.Name = "secondComConnect";
-            this.secondComConnect.Size = new System.Drawing.Size(288, 32);
+            this.secondComConnect.Size = new System.Drawing.Size(148, 16);
             this.secondComConnect.TabIndex = 66;
             this.secondComConnect.Text = "No COM Port Connect";
             // 
@@ -1252,7 +1253,7 @@ namespace WindowsFormsApplication1
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(6, 20);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(204, 25);
+            this.label14.Size = new System.Drawing.Size(99, 14);
             this.label14.TabIndex = 65;
             this.label14.Text = "Available COM Port";
             // 
@@ -1260,10 +1261,10 @@ namespace WindowsFormsApplication1
             // 
             this.comList4.FormattingEnabled = true;
             this.comList4.HorizontalScrollbar = true;
-            this.comList4.ItemHeight = 25;
+            this.comList4.ItemHeight = 14;
             this.comList4.Location = new System.Drawing.Point(9, 49);
             this.comList4.Name = "comList4";
-            this.comList4.Size = new System.Drawing.Size(191, 29);
+            this.comList4.Size = new System.Drawing.Size(191, 60);
             this.comList4.TabIndex = 1;
             // 
             // openCloseSecondPort
@@ -1357,7 +1358,7 @@ namespace WindowsFormsApplication1
             this.label12.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(1526, 610);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(174, 31);
+            this.label12.Size = new System.Drawing.Size(92, 16);
             this.label12.TabIndex = 87;
             this.label12.Text = "List of all Runs:";
             this.label12.Visible = false;
@@ -1381,7 +1382,7 @@ namespace WindowsFormsApplication1
             this.serieListBox.Location = new System.Drawing.Point(1526, 629);
             this.serieListBox.Name = "serieListBox";
             this.serieListBox.ScrollAlwaysVisible = true;
-            this.serieListBox.Size = new System.Drawing.Size(111, 112);
+            this.serieListBox.Size = new System.Drawing.Size(111, 105);
             this.serieListBox.TabIndex = 83;
             this.serieListBox.Visible = false;
             this.serieListBox.SelectedIndexChanged += new System.EventHandler(this.serieListBox_SelectedIndexChanged);
@@ -1449,7 +1450,7 @@ namespace WindowsFormsApplication1
             // 
             this.dualTestName_Text.Location = new System.Drawing.Point(103, 24);
             this.dualTestName_Text.Name = "dualTestName_Text";
-            this.dualTestName_Text.Size = new System.Drawing.Size(100, 33);
+            this.dualTestName_Text.Size = new System.Drawing.Size(100, 20);
             this.dualTestName_Text.TabIndex = 16;
             this.dualTestName_Text.TextChanged += new System.EventHandler(this.dualTestName_Text_TextChanged);
             // 
@@ -1458,7 +1459,7 @@ namespace WindowsFormsApplication1
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(14, 24);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(129, 25);
+            this.label21.Size = new System.Drawing.Size(66, 14);
             this.label21.TabIndex = 81;
             this.label21.Text = "Current Test";
             // 
@@ -1588,7 +1589,7 @@ namespace WindowsFormsApplication1
             this.dataCh1DualChanTab_lbl.Font = new System.Drawing.Font("OCR A Extended", 65F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataCh1DualChanTab_lbl.Location = new System.Drawing.Point(0, 37);
             this.dataCh1DualChanTab_lbl.Name = "dataCh1DualChanTab_lbl";
-            this.dataCh1DualChanTab_lbl.Size = new System.Drawing.Size(711, 180);
+            this.dataCh1DualChanTab_lbl.Size = new System.Drawing.Size(362, 89);
             this.dataCh1DualChanTab_lbl.TabIndex = 75;
             this.dataCh1DualChanTab_lbl.Text = "0.0000";
             // 
@@ -1598,17 +1599,17 @@ namespace WindowsFormsApplication1
             this.firstComConnect.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.firstComConnect.Location = new System.Drawing.Point(0, 16);
             this.firstComConnect.Name = "firstComConnect";
-            this.firstComConnect.Size = new System.Drawing.Size(288, 32);
+            this.firstComConnect.Size = new System.Drawing.Size(148, 16);
             this.firstComConnect.TabIndex = 65;
             this.firstComConnect.Text = "No COM Port Connect";
             // 
             // dualChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.dualChart.ChartAreas.Add(chartArea1);
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            this.dualChart.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.dualChart.ChartAreas.Add(chartArea4);
+            legend4.Enabled = false;
+            legend4.Name = "Legend1";
+            this.dualChart.Legends.Add(legend4);
             this.dualChart.Location = new System.Drawing.Point(8, 561);
             this.dualChart.Name = "dualChart";
             this.dualChart.Size = new System.Drawing.Size(798, 219);
@@ -1711,9 +1712,9 @@ namespace WindowsFormsApplication1
             // 
             this.big_graph.Controls.Add(this.Label_Data3);
             this.big_graph.Controls.Add(this.chart1);
-            this.big_graph.Location = new System.Drawing.Point(8, 38);
+            this.big_graph.Location = new System.Drawing.Point(4, 34);
             this.big_graph.Name = "big_graph";
-            this.big_graph.Size = new System.Drawing.Size(1768, 1060);
+            this.big_graph.Size = new System.Drawing.Size(1723, 1152);
             this.big_graph.TabIndex = 3;
             this.big_graph.Text = "Big Reading with Graph";
             this.big_graph.UseVisualStyleBackColor = true;
@@ -1728,21 +1729,21 @@ namespace WindowsFormsApplication1
             this.Label_Data3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.Label_Data3.Location = new System.Drawing.Point(0, 0);
             this.Label_Data3.Name = "Label_Data3";
-            this.Label_Data3.Size = new System.Drawing.Size(1768, 607);
+            this.Label_Data3.Size = new System.Drawing.Size(1723, 699);
             this.Label_Data3.TabIndex = 26;
             this.Label_Data3.Text = "0.0000";
             this.Label_Data3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
+            chartArea5.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea5);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(0, 607);
+            legend5.Name = "Legend1";
+            this.chart1.Legends.Add(legend5);
+            this.chart1.Location = new System.Drawing.Point(0, 699);
             this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(1768, 453);
+            this.chart1.Size = new System.Drawing.Size(1723, 453);
             this.chart1.TabIndex = 25;
             this.chart1.Text = "chart1";
             // 
@@ -1761,9 +1762,9 @@ namespace WindowsFormsApplication1
             this.read_graph_col.Controls.Add(this.groupBox4);
             this.read_graph_col.Controls.Add(this.label8);
             this.read_graph_col.Controls.Add(this.groupBox3);
-            this.read_graph_col.Location = new System.Drawing.Point(8, 38);
+            this.read_graph_col.Location = new System.Drawing.Point(4, 34);
             this.read_graph_col.Name = "read_graph_col";
-            this.read_graph_col.Size = new System.Drawing.Size(1768, 1060);
+            this.read_graph_col.Size = new System.Drawing.Size(1723, 1152);
             this.read_graph_col.TabIndex = 4;
             this.read_graph_col.Text = "Single Channel";
             this.read_graph_col.UseVisualStyleBackColor = true;
@@ -1775,6 +1776,7 @@ namespace WindowsFormsApplication1
             this.singleSeriesListView.CheckBoxes = true;
             this.singleSeriesListView.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.singleSeriesListView.GridLines = true;
+            this.singleSeriesListView.HideSelection = false;
             this.singleSeriesListView.Location = new System.Drawing.Point(808, 521);
             this.singleSeriesListView.Name = "singleSeriesListView";
             this.singleSeriesListView.Size = new System.Drawing.Size(154, 214);
@@ -1811,7 +1813,7 @@ namespace WindowsFormsApplication1
             // 
             this.command_text.Location = new System.Drawing.Point(1683, 770);
             this.command_text.Name = "command_text";
-            this.command_text.Size = new System.Drawing.Size(100, 33);
+            this.command_text.Size = new System.Drawing.Size(100, 20);
             this.command_text.TabIndex = 62;
             this.command_text.Visible = false;
             this.command_text.KeyDown += new System.Windows.Forms.KeyEventHandler(this.command_text_KeyDown);
@@ -1891,7 +1893,7 @@ namespace WindowsFormsApplication1
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(14, 24);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(129, 25);
+            this.label4.Size = new System.Drawing.Size(66, 14);
             this.label4.TabIndex = 58;
             this.label4.Text = "Current Test";
             // 
@@ -1899,7 +1901,7 @@ namespace WindowsFormsApplication1
             // 
             this.testName_Text.Location = new System.Drawing.Point(103, 24);
             this.testName_Text.Name = "testName_Text";
-            this.testName_Text.Size = new System.Drawing.Size(100, 33);
+            this.testName_Text.Size = new System.Drawing.Size(100, 20);
             this.testName_Text.TabIndex = 1;
             this.testName_Text.TextChanged += new System.EventHandler(this.testName_Text_TextChanged);
             // 
@@ -1907,17 +1909,17 @@ namespace WindowsFormsApplication1
             // 
             this.test_label.Location = new System.Drawing.Point(1806, 770);
             this.test_label.Name = "test_label";
-            this.test_label.Size = new System.Drawing.Size(100, 33);
+            this.test_label.Size = new System.Drawing.Size(100, 20);
             this.test_label.TabIndex = 61;
             this.test_label.Visible = false;
             // 
             // singleChart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.singleChart.ChartAreas.Add(chartArea3);
-            legend3.Enabled = false;
-            legend3.Name = "Legend1";
-            this.singleChart.Legends.Add(legend3);
+            chartArea6.Name = "ChartArea1";
+            this.singleChart.ChartAreas.Add(chartArea6);
+            legend6.Enabled = false;
+            legend6.Name = "Legend1";
+            this.singleChart.Legends.Add(legend6);
             this.singleChart.Location = new System.Drawing.Point(8, 516);
             this.singleChart.Name = "singleChart";
             this.singleChart.Size = new System.Drawing.Size(794, 219);
@@ -1945,7 +1947,7 @@ namespace WindowsFormsApplication1
             this.label10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(15, 56);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(230, 31);
+            this.label10.Size = new System.Drawing.Size(115, 16);
             this.label10.TabIndex = 44;
             this.label10.Text = "Readings Per Row";
             // 
@@ -1964,7 +1966,7 @@ namespace WindowsFormsApplication1
             // 
             this.numericUpDown2.Location = new System.Drawing.Point(18, 81);
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(57, 33);
+            this.numericUpDown2.Size = new System.Drawing.Size(57, 20);
             this.numericUpDown2.TabIndex = 1;
             this.numericUpDown2.Value = new decimal(new int[] {
             1,
@@ -1979,7 +1981,7 @@ namespace WindowsFormsApplication1
             this.checkBox7.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox7.Location = new System.Drawing.Point(96, 81);
             this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(173, 29);
+            this.checkBox7.Size = new System.Drawing.Size(90, 18);
             this.checkBox7.TabIndex = 2;
             this.checkBox7.Text = "Reading Only";
             this.checkBox7.UseVisualStyleBackColor = true;
@@ -2087,7 +2089,7 @@ namespace WindowsFormsApplication1
             this.COMconnect.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.COMconnect.Location = new System.Drawing.Point(0, 16);
             this.COMconnect.Name = "COMconnect";
-            this.COMconnect.Size = new System.Drawing.Size(288, 32);
+            this.COMconnect.Size = new System.Drawing.Size(148, 16);
             this.COMconnect.TabIndex = 41;
             this.COMconnect.Text = "No COM Port Connect";
             // 
@@ -2099,7 +2101,7 @@ namespace WindowsFormsApplication1
             this.DataSMDSingle_lbl.Font = new System.Drawing.Font("OCR A Extended", 65F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DataSMDSingle_lbl.Location = new System.Drawing.Point(0, 37);
             this.DataSMDSingle_lbl.Name = "DataSMDSingle_lbl";
-            this.DataSMDSingle_lbl.Size = new System.Drawing.Size(711, 180);
+            this.DataSMDSingle_lbl.Size = new System.Drawing.Size(362, 89);
             this.DataSMDSingle_lbl.TabIndex = 40;
             this.DataSMDSingle_lbl.Text = "0.0000";
             // 
@@ -2121,7 +2123,7 @@ namespace WindowsFormsApplication1
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(6, 20);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(204, 25);
+            this.label9.Size = new System.Drawing.Size(99, 14);
             this.label9.TabIndex = 48;
             this.label9.Text = "Available COM Port";
             // 
@@ -2129,10 +2131,10 @@ namespace WindowsFormsApplication1
             // 
             this.comList3.FormattingEnabled = true;
             this.comList3.HorizontalScrollbar = true;
-            this.comList3.ItemHeight = 25;
+            this.comList3.ItemHeight = 14;
             this.comList3.Location = new System.Drawing.Point(9, 49);
             this.comList3.Name = "comList3";
-            this.comList3.Size = new System.Drawing.Size(191, 29);
+            this.comList3.Size = new System.Drawing.Size(191, 60);
             this.comList3.TabIndex = 5;
             // 
             // refresh2
@@ -2178,7 +2180,7 @@ namespace WindowsFormsApplication1
             this.target.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.target.Location = new System.Drawing.Point(55, 35);
             this.target.Name = "target";
-            this.target.Size = new System.Drawing.Size(46, 44);
+            this.target.Size = new System.Drawing.Size(46, 26);
             this.target.TabIndex = 8;
             this.target.TextChanged += new System.EventHandler(this.target_TextChanged);
             this.target.KeyDown += new System.Windows.Forms.KeyEventHandler(this.target_KeyDown);
@@ -2220,7 +2222,7 @@ namespace WindowsFormsApplication1
             // 
             this.low_limit.Location = new System.Drawing.Point(43, 19);
             this.low_limit.Name = "low_limit";
-            this.low_limit.Size = new System.Drawing.Size(52, 33);
+            this.low_limit.Size = new System.Drawing.Size(52, 20);
             this.low_limit.TabIndex = 11;
             this.low_limit.TextChanged += new System.EventHandler(this.low_limit_TextChanged);
             this.low_limit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.low_limit_KeyDown);
@@ -2230,7 +2232,7 @@ namespace WindowsFormsApplication1
             this.low_unit.AutoSize = true;
             this.low_unit.Location = new System.Drawing.Point(7, 45);
             this.low_unit.Name = "low_unit";
-            this.low_unit.Size = new System.Drawing.Size(124, 29);
+            this.low_unit.Size = new System.Drawing.Size(67, 18);
             this.low_unit.TabIndex = 12;
             this.low_unit.TabStop = true;
             this.low_unit.Text = "LL Value";
@@ -2241,7 +2243,7 @@ namespace WindowsFormsApplication1
             this.low_percent.AutoSize = true;
             this.low_percent.Location = new System.Drawing.Point(7, 61);
             this.low_percent.Name = "low_percent";
-            this.low_percent.Size = new System.Drawing.Size(63, 29);
+            this.low_percent.Size = new System.Drawing.Size(35, 18);
             this.low_percent.TabIndex = 12;
             this.low_percent.TabStop = true;
             this.low_percent.Text = "%";
@@ -2252,7 +2254,7 @@ namespace WindowsFormsApplication1
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(4, 22);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(61, 25);
+            this.label7.Size = new System.Drawing.Size(33, 14);
             this.label7.TabIndex = 2;
             this.label7.Text = "Low*";
             // 
@@ -2273,7 +2275,7 @@ namespace WindowsFormsApplication1
             // 
             this.high_limit.Location = new System.Drawing.Point(45, 16);
             this.high_limit.Name = "high_limit";
-            this.high_limit.Size = new System.Drawing.Size(52, 33);
+            this.high_limit.Size = new System.Drawing.Size(52, 20);
             this.high_limit.TabIndex = 9;
             this.high_limit.TextChanged += new System.EventHandler(this.high_limit_TextChanged);
             this.high_limit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.high_limit_KeyDown);
@@ -2283,7 +2285,7 @@ namespace WindowsFormsApplication1
             this.high_unit.AutoSize = true;
             this.high_unit.Location = new System.Drawing.Point(9, 42);
             this.high_unit.Name = "high_unit";
-            this.high_unit.Size = new System.Drawing.Size(128, 29);
+            this.high_unit.Size = new System.Drawing.Size(68, 18);
             this.high_unit.TabIndex = 10;
             this.high_unit.TabStop = true;
             this.high_unit.Text = "UL Value";
@@ -2294,7 +2296,7 @@ namespace WindowsFormsApplication1
             this.high_percent.AutoSize = true;
             this.high_percent.Location = new System.Drawing.Point(9, 58);
             this.high_percent.Name = "high_percent";
-            this.high_percent.Size = new System.Drawing.Size(63, 29);
+            this.high_percent.Size = new System.Drawing.Size(35, 18);
             this.high_percent.TabIndex = 10;
             this.high_percent.TabStop = true;
             this.high_percent.Text = "%";
@@ -2305,7 +2307,7 @@ namespace WindowsFormsApplication1
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 19);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 25);
+            this.label3.Size = new System.Drawing.Size(32, 14);
             this.label3.TabIndex = 1;
             this.label3.Text = "High*";
             // 
@@ -2315,7 +2317,7 @@ namespace WindowsFormsApplication1
             this.dsad.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dsad.Location = new System.Drawing.Point(3, 41);
             this.dsad.Name = "dsad";
-            this.dsad.Size = new System.Drawing.Size(87, 27);
+            this.dsad.Size = new System.Drawing.Size(46, 15);
             this.dsad.TabIndex = 0;
             this.dsad.Text = "Target*";
             // 
@@ -2325,7 +2327,7 @@ namespace WindowsFormsApplication1
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(2075, 372);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(165, 44);
+            this.label8.Size = new System.Drawing.Size(81, 24);
             this.label8.TabIndex = 41;
             this.label8.Text = "No Units";
             this.label8.Visible = false;
@@ -2372,7 +2374,7 @@ namespace WindowsFormsApplication1
             this.notNumberWarning_lbl.ForeColor = System.Drawing.Color.Red;
             this.notNumberWarning_lbl.Location = new System.Drawing.Point(399, 159);
             this.notNumberWarning_lbl.Name = "notNumberWarning_lbl";
-            this.notNumberWarning_lbl.Size = new System.Drawing.Size(0, 25);
+            this.notNumberWarning_lbl.Size = new System.Drawing.Size(0, 14);
             this.notNumberWarning_lbl.TabIndex = 153;
             // 
             // useLimit_chkbox
@@ -2380,7 +2382,7 @@ namespace WindowsFormsApplication1
             this.useLimit_chkbox.AutoSize = true;
             this.useLimit_chkbox.Location = new System.Drawing.Point(394, 133);
             this.useLimit_chkbox.Name = "useLimit_chkbox";
-            this.useLimit_chkbox.Size = new System.Drawing.Size(231, 29);
+            this.useLimit_chkbox.Size = new System.Drawing.Size(118, 18);
             this.useLimit_chkbox.TabIndex = 141;
             this.useLimit_chkbox.Text = "Use Low/High Limit";
             this.useLimit_chkbox.UseVisualStyleBackColor = true;
@@ -2391,7 +2393,7 @@ namespace WindowsFormsApplication1
             this.label46.AutoSize = true;
             this.label46.Location = new System.Drawing.Point(392, 67);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(120, 25);
+            this.label46.Size = new System.Drawing.Size(59, 14);
             this.label46.TabIndex = 152;
             this.label46.Text = "Select Tool";
             // 
@@ -2402,7 +2404,7 @@ namespace WindowsFormsApplication1
             this.toolID_SC_comboBox.FormattingEnabled = true;
             this.toolID_SC_comboBox.Location = new System.Drawing.Point(394, 85);
             this.toolID_SC_comboBox.Name = "toolID_SC_comboBox";
-            this.toolID_SC_comboBox.Size = new System.Drawing.Size(133, 33);
+            this.toolID_SC_comboBox.Size = new System.Drawing.Size(133, 22);
             this.toolID_SC_comboBox.TabIndex = 139;
             // 
             // average_lbl
@@ -2410,7 +2412,7 @@ namespace WindowsFormsApplication1
             this.average_lbl.AutoSize = true;
             this.average_lbl.Location = new System.Drawing.Point(437, 358);
             this.average_lbl.Name = "average_lbl";
-            this.average_lbl.Size = new System.Drawing.Size(93, 25);
+            this.average_lbl.Size = new System.Drawing.Size(49, 14);
             this.average_lbl.TabIndex = 151;
             this.average_lbl.Text = "Average";
             // 
@@ -2419,7 +2421,7 @@ namespace WindowsFormsApplication1
             this.label47.AutoSize = true;
             this.label47.Location = new System.Drawing.Point(391, 358);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(56, 25);
+            this.label47.Size = new System.Drawing.Size(30, 14);
             this.label47.TabIndex = 150;
             this.label47.Text = "Ave.";
             // 
@@ -2428,7 +2430,7 @@ namespace WindowsFormsApplication1
             this.label43.AutoSize = true;
             this.label43.Location = new System.Drawing.Point(392, 229);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(51, 25);
+            this.label43.Size = new System.Drawing.Size(26, 14);
             this.label43.TabIndex = 149;
             this.label43.Text = "LSL";
             // 
@@ -2437,7 +2439,7 @@ namespace WindowsFormsApplication1
             this.label33.AutoSize = true;
             this.label33.Location = new System.Drawing.Point(391, 189);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(55, 25);
+            this.label33.Size = new System.Drawing.Size(27, 14);
             this.label33.TabIndex = 148;
             this.label33.Text = "USL";
             // 
@@ -2445,14 +2447,14 @@ namespace WindowsFormsApplication1
             // 
             this.USL_txt.Location = new System.Drawing.Point(425, 186);
             this.USL_txt.Name = "USL_txt";
-            this.USL_txt.Size = new System.Drawing.Size(100, 33);
+            this.USL_txt.Size = new System.Drawing.Size(100, 20);
             this.USL_txt.TabIndex = 142;
             // 
             // LSL_txt
             // 
             this.LSL_txt.Location = new System.Drawing.Point(425, 226);
             this.LSL_txt.Name = "LSL_txt";
-            this.LSL_txt.Size = new System.Drawing.Size(100, 33);
+            this.LSL_txt.Size = new System.Drawing.Size(100, 20);
             this.LSL_txt.TabIndex = 143;
             // 
             // showCMK_chkBox
@@ -2462,7 +2464,7 @@ namespace WindowsFormsApplication1
             this.showCMK_chkBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showCMK_chkBox.Location = new System.Drawing.Point(394, 113);
             this.showCMK_chkBox.Name = "showCMK_chkBox";
-            this.showCMK_chkBox.Size = new System.Drawing.Size(236, 29);
+            this.showCMK_chkBox.Size = new System.Drawing.Size(119, 18);
             this.showCMK_chkBox.TabIndex = 140;
             this.showCMK_chkBox.Text = "Show CM and CMK";
             this.showCMK_chkBox.UseVisualStyleBackColor = true;
@@ -2472,7 +2474,7 @@ namespace WindowsFormsApplication1
             this.CMKVal_lbl.AutoSize = true;
             this.CMKVal_lbl.Location = new System.Drawing.Point(437, 318);
             this.CMKVal_lbl.Name = "CMKVal_lbl";
-            this.CMKVal_lbl.Size = new System.Drawing.Size(118, 25);
+            this.CMKVal_lbl.Size = new System.Drawing.Size(58, 14);
             this.CMKVal_lbl.TabIndex = 147;
             this.CMKVal_lbl.Text = "CMK value";
             // 
@@ -2481,7 +2483,7 @@ namespace WindowsFormsApplication1
             this.CMK_lbl.AutoSize = true;
             this.CMK_lbl.Location = new System.Drawing.Point(391, 318);
             this.CMK_lbl.Name = "CMK_lbl";
-            this.CMK_lbl.Size = new System.Drawing.Size(68, 25);
+            this.CMK_lbl.Size = new System.Drawing.Size(32, 14);
             this.CMK_lbl.TabIndex = 146;
             this.CMK_lbl.Text = "CMK:";
             // 
@@ -2490,7 +2492,7 @@ namespace WindowsFormsApplication1
             this.CMVal_lbl.AutoSize = true;
             this.CMVal_lbl.Location = new System.Drawing.Point(437, 274);
             this.CMVal_lbl.Name = "CMVal_lbl";
-            this.CMVal_lbl.Size = new System.Drawing.Size(103, 25);
+            this.CMVal_lbl.Size = new System.Drawing.Size(51, 14);
             this.CMVal_lbl.TabIndex = 145;
             this.CMVal_lbl.Text = "CM value";
             // 
@@ -2499,7 +2501,7 @@ namespace WindowsFormsApplication1
             this.CM_lbl.AutoSize = true;
             this.CM_lbl.Location = new System.Drawing.Point(391, 274);
             this.CM_lbl.Name = "CM_lbl";
-            this.CM_lbl.Size = new System.Drawing.Size(53, 25);
+            this.CM_lbl.Size = new System.Drawing.Size(25, 14);
             this.CM_lbl.TabIndex = 144;
             this.CM_lbl.Text = "CM:";
             // 
@@ -2509,14 +2511,14 @@ namespace WindowsFormsApplication1
             this.runNameErrorLabel.ForeColor = System.Drawing.Color.Red;
             this.runNameErrorLabel.Location = new System.Drawing.Point(15, 54);
             this.runNameErrorLabel.Name = "runNameErrorLabel";
-            this.runNameErrorLabel.Size = new System.Drawing.Size(0, 25);
+            this.runNameErrorLabel.Size = new System.Drawing.Size(0, 14);
             this.runNameErrorLabel.TabIndex = 66;
             // 
             // currentRunText
             // 
             this.currentRunText.Location = new System.Drawing.Point(106, 21);
             this.currentRunText.Name = "currentRunText";
-            this.currentRunText.Size = new System.Drawing.Size(100, 33);
+            this.currentRunText.Size = new System.Drawing.Size(100, 20);
             this.currentRunText.TabIndex = 1;
             this.currentRunText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.currentRunText_KeyDown);
             // 
@@ -2525,7 +2527,7 @@ namespace WindowsFormsApplication1
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(14, 24);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(132, 25);
+            this.label11.Size = new System.Drawing.Size(68, 14);
             this.label11.TabIndex = 65;
             this.label11.Text = "Current Run:";
             // 
@@ -2637,10 +2639,10 @@ namespace WindowsFormsApplication1
             this.simple_col.Controls.Add(this.comList2);
             this.simple_col.Controls.Add(this.button5);
             this.simple_col.Controls.Add(this.groupBox2);
-            this.simple_col.Location = new System.Drawing.Point(8, 38);
+            this.simple_col.Location = new System.Drawing.Point(4, 34);
             this.simple_col.Name = "simple_col";
             this.simple_col.Padding = new System.Windows.Forms.Padding(3);
-            this.simple_col.Size = new System.Drawing.Size(1768, 1060);
+            this.simple_col.Size = new System.Drawing.Size(1723, 1152);
             this.simple_col.TabIndex = 1;
             this.simple_col.Text = "Simple Reading with Option to Save";
             this.simple_col.UseVisualStyleBackColor = true;
@@ -2651,7 +2653,7 @@ namespace WindowsFormsApplication1
             this.Label_Data1.Font = new System.Drawing.Font("OCR A Extended", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label_Data1.Location = new System.Drawing.Point(20, 30);
             this.Label_Data1.Name = "Label_Data1";
-            this.Label_Data1.Size = new System.Drawing.Size(229, 57);
+            this.Label_Data1.Size = new System.Drawing.Size(115, 29);
             this.Label_Data1.TabIndex = 27;
             this.Label_Data1.Text = "0.0000";
             // 
@@ -2683,7 +2685,7 @@ namespace WindowsFormsApplication1
             this.checkBox6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox6.Location = new System.Drawing.Point(25, 212);
             this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(269, 35);
+            this.checkBox6.Size = new System.Drawing.Size(139, 20);
             this.checkBox6.TabIndex = 29;
             this.checkBox6.Text = "Send Reading Only";
             this.checkBox6.UseVisualStyleBackColor = true;
@@ -2694,7 +2696,7 @@ namespace WindowsFormsApplication1
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(22, 252);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(204, 25);
+            this.label5.Size = new System.Drawing.Size(99, 14);
             this.label5.TabIndex = 35;
             this.label5.Text = "Available COM Port";
             // 
@@ -2702,7 +2704,7 @@ namespace WindowsFormsApplication1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(322, 150);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(57, 33);
+            this.numericUpDown1.Size = new System.Drawing.Size(57, 20);
             this.numericUpDown1.TabIndex = 30;
             this.numericUpDown1.Value = new decimal(new int[] {
             1,
@@ -2727,17 +2729,17 @@ namespace WindowsFormsApplication1
             this.label6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(319, 122);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(230, 31);
+            this.label6.Size = new System.Drawing.Size(115, 16);
             this.label6.TabIndex = 31;
             this.label6.Text = "Readings Per Row";
             // 
             // comList2
             // 
             this.comList2.FormattingEnabled = true;
-            this.comList2.ItemHeight = 25;
+            this.comList2.ItemHeight = 14;
             this.comList2.Location = new System.Drawing.Point(25, 282);
             this.comList2.Name = "comList2";
-            this.comList2.Size = new System.Drawing.Size(214, 54);
+            this.comList2.Size = new System.Drawing.Size(214, 46);
             this.comList2.TabIndex = 33;
             // 
             // button5
@@ -2835,10 +2837,10 @@ namespace WindowsFormsApplication1
             this.simple_reading.Controls.Add(this.Button_Serial);
             this.simple_reading.Controls.Add(this.label2);
             this.simple_reading.Controls.Add(this.comList);
-            this.simple_reading.Location = new System.Drawing.Point(8, 38);
+            this.simple_reading.Location = new System.Drawing.Point(4, 34);
             this.simple_reading.Name = "simple_reading";
             this.simple_reading.Padding = new System.Windows.Forms.Padding(3);
-            this.simple_reading.Size = new System.Drawing.Size(1768, 1094);
+            this.simple_reading.Size = new System.Drawing.Size(1723, 1152);
             this.simple_reading.TabIndex = 0;
             this.simple_reading.Text = "Torque To Spreadsheet";
             this.simple_reading.UseVisualStyleBackColor = true;
@@ -2847,7 +2849,7 @@ namespace WindowsFormsApplication1
             // 
             this.commandResult_txt.Location = new System.Drawing.Point(11, 563);
             this.commandResult_txt.Name = "commandResult_txt";
-            this.commandResult_txt.Size = new System.Drawing.Size(100, 33);
+            this.commandResult_txt.Size = new System.Drawing.Size(100, 20);
             this.commandResult_txt.TabIndex = 58;
             this.commandResult_txt.Visible = false;
             // 
@@ -2866,7 +2868,7 @@ namespace WindowsFormsApplication1
             // 
             this.command_txt.Location = new System.Drawing.Point(11, 527);
             this.command_txt.Name = "command_txt";
-            this.command_txt.Size = new System.Drawing.Size(100, 33);
+            this.command_txt.Size = new System.Drawing.Size(100, 20);
             this.command_txt.TabIndex = 56;
             this.command_txt.Visible = false;
             // 
@@ -2912,7 +2914,7 @@ namespace WindowsFormsApplication1
             this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(16, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(173, 31);
+            this.label1.Size = new System.Drawing.Size(86, 16);
             this.label1.TabIndex = 9;
             this.label1.Text = "Readings/row";
             // 
@@ -2920,7 +2922,7 @@ namespace WindowsFormsApplication1
             // 
             this.RowCountMax.Location = new System.Drawing.Point(19, 47);
             this.RowCountMax.Name = "RowCountMax";
-            this.RowCountMax.Size = new System.Drawing.Size(57, 33);
+            this.RowCountMax.Size = new System.Drawing.Size(57, 20);
             this.RowCountMax.TabIndex = 1;
             this.RowCountMax.Value = new decimal(new int[] {
             1,
@@ -2935,7 +2937,7 @@ namespace WindowsFormsApplication1
             this.Reading_Only_Box.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Reading_Only_Box.Location = new System.Drawing.Point(118, 91);
             this.Reading_Only_Box.Name = "Reading_Only_Box";
-            this.Reading_Only_Box.Size = new System.Drawing.Size(269, 35);
+            this.Reading_Only_Box.Size = new System.Drawing.Size(139, 20);
             this.Reading_Only_Box.TabIndex = 4;
             this.Reading_Only_Box.Text = "Send Reading Only";
             this.Reading_Only_Box.UseVisualStyleBackColor = true;
@@ -2957,7 +2959,7 @@ namespace WindowsFormsApplication1
             // 
             this.textBox2.Location = new System.Drawing.Point(198, 281);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 33);
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 59;
             this.textBox2.Visible = false;
             // 
@@ -2977,7 +2979,7 @@ namespace WindowsFormsApplication1
             this.COMconnect2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.COMconnect2.Location = new System.Drawing.Point(0, 16);
             this.COMconnect2.Name = "COMconnect2";
-            this.COMconnect2.Size = new System.Drawing.Size(270, 31);
+            this.COMconnect2.Size = new System.Drawing.Size(138, 16);
             this.COMconnect2.TabIndex = 41;
             this.COMconnect2.Text = "No COM Port Connect";
             // 
@@ -2988,7 +2990,7 @@ namespace WindowsFormsApplication1
             this.DataTTS_lbl.Font = new System.Drawing.Font("OCR A Extended", 65F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DataTTS_lbl.Location = new System.Drawing.Point(0, 37);
             this.DataTTS_lbl.Name = "DataTTS_lbl";
-            this.DataTTS_lbl.Size = new System.Drawing.Size(711, 180);
+            this.DataTTS_lbl.Size = new System.Drawing.Size(362, 89);
             this.DataTTS_lbl.TabIndex = 40;
             this.DataTTS_lbl.Text = "0.0000";
             // 
@@ -3019,7 +3021,7 @@ namespace WindowsFormsApplication1
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 338);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(204, 25);
+            this.label2.Size = new System.Drawing.Size(99, 14);
             this.label2.TabIndex = 17;
             this.label2.Text = "Available COM Port";
             // 
@@ -3027,10 +3029,10 @@ namespace WindowsFormsApplication1
             // 
             this.comList.FormattingEnabled = true;
             this.comList.HorizontalScrollbar = true;
-            this.comList.ItemHeight = 25;
+            this.comList.ItemHeight = 14;
             this.comList.Location = new System.Drawing.Point(11, 355);
             this.comList.Name = "comList";
-            this.comList.Size = new System.Drawing.Size(170, 29);
+            this.comList.Size = new System.Drawing.Size(170, 60);
             this.comList.TabIndex = 1;
             this.comList.SelectedIndexChanged += new System.EventHandler(this.comList_SelectedIndexChanged);
             // 
@@ -3047,11 +3049,11 @@ namespace WindowsFormsApplication1
             this.TabPages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TabPages.HotTrack = true;
             this.TabPages.ItemSize = new System.Drawing.Size(100, 30);
-            this.TabPages.Location = new System.Drawing.Point(0, 40);
+            this.TabPages.Location = new System.Drawing.Point(0, 24);
             this.TabPages.Multiline = true;
             this.TabPages.Name = "TabPages";
             this.TabPages.SelectedIndex = 0;
-            this.TabPages.Size = new System.Drawing.Size(1784, 1140);
+            this.TabPages.Size = new System.Drawing.Size(1731, 1190);
             this.TabPages.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabPages.TabIndex = 27;
             // 
@@ -3062,9 +3064,9 @@ namespace WindowsFormsApplication1
             this.big_reading.Controls.Add(this.panel3);
             this.big_reading.Controls.Add(this.upSize_btn);
             this.big_reading.Controls.Add(this.reading_bigReading_lbl);
-            this.big_reading.Location = new System.Drawing.Point(8, 38);
+            this.big_reading.Location = new System.Drawing.Point(4, 34);
             this.big_reading.Name = "big_reading";
-            this.big_reading.Size = new System.Drawing.Size(1768, 1060);
+            this.big_reading.Size = new System.Drawing.Size(1723, 1152);
             this.big_reading.TabIndex = 2;
             this.big_reading.Text = "Big Reading";
             // 
@@ -3087,9 +3089,9 @@ namespace WindowsFormsApplication1
             this.panel3.Controls.Add(this.refreshCOMList_btn_bigReading);
             this.panel3.Controls.Add(this.comList_bigReading);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 625);
+            this.panel3.Location = new System.Drawing.Point(0, 717);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1768, 435);
+            this.panel3.Size = new System.Drawing.Size(1723, 435);
             this.panel3.TabIndex = 26;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
@@ -3130,7 +3132,7 @@ namespace WindowsFormsApplication1
             "Eng. Unit"});
             this.high_unitComboBox.Location = new System.Drawing.Point(157, 121);
             this.high_unitComboBox.Name = "high_unitComboBox";
-            this.high_unitComboBox.Size = new System.Drawing.Size(67, 33);
+            this.high_unitComboBox.Size = new System.Drawing.Size(67, 22);
             this.high_unitComboBox.TabIndex = 5;
             // 
             // low_unitComboBox
@@ -3141,7 +3143,7 @@ namespace WindowsFormsApplication1
             "Eng. Unit"});
             this.low_unitComboBox.Location = new System.Drawing.Point(157, 57);
             this.low_unitComboBox.Name = "low_unitComboBox";
-            this.low_unitComboBox.Size = new System.Drawing.Size(67, 33);
+            this.low_unitComboBox.Size = new System.Drawing.Size(67, 22);
             this.low_unitComboBox.TabIndex = 3;
             // 
             // label17
@@ -3150,7 +3152,7 @@ namespace WindowsFormsApplication1
             this.label17.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Location = new System.Drawing.Point(100, 8);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(103, 45);
+            this.label17.Size = new System.Drawing.Size(51, 23);
             this.label17.TabIndex = 27;
             this.label17.Text = "Limit";
             // 
@@ -3159,7 +3161,7 @@ namespace WindowsFormsApplication1
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(8, 65);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(52, 25);
+            this.label23.Size = new System.Drawing.Size(29, 14);
             this.label23.TabIndex = 28;
             this.label23.Text = "Low";
             // 
@@ -3167,7 +3169,7 @@ namespace WindowsFormsApplication1
             // 
             this.low_bigReading_txt.Location = new System.Drawing.Point(51, 59);
             this.low_bigReading_txt.Name = "low_bigReading_txt";
-            this.low_bigReading_txt.Size = new System.Drawing.Size(100, 33);
+            this.low_bigReading_txt.Size = new System.Drawing.Size(100, 20);
             this.low_bigReading_txt.TabIndex = 2;
             // 
             // label42
@@ -3175,7 +3177,7 @@ namespace WindowsFormsApplication1
             this.label42.AutoSize = true;
             this.label42.Location = new System.Drawing.Point(8, 129);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(56, 25);
+            this.label42.Size = new System.Drawing.Size(28, 14);
             this.label42.TabIndex = 30;
             this.label42.Text = "High";
             // 
@@ -3183,7 +3185,7 @@ namespace WindowsFormsApplication1
             // 
             this.high_bigReading_txt.Location = new System.Drawing.Point(51, 123);
             this.high_bigReading_txt.Name = "high_bigReading_txt";
-            this.high_bigReading_txt.Size = new System.Drawing.Size(100, 33);
+            this.high_bigReading_txt.Size = new System.Drawing.Size(100, 20);
             this.high_bigReading_txt.TabIndex = 4;
             // 
             // groupBox19
@@ -3224,7 +3226,7 @@ namespace WindowsFormsApplication1
             this.label45.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label45.Location = new System.Drawing.Point(111, 9);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(130, 45);
+            this.label45.Size = new System.Drawing.Size(66, 23);
             this.label45.TabIndex = 32;
             this.label45.Text = "Target";
             // 
@@ -3245,10 +3247,10 @@ namespace WindowsFormsApplication1
             // 
             this.comList_bigReading.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comList_bigReading.FormattingEnabled = true;
-            this.comList_bigReading.ItemHeight = 61;
+            this.comList_bigReading.ItemHeight = 32;
             this.comList_bigReading.Location = new System.Drawing.Point(566, 12);
             this.comList_bigReading.Name = "comList_bigReading";
-            this.comList_bigReading.Size = new System.Drawing.Size(514, 4);
+            this.comList_bigReading.Size = new System.Drawing.Size(514, 100);
             this.comList_bigReading.TabIndex = 7;
             // 
             // upSize_btn
@@ -3272,7 +3274,7 @@ namespace WindowsFormsApplication1
             this.reading_bigReading_lbl.Location = new System.Drawing.Point(0, 0);
             this.reading_bigReading_lbl.Name = "reading_bigReading_lbl";
             this.reading_bigReading_lbl.Padding = new System.Windows.Forms.Padding(0, 0, 100, 430);
-            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1768, 1060);
+            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1723, 1152);
             this.reading_bigReading_lbl.TabIndex = 27;
             this.reading_bigReading_lbl.Text = "0.0000";
             this.reading_bigReading_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3291,9 +3293,9 @@ namespace WindowsFormsApplication1
             this.calibrationTab.Controls.Add(this.groupBox21);
             this.calibrationTab.Controls.Add(this.groupBox22);
             this.calibrationTab.Controls.Add(this.target_groupBox);
-            this.calibrationTab.Location = new System.Drawing.Point(8, 38);
+            this.calibrationTab.Location = new System.Drawing.Point(4, 34);
             this.calibrationTab.Name = "calibrationTab";
-            this.calibrationTab.Size = new System.Drawing.Size(1768, 1094);
+            this.calibrationTab.Size = new System.Drawing.Size(1723, 1152);
             this.calibrationTab.TabIndex = 6;
             this.calibrationTab.Text = "Cal Cert";
             this.calibrationTab.UseVisualStyleBackColor = true;
@@ -3315,7 +3317,7 @@ namespace WindowsFormsApplication1
             this.ch2Target_select.Checked = true;
             this.ch2Target_select.Location = new System.Drawing.Point(86, 16);
             this.ch2Target_select.Name = "ch2Target_select";
-            this.ch2Target_select.Size = new System.Drawing.Size(138, 29);
+            this.ch2Target_select.Size = new System.Drawing.Size(73, 18);
             this.ch2Target_select.TabIndex = 67;
             this.ch2Target_select.TabStop = true;
             this.ch2Target_select.Text = "Channel 2";
@@ -3326,7 +3328,7 @@ namespace WindowsFormsApplication1
             this.ch1Target_select.AutoSize = true;
             this.ch1Target_select.Location = new System.Drawing.Point(3, 16);
             this.ch1Target_select.Name = "ch1Target_select";
-            this.ch1Target_select.Size = new System.Drawing.Size(138, 29);
+            this.ch1Target_select.Size = new System.Drawing.Size(73, 18);
             this.ch1Target_select.TabIndex = 65;
             this.ch1Target_select.Text = "Channel 1";
             this.ch1Target_select.UseVisualStyleBackColor = true;
@@ -3424,7 +3426,7 @@ namespace WindowsFormsApplication1
             this.ALCCWChart_radio.AutoSize = true;
             this.ALCCWChart_radio.Location = new System.Drawing.Point(804, 269);
             this.ALCCWChart_radio.Name = "ALCCWChart_radio";
-            this.ALCCWChart_radio.Size = new System.Drawing.Size(102, 29);
+            this.ALCCWChart_radio.Size = new System.Drawing.Size(55, 18);
             this.ALCCWChart_radio.TabIndex = 71;
             this.ALCCWChart_radio.TabStop = true;
             this.ALCCWChart_radio.Text = "Graph";
@@ -3435,7 +3437,7 @@ namespace WindowsFormsApplication1
             this.AFCCWChart_radio.AutoSize = true;
             this.AFCCWChart_radio.Location = new System.Drawing.Point(189, 269);
             this.AFCCWChart_radio.Name = "AFCCWChart_radio";
-            this.AFCCWChart_radio.Size = new System.Drawing.Size(102, 29);
+            this.AFCCWChart_radio.Size = new System.Drawing.Size(55, 18);
             this.AFCCWChart_radio.TabIndex = 70;
             this.AFCCWChart_radio.TabStop = true;
             this.AFCCWChart_radio.Text = "Graph";
@@ -3446,7 +3448,7 @@ namespace WindowsFormsApplication1
             this.ALCWChart_radio.AutoSize = true;
             this.ALCWChart_radio.Location = new System.Drawing.Point(811, 12);
             this.ALCWChart_radio.Name = "ALCWChart_radio";
-            this.ALCWChart_radio.Size = new System.Drawing.Size(102, 29);
+            this.ALCWChart_radio.Size = new System.Drawing.Size(55, 18);
             this.ALCWChart_radio.TabIndex = 69;
             this.ALCWChart_radio.TabStop = true;
             this.ALCWChart_radio.Text = "Graph";
@@ -3457,7 +3459,7 @@ namespace WindowsFormsApplication1
             this.AFCWChart_radio.AutoSize = true;
             this.AFCWChart_radio.Location = new System.Drawing.Point(203, 12);
             this.AFCWChart_radio.Name = "AFCWChart_radio";
-            this.AFCWChart_radio.Size = new System.Drawing.Size(102, 29);
+            this.AFCWChart_radio.Size = new System.Drawing.Size(55, 18);
             this.AFCWChart_radio.TabIndex = 68;
             this.AFCWChart_radio.TabStop = true;
             this.AFCWChart_radio.Text = "Graph";
@@ -3465,7 +3467,7 @@ namespace WindowsFormsApplication1
             // 
             // exportChart_btn
             // 
-            this.exportChart_btn.Location = new System.Drawing.Point(583, 261);
+            this.exportChart_btn.Location = new System.Drawing.Point(513, 258);
             this.exportChart_btn.Name = "exportChart_btn";
             this.exportChart_btn.Size = new System.Drawing.Size(115, 35);
             this.exportChart_btn.TabIndex = 67;
@@ -3478,7 +3480,7 @@ namespace WindowsFormsApplication1
             this.exportAverage_chckbox.AutoSize = true;
             this.exportAverage_chckbox.Location = new System.Drawing.Point(6, 15);
             this.exportAverage_chckbox.Name = "exportAverage_chckbox";
-            this.exportAverage_chckbox.Size = new System.Drawing.Size(315, 29);
+            this.exportAverage_chckbox.Size = new System.Drawing.Size(161, 18);
             this.exportAverage_chckbox.TabIndex = 62;
             this.exportAverage_chckbox.Text = "Save Average ONLY to Cert";
             this.exportAverage_chckbox.UseVisualStyleBackColor = true;
@@ -3520,7 +3522,7 @@ namespace WindowsFormsApplication1
             this.ALCCWactive_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.ALCCWactive_label.Location = new System.Drawing.Point(939, 269);
             this.ALCCWactive_label.Name = "ALCCWactive_label";
-            this.ALCCWactive_label.Size = new System.Drawing.Size(130, 36);
+            this.ALCCWactive_label.Size = new System.Drawing.Size(65, 18);
             this.ALCCWactive_label.TabIndex = 50;
             this.ALCCWactive_label.Text = "ACTIVE";
             this.ALCCWactive_label.Visible = false;
@@ -3532,7 +3534,7 @@ namespace WindowsFormsApplication1
             this.ALCWactive_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.ALCWactive_label.Location = new System.Drawing.Point(939, 11);
             this.ALCWactive_label.Name = "ALCWactive_label";
-            this.ALCWactive_label.Size = new System.Drawing.Size(130, 36);
+            this.ALCWactive_label.Size = new System.Drawing.Size(65, 18);
             this.ALCWactive_label.TabIndex = 49;
             this.ALCWactive_label.Text = "ACTIVE";
             this.ALCWactive_label.Visible = false;
@@ -3544,7 +3546,7 @@ namespace WindowsFormsApplication1
             this.AFCCWactive_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.AFCCWactive_label.Location = new System.Drawing.Point(336, 269);
             this.AFCCWactive_label.Name = "AFCCWactive_label";
-            this.AFCCWactive_label.Size = new System.Drawing.Size(130, 36);
+            this.AFCCWactive_label.Size = new System.Drawing.Size(65, 18);
             this.AFCCWactive_label.TabIndex = 48;
             this.AFCCWactive_label.Text = "ACTIVE";
             this.AFCCWactive_label.Visible = false;
@@ -3556,7 +3558,7 @@ namespace WindowsFormsApplication1
             this.AFCWactive_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.AFCWactive_label.Location = new System.Drawing.Point(343, 11);
             this.AFCWactive_label.Name = "AFCWactive_label";
-            this.AFCWactive_label.Size = new System.Drawing.Size(130, 36);
+            this.AFCWactive_label.Size = new System.Drawing.Size(65, 18);
             this.AFCWactive_label.TabIndex = 47;
             this.AFCWactive_label.Text = "ACTIVE";
             this.AFCWactive_label.Visible = false;
@@ -3566,7 +3568,7 @@ namespace WindowsFormsApplication1
             this.label26.AutoSize = true;
             this.label26.Location = new System.Drawing.Point(1108, 527);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(52, 25);
+            this.label26.Size = new System.Drawing.Size(29, 14);
             this.label26.TabIndex = 46;
             this.label26.Text = "Low";
             // 
@@ -3582,7 +3584,7 @@ namespace WindowsFormsApplication1
             this.label25.AutoSize = true;
             this.label25.Location = new System.Drawing.Point(1108, 506);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(56, 25);
+            this.label25.Size = new System.Drawing.Size(28, 14);
             this.label25.TabIndex = 44;
             this.label25.Text = "High";
             // 
@@ -3700,7 +3702,7 @@ namespace WindowsFormsApplication1
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(865, 273);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(141, 25);
+            this.label20.Size = new System.Drawing.Size(71, 14);
             this.label20.TabIndex = 31;
             this.label20.Text = "As Left-CCW";
             // 
@@ -3709,7 +3711,7 @@ namespace WindowsFormsApplication1
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(872, 16);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(125, 25);
+            this.label22.Size = new System.Drawing.Size(64, 14);
             this.label22.TabIndex = 29;
             this.label22.Text = "As Left-CW";
             // 
@@ -3718,7 +3720,7 @@ namespace WindowsFormsApplication1
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(250, 273);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(164, 25);
+            this.label19.Size = new System.Drawing.Size(82, 14);
             this.label19.TabIndex = 25;
             this.label19.Text = "As Found-CCW";
             // 
@@ -3727,7 +3729,7 @@ namespace WindowsFormsApplication1
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(264, 16);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(148, 25);
+            this.label18.Size = new System.Drawing.Size(75, 14);
             this.label18.TabIndex = 23;
             this.label18.Text = "As Found-CW";
             // 
@@ -3763,7 +3765,7 @@ namespace WindowsFormsApplication1
             this.ch2Trough_chckbox.AutoSize = true;
             this.ch2Trough_chckbox.Location = new System.Drawing.Point(60, 252);
             this.ch2Trough_chckbox.Name = "ch2Trough_chckbox";
-            this.ch2Trough_chckbox.Size = new System.Drawing.Size(173, 29);
+            this.ch2Trough_chckbox.Size = new System.Drawing.Size(89, 18);
             this.ch2Trough_chckbox.TabIndex = 87;
             this.ch2Trough_chckbox.Text = "Trough Mode";
             this.ch2Trough_chckbox.UseVisualStyleBackColor = true;
@@ -3775,7 +3777,7 @@ namespace WindowsFormsApplication1
             this.label39.BackColor = System.Drawing.Color.White;
             this.label39.Location = new System.Drawing.Point(185, 2);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(193, 25);
+            this.label39.Size = new System.Drawing.Size(97, 14);
             this.label39.TabIndex = 86;
             this.label39.Text = "Channel 2 Reading";
             // 
@@ -3797,7 +3799,7 @@ namespace WindowsFormsApplication1
             this.ch2ReadingLabel_calTab.ForeColor = System.Drawing.Color.Blue;
             this.ch2ReadingLabel_calTab.Location = new System.Drawing.Point(6, 37);
             this.ch2ReadingLabel_calTab.Name = "ch2ReadingLabel_calTab";
-            this.ch2ReadingLabel_calTab.Size = new System.Drawing.Size(711, 180);
+            this.ch2ReadingLabel_calTab.Size = new System.Drawing.Size(362, 89);
             this.ch2ReadingLabel_calTab.TabIndex = 73;
             this.ch2ReadingLabel_calTab.Text = "0.0000";
             // 
@@ -3807,7 +3809,7 @@ namespace WindowsFormsApplication1
             this.ch2ConnectLabel_calTab.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ch2ConnectLabel_calTab.Location = new System.Drawing.Point(338, 16);
             this.ch2ConnectLabel_calTab.Name = "ch2ConnectLabel_calTab";
-            this.ch2ConnectLabel_calTab.Size = new System.Drawing.Size(288, 32);
+            this.ch2ConnectLabel_calTab.Size = new System.Drawing.Size(148, 16);
             this.ch2ConnectLabel_calTab.TabIndex = 66;
             this.ch2ConnectLabel_calTab.Text = "No COM Port Connect";
             // 
@@ -3905,7 +3907,7 @@ namespace WindowsFormsApplication1
             // 
             this.textBox1.Location = new System.Drawing.Point(133, 190);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 33);
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 5;
             this.textBox1.Visible = false;
             // 
@@ -3915,7 +3917,7 @@ namespace WindowsFormsApplication1
             this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label40.Location = new System.Drawing.Point(12, 193);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(223, 26);
+            this.label40.Size = new System.Drawing.Size(117, 13);
             this.label40.TabIndex = 61;
             this.label40.Text = "Nominal Full Scale*";
             this.label40.Visible = false;
@@ -3926,7 +3928,7 @@ namespace WindowsFormsApplication1
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.Location = new System.Drawing.Point(246, 140);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(184, 26);
+            this.label27.Size = new System.Drawing.Size(97, 13);
             this.label27.TabIndex = 59;
             this.label27.Text = "% or Eng. Unit *";
             // 
@@ -3938,7 +3940,7 @@ namespace WindowsFormsApplication1
             "Eng. Unit"});
             this.limitEngPercent_comboBox.Location = new System.Drawing.Point(367, 137);
             this.limitEngPercent_comboBox.Name = "limitEngPercent_comboBox";
-            this.limitEngPercent_comboBox.Size = new System.Drawing.Size(100, 33);
+            this.limitEngPercent_comboBox.Size = new System.Drawing.Size(100, 22);
             this.limitEngPercent_comboBox.TabIndex = 9;
             this.limitEngPercent_comboBox.SelectedIndexChanged += new System.EventHandler(this.limitEngPercent_comboBox_SelectedIndexChanged);
             // 
@@ -3956,7 +3958,7 @@ namespace WindowsFormsApplication1
             // 
             this.ch2Unit_txt.Location = new System.Drawing.Point(367, 190);
             this.ch2Unit_txt.Name = "ch2Unit_txt";
-            this.ch2Unit_txt.Size = new System.Drawing.Size(100, 33);
+            this.ch2Unit_txt.Size = new System.Drawing.Size(100, 20);
             this.ch2Unit_txt.TabIndex = 11;
             this.ch2Unit_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch2Unit_txt_Keydown);
             // 
@@ -3966,7 +3968,7 @@ namespace WindowsFormsApplication1
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label24.Location = new System.Drawing.Point(248, 193);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(170, 26);
+            this.label24.Size = new System.Drawing.Size(91, 13);
             this.label24.TabIndex = 55;
             this.label24.Text = "Channel 2 Unit";
             // 
@@ -3974,7 +3976,7 @@ namespace WindowsFormsApplication1
             // 
             this.ch1Unit_txt.Location = new System.Drawing.Point(367, 164);
             this.ch1Unit_txt.Name = "ch1Unit_txt";
-            this.ch1Unit_txt.Size = new System.Drawing.Size(100, 33);
+            this.ch1Unit_txt.Size = new System.Drawing.Size(100, 20);
             this.ch1Unit_txt.TabIndex = 10;
             this.ch1Unit_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch1Unit_txt_Keydown);
             // 
@@ -3983,7 +3985,7 @@ namespace WindowsFormsApplication1
             this.label28.AutoSize = true;
             this.label28.Location = new System.Drawing.Point(12, 240);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(239, 25);
+            this.label28.Size = new System.Drawing.Size(121, 14);
             this.label28.TabIndex = 53;
             this.label28.Text = "(Drag to Change Order)";
             // 
@@ -3991,7 +3993,7 @@ namespace WindowsFormsApplication1
             // 
             this.sampleNum_txt.Location = new System.Drawing.Point(367, 59);
             this.sampleNum_txt.Name = "sampleNum_txt";
-            this.sampleNum_txt.Size = new System.Drawing.Size(100, 33);
+            this.sampleNum_txt.Size = new System.Drawing.Size(100, 20);
             this.sampleNum_txt.TabIndex = 6;
             this.sampleNum_txt.Text = "1";
             this.sampleNum_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sampleNum_txt_Keydown);
@@ -4003,7 +4005,7 @@ namespace WindowsFormsApplication1
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.Location = new System.Drawing.Point(246, 62);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(201, 26);
+            this.label30.Size = new System.Drawing.Size(109, 13);
             this.label30.TabIndex = 51;
             this.label30.Text = "# Samples/point *";
             // 
@@ -4013,7 +4015,7 @@ namespace WindowsFormsApplication1
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label29.Location = new System.Drawing.Point(248, 167);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(170, 26);
+            this.label29.Size = new System.Drawing.Size(91, 13);
             this.label29.TabIndex = 50;
             this.label29.Text = "Channel 1 Unit";
             // 
@@ -4023,7 +4025,7 @@ namespace WindowsFormsApplication1
             this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label31.Location = new System.Drawing.Point(12, 122);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(126, 26);
+            this.label31.Size = new System.Drawing.Size(69, 13);
             this.label31.TabIndex = 49;
             this.label31.Text = "# of Points";
             // 
@@ -4031,7 +4033,7 @@ namespace WindowsFormsApplication1
             // 
             this.maxPoint_txt.Location = new System.Drawing.Point(133, 119);
             this.maxPoint_txt.Name = "maxPoint_txt";
-            this.maxPoint_txt.Size = new System.Drawing.Size(100, 33);
+            this.maxPoint_txt.Size = new System.Drawing.Size(100, 20);
             this.maxPoint_txt.TabIndex = 3;
             this.maxPoint_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maxPoint_txt_Keydown);
             this.maxPoint_txt.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.maxPoint_txt_PreviewKeyDown);
@@ -4042,7 +4044,7 @@ namespace WindowsFormsApplication1
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label32.Location = new System.Drawing.Point(12, 225);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(114, 26);
+            this.label32.Size = new System.Drawing.Size(57, 13);
             this.label32.TabIndex = 47;
             this.label32.Text = "Test Order";
             // 
@@ -4052,7 +4054,7 @@ namespace WindowsFormsApplication1
             this.testID_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.testID_lbl.Location = new System.Drawing.Point(12, 62);
             this.testID_lbl.Name = "testID_lbl";
-            this.testID_lbl.Size = new System.Drawing.Size(105, 26);
+            this.testID_lbl.Size = new System.Drawing.Size(58, 13);
             this.testID_lbl.TabIndex = 46;
             this.testID_lbl.Text = "Test ID *";
             // 
@@ -4060,10 +4062,10 @@ namespace WindowsFormsApplication1
             // 
             this.testOrder_list.AllowDrop = true;
             this.testOrder_list.FormattingEnabled = true;
-            this.testOrder_list.ItemHeight = 25;
+            this.testOrder_list.ItemHeight = 14;
             this.testOrder_list.Location = new System.Drawing.Point(133, 225);
             this.testOrder_list.Name = "testOrder_list";
-            this.testOrder_list.Size = new System.Drawing.Size(100, 29);
+            this.testOrder_list.Size = new System.Drawing.Size(100, 18);
             this.testOrder_list.TabIndex = 45;
             // 
             // resetCurrTestSettings_btn
@@ -4080,7 +4082,7 @@ namespace WindowsFormsApplication1
             // 
             this.testID_txt.Location = new System.Drawing.Point(133, 59);
             this.testID_txt.Name = "testID_txt";
-            this.testID_txt.Size = new System.Drawing.Size(100, 33);
+            this.testID_txt.Size = new System.Drawing.Size(100, 20);
             this.testID_txt.TabIndex = 1;
             this.testID_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.testID_txt_Keydown);
             this.testID_txt.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.testID_txt_PreviewKeyDown);
@@ -4100,7 +4102,7 @@ namespace WindowsFormsApplication1
             this.AL_chkbox.AutoSize = true;
             this.AL_chkbox.Location = new System.Drawing.Point(350, 222);
             this.AL_chkbox.Name = "AL_chkbox";
-            this.AL_chkbox.Size = new System.Drawing.Size(113, 29);
+            this.AL_chkbox.Size = new System.Drawing.Size(62, 18);
             this.AL_chkbox.TabIndex = 13;
             this.AL_chkbox.Text = "As Left";
             this.AL_chkbox.UseVisualStyleBackColor = true;
@@ -4111,7 +4113,7 @@ namespace WindowsFormsApplication1
             this.AF_chkbox.AutoSize = true;
             this.AF_chkbox.Location = new System.Drawing.Point(248, 222);
             this.AF_chkbox.Name = "AF_chkbox";
-            this.AF_chkbox.Size = new System.Drawing.Size(136, 29);
+            this.AF_chkbox.Size = new System.Drawing.Size(73, 18);
             this.AF_chkbox.TabIndex = 12;
             this.AF_chkbox.Text = "As Found";
             this.AF_chkbox.UseVisualStyleBackColor = true;
@@ -4121,7 +4123,7 @@ namespace WindowsFormsApplication1
             // 
             this.highLimit_txt.Location = new System.Drawing.Point(367, 111);
             this.highLimit_txt.Name = "highLimit_txt";
-            this.highLimit_txt.Size = new System.Drawing.Size(100, 33);
+            this.highLimit_txt.Size = new System.Drawing.Size(100, 20);
             this.highLimit_txt.TabIndex = 8;
             this.highLimit_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.highLimit_txt_Keydown);
             this.highLimit_txt.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.highLimit_txt_PreviewKeyDown);
@@ -4130,7 +4132,7 @@ namespace WindowsFormsApplication1
             // 
             this.lowLimit_txt.Location = new System.Drawing.Point(367, 85);
             this.lowLimit_txt.Name = "lowLimit_txt";
-            this.lowLimit_txt.Size = new System.Drawing.Size(100, 33);
+            this.lowLimit_txt.Size = new System.Drawing.Size(100, 20);
             this.lowLimit_txt.TabIndex = 7;
             this.lowLimit_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lowLimit_txt_Keydown);
             this.lowLimit_txt.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.lowLimit_txt_PreviewKeyDown);
@@ -4139,7 +4141,7 @@ namespace WindowsFormsApplication1
             // 
             this.FS_txt.Location = new System.Drawing.Point(133, 164);
             this.FS_txt.Name = "FS_txt";
-            this.FS_txt.Size = new System.Drawing.Size(100, 33);
+            this.FS_txt.Size = new System.Drawing.Size(100, 20);
             this.FS_txt.TabIndex = 4;
             this.FS_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FS_txt_Keydown);
             this.FS_txt.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.FS_txt_PreviewKeyDown);
@@ -4149,7 +4151,7 @@ namespace WindowsFormsApplication1
             this.CCW_chkbox.AutoSize = true;
             this.CCW_chkbox.Location = new System.Drawing.Point(350, 252);
             this.CCW_chkbox.Name = "CCW_chkbox";
-            this.CCW_chkbox.Size = new System.Drawing.Size(223, 29);
+            this.CCW_chkbox.Size = new System.Drawing.Size(117, 18);
             this.CCW_chkbox.TabIndex = 15;
             this.CCW_chkbox.Text = "Counter Clockwise";
             this.CCW_chkbox.UseVisualStyleBackColor = true;
@@ -4161,7 +4163,7 @@ namespace WindowsFormsApplication1
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label35.Location = new System.Drawing.Point(248, 114);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(137, 26);
+            this.label35.Size = new System.Drawing.Size(72, 13);
             this.label35.TabIndex = 33;
             this.label35.Text = "High Limit *";
             // 
@@ -4170,7 +4172,7 @@ namespace WindowsFormsApplication1
             this.CW_chkbox.AutoSize = true;
             this.CW_chkbox.Location = new System.Drawing.Point(248, 252);
             this.CW_chkbox.Name = "CW_chkbox";
-            this.CW_chkbox.Size = new System.Drawing.Size(141, 29);
+            this.CW_chkbox.Size = new System.Drawing.Size(76, 18);
             this.CW_chkbox.TabIndex = 14;
             this.CW_chkbox.Text = "Clockwise";
             this.CW_chkbox.UseVisualStyleBackColor = true;
@@ -4182,7 +4184,7 @@ namespace WindowsFormsApplication1
             this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label36.Location = new System.Drawing.Point(246, 88);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(131, 26);
+            this.label36.Size = new System.Drawing.Size(69, 13);
             this.label36.TabIndex = 32;
             this.label36.Text = "Low Limit *";
             // 
@@ -4192,7 +4194,7 @@ namespace WindowsFormsApplication1
             this.FSTarget_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FSTarget_label.Location = new System.Drawing.Point(12, 167);
             this.FSTarget_label.Name = "FSTarget_label";
-            this.FSTarget_label.Size = new System.Drawing.Size(202, 26);
+            this.FSTarget_label.Size = new System.Drawing.Size(109, 13);
             this.FSTarget_label.TabIndex = 31;
             this.FSTarget_label.Text = "Target Full Scale*";
             // 
@@ -4204,7 +4206,7 @@ namespace WindowsFormsApplication1
             "Dual Channel Test"});
             this.testType_comboBox.Location = new System.Drawing.Point(133, 88);
             this.testType_comboBox.Name = "testType_comboBox";
-            this.testType_comboBox.Size = new System.Drawing.Size(100, 33);
+            this.testType_comboBox.Size = new System.Drawing.Size(100, 22);
             this.testType_comboBox.TabIndex = 2;
             this.testType_comboBox.SelectedIndexChanged += new System.EventHandler(this.testType_comboBox_SelectedIndexChanged);
             // 
@@ -4214,7 +4216,7 @@ namespace WindowsFormsApplication1
             this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.Location = new System.Drawing.Point(12, 91);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(132, 26);
+            this.label37.Size = new System.Drawing.Size(73, 13);
             this.label37.TabIndex = 12;
             this.label37.Text = "Test Type *";
             // 
@@ -4223,7 +4225,7 @@ namespace WindowsFormsApplication1
             this.testSetup_comboBox.FormattingEnabled = true;
             this.testSetup_comboBox.Location = new System.Drawing.Point(133, 27);
             this.testSetup_comboBox.Name = "testSetup_comboBox";
-            this.testSetup_comboBox.Size = new System.Drawing.Size(334, 33);
+            this.testSetup_comboBox.Size = new System.Drawing.Size(334, 22);
             this.testSetup_comboBox.TabIndex = 0;
             this.testSetup_comboBox.SelectedIndexChanged += new System.EventHandler(this.testSetup_comboBox_SelectedIndexChanged);
             // 
@@ -4233,7 +4235,7 @@ namespace WindowsFormsApplication1
             this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label38.Location = new System.Drawing.Point(12, 30);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(148, 26);
+            this.label38.Size = new System.Drawing.Size(81, 13);
             this.label38.TabIndex = 1;
             this.label38.Text = "Select Test *";
             // 
@@ -4256,7 +4258,7 @@ namespace WindowsFormsApplication1
             this.label41.AutoSize = true;
             this.label41.Location = new System.Drawing.Point(6, 20);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(204, 25);
+            this.label41.Size = new System.Drawing.Size(99, 14);
             this.label41.TabIndex = 65;
             this.label41.Text = "Available COM Port";
             // 
@@ -4264,10 +4266,10 @@ namespace WindowsFormsApplication1
             // 
             this.comList_calibration.FormattingEnabled = true;
             this.comList_calibration.HorizontalScrollbar = true;
-            this.comList_calibration.ItemHeight = 25;
+            this.comList_calibration.ItemHeight = 14;
             this.comList_calibration.Location = new System.Drawing.Point(9, 49);
             this.comList_calibration.Name = "comList_calibration";
-            this.comList_calibration.Size = new System.Drawing.Size(264, 29);
+            this.comList_calibration.Size = new System.Drawing.Size(264, 60);
             this.comList_calibration.TabIndex = 1;
             // 
             // ch2ConnectBtn_calTab
@@ -4325,7 +4327,7 @@ namespace WindowsFormsApplication1
             this.ch1Trough_chckbox.AutoSize = true;
             this.ch1Trough_chckbox.Location = new System.Drawing.Point(10, 252);
             this.ch1Trough_chckbox.Name = "ch1Trough_chckbox";
-            this.ch1Trough_chckbox.Size = new System.Drawing.Size(173, 29);
+            this.ch1Trough_chckbox.Size = new System.Drawing.Size(89, 18);
             this.ch1Trough_chckbox.TabIndex = 31;
             this.ch1Trough_chckbox.Text = "Trough Mode";
             this.ch1Trough_chckbox.UseVisualStyleBackColor = true;
@@ -4337,7 +4339,7 @@ namespace WindowsFormsApplication1
             this.label34.BackColor = System.Drawing.Color.White;
             this.label34.Location = new System.Drawing.Point(185, 2);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(193, 25);
+            this.label34.Size = new System.Drawing.Size(97, 14);
             this.label34.TabIndex = 31;
             this.label34.Text = "Channel 1 Reading";
             // 
@@ -4406,7 +4408,7 @@ namespace WindowsFormsApplication1
             this.ch1ReadingLabel_calTab.ForeColor = System.Drawing.Color.Blue;
             this.ch1ReadingLabel_calTab.Location = new System.Drawing.Point(6, 37);
             this.ch1ReadingLabel_calTab.Name = "ch1ReadingLabel_calTab";
-            this.ch1ReadingLabel_calTab.Size = new System.Drawing.Size(711, 180);
+            this.ch1ReadingLabel_calTab.Size = new System.Drawing.Size(362, 89);
             this.ch1ReadingLabel_calTab.TabIndex = 75;
             this.ch1ReadingLabel_calTab.Text = "0.0000";
             // 
@@ -4416,7 +4418,7 @@ namespace WindowsFormsApplication1
             this.ch1ConnectLabel_calTab.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ch1ConnectLabel_calTab.Location = new System.Drawing.Point(6, 16);
             this.ch1ConnectLabel_calTab.Name = "ch1ConnectLabel_calTab";
-            this.ch1ConnectLabel_calTab.Size = new System.Drawing.Size(288, 32);
+            this.ch1ConnectLabel_calTab.Size = new System.Drawing.Size(148, 16);
             this.ch1ConnectLabel_calTab.TabIndex = 65;
             this.ch1ConnectLabel_calTab.Text = "No COM Port Connect";
             // 
@@ -4456,7 +4458,7 @@ namespace WindowsFormsApplication1
             // 
             this.comment_txt.Location = new System.Drawing.Point(89, 273);
             this.comment_txt.Name = "comment_txt";
-            this.comment_txt.Size = new System.Drawing.Size(184, 33);
+            this.comment_txt.Size = new System.Drawing.Size(184, 20);
             this.comment_txt.TabIndex = 44;
             // 
             // comment_lbl
@@ -4464,7 +4466,7 @@ namespace WindowsFormsApplication1
             this.comment_lbl.AutoSize = true;
             this.comment_lbl.Location = new System.Drawing.Point(6, 280);
             this.comment_lbl.Name = "comment_lbl";
-            this.comment_lbl.Size = new System.Drawing.Size(106, 25);
+            this.comment_lbl.Size = new System.Drawing.Size(51, 14);
             this.comment_lbl.TabIndex = 43;
             this.comment_lbl.Text = "Comment";
             // 
@@ -4473,7 +4475,7 @@ namespace WindowsFormsApplication1
             this.toolID_comboBox.FormattingEnabled = true;
             this.toolID_comboBox.Location = new System.Drawing.Point(89, 12);
             this.toolID_comboBox.Name = "toolID_comboBox";
-            this.toolID_comboBox.Size = new System.Drawing.Size(184, 33);
+            this.toolID_comboBox.Size = new System.Drawing.Size(184, 22);
             this.toolID_comboBox.TabIndex = 1;
             this.toolID_comboBox.SelectedIndexChanged += new System.EventHandler(this.toolID_comboBox_SelectedIndexChanged_1);
             // 
@@ -4481,7 +4483,7 @@ namespace WindowsFormsApplication1
             // 
             this.toolOperatorID_txt.Location = new System.Drawing.Point(89, 247);
             this.toolOperatorID_txt.Name = "toolOperatorID_txt";
-            this.toolOperatorID_txt.Size = new System.Drawing.Size(184, 33);
+            this.toolOperatorID_txt.Size = new System.Drawing.Size(184, 20);
             this.toolOperatorID_txt.TabIndex = 41;
             // 
             // operatorID_lbl
@@ -4489,7 +4491,7 @@ namespace WindowsFormsApplication1
             this.operatorID_lbl.AutoSize = true;
             this.operatorID_lbl.Location = new System.Drawing.Point(6, 254);
             this.operatorID_lbl.Name = "operatorID_lbl";
-            this.operatorID_lbl.Size = new System.Drawing.Size(126, 25);
+            this.operatorID_lbl.Size = new System.Drawing.Size(62, 14);
             this.operatorID_lbl.TabIndex = 40;
             this.operatorID_lbl.Text = "Operator ID";
             // 
@@ -4497,7 +4499,7 @@ namespace WindowsFormsApplication1
             // 
             this.toolProcedure_txt.Location = new System.Drawing.Point(89, 221);
             this.toolProcedure_txt.Name = "toolProcedure_txt";
-            this.toolProcedure_txt.Size = new System.Drawing.Size(184, 33);
+            this.toolProcedure_txt.Size = new System.Drawing.Size(184, 20);
             this.toolProcedure_txt.TabIndex = 39;
             // 
             // procedure_lbl
@@ -4505,7 +4507,7 @@ namespace WindowsFormsApplication1
             this.procedure_lbl.AutoSize = true;
             this.procedure_lbl.Location = new System.Drawing.Point(6, 228);
             this.procedure_lbl.Name = "procedure_lbl";
-            this.procedure_lbl.Size = new System.Drawing.Size(112, 25);
+            this.procedure_lbl.Size = new System.Drawing.Size(57, 14);
             this.procedure_lbl.TabIndex = 38;
             this.procedure_lbl.Text = "Procedure";
             // 
@@ -4514,7 +4516,7 @@ namespace WindowsFormsApplication1
             this.label15.AutoSize = true;
             this.label15.Location = new System.Drawing.Point(228, 72);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(82, 25);
+            this.label15.Size = new System.Drawing.Size(42, 14);
             this.label15.TabIndex = 37;
             this.label15.Text = "months";
             // 
@@ -4522,7 +4524,7 @@ namespace WindowsFormsApplication1
             // 
             this.toolCertLot_txt.Location = new System.Drawing.Point(89, 195);
             this.toolCertLot_txt.Name = "toolCertLot_txt";
-            this.toolCertLot_txt.Size = new System.Drawing.Size(184, 33);
+            this.toolCertLot_txt.Size = new System.Drawing.Size(184, 20);
             this.toolCertLot_txt.TabIndex = 36;
             // 
             // certLot_lbl
@@ -4530,7 +4532,7 @@ namespace WindowsFormsApplication1
             this.certLot_lbl.AutoSize = true;
             this.certLot_lbl.Location = new System.Drawing.Point(6, 202);
             this.certLot_lbl.Name = "certLot_lbl";
-            this.certLot_lbl.Size = new System.Drawing.Size(90, 25);
+            this.certLot_lbl.Size = new System.Drawing.Size(45, 14);
             this.certLot_lbl.TabIndex = 35;
             this.certLot_lbl.Text = "Cert Lot";
             // 
@@ -4538,7 +4540,7 @@ namespace WindowsFormsApplication1
             // 
             this.toolManufacture_txt.Location = new System.Drawing.Point(89, 169);
             this.toolManufacture_txt.Name = "toolManufacture_txt";
-            this.toolManufacture_txt.Size = new System.Drawing.Size(184, 33);
+            this.toolManufacture_txt.Size = new System.Drawing.Size(184, 20);
             this.toolManufacture_txt.TabIndex = 34;
             // 
             // manu_lbl
@@ -4546,7 +4548,7 @@ namespace WindowsFormsApplication1
             this.manu_lbl.AutoSize = true;
             this.manu_lbl.Location = new System.Drawing.Point(6, 176);
             this.manu_lbl.Name = "manu_lbl";
-            this.manu_lbl.Size = new System.Drawing.Size(131, 25);
+            this.manu_lbl.Size = new System.Drawing.Size(68, 14);
             this.manu_lbl.TabIndex = 33;
             this.manu_lbl.Text = "Manufacture";
             // 
@@ -4554,7 +4556,7 @@ namespace WindowsFormsApplication1
             // 
             this.toolModel_txt.Location = new System.Drawing.Point(89, 143);
             this.toolModel_txt.Name = "toolModel_txt";
-            this.toolModel_txt.Size = new System.Drawing.Size(184, 33);
+            this.toolModel_txt.Size = new System.Drawing.Size(184, 20);
             this.toolModel_txt.TabIndex = 32;
             // 
             // model_lbl
@@ -4562,7 +4564,7 @@ namespace WindowsFormsApplication1
             this.model_lbl.AutoSize = true;
             this.model_lbl.Location = new System.Drawing.Point(6, 150);
             this.model_lbl.Name = "model_lbl";
-            this.model_lbl.Size = new System.Drawing.Size(72, 25);
+            this.model_lbl.Size = new System.Drawing.Size(35, 14);
             this.model_lbl.TabIndex = 31;
             this.model_lbl.Text = "Model";
             // 
@@ -4570,7 +4572,7 @@ namespace WindowsFormsApplication1
             // 
             this.humid_txt.Location = new System.Drawing.Point(89, 117);
             this.humid_txt.Name = "humid_txt";
-            this.humid_txt.Size = new System.Drawing.Size(184, 33);
+            this.humid_txt.Size = new System.Drawing.Size(184, 20);
             this.humid_txt.TabIndex = 30;
             // 
             // humid_lbl
@@ -4578,7 +4580,7 @@ namespace WindowsFormsApplication1
             this.humid_lbl.AutoSize = true;
             this.humid_lbl.Location = new System.Drawing.Point(6, 124);
             this.humid_lbl.Name = "humid_lbl";
-            this.humid_lbl.Size = new System.Drawing.Size(96, 25);
+            this.humid_lbl.Size = new System.Drawing.Size(47, 14);
             this.humid_lbl.TabIndex = 29;
             this.humid_lbl.Text = "Humidity";
             // 
@@ -4586,7 +4588,7 @@ namespace WindowsFormsApplication1
             // 
             this.temperature_txt.Location = new System.Drawing.Point(89, 91);
             this.temperature_txt.Name = "temperature_txt";
-            this.temperature_txt.Size = new System.Drawing.Size(184, 33);
+            this.temperature_txt.Size = new System.Drawing.Size(184, 20);
             this.temperature_txt.TabIndex = 28;
             // 
             // temperature_lbl
@@ -4594,7 +4596,7 @@ namespace WindowsFormsApplication1
             this.temperature_lbl.AutoSize = true;
             this.temperature_lbl.Location = new System.Drawing.Point(6, 98);
             this.temperature_lbl.Name = "temperature_lbl";
-            this.temperature_lbl.Size = new System.Drawing.Size(133, 25);
+            this.temperature_lbl.Size = new System.Drawing.Size(67, 14);
             this.temperature_lbl.TabIndex = 27;
             this.temperature_lbl.Text = "Temperature";
             // 
@@ -4602,7 +4604,7 @@ namespace WindowsFormsApplication1
             // 
             this.recall_txt.Location = new System.Drawing.Point(89, 65);
             this.recall_txt.Name = "recall_txt";
-            this.recall_txt.Size = new System.Drawing.Size(137, 33);
+            this.recall_txt.Size = new System.Drawing.Size(137, 20);
             this.recall_txt.TabIndex = 26;
             // 
             // recall_lbl
@@ -4610,7 +4612,7 @@ namespace WindowsFormsApplication1
             this.recall_lbl.AutoSize = true;
             this.recall_lbl.Location = new System.Drawing.Point(6, 72);
             this.recall_lbl.Name = "recall_lbl";
-            this.recall_lbl.Size = new System.Drawing.Size(146, 25);
+            this.recall_lbl.Size = new System.Drawing.Size(74, 14);
             this.recall_lbl.TabIndex = 25;
             this.recall_lbl.Text = "Recall Interval";
             // 
@@ -4618,7 +4620,7 @@ namespace WindowsFormsApplication1
             // 
             this.toolSN_txt.Location = new System.Drawing.Point(89, 39);
             this.toolSN_txt.Name = "toolSN_txt";
-            this.toolSN_txt.Size = new System.Drawing.Size(184, 33);
+            this.toolSN_txt.Size = new System.Drawing.Size(184, 20);
             this.toolSN_txt.TabIndex = 24;
             // 
             // toolSN_lbl
@@ -4627,7 +4629,7 @@ namespace WindowsFormsApplication1
             this.toolSN_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolSN_lbl.Location = new System.Drawing.Point(6, 46);
             this.toolSN_lbl.Name = "toolSN_lbl";
-            this.toolSN_lbl.Size = new System.Drawing.Size(69, 26);
+            this.toolSN_lbl.Size = new System.Drawing.Size(39, 13);
             this.toolSN_lbl.TabIndex = 23;
             this.toolSN_lbl.Text = "S/N *";
             // 
@@ -4637,7 +4639,7 @@ namespace WindowsFormsApplication1
             this.toolID_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolID_lbl.Location = new System.Drawing.Point(6, 20);
             this.toolID_lbl.Name = "toolID_lbl";
-            this.toolID_lbl.Size = new System.Drawing.Size(144, 26);
+            this.toolID_lbl.Size = new System.Drawing.Size(77, 13);
             this.toolID_lbl.TabIndex = 21;
             this.toolID_lbl.Text = "Tool Name *";
             // 
@@ -4670,7 +4672,7 @@ namespace WindowsFormsApplication1
             this.label13.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(157, 34);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(358, 72);
+            this.label13.Size = new System.Drawing.Size(172, 36);
             this.label13.TabIndex = 0;
             this.label13.Text = "Next Target";
             // 
