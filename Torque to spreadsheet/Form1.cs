@@ -77,6 +77,8 @@ namespace WindowsFormsApplication1
         private const string defaultBigReadingFontSize_valueName = "bigReadingFontSize";
         private const string defaultAutoUpdate_valueName = "Yes";
 
+        private const int noTriggerGridColCount = 5, TriggerGridColCount = 6;
+
 
         private string saveLocation = "";
         private bool isMasterSave = false;
@@ -214,11 +216,7 @@ namespace WindowsFormsApplication1
             }
             startTest_btn.Location = new Point(909, 150);
             menuStrip1.Focus();
-            Runbgw();
-        }
-        private void update(float nu)
-        {
-
+            //Runbgw();
         }
 
         //update the Pass Fail indication on Big Reading Tab
@@ -902,8 +900,10 @@ namespace WindowsFormsApplication1
         //if background worker hasnt been opened then open and run it
         private void Runbgw()
         {
+            
             if (backgroundWorker1.IsBusy == false)
                 backgroundWorker1.RunWorkerAsync(); //run background worker
+                
         }
 
         //if passed in ComtoDisconnect contain -Channel1 or -Channel2(depends on channelNumber passed in), then remove that part
@@ -992,6 +992,7 @@ namespace WindowsFormsApplication1
                             //update on display to show Com, SN and FS of tester that are connecting
                             showComConnect_FirstChan(displaySNandFS);
                             FSList[list.SelectedIndex] += tail_Channel1;
+                            serialPort1.DataReceived += new SerialDataReceivedEventHandler(port_DataReceived);
                         }
                         else
                             MessageBox.Show(
@@ -1362,8 +1363,8 @@ namespace WindowsFormsApplication1
             }
             catch (System.Exception excep) { }
 
-            if (serialPort1.IsOpen)
-                Runbgw(); //run the backgroundworker again if the serial port hasn't been closed
+            //if (serialPort1.IsOpen)
+            //    Runbgw(); //run the backgroundworker again if the serial port hasn't been closed
 
         }
 
@@ -1521,16 +1522,16 @@ namespace WindowsFormsApplication1
         float LSL, USL;
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
+            
             if ((serialData.Length > 0) && (enableLiveReadingToolStripMenuItem.Checked == false))// && (isRefresh == false))
             {
                 //if (isChan1Enter == true)
                 captureReadingsUsedByBGW(serialData);
                 serialData = "";
-                Runbgw();
+                
             }
-            else { Runbgw(); }
-
+            //Todo:this cause CPU use 100%, see if manual capture still work without it  when live reading is off
+            //Runbgw();
         }
 
         //Return List<float> that contains all datas from passed in Datatable, given colName
@@ -1702,7 +1703,7 @@ namespace WindowsFormsApplication1
         //Trigger when timer tick
         private void timer2_Tick(object sender, EventArgs e)
         {
-
+            
             if (enableLiveReadingToolStripMenuItem.Checked)
             {
                 updateChannelsReadings();
@@ -2177,7 +2178,7 @@ namespace WindowsFormsApplication1
             {
                 serialPort1.Open();
                 toolStripStatusLabel2.Text = " Status: Opened";
-                Runbgw(); //run background worker
+                //Runbgw(); //run background worker
             }
             catch
             { toolStripStatusLabel2.Text = " Status: Error Opening Port!"; }
@@ -2208,28 +2209,11 @@ namespace WindowsFormsApplication1
         }
 
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {// Event for receiving data
-            received_message = "";
-            this.Invoke(new EventHandler(DoUpdate));
-
-            //close port after received message from COM
-            if (port.IsOpen == true)
-                port.Close();
-
+        {
+            if (enableLiveReadingToolStripMenuItem.Checked == false)
+                Runbgw();
         }
-        private void DoUpdate(object s, EventArgs e)
-        {  // Read the buffer to text box.
-            //while loop to make sure received_message reads more than certain length (serialLen)
-            while ((received_message.Length < serialLen) & (port.IsOpen == true))
-            {
-                received_message += port.ReadExisting();
-            }
-
-            Console.WriteLine(received_message);
-            //           receive_text.Text = received_message;
-            //           tester_list.Items.Add(received_message);
-
-        }
+        
         //Initialize the port, prameter: portnum
         private void port_init(string portnum)
         {
@@ -5563,10 +5547,10 @@ namespace WindowsFormsApplication1
             CW_chkbox.Checked = true;
             CCW_chkbox.Checked = true;
 
-            initTestGridView(ref AFCW_grid);
-            initTestGridView(ref AFCCW_grid);
-            initTestGridView(ref ALCW_grid);
-            initTestGridView(ref ALCCW_grid);
+            initTestGridView(ref AFCW_grid,noTriggerGridColCount);
+            initTestGridView(ref AFCCW_grid, noTriggerGridColCount);
+            initTestGridView(ref ALCW_grid, noTriggerGridColCount);
+            initTestGridView(ref ALCCW_grid, noTriggerGridColCount);
 
         }
 
@@ -7101,7 +7085,7 @@ namespace WindowsFormsApplication1
             highGridCol = 5;
 
         //init TestGridview, set what it looks like and clear all datas
-        private void initTestGridView(ref DataGridView thisGrid)
+        private void initTestGridView(ref DataGridView thisGrid, int colCount)
         {
             if (thisGrid.ColumnCount == 0)
             {
@@ -7111,17 +7095,17 @@ namespace WindowsFormsApplication1
                 thisGrid.Columns.Add("low", "Low");
                 thisGrid.Columns.Add("target", "Target");
                 thisGrid.Columns.Add("high", "High");
+                if (colCount>5)
+                thisGrid.Columns.Add("trigger","Trigger Value");
             }
             PreventGridSort(ref thisGrid);
             thisGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             thisGrid.Columns[0].Width = 25;
-            int colWidth = (thisGrid.Width - thisGrid.Columns[0].Width - 37) / 5;
-            thisGrid.Columns[1].Width = colWidth;
-            thisGrid.Columns[2].Width = colWidth;
-            thisGrid.Columns[3].Width = colWidth;
-            thisGrid.Columns[4].Width = colWidth;
-            thisGrid.Columns[5].Width = colWidth;
-
+            int colWidth = (thisGrid.Width - thisGrid.Columns[0].Width - 37) / colCount;
+            for (int col = 1; col <= colCount; col++)
+            {
+                thisGrid.Columns[col].Width = colWidth;
+            }
             //Clear all Rows
             thisGrid.Rows.Clear();
         }
@@ -7188,7 +7172,8 @@ namespace WindowsFormsApplication1
         {
             //initiate returnGrid
             DataGridView returnGrid = new DataGridView();
-            initTestGridView(ref returnGrid);
+
+            initTestGridView(ref returnGrid,oriGrid.ColumnCount);
 
             int copyOrFlip = Math.Abs(oriGridIndex - returnGridIndex) % 2;//0=copy, 1=flip
             if (copyOrFlip == 0) //Copy exactly
@@ -8411,12 +8396,21 @@ namespace WindowsFormsApplication1
                 writeReadingsToTest(reading_arr, currTestSetup.testOrder);
             }
         }
-        private void stream_btn_Click(object sender, EventArgs e)
+        //Todo: Decide when to flush masterStream, after selecting new test?
+        MasterStreamData masterStream = new MasterStreamData();
+        //Save streamTable to the specified quadrant stream
+        private void saveStreamDataForQuadrant(DataTable streamTable)
         {
-            timer2.Stop();
-            List<double> Targets = new List<double> { };
             char currGridNum = lookForActiveTestGrid();
-            switch (currGridNum)
+            masterStream.writeToStreamTable(currGridNum,streamTable);
+        }
+
+        //Open Stream Form for specific Quadrant
+        private void startQuadrantStream(char quadrant)
+        {
+            //put Quadrant's targets into Targets
+            List<double> Targets = new List<double> { };
+            switch (quadrant)
             {
                 case '1':
                     Targets = getCurrGridTargets(AFCW_grid);
@@ -8431,28 +8425,46 @@ namespace WindowsFormsApplication1
                     Targets = getCurrGridTargets(ALCCW_grid);
                     break;
             }
+
+            timer2.Stop();
+            //Define Single or Dual Channel Stream
             int channelCount = 1;
             if (currTestSetup.testType == "1")
                 channelCount = 1;
             else if (currTestSetup.testType == "2")
                 channelCount = 2;
 
-
+            //Define target channel
             int target_Channel = 1;
             if ((ch1Target_select.Checked) || (channelCount == 1))
                 target_Channel = 1;
             else if (ch2Target_select.Checked)
                 target_Channel = 2;
+
+            //Start streaming
             StreamingForm streamingForm = new StreamingForm(serialPort1, Targets, target_Channel, channelCount);
             streamingForm.ShowDialog();
 
             //Write to current Test
             if (streamingForm.isSave == true)
+            {
                 writeStreamToCurrentCalTest(streamingForm.returnResultTable);
+                saveStreamDataForQuadrant(streamingForm.streamTable);
+            }
 
             streamingForm.Dispose();
-
             timer2.Start();
+        }
+        private void stream_btn_Click(object sender, EventArgs e)
+        {
+            char currGridNum = lookForActiveTestGrid();
+            startQuadrantStream(currGridNum);
+        }
+
+        private void openOldStream_btn_Click(object sender, EventArgs e)
+        {
+            char quadrantToViewStream = '1';//For now, hard code to use AFCW
+            startQuadrantStream(quadrantToViewStream);
         }
 
         private void ExportChart_btn_Click(object sender, EventArgs e)

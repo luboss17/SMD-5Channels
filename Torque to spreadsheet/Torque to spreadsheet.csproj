@@ -186,6 +186,7 @@
     </Compile>
     <Compile Include="HashTableTestSetup.cs" />
     <Compile Include="LowHighTarget.cs" />
+    <Compile Include="MasterStreamData.cs" />
     <Compile Include="newTestConfirm_form.cs">
       <SubType>Form</SubType>
     </Compile>

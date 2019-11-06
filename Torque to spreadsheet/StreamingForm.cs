@@ -152,7 +152,7 @@ namespace WindowsFormsApplication1
         int baud250k = 250000;
         SerialPort streamingPort1 = new SerialPort(),streamingPort2=new SerialPort();
         SerialPort streamPort = new SerialPort();
-        DataTable streamTable = new DataTable();
+        public DataTable streamTable = new DataTable();
 
         private void autoStartStream(int channelCount)
         {
@@ -608,6 +608,7 @@ namespace WindowsFormsApplication1
         private void saveResult_btn_Click(object sender, EventArgs e)
         {
             isSave = true;
+            closeForm(isSave);
         }
 
         private void bindChartXYwithTableHeader(ref DataTable tableToBind, int xTableIndex, int yTableIndex, ref Chart chart, string serieName)
@@ -625,8 +626,7 @@ namespace WindowsFormsApplication1
             }
             autoStartStream(channelCount);
         }
-
-        private void close_btn_Click(object sender, EventArgs e)
+        private void closeForm(bool isSave)
         {
             if ((isSave == false) && (masterStream.Count > 0))
             {
@@ -638,6 +638,10 @@ namespace WindowsFormsApplication1
             }
             else
                 this.Close();
+        }
+        private void close_btn_Click(object sender, EventArgs e)
+        {
+            closeForm(isSave);
         }
 
         string chartAreaName = "StreamChartArea";
