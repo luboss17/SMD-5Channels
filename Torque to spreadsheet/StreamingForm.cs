@@ -22,7 +22,30 @@ namespace WindowsFormsApplication1
         public DataTable returnResultTable = new DataTable();
         Chart streamChart = new Chart();
         public bool isSave = false,endOfStream=false;
-        public StreamingForm(SerialPort port, List<double> targets, int channelToCompare,int channelCount)
+
+        //start new Stream
+        public StreamingForm(bool isOpenOldStream, SerialPort port, List<double> targets, int channelToCompare, int channelCount)
+        {
+            StreamingFormInit(port, targets, channelToCompare, channelCount);
+            if (isOpenOldStream==false)
+                autoStartStream(channelCount);//auto start streaming
+        }
+
+        //open old stream
+        public StreamingForm(bool isOpenOldStream, SerialPort port, List<double> targets, int channelToCompare, int channelCount,DataTable oldStreamTable) 
+            : this(isOpenOldStream,port, targets, channelToCompare, channelCount)
+        {
+            if ((isOpenOldStream==true)&&(oldStreamTable!=null)&&(oldStreamTable.Rows.Count>0))
+            {
+                foreach (DataRow row in oldStreamTable.Rows)
+                {
+                    this.streamTable.ImportRow(row);
+                }
+                bindStreamGrid();
+                streamChart.DataBind();
+            }
+        }
+        private void StreamingFormInit(SerialPort port, List<double> targets, int channelToCompare, int channelCount)
         {
             InitializeComponent();
             streamingPort1 = port;
@@ -36,10 +59,8 @@ namespace WindowsFormsApplication1
 
             bindResultGrid();
             InitTimer();
-            isStream = false;
-            autoStartStream(channelCount);//auto start streaming
+            
         }
-
         private void StreamingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             isStream = false;
@@ -308,8 +329,8 @@ namespace WindowsFormsApplication1
         }
         private void bindStreamGrid()
         {
-            var sourceList = new BindingList<READINGS_ANGLES>(streamReadingsList);
-            var source = new BindingSource(sourceList, null);
+            //var sourceList = new BindingList<READINGS_ANGLES>(streamReadingsList);
+            //var source = new BindingSource(sourceList, null);
 
             streamGrid.DataSource = streamTable;
 
@@ -392,6 +413,8 @@ namespace WindowsFormsApplication1
         {
             byte stopStreamByte = 0x20;
             sendCommandNoResponse(stopStreamByte, thisPort);
+            isStream = false;
+
         }
 
         private const string ch1StreamSerie = "Channel1", ch2StreamSerie = "Channel2", angle1StreamSerie = "Angle1", angle2StreamSerie = "Angle2";

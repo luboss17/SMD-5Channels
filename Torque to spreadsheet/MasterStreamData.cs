@@ -19,7 +19,7 @@ namespace WindowsFormsApplication1
 
         private void initStreamTable(ref DataTable streamTable)
         {
-            streamTable = new DataTable();
+            streamTable = new DataTable("StreamTable");
 
             DataColumn dtColumn = new DataColumn();
             dtColumn.DataType = typeof(Int32);
@@ -76,6 +76,27 @@ namespace WindowsFormsApplication1
                     break;
 
             }
+        }
+        public DataTable getQuadrantStreamTable(char quadrantIndex)
+        {
+            DataTable returnTable = new DataTable();
+            switch (quadrantIndex)
+            {
+                case '1':
+                    returnTable= AFCW_streamTable.Copy();
+                    break;
+                case '2':
+                    returnTable = AFCCW_streamTable.Copy();
+                    break;
+                case '3':
+                    returnTable = ALCW_streamTable.Copy();
+                    break;
+                case '4':
+                    returnTable = ALCCW_streamTable.Copy();
+                    break;
+
+            }
+            return returnTable;
         }
     }
 }

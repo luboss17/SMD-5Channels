@@ -929,7 +929,7 @@ namespace WindowsFormsApplication1
             this.dualChannelTab.Controls.Add(this.firstChannelGrid);
             this.dualChannelTab.Location = new System.Drawing.Point(8, 38);
             this.dualChannelTab.Name = "dualChannelTab";
-            this.dualChannelTab.Size = new System.Drawing.Size(1768, 992);
+            this.dualChannelTab.Size = new System.Drawing.Size(1768, 1060);
             this.dualChannelTab.TabIndex = 5;
             this.dualChannelTab.Text = "Dual Channel";
             this.dualChannelTab.UseVisualStyleBackColor = true;
@@ -1713,7 +1713,7 @@ namespace WindowsFormsApplication1
             this.big_graph.Controls.Add(this.chart1);
             this.big_graph.Location = new System.Drawing.Point(8, 38);
             this.big_graph.Name = "big_graph";
-            this.big_graph.Size = new System.Drawing.Size(1768, 992);
+            this.big_graph.Size = new System.Drawing.Size(1768, 1060);
             this.big_graph.TabIndex = 3;
             this.big_graph.Text = "Big Reading with Graph";
             this.big_graph.UseVisualStyleBackColor = true;
@@ -1728,7 +1728,7 @@ namespace WindowsFormsApplication1
             this.Label_Data3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.Label_Data3.Location = new System.Drawing.Point(0, 0);
             this.Label_Data3.Name = "Label_Data3";
-            this.Label_Data3.Size = new System.Drawing.Size(1768, 539);
+            this.Label_Data3.Size = new System.Drawing.Size(1768, 607);
             this.Label_Data3.TabIndex = 26;
             this.Label_Data3.Text = "0.0000";
             this.Label_Data3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1740,7 +1740,7 @@ namespace WindowsFormsApplication1
             this.chart1.Dock = System.Windows.Forms.DockStyle.Bottom;
             legend2.Name = "Legend1";
             this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(0, 539);
+            this.chart1.Location = new System.Drawing.Point(0, 607);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(1768, 453);
             this.chart1.TabIndex = 25;
@@ -1763,7 +1763,7 @@ namespace WindowsFormsApplication1
             this.read_graph_col.Controls.Add(this.groupBox3);
             this.read_graph_col.Location = new System.Drawing.Point(8, 38);
             this.read_graph_col.Name = "read_graph_col";
-            this.read_graph_col.Size = new System.Drawing.Size(1768, 992);
+            this.read_graph_col.Size = new System.Drawing.Size(1768, 1060);
             this.read_graph_col.TabIndex = 4;
             this.read_graph_col.Text = "Single Channel";
             this.read_graph_col.UseVisualStyleBackColor = true;
@@ -2640,7 +2640,7 @@ namespace WindowsFormsApplication1
             this.simple_col.Location = new System.Drawing.Point(8, 38);
             this.simple_col.Name = "simple_col";
             this.simple_col.Padding = new System.Windows.Forms.Padding(3);
-            this.simple_col.Size = new System.Drawing.Size(1768, 992);
+            this.simple_col.Size = new System.Drawing.Size(1768, 1060);
             this.simple_col.TabIndex = 1;
             this.simple_col.Text = "Simple Reading with Option to Save";
             this.simple_col.UseVisualStyleBackColor = true;
@@ -2838,7 +2838,7 @@ namespace WindowsFormsApplication1
             this.simple_reading.Location = new System.Drawing.Point(8, 38);
             this.simple_reading.Name = "simple_reading";
             this.simple_reading.Padding = new System.Windows.Forms.Padding(3);
-            this.simple_reading.Size = new System.Drawing.Size(1768, 1026);
+            this.simple_reading.Size = new System.Drawing.Size(1768, 1094);
             this.simple_reading.TabIndex = 0;
             this.simple_reading.Text = "Torque To Spreadsheet";
             this.simple_reading.UseVisualStyleBackColor = true;
@@ -3051,7 +3051,7 @@ namespace WindowsFormsApplication1
             this.TabPages.Multiline = true;
             this.TabPages.Name = "TabPages";
             this.TabPages.SelectedIndex = 0;
-            this.TabPages.Size = new System.Drawing.Size(1784, 1038);
+            this.TabPages.Size = new System.Drawing.Size(1784, 1140);
             this.TabPages.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabPages.TabIndex = 27;
             // 
@@ -3064,7 +3064,7 @@ namespace WindowsFormsApplication1
             this.big_reading.Controls.Add(this.reading_bigReading_lbl);
             this.big_reading.Location = new System.Drawing.Point(8, 38);
             this.big_reading.Name = "big_reading";
-            this.big_reading.Size = new System.Drawing.Size(1768, 992);
+            this.big_reading.Size = new System.Drawing.Size(1768, 1060);
             this.big_reading.TabIndex = 2;
             this.big_reading.Text = "Big Reading";
             // 
@@ -3087,7 +3087,7 @@ namespace WindowsFormsApplication1
             this.panel3.Controls.Add(this.refreshCOMList_btn_bigReading);
             this.panel3.Controls.Add(this.comList_bigReading);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 557);
+            this.panel3.Location = new System.Drawing.Point(0, 625);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1768, 435);
             this.panel3.TabIndex = 26;
@@ -3272,7 +3272,7 @@ namespace WindowsFormsApplication1
             this.reading_bigReading_lbl.Location = new System.Drawing.Point(0, 0);
             this.reading_bigReading_lbl.Name = "reading_bigReading_lbl";
             this.reading_bigReading_lbl.Padding = new System.Windows.Forms.Padding(0, 0, 100, 430);
-            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1768, 992);
+            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1768, 1060);
             this.reading_bigReading_lbl.TabIndex = 27;
             this.reading_bigReading_lbl.Text = "0.0000";
             this.reading_bigReading_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3293,7 +3293,7 @@ namespace WindowsFormsApplication1
             this.calibrationTab.Controls.Add(this.target_groupBox);
             this.calibrationTab.Location = new System.Drawing.Point(8, 38);
             this.calibrationTab.Name = "calibrationTab";
-            this.calibrationTab.Size = new System.Drawing.Size(1768, 992);
+            this.calibrationTab.Size = new System.Drawing.Size(1768, 1094);
             this.calibrationTab.TabIndex = 6;
             this.calibrationTab.Text = "Cal Cert";
             this.calibrationTab.UseVisualStyleBackColor = true;
@@ -4680,7 +4680,7 @@ namespace WindowsFormsApplication1
             this.AutoScroll = true;
             this.AutoScrollMinSize = new System.Drawing.Size(1473, 945);
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1731, 1112);
+            this.ClientSize = new System.Drawing.Size(1731, 1214);
             this.Controls.Add(this.TabPages);
             this.Controls.Add(this.testerType);
             this.Controls.Add(this.groupBox1);

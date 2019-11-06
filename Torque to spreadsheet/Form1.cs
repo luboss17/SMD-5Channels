@@ -6744,6 +6744,7 @@ namespace WindowsFormsApplication1
                 switch (chrTestOrder)
                 {
                     case '1':
+                        wsheet=
                         wsheet = writeSingleGridToExcel(ref AFCW_grid, AFCW, wsheet, startCol, startRow);
                         break;
                     case '2':
@@ -8404,13 +8405,12 @@ namespace WindowsFormsApplication1
             char currGridNum = lookForActiveTestGrid();
             masterStream.writeToStreamTable(currGridNum,streamTable);
         }
-
         //Open Stream Form for specific Quadrant
-        private void startQuadrantStream(char quadrant)
+        private void startQuadrantStream(char quadrantIndex,bool isOpenOldStream)
         {
             //put Quadrant's targets into Targets
             List<double> Targets = new List<double> { };
-            switch (quadrant)
+            switch (quadrantIndex)
             {
                 case '1':
                     Targets = getCurrGridTargets(AFCW_grid);
@@ -8440,9 +8440,14 @@ namespace WindowsFormsApplication1
                 target_Channel = 1;
             else if (ch2Target_select.Checked)
                 target_Channel = 2;
-
+            StreamingForm streamingForm;
             //Start streaming
-            StreamingForm streamingForm = new StreamingForm(serialPort1, Targets, target_Channel, channelCount);
+            if (isOpenOldStream == false)
+            {
+                streamingForm = new StreamingForm(isOpenOldStream, serialPort1, Targets, target_Channel, channelCount);
+            }
+            else
+                streamingForm = new StreamingForm(isOpenOldStream, serialPort1, Targets, target_Channel, channelCount,masterStream.getQuadrantStreamTable(quadrantIndex));
             streamingForm.ShowDialog();
 
             //Write to current Test
@@ -8457,14 +8462,16 @@ namespace WindowsFormsApplication1
         }
         private void stream_btn_Click(object sender, EventArgs e)
         {
+            bool isOpenOldStream = false;
             char currGridNum = lookForActiveTestGrid();
-            startQuadrantStream(currGridNum);
+            startQuadrantStream(currGridNum,isOpenOldStream);
         }
 
         private void openOldStream_btn_Click(object sender, EventArgs e)
         {
+            bool isOpenOldStream = true;
             char quadrantToViewStream = '1';//For now, hard code to use AFCW
-            startQuadrantStream(quadrantToViewStream);
+            startQuadrantStream(quadrantToViewStream,isOpenOldStream);
         }
 
         private void ExportChart_btn_Click(object sender, EventArgs e)
