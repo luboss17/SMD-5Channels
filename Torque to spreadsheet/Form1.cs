@@ -6817,12 +6817,43 @@ namespace WindowsFormsApplication1
             //Init Excel to write
             Excel.Application xlApp;
             Excel.Workbook xlWorkBook;
-            Excel.Worksheet xlWorkSheet;
+            Excel.Worksheet xlWorkSheet=new Excel.Worksheet();
             object misValue = System.Reflection.Missing.Value;
 
             xlApp = new Excel.Application();
             xlApp.DisplayAlerts = false;
             xlWorkBook = xlApp.Workbooks.Add(misValue);
+            int runningWsheetCount = 0;
+            int toolExcelRow = nextAvaiExcelRow;//since we are writing tool info first for each wsheet, save this row and reassign it to nextAvaiExcelRow for next wsheet quadrant
+            while (runningWsheetCount<testOrder.Length)
+            {
+                //runningWsheetCount = xlWorkBook.Worksheets.Count;
+                xlWorkSheet = new Excel.Worksheet();
+                if (runningWsheetCount < 1)
+                    xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                else
+                    xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.Add();
+
+                //Write Tool Info
+                xlWorkSheet = writeAllToolsInfoExcelWorkbook(xlWorkSheet, toolExcelRow);
+                
+                //Write Test Grid
+                int startTestGridRow = nextAvaiExcelRow;
+                xlWorkSheet = writeAllTestGridsToExcelWsheet(xlWorkSheet, testOrder[runningWsheetCount].ToString());
+                
+                //Write Stream
+                //Todo: Implement
+
+                //Draw Graph
+                //Todo: for now test to see if work w graph for each quadrant first
+                string gridName = getGridNameToGraph(testOrder[runningWsheetCount]);
+                if ((gridName != "") && (isGraph == true))
+                    xlWorkSheet = drawGraphToExcel(xlWorkSheet, startTestGridRow + 1, nextAvaiExcelRow - 1, 0, gridName);
+
+                runningWsheetCount++;
+            }
+
+            /*
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
             //Write Tools headers and Tools value
@@ -6835,7 +6866,7 @@ namespace WindowsFormsApplication1
             //Draw graph for first quadrant if required
             string gridName = getGridNameToGraph(testOrder[0]);
             if ((gridName != "") && (isGraph == true))
-                xlWorkSheet = drawGraphToExcel(xlWorkSheet, startTestGridRow + 1, nextAvaiExcelRow - 1, 0, gridName);
+                xlWorkSheet = drawGraphToExcel(xlWorkSheet, startTestGridRow + 1, nextAvaiExcelRow - 1, 0, gridName);*/
 
             //Save and release Excel object
             xlWorkBook.SaveAs(excelPath, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
@@ -8400,10 +8431,9 @@ namespace WindowsFormsApplication1
         //Todo: Decide when to flush masterStream, after selecting new test?
         MasterStreamData masterStream = new MasterStreamData();
         //Save streamTable to the specified quadrant stream
-        private void saveStreamDataForQuadrant(DataTable streamTable)
+        private void saveStreamDataForQuadrant(DataTable streamTable,char quadrantIndex)
         {
-            char currGridNum = lookForActiveTestGrid();
-            masterStream.writeToStreamTable(currGridNum,streamTable);
+            masterStream.writeToStreamTable(quadrantIndex,streamTable);
         }
         //Open Stream Form for specific Quadrant
         private void startQuadrantStream(char quadrantIndex,bool isOpenOldStream)
@@ -8454,7 +8484,7 @@ namespace WindowsFormsApplication1
             if (streamingForm.isSave == true)
             {
                 writeStreamToCurrentCalTest(streamingForm.returnResultTable);
-                saveStreamDataForQuadrant(streamingForm.streamTable);
+                saveStreamDataForQuadrant(streamingForm.streamTable, quadrantIndex);
             }
 
             streamingForm.Dispose();
