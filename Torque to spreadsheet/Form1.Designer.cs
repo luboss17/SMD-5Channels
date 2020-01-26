@@ -33,12 +33,12 @@ namespace WindowsFormsApplication1
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -308,12 +308,19 @@ namespace WindowsFormsApplication1
             this.continue_pauseTest_btn = new System.Windows.Forms.Button();
             this.captureBtn_calTab = new System.Windows.Forms.Button();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
+<<<<<<< HEAD
+=======
+            this.openOldStream_btn = new System.Windows.Forms.Button();
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.ALCCWChart_radio = new System.Windows.Forms.RadioButton();
             this.AFCCWChart_radio = new System.Windows.Forms.RadioButton();
             this.ALCWChart_radio = new System.Windows.Forms.RadioButton();
             this.AFCWChart_radio = new System.Windows.Forms.RadioButton();
             this.exportChart_btn = new System.Windows.Forms.Button();
+<<<<<<< HEAD
             this.stream_btn = new System.Windows.Forms.Button();
+=======
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.exportAverage_chckbox = new System.Windows.Forms.CheckBox();
             this.excelExport_calTab_btn = new System.Windows.Forms.Button();
             this.copyAllStruct_btn = new System.Windows.Forms.Button();
@@ -340,6 +347,7 @@ namespace WindowsFormsApplication1
             this.label22 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
+            this.stream_btn = new System.Windows.Forms.Button();
             this.ch2Reading_groupBox = new System.Windows.Forms.GroupBox();
             this.ch2Trough_chckbox = new System.Windows.Forms.CheckBox();
             this.label39 = new System.Windows.Forms.Label();
@@ -559,7 +567,11 @@ namespace WindowsFormsApplication1
             this.printToolToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+<<<<<<< HEAD
             this.menuStrip1.Size = new System.Drawing.Size(1784, 40);
+=======
+            this.menuStrip1.Size = new System.Drawing.Size(1731, 24);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -624,14 +636,22 @@ namespace WindowsFormsApplication1
             // toolsManagerToolStripMenuItem
             // 
             this.toolsManagerToolStripMenuItem.Name = "toolsManagerToolStripMenuItem";
+<<<<<<< HEAD
             this.toolsManagerToolStripMenuItem.Size = new System.Drawing.Size(184, 36);
+=======
+            this.toolsManagerToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.toolsManagerToolStripMenuItem.Text = "Tools Manager";
             this.toolsManagerToolStripMenuItem.Click += new System.EventHandler(this.toolsManagerToolStripMenuItem_Click);
             // 
             // testManagerToolStripMenuItem
             // 
             this.testManagerToolStripMenuItem.Name = "testManagerToolStripMenuItem";
+<<<<<<< HEAD
             this.testManagerToolStripMenuItem.Size = new System.Drawing.Size(171, 36);
+=======
+            this.testManagerToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.testManagerToolStripMenuItem.Text = "Test Manager";
             this.testManagerToolStripMenuItem.Click += new System.EventHandler(this.testManagerToolStripMenuItem_Click);
             // 
@@ -692,14 +712,22 @@ namespace WindowsFormsApplication1
             // includeTimeToolStripMenuItem
             // 
             this.includeTimeToolStripMenuItem.Name = "includeTimeToolStripMenuItem";
+<<<<<<< HEAD
             this.includeTimeToolStripMenuItem.Size = new System.Drawing.Size(252, 38);
+=======
+            this.includeTimeToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.includeTimeToolStripMenuItem.Text = "Include Time";
             this.includeTimeToolStripMenuItem.Click += new System.EventHandler(this.includeTimeToolStripMenuItem_Click);
             // 
             // includeDateToolStripMenuItem
             // 
             this.includeDateToolStripMenuItem.Name = "includeDateToolStripMenuItem";
+<<<<<<< HEAD
             this.includeDateToolStripMenuItem.Size = new System.Drawing.Size(252, 38);
+=======
+            this.includeDateToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.includeDateToolStripMenuItem.Text = "Include Date";
             this.includeDateToolStripMenuItem.Click += new System.EventHandler(this.includeDateToolStripMenuItem_Click);
             // 
@@ -757,7 +785,11 @@ namespace WindowsFormsApplication1
             // printToolToolStripMenuItem
             // 
             this.printToolToolStripMenuItem.Name = "printToolToolStripMenuItem";
+<<<<<<< HEAD
             this.printToolToolStripMenuItem.Size = new System.Drawing.Size(128, 36);
+=======
+            this.printToolToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.printToolToolStripMenuItem.Text = "Print Tool";
             this.printToolToolStripMenuItem.Click += new System.EventHandler(this.printToolToolStripMenuItem_Click);
             // 
@@ -928,7 +960,11 @@ namespace WindowsFormsApplication1
             this.dualChannelTab.Controls.Add(this.firstChannelGrid);
             this.dualChannelTab.Location = new System.Drawing.Point(8, 38);
             this.dualChannelTab.Name = "dualChannelTab";
+<<<<<<< HEAD
             this.dualChannelTab.Size = new System.Drawing.Size(1674, 877);
+=======
+            this.dualChannelTab.Size = new System.Drawing.Size(1723, 1152);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.dualChannelTab.TabIndex = 5;
             this.dualChannelTab.Text = "Dual Channel";
             this.dualChannelTab.UseVisualStyleBackColor = true;
@@ -940,6 +976,7 @@ namespace WindowsFormsApplication1
             this.dualSeriesListView.CheckBoxes = true;
             this.dualSeriesListView.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dualSeriesListView.GridLines = true;
+            this.dualSeriesListView.HideSelection = false;
             this.dualSeriesListView.Location = new System.Drawing.Point(811, 561);
             this.dualSeriesListView.Name = "dualSeriesListView";
             this.dualSeriesListView.Size = new System.Drawing.Size(154, 240);
@@ -1262,7 +1299,11 @@ namespace WindowsFormsApplication1
             this.comList4.ItemHeight = 25;
             this.comList4.Location = new System.Drawing.Point(9, 49);
             this.comList4.Name = "comList4";
+<<<<<<< HEAD
             this.comList4.Size = new System.Drawing.Size(191, 29);
+=======
+            this.comList4.Size = new System.Drawing.Size(191, 60);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.comList4.TabIndex = 1;
             // 
             // openCloseSecondPort
@@ -1380,7 +1421,11 @@ namespace WindowsFormsApplication1
             this.serieListBox.Location = new System.Drawing.Point(1526, 629);
             this.serieListBox.Name = "serieListBox";
             this.serieListBox.ScrollAlwaysVisible = true;
+<<<<<<< HEAD
             this.serieListBox.Size = new System.Drawing.Size(111, 112);
+=======
+            this.serieListBox.Size = new System.Drawing.Size(111, 105);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.serieListBox.TabIndex = 83;
             this.serieListBox.Visible = false;
             this.serieListBox.SelectedIndexChanged += new System.EventHandler(this.serieListBox_SelectedIndexChanged);
@@ -1603,11 +1648,11 @@ namespace WindowsFormsApplication1
             // 
             // dualChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.dualChart.ChartAreas.Add(chartArea1);
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            this.dualChart.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.dualChart.ChartAreas.Add(chartArea4);
+            legend4.Enabled = false;
+            legend4.Name = "Legend1";
+            this.dualChart.Legends.Add(legend4);
             this.dualChart.Location = new System.Drawing.Point(8, 561);
             this.dualChart.Name = "dualChart";
             this.dualChart.Size = new System.Drawing.Size(798, 219);
@@ -1712,7 +1757,11 @@ namespace WindowsFormsApplication1
             this.big_graph.Controls.Add(this.chart1);
             this.big_graph.Location = new System.Drawing.Point(8, 38);
             this.big_graph.Name = "big_graph";
+<<<<<<< HEAD
             this.big_graph.Size = new System.Drawing.Size(1674, 877);
+=======
+            this.big_graph.Size = new System.Drawing.Size(1723, 1152);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.big_graph.TabIndex = 3;
             this.big_graph.Text = "Big Reading with Graph";
             this.big_graph.UseVisualStyleBackColor = true;
@@ -1727,21 +1776,33 @@ namespace WindowsFormsApplication1
             this.Label_Data3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.Label_Data3.Location = new System.Drawing.Point(0, 0);
             this.Label_Data3.Name = "Label_Data3";
+<<<<<<< HEAD
             this.Label_Data3.Size = new System.Drawing.Size(1674, 424);
+=======
+            this.Label_Data3.Size = new System.Drawing.Size(1723, 699);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.Label_Data3.TabIndex = 26;
             this.Label_Data3.Text = "0.0000";
             this.Label_Data3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
+            chartArea5.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea5);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Bottom;
+<<<<<<< HEAD
             legend2.Name = "Legend1";
             this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(0, 424);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(1674, 453);
+=======
+            legend5.Name = "Legend1";
+            this.chart1.Legends.Add(legend5);
+            this.chart1.Location = new System.Drawing.Point(0, 699);
+            this.chart1.Name = "chart1";
+            this.chart1.Size = new System.Drawing.Size(1723, 453);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.chart1.TabIndex = 25;
             this.chart1.Text = "chart1";
             // 
@@ -1762,7 +1823,11 @@ namespace WindowsFormsApplication1
             this.read_graph_col.Controls.Add(this.groupBox3);
             this.read_graph_col.Location = new System.Drawing.Point(8, 38);
             this.read_graph_col.Name = "read_graph_col";
+<<<<<<< HEAD
             this.read_graph_col.Size = new System.Drawing.Size(1674, 877);
+=======
+            this.read_graph_col.Size = new System.Drawing.Size(1723, 1152);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.read_graph_col.TabIndex = 4;
             this.read_graph_col.Text = "Single Channel";
             this.read_graph_col.UseVisualStyleBackColor = true;
@@ -1774,6 +1839,7 @@ namespace WindowsFormsApplication1
             this.singleSeriesListView.CheckBoxes = true;
             this.singleSeriesListView.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.singleSeriesListView.GridLines = true;
+            this.singleSeriesListView.HideSelection = false;
             this.singleSeriesListView.Location = new System.Drawing.Point(808, 521);
             this.singleSeriesListView.Name = "singleSeriesListView";
             this.singleSeriesListView.Size = new System.Drawing.Size(154, 214);
@@ -1912,11 +1978,11 @@ namespace WindowsFormsApplication1
             // 
             // singleChart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.singleChart.ChartAreas.Add(chartArea3);
-            legend3.Enabled = false;
-            legend3.Name = "Legend1";
-            this.singleChart.Legends.Add(legend3);
+            chartArea6.Name = "ChartArea1";
+            this.singleChart.ChartAreas.Add(chartArea6);
+            legend6.Enabled = false;
+            legend6.Name = "Legend1";
+            this.singleChart.Legends.Add(legend6);
             this.singleChart.Location = new System.Drawing.Point(8, 516);
             this.singleChart.Name = "singleChart";
             this.singleChart.Size = new System.Drawing.Size(794, 219);
@@ -2131,7 +2197,11 @@ namespace WindowsFormsApplication1
             this.comList3.ItemHeight = 25;
             this.comList3.Location = new System.Drawing.Point(9, 49);
             this.comList3.Name = "comList3";
+<<<<<<< HEAD
             this.comList3.Size = new System.Drawing.Size(191, 29);
+=======
+            this.comList3.Size = new System.Drawing.Size(191, 60);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.comList3.TabIndex = 5;
             // 
             // refresh2
@@ -2639,7 +2709,11 @@ namespace WindowsFormsApplication1
             this.simple_col.Location = new System.Drawing.Point(8, 38);
             this.simple_col.Name = "simple_col";
             this.simple_col.Padding = new System.Windows.Forms.Padding(3);
+<<<<<<< HEAD
             this.simple_col.Size = new System.Drawing.Size(1674, 877);
+=======
+            this.simple_col.Size = new System.Drawing.Size(1723, 1152);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.simple_col.TabIndex = 1;
             this.simple_col.Text = "Simple Reading with Option to Save";
             this.simple_col.UseVisualStyleBackColor = true;
@@ -2736,7 +2810,11 @@ namespace WindowsFormsApplication1
             this.comList2.ItemHeight = 25;
             this.comList2.Location = new System.Drawing.Point(25, 282);
             this.comList2.Name = "comList2";
+<<<<<<< HEAD
             this.comList2.Size = new System.Drawing.Size(214, 54);
+=======
+            this.comList2.Size = new System.Drawing.Size(214, 46);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.comList2.TabIndex = 33;
             // 
             // button5
@@ -2837,7 +2915,11 @@ namespace WindowsFormsApplication1
             this.simple_reading.Location = new System.Drawing.Point(8, 38);
             this.simple_reading.Name = "simple_reading";
             this.simple_reading.Padding = new System.Windows.Forms.Padding(3);
+<<<<<<< HEAD
             this.simple_reading.Size = new System.Drawing.Size(1768, 859);
+=======
+            this.simple_reading.Size = new System.Drawing.Size(1723, 1152);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.simple_reading.TabIndex = 0;
             this.simple_reading.Text = "Torque To Spreadsheet";
             this.simple_reading.UseVisualStyleBackColor = true;
@@ -3029,7 +3111,11 @@ namespace WindowsFormsApplication1
             this.comList.ItemHeight = 25;
             this.comList.Location = new System.Drawing.Point(11, 355);
             this.comList.Name = "comList";
+<<<<<<< HEAD
             this.comList.Size = new System.Drawing.Size(170, 29);
+=======
+            this.comList.Size = new System.Drawing.Size(170, 60);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.comList.TabIndex = 1;
             this.comList.SelectedIndexChanged += new System.EventHandler(this.comList_SelectedIndexChanged);
             // 
@@ -3050,7 +3136,11 @@ namespace WindowsFormsApplication1
             this.TabPages.Multiline = true;
             this.TabPages.Name = "TabPages";
             this.TabPages.SelectedIndex = 0;
+<<<<<<< HEAD
             this.TabPages.Size = new System.Drawing.Size(1784, 905);
+=======
+            this.TabPages.Size = new System.Drawing.Size(1731, 1190);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.TabPages.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabPages.TabIndex = 27;
             // 
@@ -3063,7 +3153,11 @@ namespace WindowsFormsApplication1
             this.big_reading.Controls.Add(this.reading_bigReading_lbl);
             this.big_reading.Location = new System.Drawing.Point(8, 38);
             this.big_reading.Name = "big_reading";
+<<<<<<< HEAD
             this.big_reading.Size = new System.Drawing.Size(1674, 877);
+=======
+            this.big_reading.Size = new System.Drawing.Size(1723, 1152);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.big_reading.TabIndex = 2;
             this.big_reading.Text = "Big Reading";
             // 
@@ -3086,9 +3180,15 @@ namespace WindowsFormsApplication1
             this.panel3.Controls.Add(this.refreshCOMList_btn_bigReading);
             this.panel3.Controls.Add(this.comList_bigReading);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+<<<<<<< HEAD
             this.panel3.Location = new System.Drawing.Point(0, 442);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1674, 435);
+=======
+            this.panel3.Location = new System.Drawing.Point(0, 717);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1723, 435);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.panel3.TabIndex = 26;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
@@ -3247,7 +3347,11 @@ namespace WindowsFormsApplication1
             this.comList_bigReading.ItemHeight = 61;
             this.comList_bigReading.Location = new System.Drawing.Point(566, 12);
             this.comList_bigReading.Name = "comList_bigReading";
+<<<<<<< HEAD
             this.comList_bigReading.Size = new System.Drawing.Size(514, 4);
+=======
+            this.comList_bigReading.Size = new System.Drawing.Size(514, 100);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.comList_bigReading.TabIndex = 7;
             // 
             // upSize_btn
@@ -3271,7 +3375,11 @@ namespace WindowsFormsApplication1
             this.reading_bigReading_lbl.Location = new System.Drawing.Point(0, 0);
             this.reading_bigReading_lbl.Name = "reading_bigReading_lbl";
             this.reading_bigReading_lbl.Padding = new System.Windows.Forms.Padding(0, 0, 100, 430);
+<<<<<<< HEAD
             this.reading_bigReading_lbl.Size = new System.Drawing.Size(1674, 877);
+=======
+            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1723, 1152);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.reading_bigReading_lbl.TabIndex = 27;
             this.reading_bigReading_lbl.Text = "0.0000";
             this.reading_bigReading_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3292,7 +3400,11 @@ namespace WindowsFormsApplication1
             this.calibrationTab.Controls.Add(this.target_groupBox);
             this.calibrationTab.Location = new System.Drawing.Point(8, 38);
             this.calibrationTab.Name = "calibrationTab";
+<<<<<<< HEAD
             this.calibrationTab.Size = new System.Drawing.Size(1768, 859);
+=======
+            this.calibrationTab.Size = new System.Drawing.Size(1723, 1152);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.calibrationTab.TabIndex = 6;
             this.calibrationTab.Text = "Cal Cert";
             this.calibrationTab.UseVisualStyleBackColor = true;
@@ -3314,7 +3426,11 @@ namespace WindowsFormsApplication1
             this.ch2Target_select.Checked = true;
             this.ch2Target_select.Location = new System.Drawing.Point(86, 16);
             this.ch2Target_select.Name = "ch2Target_select";
+<<<<<<< HEAD
             this.ch2Target_select.Size = new System.Drawing.Size(138, 29);
+=======
+            this.ch2Target_select.Size = new System.Drawing.Size(73, 18);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.ch2Target_select.TabIndex = 67;
             this.ch2Target_select.TabStop = true;
             this.ch2Target_select.Text = "Channel 2";
@@ -3325,7 +3441,11 @@ namespace WindowsFormsApplication1
             this.ch1Target_select.AutoSize = true;
             this.ch1Target_select.Location = new System.Drawing.Point(3, 16);
             this.ch1Target_select.Name = "ch1Target_select";
+<<<<<<< HEAD
             this.ch1Target_select.Size = new System.Drawing.Size(138, 29);
+=======
+            this.ch1Target_select.Size = new System.Drawing.Size(73, 18);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.ch1Target_select.TabIndex = 65;
             this.ch1Target_select.Text = "Channel 1";
             this.ch1Target_select.UseVisualStyleBackColor = true;
@@ -3370,6 +3490,10 @@ namespace WindowsFormsApplication1
             // 
             // groupBox17
             // 
+<<<<<<< HEAD
+=======
+            this.groupBox17.Controls.Add(this.openOldStream_btn);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.groupBox17.Controls.Add(this.ALCCWChart_radio);
             this.groupBox17.Controls.Add(this.AFCCWChart_radio);
             this.groupBox17.Controls.Add(this.ALCWChart_radio);
@@ -3407,12 +3531,29 @@ namespace WindowsFormsApplication1
             this.groupBox17.TabIndex = 29;
             this.groupBox17.TabStop = false;
             // 
+<<<<<<< HEAD
+=======
+            // openOldStream_btn
+            // 
+            this.openOldStream_btn.Location = new System.Drawing.Point(955, 507);
+            this.openOldStream_btn.Name = "openOldStream_btn";
+            this.openOldStream_btn.Size = new System.Drawing.Size(115, 35);
+            this.openOldStream_btn.TabIndex = 72;
+            this.openOldStream_btn.Text = "View Stream";
+            this.openOldStream_btn.UseVisualStyleBackColor = true;
+            this.openOldStream_btn.Click += new System.EventHandler(this.openOldStream_btn_Click);
+            // 
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             // ALCCWChart_radio
             // 
             this.ALCCWChart_radio.AutoSize = true;
             this.ALCCWChart_radio.Location = new System.Drawing.Point(804, 269);
             this.ALCCWChart_radio.Name = "ALCCWChart_radio";
+<<<<<<< HEAD
             this.ALCCWChart_radio.Size = new System.Drawing.Size(102, 29);
+=======
+            this.ALCCWChart_radio.Size = new System.Drawing.Size(55, 18);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.ALCCWChart_radio.TabIndex = 71;
             this.ALCCWChart_radio.TabStop = true;
             this.ALCCWChart_radio.Text = "Graph";
@@ -3423,7 +3564,11 @@ namespace WindowsFormsApplication1
             this.AFCCWChart_radio.AutoSize = true;
             this.AFCCWChart_radio.Location = new System.Drawing.Point(189, 269);
             this.AFCCWChart_radio.Name = "AFCCWChart_radio";
+<<<<<<< HEAD
             this.AFCCWChart_radio.Size = new System.Drawing.Size(102, 29);
+=======
+            this.AFCCWChart_radio.Size = new System.Drawing.Size(55, 18);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.AFCCWChart_radio.TabIndex = 70;
             this.AFCCWChart_radio.TabStop = true;
             this.AFCCWChart_radio.Text = "Graph";
@@ -3434,7 +3579,11 @@ namespace WindowsFormsApplication1
             this.ALCWChart_radio.AutoSize = true;
             this.ALCWChart_radio.Location = new System.Drawing.Point(811, 12);
             this.ALCWChart_radio.Name = "ALCWChart_radio";
+<<<<<<< HEAD
             this.ALCWChart_radio.Size = new System.Drawing.Size(102, 29);
+=======
+            this.ALCWChart_radio.Size = new System.Drawing.Size(55, 18);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.ALCWChart_radio.TabIndex = 69;
             this.ALCWChart_radio.TabStop = true;
             this.ALCWChart_radio.Text = "Graph";
@@ -3445,7 +3594,11 @@ namespace WindowsFormsApplication1
             this.AFCWChart_radio.AutoSize = true;
             this.AFCWChart_radio.Location = new System.Drawing.Point(203, 12);
             this.AFCWChart_radio.Name = "AFCWChart_radio";
+<<<<<<< HEAD
             this.AFCWChart_radio.Size = new System.Drawing.Size(102, 29);
+=======
+            this.AFCWChart_radio.Size = new System.Drawing.Size(55, 18);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.AFCWChart_radio.TabIndex = 68;
             this.AFCWChart_radio.TabStop = true;
             this.AFCWChart_radio.Text = "Graph";
@@ -3453,13 +3606,18 @@ namespace WindowsFormsApplication1
             // 
             // exportChart_btn
             // 
+<<<<<<< HEAD
             this.exportChart_btn.Location = new System.Drawing.Point(583, 261);
+=======
+            this.exportChart_btn.Location = new System.Drawing.Point(513, 258);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.exportChart_btn.Name = "exportChart_btn";
             this.exportChart_btn.Size = new System.Drawing.Size(115, 35);
             this.exportChart_btn.TabIndex = 67;
             this.exportChart_btn.Text = "Export Torque Chart";
             this.exportChart_btn.UseVisualStyleBackColor = true;
             this.exportChart_btn.Click += new System.EventHandler(this.ExportChart_btn_Click);
+<<<<<<< HEAD
             // 
             // stream_btn
             // 
@@ -3470,6 +3628,8 @@ namespace WindowsFormsApplication1
             this.stream_btn.Text = "Stream";
             this.stream_btn.UseVisualStyleBackColor = true;
             this.stream_btn.Click += new System.EventHandler(this.stream_btn_Click);
+=======
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             // 
             // exportAverage_chckbox
             // 
@@ -3728,6 +3888,16 @@ namespace WindowsFormsApplication1
             this.label18.Size = new System.Drawing.Size(148, 25);
             this.label18.TabIndex = 23;
             this.label18.Text = "As Found-CW";
+            // 
+            // stream_btn
+            // 
+            this.stream_btn.Location = new System.Drawing.Point(903, 205);
+            this.stream_btn.Name = "stream_btn";
+            this.stream_btn.Size = new System.Drawing.Size(108, 29);
+            this.stream_btn.TabIndex = 66;
+            this.stream_btn.Text = "Stream";
+            this.stream_btn.UseVisualStyleBackColor = true;
+            this.stream_btn.Click += new System.EventHandler(this.stream_btn_Click);
             // 
             // ch2Reading_groupBox
             // 
@@ -4051,7 +4221,11 @@ namespace WindowsFormsApplication1
             this.testOrder_list.ItemHeight = 25;
             this.testOrder_list.Location = new System.Drawing.Point(133, 225);
             this.testOrder_list.Name = "testOrder_list";
+<<<<<<< HEAD
             this.testOrder_list.Size = new System.Drawing.Size(100, 29);
+=======
+            this.testOrder_list.Size = new System.Drawing.Size(100, 18);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.testOrder_list.TabIndex = 45;
             // 
             // resetCurrTestSettings_btn
@@ -4255,7 +4429,11 @@ namespace WindowsFormsApplication1
             this.comList_calibration.ItemHeight = 25;
             this.comList_calibration.Location = new System.Drawing.Point(9, 49);
             this.comList_calibration.Name = "comList_calibration";
+<<<<<<< HEAD
             this.comList_calibration.Size = new System.Drawing.Size(264, 29);
+=======
+            this.comList_calibration.Size = new System.Drawing.Size(264, 60);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.comList_calibration.TabIndex = 1;
             // 
             // ch2ConnectBtn_calTab
@@ -4668,7 +4846,7 @@ namespace WindowsFormsApplication1
             this.AutoScroll = true;
             this.AutoScrollMinSize = new System.Drawing.Size(1473, 945);
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1690, 947);
+            this.ClientSize = new System.Drawing.Size(1731, 1214);
             this.Controls.Add(this.TabPages);
             this.Controls.Add(this.testerType);
             this.Controls.Add(this.groupBox1);
@@ -5176,6 +5354,10 @@ namespace WindowsFormsApplication1
         private RadioButton AFCCWChart_radio;
         private RadioButton ALCWChart_radio;
         private RadioButton AFCWChart_radio;
+<<<<<<< HEAD
+=======
+        private Button openOldStream_btn;
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
     }
 }
 

@@ -66,14 +66,22 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+<<<<<<< HEAD
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Torque to spreadsheet.exe" size="712704">
+=======
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Torque to spreadsheet.exe" size="715264">
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
       <assemblyIdentity name="Torque to spreadsheet" version="6.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+<<<<<<< HEAD
         <dsig:DigestValue>mtOq547Ib40wTemWblfEPeGLfa0=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>xRYDsCn/ZGhNenr/Tx9FWt5zshY=</dsig:DigestValue>
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
       </hash>
     </dependentAssembly>
   </dependency>

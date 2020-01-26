@@ -22,12 +22,42 @@ namespace WindowsFormsApplication1
         public DataTable returnResultTable = new DataTable();
         Chart streamChart = new Chart();
         public bool isSave = false,endOfStream=false;
+<<<<<<< HEAD
         bool waitForCh1Sync = false, waitForCh2Sync = false;
         public StreamingForm(SerialPort ch1Port,SerialPort ch2Port, List<double> targets, int channelToCompare,int channelCount)
         {
             InitializeComponent();
             streamingPort1 = ch1Port;
             streamingPort2 = ch2Port;
+=======
+
+        //start new Stream
+        public StreamingForm(bool isOpenOldStream, SerialPort port, List<double> targets, int channelToCompare, int channelCount)
+        {
+            StreamingFormInit(port, targets, channelToCompare, channelCount);
+            if (isOpenOldStream==false)
+                autoStartStream(channelCount);//auto start streaming
+        }
+
+        //open old stream
+        public StreamingForm(bool isOpenOldStream, SerialPort port, List<double> targets, int channelToCompare, int channelCount,DataTable oldStreamTable) 
+            : this(isOpenOldStream,port, targets, channelToCompare, channelCount)
+        {
+            if ((isOpenOldStream==true)&&(oldStreamTable!=null)&&(oldStreamTable.Rows.Count>0))
+            {
+                foreach (DataRow row in oldStreamTable.Rows)
+                {
+                    this.streamTable.ImportRow(row);
+                }
+                bindStreamGrid();
+                streamChart.DataBind();
+            }
+        }
+        private void StreamingFormInit(SerialPort port, List<double> targets, int channelToCompare, int channelCount)
+        {
+            InitializeComponent();
+            streamingPort1 = port;
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.targets = targets;
             this.channelCount = channelCount;
             this.channelToCompare = channelToCompare;
@@ -38,10 +68,15 @@ namespace WindowsFormsApplication1
 
             bindResultGrid();
             InitTimer();
+<<<<<<< HEAD
             isStream = false;
             autoStartStream(channelCount);//auto start streaming
         }
 
+=======
+            
+        }
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
         private void StreamingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             isStream = false;
@@ -69,7 +104,10 @@ namespace WindowsFormsApplication1
         }
 
         //Trigger when timer tick
+<<<<<<< HEAD
         //Update live reading, update stream grid
+=======
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
         private void streamTimer_Tick(object sender, EventArgs e)
         {
             try
@@ -104,6 +142,7 @@ namespace WindowsFormsApplication1
         }
         private void initPort()
         {
+<<<<<<< HEAD
             streamingPort1.DataReceived += streamingPort1_DataReceived;
             streamingPort2.DataReceived += streamingPort2_DataReceived;
         }
@@ -111,6 +150,14 @@ namespace WindowsFormsApplication1
         private void streamingPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             if ((isStream == true)&&(waitForCh1Sync==false)&&(waitForCh2Sync==false))
+=======
+            streamingPort1.DataReceived += streamingPort_DataReceived;
+        }
+
+        private void streamingPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (isStream == true)
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             {
                 int bytes;
                 byte[] Bytebuffer;
@@ -139,6 +186,7 @@ namespace WindowsFormsApplication1
                 T.Wait();
             }
         }
+<<<<<<< HEAD
         private void streamingPort2_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             if ((isStream == true) && (waitForCh1Sync == false) && (waitForCh2Sync == false))
@@ -170,6 +218,9 @@ namespace WindowsFormsApplication1
                 T.Wait();
             }
         }
+=======
+
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
         /// <summary>
         /// /////////////////////////Start Streaming////////////////////////////
         /// </summary>
@@ -177,7 +228,10 @@ namespace WindowsFormsApplication1
         List<byte> masterStream = new List<byte>(), tempMaster = new List<byte>();
         private List<READINGS_ANGLES> streamReadingsList = new List<READINGS_ANGLES>();
         const string startSingleStreamCommand = "?*M;";
+<<<<<<< HEAD
         string startSyncDualStreamCommand = "?*Y";//begin on sync comand, need to append rate to the end of command
+=======
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
         const string startDualStreamCommand = "?*D;";
         string[] acknowledge = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
         int invalidCount = 0;
@@ -187,7 +241,11 @@ namespace WindowsFormsApplication1
         int baud250k = 250000;
         SerialPort streamingPort1 = new SerialPort(),streamingPort2=new SerialPort();
         SerialPort streamPort = new SerialPort();
+<<<<<<< HEAD
         DataTable streamTable = new DataTable();
+=======
+        public DataTable streamTable = new DataTable();
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
 
         private void autoStartStream(int channelCount)
         {
@@ -202,6 +260,10 @@ namespace WindowsFormsApplication1
                 //For now, Dual Stream only deal w 2 Single Digital TD Stream
                 //startDualStream(streamingPort1);
                 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             }
         }
         //Check if byteArr has header from Streaming, if it does, send back ack
@@ -342,8 +404,13 @@ namespace WindowsFormsApplication1
         }
         private void bindStreamGrid()
         {
+<<<<<<< HEAD
             var sourceList = new BindingList<READINGS_ANGLES>(streamReadingsList);
             var source = new BindingSource(sourceList, null);
+=======
+            //var sourceList = new BindingList<READINGS_ANGLES>(streamReadingsList);
+            //var source = new BindingSource(sourceList, null);
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
 
             streamGrid.DataSource = streamTable;
 
@@ -359,6 +426,15 @@ namespace WindowsFormsApplication1
 
             for (int rowIndex = 0; rowIndex < readingList.Count; rowIndex++)
             {
+<<<<<<< HEAD
+=======
+                /*
+                if (((rowIndex%40)==0)&&(rowIndex!=0))
+                {
+                    thisGrid.CurrentCell.Selected = false;
+                    thisGrid.Rows[1].Selected = true;
+                }*/
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
                 //Todo: get Unit and change to new string[2]
                 string[] strToadd = new string[1];
                 strToadd[0] = readingList[rowIndex].reading1.ToString();
@@ -420,6 +496,11 @@ namespace WindowsFormsApplication1
         {
             byte stopStreamByte = 0x20;
             sendCommandNoResponse(stopStreamByte, thisPort);
+<<<<<<< HEAD
+=======
+            isStream = false;
+
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
         }
 
         private const string ch1StreamSerie = "Channel1", ch2StreamSerie = "Channel2", angle1StreamSerie = "Angle1", angle2StreamSerie = "Angle2";
@@ -446,6 +527,12 @@ namespace WindowsFormsApplication1
             serialPort.BaudRate = baud9600;
         }
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
         private void initStreamTable()
         {
             streamTable = new DataTable("StreamTable");
@@ -633,9 +720,15 @@ namespace WindowsFormsApplication1
         private void saveResult_btn_Click(object sender, EventArgs e)
         {
             isSave = true;
+<<<<<<< HEAD
         }
 
 
+=======
+            closeForm(isSave);
+        }
+
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
         private void bindChartXYwithTableHeader(ref DataTable tableToBind, int xTableIndex, int yTableIndex, ref Chart chart, string serieName)
         {
             chart.Series[serieName].XValueMember = tableToBind.Columns[xTableIndex].ColumnName;
@@ -651,8 +744,12 @@ namespace WindowsFormsApplication1
             }
             autoStartStream(channelCount);
         }
+<<<<<<< HEAD
 
         private void close_btn_Click(object sender, EventArgs e)
+=======
+        private void closeForm(bool isSave)
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
         {
             if ((isSave == false) && (masterStream.Count > 0))
             {
@@ -665,6 +762,13 @@ namespace WindowsFormsApplication1
             else
                 this.Close();
         }
+<<<<<<< HEAD
+=======
+        private void close_btn_Click(object sender, EventArgs e)
+        {
+            closeForm(isSave);
+        }
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
 
         string chartAreaName = "StreamChartArea";
         private void initStreamChart()
@@ -737,6 +841,7 @@ namespace WindowsFormsApplication1
             }
             return returnvalue;
         }
+<<<<<<< HEAD
         //Dual Stream
         private int getCorrectedRate(int oriRate)
         {
@@ -759,12 +864,17 @@ namespace WindowsFormsApplication1
             waitForCh2Sync = false;
 
         }
+=======
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
         /// <summary>
         /// ///////////////////End Streaming///////////////////////////////////
         /// </summary>
         /// 
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
     public static class Extension
     {
         public static DataTable tableAddCol(this DataTable thisTable, string colName, int index)
