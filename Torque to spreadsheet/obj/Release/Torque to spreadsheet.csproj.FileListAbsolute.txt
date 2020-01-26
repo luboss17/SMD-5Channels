@@ -100,7 +100,83 @@ C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_setForceAutoClear.resources
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Excel.dll
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Excel.xml
-C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csprojResolveAssemblyReference.cache
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Interop.Dymo.dll
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.PrintLabel2.resources
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.PrintDymo.resources
+C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.StreamingForm.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.exe.config
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.ResolveComReference.cache
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.exe
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.pdb
+C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csprojAssemblyReference.cache
+C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.CopyComplete
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.exe.manifest
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.application
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.exe
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.pdb
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Excel.xml
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csprojResolveAssemblyReference.cache
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.AboutBox1.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.exampleForm.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form1.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.FormAddDualRun.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.FormAddRun.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_Calibration.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_Delete.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_DualDelete.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_DualRename.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_MenuControl.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.FormRename.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_setForceAutoClear.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_TestSequence.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_ToolsManager.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.getSaveAsTestSetupNameForm.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.newTestConfirm_form.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.newTool_frm.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.PrintDymo.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.PrintLabel2.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.StreamingForm.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.TestSequenceManager_form.resources
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.GenerateResource.Cache
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.TrustInfo.xml
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.exe.manifest
+C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.application
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.exe.config
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.exe.manifest
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.application
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.exe
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.pdb
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Excel.xml
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csprojAssemblyReference.cache
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.ResolveComReference.cache
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.AboutBox1.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.exampleForm.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form1.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.FormAddDualRun.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.FormAddRun.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_Calibration.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_Delete.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_DualDelete.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_DualRename.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_MenuControl.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.FormRename.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_setForceAutoClear.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_TestSequence.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_ToolsManager.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.getSaveAsTestSetupNameForm.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.newTestConfirm_form.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.newTool_frm.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.PrintDymo.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.PrintLabel2.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.StreamingForm.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.TestSequenceManager_form.resources
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.GenerateResource.cache
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.CoreCompileInputs.cache
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.TrustInfo.xml
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.exe.manifest
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.application
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.CopyComplete
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.exe
+C:\Users\huyhu\OneDrive\Desktop\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.pdb

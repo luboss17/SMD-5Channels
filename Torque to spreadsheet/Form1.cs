@@ -1,33 +1,22 @@
-﻿using System;
+﻿using Docs.Excel;
+using Microsoft.Win32;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using System.Collections;
-using System.IO.Ports;
-using System.Text.RegularExpressions;
-using Docs.Excel;
-using System.IO;
-using Excel = Microsoft.Office.Interop.Excel;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using System.Runtime.Remoting.Channels;
-using System.Text;
-using System.Windows.Forms.DataVisualization.Charting;
-using System.Threading;
-using System.Windows.Forms.VisualStyles;
-using Microsoft.Win32;
-using System.Timers;
-using System.Net.Sockets;
 using System.Deployment.Application;
-using System.Security.Principal;
-using System.Data.OleDb;
-using Dymo;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.IO.Ports;
+using System.Linq;
+using System.Net.Sockets;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+using Excel = Microsoft.Office.Interop.Excel;
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
@@ -1148,7 +1137,7 @@ namespace WindowsFormsApplication1
             spreadSheetActivate();
         }
 
-        private bool checkrowValid(string[] row)
+        private bool checkrowValid(string[] row)                
         {
             float f;
             bool datavalid = true;
@@ -2893,7 +2882,12 @@ namespace WindowsFormsApplication1
                 lastPathName = extractPathFromExcelPathName(path);
             return path;
         }
-
+        //added 9/12/19
+        //save 1 quadrant from Cal Cert to Excel
+        private void saveExcelCalQuadrant(string path, string quadName)
+        {
+            throw new NotImplementedException();
+        }
         //changed 7/31/18
         private void saveExcel(string path, DataTable thisTable, int chartType)
         {
@@ -5725,19 +5719,18 @@ namespace WindowsFormsApplication1
 
             return thistestTable;
         }
-        private void AFCW_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void cellValueChanged(ref DataGridView grid, DataGridViewCellEventArgs e, int Sign)
         {
-            //if column is target call rewriteLowHigh_gridRow to rewrite low high for that row
             if (e.ColumnIndex == targetGridCol)
             {
-                rewriteLowHigh_gridRow(ref AFCW_grid, e.RowIndex);
+                rewriteLowHigh_gridRow(ref grid, e.RowIndex);
             }
 
             //If still in testSetup mode, save the changed made from grid to currTestSetUp testTable
             if (testSetup_groupBox.Enabled == true)
             {
-                currTestSetup.testTable = updateTestTablewhenGridChanged(AFCW_grid, currTestSetup.testTable, 1);//Write testable the update testTable after a grid is changed
-                //updateTestGrid(currTestSetup.testTable,testList);
+                currTestSetup.testTable = updateTestTablewhenGridChanged(grid, currTestSetup.testTable, 2);//Write testable the update testTable after a grid is changed
+                //updateTestGrid(currTestSetup.testTable, testList);
             }
             else//If not in testsetup mode, update and show the active test Grid
             {
@@ -5745,75 +5738,26 @@ namespace WindowsFormsApplication1
                 showActiveTestGrid(currTestGridNum);
             }
             if (testSetup_groupBox.Enabled == false)
-                reevaluatePassFailData(ref AFCW_grid, 1);
+                reevaluatePassFailData(ref grid, Sign);
+        }
+        private void AFCW_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            cellValueChanged(ref AFCW_grid, e, 1);
 
         }
 
         private void AFCCW_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            //if column is target call rewriteLowHigh_gridRow to rewrite low high for that row
-            if (e.ColumnIndex == targetGridCol)
-            {
-                rewriteLowHigh_gridRow(ref AFCCW_grid, e.RowIndex);
-            }
+            cellValueChanged(ref AFCCW_grid, e, -1);
 
-            //If still in testSetup mode, save the changed made from grid to currTestSetUp testTable
-            if (testSetup_groupBox.Enabled == true)
-            {
-                currTestSetup.testTable = updateTestTablewhenGridChanged(AFCCW_grid, currTestSetup.testTable, 2);//Write testable the update testTable after a grid is changed
-                //updateTestGrid(currTestSetup.testTable, testList);
-            }
-            else//If not in testsetup mode, update and show the active test Grid
-            {
-                currTestGridNum = lookForActiveTestGrid();
-                showActiveTestGrid(currTestGridNum);
-            }
-            if (testSetup_groupBox.Enabled == false)
-                reevaluatePassFailData(ref AFCCW_grid, -1);
         }
         private void ALCW_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            //if column is target call rewriteLowHigh_gridRow to rewrite low high for that row
-            if (e.ColumnIndex == targetGridCol)
-            {
-                rewriteLowHigh_gridRow(ref ALCW_grid, e.RowIndex);
-            }
-
-            //If still in testSetup mode, save the changed made from grid to currTestSetUp testTable
-            if (testSetup_groupBox.Enabled == true)
-            {
-                currTestSetup.testTable = updateTestTablewhenGridChanged(ALCW_grid, currTestSetup.testTable, 3);//Write testable the update testTable after a grid is changed
-                //updateTestGrid(currTestSetup.testTable, testList);
-            }
-            else//If not in testsetup mode, update and show the active test Grid
-            {
-                currTestGridNum = lookForActiveTestGrid();
-                showActiveTestGrid(currTestGridNum);
-            }
-            if (testSetup_groupBox.Enabled == false)
-                reevaluatePassFailData(ref ALCW_grid, 1);
+            cellValueChanged(ref ALCW_grid, e, 1);
         }
         private void ALCCW_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            //if column is target call rewriteLowHigh_gridRow to rewrite low high for that row
-            if (e.ColumnIndex == targetGridCol)
-            {
-                rewriteLowHigh_gridRow(ref ALCCW_grid, e.RowIndex);
-            }
-
-            //If still in testSetup mode, save the changed made from grid to currTestSetUp testTable
-            if (testSetup_groupBox.Enabled == true)
-            {
-                currTestSetup.testTable = updateTestTablewhenGridChanged(ALCCW_grid, currTestSetup.testTable, 4);//Write testable the update testTable after a grid is changed
-                //updateTestGrid(currTestSetup.testTable, testList);
-            }
-            else//If not in testsetup mode, update and show the active test Grid
-            {
-                currTestGridNum = lookForActiveTestGrid();
-                showActiveTestGrid(currTestGridNum);
-            }
-            if (testSetup_groupBox.Enabled == false)
-                reevaluatePassFailData(ref ALCCW_grid, -1);
+            cellValueChanged(ref ALCCW_grid, e, -1);
         }
         //Handle drag drop for testOrder_list
         private void testOrder_list_MouseDown(object sender, MouseEventArgs e)
@@ -5979,7 +5923,7 @@ namespace WindowsFormsApplication1
 
             if (frm.excelExport == true)
             {//Export Excel
-                calTab_excelExport();
+                calTab_excelExport(false,false);
             }
             if (frm.certExport == true)
             {
@@ -6304,7 +6248,7 @@ namespace WindowsFormsApplication1
             }
 
             //Init all headers for currCert
-            currCert.setAllHeaders(toolID_comboBox.Text, timeStamp, duedate, recall_txt.Text+" Months", temperature_txt.Text, humid_txt.Text, equipment, toolModel_txt.Text, toolManufacture_txt.Text, capacity, accuracy, testID, toolSN_txt.Text, toolCertLot_txt.Text, toolProcedure_txt.Text, unit, toolOperatorID_txt.Text);
+            currCert.setAllHeaders(toolID_comboBox.Text, timeStamp, duedate, recall_txt.Text + " Months", temperature_txt.Text, humid_txt.Text, equipment, toolModel_txt.Text, toolManufacture_txt.Text, capacity, accuracy, testID, toolSN_txt.Text, toolCertLot_txt.Text, toolProcedure_txt.Text, unit, toolOperatorID_txt.Text);
 
             //Loop through each grid quadrant, if not empty, write as 1 block to CSV for CM
             DataGridView[] tempGrids_arr = new DataGridView[] { AFCW_grid, AFCCW_grid, ALCW_grid, ALCCW_grid };
@@ -6765,24 +6709,167 @@ namespace WindowsFormsApplication1
 
             return returnFloats;
         }
+        //Like convertGridDatatoFloats, but convert from 10 to 100 points
+        private float[,] convertGridDatatoFloatsTorqueChart(DataGridView oldGrid, int rowCount, int colCount)
+        {
+            DataGridView torqueChartGrid = convertToTorqueChartGrid(oldGrid);
+            return convertGridDatatoFloats(torqueChartGrid, rowCount, colCount);
+        }
+        //convert datagridview test set up into a torque chat with 10 times the amount of points
+        //Pass in old grid, the increment amount for each point for both ch1 and ch2 delta
+        private DataGridView convertToTorqueChartGrid(DataGridView oldGrid)
+        {
+            float ch1Delta=0, ch2Delta=0;
+            const int decimalPlace = 4;
+            //create newGrid with same struct
+            DataGridView newGridView = new DataGridView();
+            for (int j = 0; j < oldGrid.Columns.Count; j++)
+            {
+                newGridView.Columns.Add(oldGrid.Columns[j].Clone() as DataGridViewColumn);
+            }
 
+            //populate each row in new grid
+            float ch1startBlockVal = 0,ch2startBlockVal = 0,targetStartBlockVal=0,lowStartBlockVal=0,highStartBlockVal=0;
+            int newGridRowCount = 0;
+            int oldGridRowCount = 0;
+            const int pointCount = 10;
+            //for each old row, expand to 9 smaller ones
+            foreach (DataGridViewRow oldRow in oldGrid.Rows)
+            {
+                if (!oldRow.IsNewRow)
+                {
+                    //find delta for each block
+                    if (oldGridRowCount<oldGrid.Rows.Count-2)
+                    {
+                        ch1Delta = getTorqueChartDelta(convertGridCellToFloat(oldRow.Cells[ch1ReadingGridCol]),
+                            convertGridCellToFloat(oldGrid.Rows[oldGridRowCount+1].Cells[ch1ReadingGridCol]), pointCount);
+                        ch2Delta = getTorqueChartDelta(convertGridCellToFloat(oldRow.Cells[ch2ReadingGridCol]),
+                            convertGridCellToFloat(oldGrid.Rows[oldGridRowCount+1].Cells[ch2ReadingGridCol]), pointCount);
+                    }
+                    
+                    
+                    ch1startBlockVal = getbeginBlockVal(convertGridCellToFloat(oldRow.Cells[ch1ReadingGridCol]), ch1Delta);
+                    ch2startBlockVal = getbeginBlockVal(convertGridCellToFloat(oldRow.Cells[ch2ReadingGridCol]), ch2Delta);
+
+                    for (int rowCount = 1; rowCount <= 10; rowCount++)
+                    {
+                        newGridRowCount++;
+                        DataGridViewRow newRow = (DataGridViewRow)oldRow.Clone();
+                        newRow.Cells[0].Value = newGridRowCount;
+                        //first row of this block, just add ch1startBlockVal and ch2startBlockVal
+                        if (rowCount == 1)
+                        {
+                            newRow.Cells[ch1ReadingGridCol].Value = convertToFloatwithDecimal(ch1startBlockVal,decimalPlace);
+                            newRow.Cells[ch2ReadingGridCol].Value = convertToFloatwithDecimal(ch2startBlockVal,decimalPlace);
+                            newRow.Cells[targetGridCol].Value = convertToFloatwithDecimal(targetStartBlockVal,decimalPlace);
+                            newRow.Cells[lowGridCol].Value = convertToFloatwithDecimal(lowStartBlockVal,decimalPlace);
+                            newRow.Cells[highGridCol].Value = convertToFloatwithDecimal(highStartBlockVal,decimalPlace);
+                        }
+                        else//For the rest of the row, add delta to calculate value
+                        {
+                            DataGridViewRow prevRow = newGridView.Rows[newGridView.Rows.Count - 2];
+                            newRow = populateNextTorqueChartRow(prevRow, newRow, ch1Delta, ch2Delta); 
+                        }
+
+                        newGridView.Rows.Add(newRow);
+                    }
+                    oldGridRowCount++;
+                }
+            }
+            //remove target, high low column
+            newGridView = removeColumn(newGridView, highGridCol);
+            newGridView = removeColumn(newGridView, targetGridCol);
+            newGridView = removeColumn(newGridView, lowGridCol);
+            
+            return newGridView;
+        }
+        //remove column from datagridview
+        private DataGridView removeColumn(DataGridView grid, int colIndex)
+        {
+            grid.Columns.RemoveAt(colIndex);
+            return grid;
+        }
+        private DataGridViewRow populateNextTorqueChartRow(DataGridViewRow prevRow, DataGridViewRow nextRow, float ch1Delta, float ch2Delta)
+        {
+            const int decimalPlace = 4;
+            float nextRowCh1 = 0, nextRowCh2 = 0;
+            float prevRowCh1 = convertGridCellToFloat(prevRow.Cells[ch1ReadingGridCol]);
+            float prevRowCh2 = convertGridCellToFloat(prevRow.Cells[ch2ReadingGridCol]);
+            
+            if (prevRowCh1 != 0)
+            {
+                nextRowCh1 = prevRowCh1 + ch1Delta;
+                nextRow.Cells[ch1ReadingGridCol].Value = convertToFloatwithDecimal(nextRowCh1,decimalPlace);
+            }
+            if (prevRowCh2!=0)
+            {
+                nextRowCh2 = prevRowCh2 + ch2Delta;
+                nextRow.Cells[ch2ReadingGridCol].Value = convertToFloatwithDecimal(nextRowCh2,decimalPlace);
+            }
+            return nextRow;
+        }
+        private float convertGridCellToFloat(DataGridViewCell cell)
+        {
+            float retVal = 0;
+            if (cell.Value!=null)
+            {
+                try
+                {
+                    retVal = Single.Parse(cell.Value.ToString());
+                }
+                catch { retVal = 0; }
+            }
+            return retVal;
+        }
+        //get difference between each row for certain Column in Torque Chart
+        private float getTorqueChartDelta (float value1, float value2,int pointCount)
+        {
+            float returnDelta = 0;
+            if (pointCount>0)
+                returnDelta = (value2 - value1) / 10;
+            return returnDelta;
+        }
+        
+        private float getDelta(DataGridView grid, int colIndex)
+        {
+            float retDelta = 0;
+            if ((grid.Rows[0].Cells[colIndex].Value.ToString() != "") &&
+                    (grid.Rows[1].Cells[colIndex].Value.ToString() != ""))
+            {
+                try
+                {
+                    float row0 = 0, row1 = 0;
+                    row0 = convertGridCellToFloat(grid.Rows[0].Cells[colIndex]);
+                    row1 = convertGridCellToFloat(grid.Rows[1].Cells[colIndex]);
+                    retDelta = (row1 - row0) / 10;
+                }
+                catch { retDelta = 0; }
+            }
+            return retDelta;
+        }
+        //get the value to start for each block in Torque Chart
+        private float getbeginBlockVal(float endVal, float delta)
+        {
+            float retVal = 0;
+            if ((endVal!=0)&&(delta!=0))
+                retVal=endVal - (9 * delta);
+            return retVal;
+        }
         //Write passed in Datagridview into worksheet
         //Changed 9/12/18
-        private Excel.Worksheet writeSingleGridToExcel(ref DataGridView thisGrid, string quadrantName, Excel.Worksheet wsheet, int startCol, int startRow)
+        private Excel.Worksheet writeSingleGridToExcel(ref DataGridView thisGrid, string quadrantName, Excel.Worksheet wsheet, int startCol, int startRow, bool isTorqueChart)
         {
             int colNum = startCol;
             int colRange = thisGrid.ColumnCount;
             int rowNum = startRow;
             int rowRange = thisGrid.RowCount - 1;
-
             //Write column headers
-            //Todo: before write the reading, write quadrantName
             //Write quadrant Name
             string cellID = "";
             cellID = convertNumToColCharExcel(colNum).ToString() + rowNum;
             wsheet = writeCellToExcelWorkBook(cellID, quadrantName, wsheet);
 
-            //Write the reading of the quadrant
+            //Write the header of each column
             rowNum++;
             foreach (DataGridViewColumn gridCol in thisGrid.Columns)
             {
@@ -6793,9 +6880,20 @@ namespace WindowsFormsApplication1
             colNum = startCol;//reset colNum to A
             rowNum++;//go to next row
 
-            float[,] floatArr = convertGridDatatoFloats(thisGrid, rowRange, colRange);
+            //Write actual readings into Excel
+            float[,] floatArr;
+            
+            if (isTorqueChart==true)
+            {
+                rowRange = 10*(thisGrid.Rows.Count-1);
+                floatArr = convertGridDatatoFloatsTorqueChart(thisGrid, rowRange, colRange);
+            }
+            else
+            {
+                floatArr = convertGridDatatoFloats(thisGrid, rowRange, colRange);
+            }
             Excel.Range datarange = (Excel.Range)wsheet.Cells[rowNum, convertNumToColCharExcel(colNum).ToString()];//Set initial cell of datarange
-            datarange = datarange.get_Resize(rowRange, colRange);//Set the size of ddddatarange
+            datarange = datarange.get_Resize(rowRange, colRange);//Set the size of datarange
             datarange.set_Value(Excel.XlRangeValueDataType.xlRangeValueDefault, floatArr);
 
             rowNum += rowRange;
@@ -6804,10 +6902,10 @@ namespace WindowsFormsApplication1
         }
 
         //Go through each char in testOrder and write corresponding testGrid to Excel worksheet
-        //Changed 9/12/18
-        private Excel.Worksheet writeAllTestGridsToExcelWsheet(Excel.Worksheet wsheet, string testOrder)
-        {
+        //Changed 9/18/19
 
+        private Excel.Worksheet writeAllTestGridsToExcelWsheet(Excel.Worksheet wsheet, string testOrder, bool isTorqueChart)
+        {
             foreach (char chrTestOrder in testOrder)
             {
                 int startCol = 0;
@@ -6815,26 +6913,74 @@ namespace WindowsFormsApplication1
                 switch (chrTestOrder)
                 {
                     case '1':
-                        wsheet = writeSingleGridToExcel(ref AFCW_grid, AFCW, wsheet, startCol, startRow);
+                        wsheet = writeSingleGridToExcel(ref AFCW_grid, AFCW, wsheet, startCol, startRow,isTorqueChart);
                         break;
                     case '2':
-                        wsheet = writeSingleGridToExcel(ref AFCCW_grid, AFCCW, wsheet, startCol, startRow);
+                        wsheet = writeSingleGridToExcel(ref AFCCW_grid, AFCCW, wsheet, startCol, startRow,isTorqueChart);
                         break;
                     case '3':
-                        wsheet = writeSingleGridToExcel(ref ALCW_grid, ALCW, wsheet, startCol, startRow);
+                        wsheet = writeSingleGridToExcel(ref ALCW_grid, ALCW, wsheet, startCol, startRow,isTorqueChart);
                         break;
                     case '4':
-                        wsheet = writeSingleGridToExcel(ref ALCCW_grid, ALCCW, wsheet, startCol, startRow);
+                        wsheet = writeSingleGridToExcel(ref ALCCW_grid, ALCCW, wsheet, startCol, startRow,isTorqueChart);
                         break;
                 }
             }
             return wsheet;
         }
-
+        //Added 9/12/19
+        //Draw graph to CalCert excel export
         private int nextAvaiExcelRow;
+        private Excel.Worksheet drawGraphToExcel(Excel.Worksheet xlWorkSheet, int startRow, int endRow, int col, string chartTitle)
+        {
+            object misValue = System.Reflection.Missing.Value;
+            //init Chart setting
+            Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlWorkSheet.ChartObjects(Type.Missing);
+            Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(200, 80, 500, 250);
+            Excel.Chart chartPage = myChart.Chart;
 
+            //set line chart
+            chartPage.ChartType = Excel.XlChartType.xlXYScatterLines;
+
+            chartPage.HasTitle = true;
+            chartPage.ChartTitle.Text = chartTitle;
+            chartPage.ChartTitle.Font.Size = 12;
+            chartPage.HasLegend = true;
+
+            //Set values for target,reading,low high
+            string begin_reading, end_reading;
+            Excel.SeriesCollection oSeries = (Excel.SeriesCollection)myChart.Chart.SeriesCollection(misValue);
+            Excel.Series reading = oSeries.NewSeries();
+            reading.Name = colName;
+            reading.Border.Color = Color.Blue;
+
+            begin_reading = getColLetter(0) + (startRow + 1);
+            end_reading = getColLetter(0) + endRow;
+            Excel.Range reading_range = xlWorkSheet.get_Range(begin_reading, end_reading);
+
+            reading.Values = reading_range;
+
+            return xlWorkSheet;
+
+        }
+        //convert char of grid sequence to name of grid
+        //Added 9/12/19
+        private string getGridNameToGraph(char sequenceChr)
+        {
+            string gridNameToGraph = "";
+            if (AFCWChart_radio.Checked == true)
+                gridNameToGraph = AFCW;
+            if (ALCWChart_radio.Checked == true)
+                gridNameToGraph = ALCW;
+            if (AFCCWChart_radio.Checked == true)
+                gridNameToGraph = AFCCW;
+            if (ALCCWChart_radio.Checked == true)
+                gridNameToGraph = ALCCW;
+            return gridNameToGraph;
+        }
+        //Changed 9/12/19
         //Write Tools info and testGridView Readings into Excel file
-        private void saveTestResultExcel(string excelPath, string testOrder)
+        private void saveTestResultExcel(string excelPath, string testOrder, bool isGraph,bool isTorqueChart)
         {
             //Init Excel to write
             Excel.Application xlApp;
@@ -6850,8 +6996,14 @@ namespace WindowsFormsApplication1
             //Write Tools headers and Tools value
             xlWorkSheet = writeAllToolsInfoExcelWorkbook(xlWorkSheet, nextAvaiExcelRow);
 
+            int startTestGridRow = nextAvaiExcelRow;
             //Write all testGrid to excelworksheet
-            xlWorkSheet = writeAllTestGridsToExcelWsheet(xlWorkSheet, testOrder);
+            xlWorkSheet = writeAllTestGridsToExcelWsheet(xlWorkSheet, testOrder,isTorqueChart);
+
+            //Draw graph for first quadrant if required
+            string gridName = getGridNameToGraph(testOrder[0]);
+            if ((gridName != "") && (isGraph == true))
+                xlWorkSheet = drawGraphToExcel(xlWorkSheet, startTestGridRow + 1, nextAvaiExcelRow - 1, 0, gridName);
 
             //Save and release Excel object
             xlWorkBook.SaveAs(excelPath, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
@@ -6865,11 +7017,10 @@ namespace WindowsFormsApplication1
         }
 
         //Handle exporting excel datas in cal Tab
-        private void calTab_excelExport()
+        private void calTab_excelExport(bool isGraph,bool isTorqueChart)
         {
             string fileName = currentDualSerie + "-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xls";
             string path = Path.Combine(getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName), fileName);
-
             if (getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName) == "")
             {
                 MessageBox.Show(quickExportError, "Define Quick Export (File --> Define Quick Export)");
@@ -6879,7 +7030,7 @@ namespace WindowsFormsApplication1
                 nextAvaiExcelRow = 1;
                 try
                 {
-                    saveTestResultExcel(path, currTestSetup.testOrder);
+                    saveTestResultExcel(path, currTestSetup.testOrder, isGraph, isTorqueChart);
                     var dialogResult =
                         MessageBox.Show(
                             "Excel exported successfully at location: " + path +
@@ -6927,7 +7078,7 @@ namespace WindowsFormsApplication1
         {
             if (testSetup_groupBox.Enabled == false)
             {
-                calTab_excelExport();
+                calTab_excelExport(false,false);
             }
         }
 
@@ -6987,74 +7138,39 @@ namespace WindowsFormsApplication1
 
 
         //Assign color code for each Data Row of passed in gridview
+        //changed 6/9/19
         private void reevaluatePassFailData(ref DataGridView thisGrid, int posOrneg)
         {
             try
             {
                 testType = testType_comboBox.SelectedIndex + 1;
 
-                float ch1Reading = 0, ch2Reading = 0, target = 0, low = 0, high = 0;
+                float target = 0, low = 0, high = 0, reading = 0;
                 int gridRowIndex = 0;
 
                 foreach (DataGridViewRow gridRow in thisGrid.Rows)
                 {
                     bool floatValid = true;
-                    if (testType == 1)//Single Channel test, compare Channel 1 Reading with Target
+                    try
                     {
-                        //Try to get the float value of Reading, target,low, high
-                        try
-                        {
-                            ch1Reading = Single.Parse(gridRow.Cells[chan1Readings_colName].Value.ToString()) * posOrneg;
-                            target = Single.Parse(gridRow.Cells[target_colName].Value.ToString()) * posOrneg;
-                            low = Single.Parse(gridRow.Cells[low_colName].Value.ToString()) * posOrneg;
-                            high = Single.Parse(gridRow.Cells[high_colName].Value.ToString()) * posOrneg;
-                        }
-                        catch
-                        {
-                            floatValid = false;
-                        }
-
-                        if (floatValid == true)
-                        {
-                            changeGridColor(ref thisGrid, gridRowIndex, ch1Reading, target, low, high);
-                        }
-                        else//if the datas can't be converted to float, clear out the color
-                        {
-                            ch1Reading = 0;
-                            target = 0;
-                            low = 0;
-                            high = 0;
-                            changeGridColor(ref thisGrid, gridRowIndex, ch1Reading, target, low, high);
-                        }
+                        target = Single.Parse(gridRow.Cells[target_colName].Value.ToString()) * posOrneg;
+                        low = Single.Parse(gridRow.Cells[low_colName].Value.ToString()) * posOrneg;
+                        high = Single.Parse(gridRow.Cells[high_colName].Value.ToString()) * posOrneg;
+                        if ((testType == 1) || ((testType == 2) && (ch1Target_select.Checked)))
+                            reading = Single.Parse(gridRow.Cells[chan1Readings_colName].Value.ToString()) * posOrneg;
+                        else if ((testType == 2) && (ch2Target_select.Checked))
+                            reading = Single.Parse(gridRow.Cells[chan2Readings_colName].Value.ToString()) * posOrneg;
                     }
-                    if (testType == 2)
+                    catch { floatValid = false; }
+                    if (floatValid == false)
                     {
-                        //Dual Channel Test
-                        try
-                        {
-                            ch2Reading = Single.Parse(gridRow.Cells[chan2Readings_colName].Value.ToString()) * posOrneg;
-                            target = Single.Parse(gridRow.Cells[target_colName].Value.ToString()) * posOrneg;
-                            low = Single.Parse(gridRow.Cells[low_colName].Value.ToString()) * posOrneg;
-                            high = Single.Parse(gridRow.Cells[high_colName].Value.ToString()) * posOrneg;
-                        }
-                        catch
-                        {
-                            floatValid = false;
-                        }
-
-                        if (floatValid == true)
-                        {
-                            changeGridColor(ref thisGrid, gridRowIndex, ch2Reading, target, low, high);
-                        }
-                        else
-                        {
-                            ch2Reading = 0;
-                            target = 0;
-                            low = 0;
-                            high = 0;
-                            changeGridColor(ref thisGrid, gridRowIndex, ch2Reading, target, low, high);
-                        }
+                        reading = 0;
+                        target = 0;
+                        low = 0;
+                        high = 0;
                     }
+                    changeGridColor(ref thisGrid, gridRowIndex, reading, target, low, high);
+
                     gridRowIndex++;
                 }
             }
@@ -7949,10 +8065,16 @@ namespace WindowsFormsApplication1
 
                     //if the last row of this grid is written and this Tool has pauseToolSetup, then pause test
                     int firstRow = 0;
-                    if (((thisGrid.Rows[thisGrid.Rows.Count - 2].Cells[ch1ReadingGridCol].Value.ToString() != "") || (thisGrid.Rows[thisGrid.Rows.Count - 2].Cells[ch2ReadingGridCol].Value.ToString() != "")) &&
-                        (getBoolValofTableCell(currToolTable, firstRow, pack.setupPause_colName)))
+                    try
+                    {
+                        if (((thisGrid.Rows[thisGrid.Rows.Count - 2].Cells[ch1ReadingGridCol].Value.ToString() != "") || (thisGrid.Rows[thisGrid.Rows.Count - 2].Cells[ch2ReadingGridCol].Value.ToString() != "")) &&
+                            (getBoolValofTableCell(currToolTable, firstRow, pack.setupPause_colName)))
+                            changePauseContinueTestState();
+                    }
+                    catch (IndexOutOfRangeException)
+                    {
                         changePauseContinueTestState();
-
+                    }
                     break;//break out of loop after write
                 }
                 rowIndex++;
@@ -8408,12 +8530,91 @@ namespace WindowsFormsApplication1
                 LSL_txt.Enabled = true;
             }
         }
-        
+
         /////**********************************Start Connect and Handle Tools Database****************************************
         //Variables for Tools Database Connect
         private TcpClient clientSocket = new TcpClient();
         private static Client pack;
         private const string IP = "";
+        private List<double> getCurrGridTargets(DataGridView grid)
+        {
+            List<double> returnTargets = new List<double>();
+            string targetCol = currTestSetup.get_targetTableHeader();
+            foreach (DataGridViewRow gridRow in grid.Rows)
+            {
+                if (!gridRow.IsNewRow)
+                    returnTargets.Add(Convert.ToDouble(gridRow.Cells[targetCol].Value));
+            }
+
+            return returnTargets;
+        }
+        private void writeStreamToCurrentCalTest(DataTable streamResultTable)
+        {
+            string[] reading_arr = new string[] { };
+            foreach (DataRow dtRow in streamResultTable.Rows)
+            {
+                if (currTestSetup.testType == "1")
+                {
+                    reading_arr = new string[] { dtRow[1].ToString() };
+                }
+                else if (currTestSetup.testType == "2")
+                {
+                    reading_arr = new string[] { dtRow[1].ToString(), dtRow[2].ToString() };
+                }
+                writeReadingsToTest(reading_arr, currTestSetup.testOrder);
+            }
+        }
+        private void stream_btn_Click(object sender, EventArgs e)
+        {
+            timer2.Stop();
+            List<double> Targets = new List<double> { };
+            char currGridNum = lookForActiveTestGrid();
+            switch (currGridNum)
+            {
+                case '1':
+                    Targets = getCurrGridTargets(AFCW_grid);
+                    break;
+                case '2':
+                    Targets = getCurrGridTargets(AFCCW_grid);
+                    break;
+                case '3':
+                    Targets = getCurrGridTargets(ALCW_grid);
+                    break;
+                case '4':
+                    Targets = getCurrGridTargets(ALCCW_grid);
+                    break;
+            }
+            int channelCount = 1;
+            if (currTestSetup.testType == "1")
+                channelCount = 1;
+            else if (currTestSetup.testType == "2")
+                channelCount = 2;
+
+
+            int target_Channel = 1;
+            if ((ch1Target_select.Checked) || (channelCount == 1))
+                target_Channel = 1;
+            else if (ch2Target_select.Checked)
+                target_Channel = 2;
+            StreamingForm streamingForm = new StreamingForm(serialPort1,serialPort2, Targets, target_Channel, channelCount);
+            streamingForm.ShowDialog();
+
+            //Write to current Test
+            if (streamingForm.isSave == true)
+                writeStreamToCurrentCalTest(streamingForm.returnResultTable);
+
+            streamingForm.Dispose();
+
+            timer2.Start();
+        }
+
+        private void ExportChart_btn_Click(object sender, EventArgs e)
+        {
+            if (testSetup_groupBox.Enabled == false)
+            {
+                calTab_excelExport(true,true);
+            }
+        }
 
         private const int portNum = 58008;
         private const int major = 1;
@@ -9063,10 +9264,10 @@ namespace WindowsFormsApplication1
                     if (TabPages.SelectedTab.Name == calTabName)
                     {
                         if (toolOperatorID_txt.Text != "")
-                            toolInfoStr += "Operator: " + toolOperatorID_txt.Text+newline;
+                            toolInfoStr += "Operator: " + toolOperatorID_txt.Text + newline;
 
                         DateTime today = DateTime.Now;
-                        toolInfoStr += "Cal Date: " + today.ToString("MM-dd-yyyy")+newline;
+                        toolInfoStr += $"Cal Date: {today.ToString("MM-dd-yyyy")}{newline}";
                         if (recall_txt.Text != "")
                         {
                             int duration = 0;
@@ -9079,7 +9280,7 @@ namespace WindowsFormsApplication1
                                 Debug.Write(e.Message);
                             }
                             DateTime dueDate = today.AddMonths(duration);
-                            toolInfoStr +="Due Date: "+dueDate.ToString("MM-dd-yyyy") + newline;
+                            toolInfoStr += "Due Date: " + dueDate.ToString("MM-dd-yyyy") + newline;
                         }
                     }
                 }
