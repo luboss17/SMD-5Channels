@@ -5907,11 +5907,7 @@ namespace WindowsFormsApplication1
 
             if (frm.excelExport == true)
             {//Export Excel
-<<<<<<< HEAD
                 calTab_excelExport(false,false);
-=======
-                calTab_excelExport(false);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             }
             if (frm.certExport == true)
             {
@@ -6891,12 +6887,6 @@ namespace WindowsFormsApplication1
 
         //Go through each char in testOrder and write corresponding testGrid to Excel worksheet
         //Changed 9/18/19
-<<<<<<< HEAD
-=======
-
-        private Excel.Worksheet writeAllTestGridsToExcelWsheet(Excel.Worksheet wsheet, string testOrder)
-        {
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
 
         private Excel.Worksheet writeAllTestGridsToExcelWsheet(Excel.Worksheet wsheet, string testOrder, bool isTorqueChart)
         {
@@ -6907,12 +6897,7 @@ namespace WindowsFormsApplication1
                 switch (chrTestOrder)
                 {
                     case '1':
-<<<<<<< HEAD
                         wsheet = writeSingleGridToExcel(ref AFCW_grid, AFCW, wsheet, startCol, startRow,isTorqueChart);
-=======
-                        wsheet=
-                        wsheet = writeSingleGridToExcel(ref AFCW_grid, AFCW, wsheet, startCol, startRow);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
                         break;
                     case '2':
                         wsheet = writeSingleGridToExcel(ref AFCCW_grid, AFCCW, wsheet, startCol, startRow,isTorqueChart);
@@ -6979,11 +6964,7 @@ namespace WindowsFormsApplication1
         }
         //Changed 9/12/19
         //Write Tools info and testGridView Readings into Excel file
-<<<<<<< HEAD
         private void saveTestResultExcel(string excelPath, string testOrder, bool isGraph,bool isTorqueChart)
-=======
-        private void saveTestResultExcel(string excelPath, string testOrder, bool isGraph)
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
         {
             //Init Excel to write
             Excel.Application xlApp;
@@ -7056,11 +7037,7 @@ namespace WindowsFormsApplication1
         }
 
         //Handle exporting excel datas in cal Tab
-<<<<<<< HEAD
         private void calTab_excelExport(bool isGraph,bool isTorqueChart)
-=======
-        private void calTab_excelExport(bool isGraph)
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
         {
             string fileName = currentDualSerie + "-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xls";
             string path = Path.Combine(getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName), fileName);
@@ -7073,11 +7050,7 @@ namespace WindowsFormsApplication1
                 nextAvaiExcelRow = 1;
                 try
                 {
-<<<<<<< HEAD
                     saveTestResultExcel(path, currTestSetup.testOrder, isGraph, isTorqueChart);
-=======
-                    saveTestResultExcel(path, currTestSetup.testOrder, isGraph);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
                     var dialogResult =
                         MessageBox.Show(
                             "Excel exported successfully at location: " + path +
@@ -7125,11 +7098,7 @@ namespace WindowsFormsApplication1
         {
             if (testSetup_groupBox.Enabled == false)
             {
-<<<<<<< HEAD
                 calTab_excelExport(false,false);
-=======
-                calTab_excelExport(false);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             }
         }
 
@@ -8616,28 +8585,12 @@ namespace WindowsFormsApplication1
                 writeReadingsToTest(reading_arr, currTestSetup.testOrder);
             }
         }
-<<<<<<< HEAD
         private void stream_btn_Click(object sender, EventArgs e)
         {
             timer2.Stop();
             List<double> Targets = new List<double> { };
             char currGridNum = lookForActiveTestGrid();
             switch (currGridNum)
-=======
-        //Todo: Decide when to flush masterStream, after selecting new test?
-        MasterStreamData masterStream = new MasterStreamData();
-        //Save streamTable to the specified quadrant stream
-        private void saveStreamDataForQuadrant(DataTable streamTable,char quadrantIndex)
-        {
-            masterStream.writeToStreamTable(quadrantIndex,streamTable);
-        }
-        //Open Stream Form for specific Quadrant
-        private void startQuadrantStream(char quadrantIndex,bool isOpenOldStream)
-        {
-            //put Quadrant's targets into Targets
-            List<double> Targets = new List<double> { };
-            switch (quadrantIndex)
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             {
                 case '1':
                     Targets = getCurrGridTargets(AFCW_grid);
@@ -8652,92 +8605,34 @@ namespace WindowsFormsApplication1
                     Targets = getCurrGridTargets(ALCCW_grid);
                     break;
             }
-<<<<<<< HEAD
-=======
-
-            timer2.Stop();
-            //Define Single or Dual Channel Stream
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             int channelCount = 1;
             if (currTestSetup.testType == "1")
                 channelCount = 1;
             else if (currTestSetup.testType == "2")
                 channelCount = 2;
 
-<<<<<<< HEAD
-
-=======
-            //Define target channel
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             int target_Channel = 1;
             if ((ch1Target_select.Checked) || (channelCount == 1))
                 target_Channel = 1;
             else if (ch2Target_select.Checked)
                 target_Channel = 2;
-<<<<<<< HEAD
             StreamingForm streamingForm = new StreamingForm(serialPort1,serialPort2, Targets, target_Channel, channelCount);
-=======
-            StreamingForm streamingForm;
-            //Start streaming
-            if (isOpenOldStream == false)
-            {
-                streamingForm = new StreamingForm(isOpenOldStream, serialPort1, Targets, target_Channel, channelCount);
-            }
-            else
-                streamingForm = new StreamingForm(isOpenOldStream, serialPort1, Targets, target_Channel, channelCount,masterStream.getQuadrantStreamTable(quadrantIndex));
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             streamingForm.ShowDialog();
 
             //Write to current Test
             if (streamingForm.isSave == true)
-<<<<<<< HEAD
                 writeStreamToCurrentCalTest(streamingForm.returnResultTable);
 
             streamingForm.Dispose();
 
             timer2.Start();
         }
-=======
-            {
-                writeStreamToCurrentCalTest(streamingForm.returnResultTable);
-                saveStreamDataForQuadrant(streamingForm.streamTable, quadrantIndex);
-            }
-
-            streamingForm.Dispose();
-            timer2.Start();
-        }
-        private void stream_btn_Click(object sender, EventArgs e)
-        {
-            bool isOpenOldStream = false;
-            char currGridNum = lookForActiveTestGrid();
-            startQuadrantStream(currGridNum,isOpenOldStream);
-        }
-
-        private void openOldStream_btn_Click(object sender, EventArgs e)
-        {
-            bool isOpenOldStream = true;
-            char quadrantToViewStream = '1';
-            if (AFCWChart_radio.Checked==true)
-                quadrantToViewStream = '1';
-            else if (AFCCWChart_radio.Checked == true)
-                quadrantToViewStream = '2';
-            else if (ALCWChart_radio.Checked == true)
-                quadrantToViewStream = '3';
-            else if (ALCCWChart_radio.Checked == true)
-                quadrantToViewStream = '4';
-            startQuadrantStream(quadrantToViewStream,isOpenOldStream);
-        }
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
 
         private void ExportChart_btn_Click(object sender, EventArgs e)
         {
             if (testSetup_groupBox.Enabled == false)
             {
-<<<<<<< HEAD
                 calTab_excelExport(true,true);
-=======
-                calTab_excelExport(true);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             }
         }
 
