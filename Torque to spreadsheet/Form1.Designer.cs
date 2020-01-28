@@ -33,11 +33,10 @@ namespace WindowsFormsApplication1
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -308,19 +307,11 @@ namespace WindowsFormsApplication1
             this.continue_pauseTest_btn = new System.Windows.Forms.Button();
             this.captureBtn_calTab = new System.Windows.Forms.Button();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
-<<<<<<< HEAD
-=======
-            this.openOldStream_btn = new System.Windows.Forms.Button();
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.ALCCWChart_radio = new System.Windows.Forms.RadioButton();
             this.AFCCWChart_radio = new System.Windows.Forms.RadioButton();
             this.ALCWChart_radio = new System.Windows.Forms.RadioButton();
             this.AFCWChart_radio = new System.Windows.Forms.RadioButton();
             this.exportChart_btn = new System.Windows.Forms.Button();
-<<<<<<< HEAD
-            this.stream_btn = new System.Windows.Forms.Button();
-=======
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.exportAverage_chckbox = new System.Windows.Forms.CheckBox();
             this.excelExport_calTab_btn = new System.Windows.Forms.Button();
             this.copyAllStruct_btn = new System.Windows.Forms.Button();
@@ -521,7 +512,7 @@ namespace WindowsFormsApplication1
             // 
             this.toolStripStatusLabel1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(75, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(75, 12);
             this.toolStripStatusLabel1.Text = "Port: ";
             this.toolStripStatusLabel1.MouseHover += new System.EventHandler(this.toolStripStatusLabel1_MouseHover);
             // 
@@ -530,7 +521,7 @@ namespace WindowsFormsApplication1
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(22, 20);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(22, 18);
             this.toolStripDropDownButton1.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStripDropDownButton1_DropDownItemClicked);
             this.toolStripDropDownButton1.Click += new System.EventHandler(this.toolStripDropDownButton1_Click);
             this.toolStripDropDownButton1.MouseHover += new System.EventHandler(this.toolStripDropDownButton1_MouseHover);
@@ -539,25 +530,26 @@ namespace WindowsFormsApplication1
             // 
             this.toolStripStatusLabel2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(188, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(188, 12);
             this.toolStripStatusLabel2.Text = " Status: Closed";
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(245, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(245, 12);
             this.toolStripStatusLabel3.Text = " Spreadsheet Mode:";
             // 
             // SpreadSheetModeLabel
             // 
             this.SpreadSheetModeLabel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SpreadSheetModeLabel.Name = "SpreadSheetModeLabel";
-            this.SpreadSheetModeLabel.Size = new System.Drawing.Size(150, 17);
+            this.SpreadSheetModeLabel.Size = new System.Drawing.Size(150, 12);
             this.SpreadSheetModeLabel.Text = "Deactivated";
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openMenuItem,
@@ -567,11 +559,7 @@ namespace WindowsFormsApplication1
             this.printToolToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-<<<<<<< HEAD
             this.menuStrip1.Size = new System.Drawing.Size(1784, 40);
-=======
-            this.menuStrip1.Size = new System.Drawing.Size(1731, 24);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -587,34 +575,34 @@ namespace WindowsFormsApplication1
             this.exitToolStripMenuItem});
             this.openMenuItem.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.openMenuItem.Name = "openMenuItem";
-            this.openMenuItem.Size = new System.Drawing.Size(58, 36);
+            this.openMenuItem.Size = new System.Drawing.Size(66, 36);
             this.openMenuItem.Text = "File";
             // 
             // openStripMenuItem
             // 
             this.openStripMenuItem.Name = "openStripMenuItem";
-            this.openStripMenuItem.Size = new System.Drawing.Size(350, 38);
+            this.openStripMenuItem.Size = new System.Drawing.Size(385, 44);
             this.openStripMenuItem.Text = "Open";
             this.openStripMenuItem.Click += new System.EventHandler(this.openStripMenuItem_Click);
             // 
             // newTestToolStripMenuItem
             // 
             this.newTestToolStripMenuItem.Name = "newTestToolStripMenuItem";
-            this.newTestToolStripMenuItem.Size = new System.Drawing.Size(350, 38);
+            this.newTestToolStripMenuItem.Size = new System.Drawing.Size(385, 44);
             this.newTestToolStripMenuItem.Text = "Restart App";
             this.newTestToolStripMenuItem.Click += new System.EventHandler(this.newTestToolStripMenuItem_Click);
             // 
             // defineQuickExportPathToolStripMenuItem
             // 
             this.defineQuickExportPathToolStripMenuItem.Name = "defineQuickExportPathToolStripMenuItem";
-            this.defineQuickExportPathToolStripMenuItem.Size = new System.Drawing.Size(350, 38);
+            this.defineQuickExportPathToolStripMenuItem.Size = new System.Drawing.Size(385, 44);
             this.defineQuickExportPathToolStripMenuItem.Text = "Define Quick Export Path";
             this.defineQuickExportPathToolStripMenuItem.Click += new System.EventHandler(this.defineQuickExportPathToolStripMenuItem_Click);
             // 
             // streamDataToolStripMenuItem
             // 
             this.streamDataToolStripMenuItem.Name = "streamDataToolStripMenuItem";
-            this.streamDataToolStripMenuItem.Size = new System.Drawing.Size(350, 38);
+            this.streamDataToolStripMenuItem.Size = new System.Drawing.Size(385, 44);
             this.streamDataToolStripMenuItem.Text = "Stream Data";
             this.streamDataToolStripMenuItem.Visible = false;
             this.streamDataToolStripMenuItem.Click += new System.EventHandler(this.streamDataToolStripMenuItem_Click);
@@ -622,36 +610,28 @@ namespace WindowsFormsApplication1
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(350, 38);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(385, 44);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(350, 38);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(385, 44);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // toolsManagerToolStripMenuItem
             // 
             this.toolsManagerToolStripMenuItem.Name = "toolsManagerToolStripMenuItem";
-<<<<<<< HEAD
-            this.toolsManagerToolStripMenuItem.Size = new System.Drawing.Size(184, 36);
-=======
-            this.toolsManagerToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.toolsManagerToolStripMenuItem.Size = new System.Drawing.Size(192, 36);
             this.toolsManagerToolStripMenuItem.Text = "Tools Manager";
             this.toolsManagerToolStripMenuItem.Click += new System.EventHandler(this.toolsManagerToolStripMenuItem_Click);
             // 
             // testManagerToolStripMenuItem
             // 
             this.testManagerToolStripMenuItem.Name = "testManagerToolStripMenuItem";
-<<<<<<< HEAD
-            this.testManagerToolStripMenuItem.Size = new System.Drawing.Size(171, 36);
-=======
-            this.testManagerToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.testManagerToolStripMenuItem.Size = new System.Drawing.Size(179, 36);
             this.testManagerToolStripMenuItem.Text = "Test Manager";
             this.testManagerToolStripMenuItem.Click += new System.EventHandler(this.testManagerToolStripMenuItem_Click);
             // 
@@ -668,7 +648,7 @@ namespace WindowsFormsApplication1
             this.autoUpdateMenuItem,
             this.updateToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(111, 36);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(119, 36);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // autoConnectToolStripMenuItem
@@ -677,7 +657,7 @@ namespace WindowsFormsApplication1
             this.autoConnectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.startMinimizedToolStripMenuItem});
             this.autoConnectToolStripMenuItem.Name = "autoConnectToolStripMenuItem";
-            this.autoConnectToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.autoConnectToolStripMenuItem.Size = new System.Drawing.Size(412, 44);
             this.autoConnectToolStripMenuItem.Text = "Auto Connect";
             this.autoConnectToolStripMenuItem.Visible = false;
             this.autoConnectToolStripMenuItem.Click += new System.EventHandler(this.autoConnectToolStripMenuItem_Click);
@@ -687,7 +667,7 @@ namespace WindowsFormsApplication1
             this.startMinimizedToolStripMenuItem.CheckOnClick = true;
             this.startMinimizedToolStripMenuItem.Enabled = false;
             this.startMinimizedToolStripMenuItem.Name = "startMinimizedToolStripMenuItem";
-            this.startMinimizedToolStripMenuItem.Size = new System.Drawing.Size(282, 38);
+            this.startMinimizedToolStripMenuItem.Size = new System.Drawing.Size(317, 44);
             this.startMinimizedToolStripMenuItem.Text = "Start Minimized";
             this.startMinimizedToolStripMenuItem.Click += new System.EventHandler(this.startMinimizedToolStripMenuItem_Click);
             this.startMinimizedToolStripMenuItem.EnabledChanged += new System.EventHandler(this.startMinimizedToolStripMenuItem_EnabledChanged);
@@ -696,7 +676,7 @@ namespace WindowsFormsApplication1
             // 
             this.alwaysOnTopToolStripMenuItem.CheckOnClick = true;
             this.alwaysOnTopToolStripMenuItem.Name = "alwaysOnTopToolStripMenuItem";
-            this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.alwaysOnTopToolStripMenuItem.Size = new System.Drawing.Size(412, 44);
             this.alwaysOnTopToolStripMenuItem.Text = "Always on Top";
             this.alwaysOnTopToolStripMenuItem.Click += new System.EventHandler(this.alwaysOnTopToolStripMenuItem_Click);
             // 
@@ -706,28 +686,20 @@ namespace WindowsFormsApplication1
             this.includeTimeToolStripMenuItem,
             this.includeDateToolStripMenuItem});
             this.includeDateStampToolStripMenuItem.Name = "includeDateStampToolStripMenuItem";
-            this.includeDateStampToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.includeDateStampToolStripMenuItem.Size = new System.Drawing.Size(412, 44);
             this.includeDateStampToolStripMenuItem.Text = "Time/Date Stamp";
             // 
             // includeTimeToolStripMenuItem
             // 
             this.includeTimeToolStripMenuItem.Name = "includeTimeToolStripMenuItem";
-<<<<<<< HEAD
-            this.includeTimeToolStripMenuItem.Size = new System.Drawing.Size(252, 38);
-=======
-            this.includeTimeToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.includeTimeToolStripMenuItem.Size = new System.Drawing.Size(287, 44);
             this.includeTimeToolStripMenuItem.Text = "Include Time";
             this.includeTimeToolStripMenuItem.Click += new System.EventHandler(this.includeTimeToolStripMenuItem_Click);
             // 
             // includeDateToolStripMenuItem
             // 
             this.includeDateToolStripMenuItem.Name = "includeDateToolStripMenuItem";
-<<<<<<< HEAD
-            this.includeDateToolStripMenuItem.Size = new System.Drawing.Size(252, 38);
-=======
-            this.includeDateToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.includeDateToolStripMenuItem.Size = new System.Drawing.Size(287, 44);
             this.includeDateToolStripMenuItem.Text = "Include Date";
             this.includeDateToolStripMenuItem.Click += new System.EventHandler(this.includeDateToolStripMenuItem_Click);
             // 
@@ -737,7 +709,7 @@ namespace WindowsFormsApplication1
             this.showALLCOMAvailableToolStripMenuItem.CheckOnClick = true;
             this.showALLCOMAvailableToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showALLCOMAvailableToolStripMenuItem.Name = "showALLCOMAvailableToolStripMenuItem";
-            this.showALLCOMAvailableToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.showALLCOMAvailableToolStripMenuItem.Size = new System.Drawing.Size(412, 44);
             this.showALLCOMAvailableToolStripMenuItem.Text = "Show ALL COM available";
             this.showALLCOMAvailableToolStripMenuItem.Click += new System.EventHandler(this.showALLCOMAvailableToolStripMenuItem_Click);
             // 
@@ -747,20 +719,20 @@ namespace WindowsFormsApplication1
             this.enableLiveReadingToolStripMenuItem.CheckOnClick = true;
             this.enableLiveReadingToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.enableLiveReadingToolStripMenuItem.Name = "enableLiveReadingToolStripMenuItem";
-            this.enableLiveReadingToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.enableLiveReadingToolStripMenuItem.Size = new System.Drawing.Size(412, 44);
             this.enableLiveReadingToolStripMenuItem.Text = "Enable Live Reading";
             // 
             // overwriteDataAtCursorToolStripMenuItem
             // 
             this.overwriteDataAtCursorToolStripMenuItem.CheckOnClick = true;
             this.overwriteDataAtCursorToolStripMenuItem.Name = "overwriteDataAtCursorToolStripMenuItem";
-            this.overwriteDataAtCursorToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.overwriteDataAtCursorToolStripMenuItem.Size = new System.Drawing.Size(412, 44);
             this.overwriteDataAtCursorToolStripMenuItem.Text = "Overwrite Data at Cursor";
             // 
             // forceAutoClearToolStripMenuItem
             // 
             this.forceAutoClearToolStripMenuItem.Name = "forceAutoClearToolStripMenuItem";
-            this.forceAutoClearToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.forceAutoClearToolStripMenuItem.Size = new System.Drawing.Size(412, 44);
             this.forceAutoClearToolStripMenuItem.Text = "Force Auto-Clear";
             this.forceAutoClearToolStripMenuItem.Click += new System.EventHandler(this.forceAutoClearToolStripMenuItem_Click);
             // 
@@ -770,14 +742,14 @@ namespace WindowsFormsApplication1
             this.autoUpdateMenuItem.CheckOnClick = true;
             this.autoUpdateMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoUpdateMenuItem.Name = "autoUpdateMenuItem";
-            this.autoUpdateMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.autoUpdateMenuItem.Size = new System.Drawing.Size(412, 44);
             this.autoUpdateMenuItem.Text = "Auto Update";
             this.autoUpdateMenuItem.Click += new System.EventHandler(this.autoUpdateMenuItem_Click);
             // 
             // updateToolStripMenuItem
             // 
             this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(377, 38);
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(412, 44);
             this.updateToolStripMenuItem.Text = "Manual Update";
             this.updateToolStripMenuItem.Visible = false;
             this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
@@ -785,11 +757,7 @@ namespace WindowsFormsApplication1
             // printToolToolStripMenuItem
             // 
             this.printToolToolStripMenuItem.Name = "printToolToolStripMenuItem";
-<<<<<<< HEAD
-            this.printToolToolStripMenuItem.Size = new System.Drawing.Size(128, 36);
-=======
-            this.printToolToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.printToolToolStripMenuItem.Size = new System.Drawing.Size(136, 36);
             this.printToolToolStripMenuItem.Text = "Print Tool";
             this.printToolToolStripMenuItem.Click += new System.EventHandler(this.printToolToolStripMenuItem_Click);
             // 
@@ -960,11 +928,7 @@ namespace WindowsFormsApplication1
             this.dualChannelTab.Controls.Add(this.firstChannelGrid);
             this.dualChannelTab.Location = new System.Drawing.Point(8, 38);
             this.dualChannelTab.Name = "dualChannelTab";
-<<<<<<< HEAD
-            this.dualChannelTab.Size = new System.Drawing.Size(1674, 877);
-=======
-            this.dualChannelTab.Size = new System.Drawing.Size(1723, 1152);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.dualChannelTab.Size = new System.Drawing.Size(1768, 859);
             this.dualChannelTab.TabIndex = 5;
             this.dualChannelTab.Text = "Dual Channel";
             this.dualChannelTab.UseVisualStyleBackColor = true;
@@ -1012,6 +976,7 @@ namespace WindowsFormsApplication1
             this.dualMasterGrid.Location = new System.Drawing.Point(2012, 257);
             this.dualMasterGrid.Name = "dualMasterGrid";
             this.dualMasterGrid.ReadOnly = true;
+            this.dualMasterGrid.RowHeadersWidth = 82;
             this.dualMasterGrid.Size = new System.Drawing.Size(432, 601);
             this.dualMasterGrid.TabIndex = 75;
             this.dualMasterGrid.Visible = false;
@@ -1299,11 +1264,7 @@ namespace WindowsFormsApplication1
             this.comList4.ItemHeight = 25;
             this.comList4.Location = new System.Drawing.Point(9, 49);
             this.comList4.Name = "comList4";
-<<<<<<< HEAD
             this.comList4.Size = new System.Drawing.Size(191, 29);
-=======
-            this.comList4.Size = new System.Drawing.Size(191, 60);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.comList4.TabIndex = 1;
             // 
             // openCloseSecondPort
@@ -1351,6 +1312,7 @@ namespace WindowsFormsApplication1
             this.chan2Reading});
             this.dataGridView1.Location = new System.Drawing.Point(1492, 24);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.Size = new System.Drawing.Size(626, 227);
             this.dataGridView1.TabIndex = 88;
             this.dataGridView1.Visible = false;
@@ -1358,26 +1320,31 @@ namespace WindowsFormsApplication1
             // lowLimitCol
             // 
             this.lowLimitCol.HeaderText = "Low";
+            this.lowLimitCol.MinimumWidth = 10;
             this.lowLimitCol.Name = "lowLimitCol";
             // 
             // highLimitCol
             // 
             this.highLimitCol.HeaderText = "High";
+            this.highLimitCol.MinimumWidth = 10;
             this.highLimitCol.Name = "highLimitCol";
             // 
             // theoreticalTarget
             // 
             this.theoreticalTarget.HeaderText = "Theoretical Target";
+            this.theoreticalTarget.MinimumWidth = 10;
             this.theoreticalTarget.Name = "theoreticalTarget";
             // 
             // chan1Reading
             // 
             this.chan1Reading.HeaderText = "Channel 1";
+            this.chan1Reading.MinimumWidth = 10;
             this.chan1Reading.Name = "chan1Reading";
             // 
             // chan2Reading
             // 
             this.chan2Reading.HeaderText = "Channel 2";
+            this.chan2Reading.MinimumWidth = 10;
             this.chan2Reading.Name = "chan2Reading";
             // 
             // saveRun_button
@@ -1421,11 +1388,7 @@ namespace WindowsFormsApplication1
             this.serieListBox.Location = new System.Drawing.Point(1526, 629);
             this.serieListBox.Name = "serieListBox";
             this.serieListBox.ScrollAlwaysVisible = true;
-<<<<<<< HEAD
-            this.serieListBox.Size = new System.Drawing.Size(111, 112);
-=======
-            this.serieListBox.Size = new System.Drawing.Size(111, 105);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.serieListBox.Size = new System.Drawing.Size(111, 90);
             this.serieListBox.TabIndex = 83;
             this.serieListBox.Visible = false;
             this.serieListBox.SelectedIndexChanged += new System.EventHandler(this.serieListBox_SelectedIndexChanged);
@@ -1475,6 +1438,7 @@ namespace WindowsFormsApplication1
             this.noCurrDualMasterGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.noCurrDualMasterGrid.Location = new System.Drawing.Point(3, 51);
             this.noCurrDualMasterGrid.Name = "noCurrDualMasterGrid";
+            this.noCurrDualMasterGrid.RowHeadersWidth = 82;
             this.noCurrDualMasterGrid.Size = new System.Drawing.Size(438, 621);
             this.noCurrDualMasterGrid.TabIndex = 19;
             // 
@@ -1648,11 +1612,11 @@ namespace WindowsFormsApplication1
             // 
             // dualChart
             // 
-            chartArea4.Name = "ChartArea1";
-            this.dualChart.ChartAreas.Add(chartArea4);
-            legend4.Enabled = false;
-            legend4.Name = "Legend1";
-            this.dualChart.Legends.Add(legend4);
+            chartArea7.Name = "ChartArea1";
+            this.dualChart.ChartAreas.Add(chartArea7);
+            legend5.Enabled = false;
+            legend5.Name = "Legend1";
+            this.dualChart.Legends.Add(legend5);
             this.dualChart.Location = new System.Drawing.Point(8, 561);
             this.dualChart.Name = "dualChart";
             this.dualChart.Size = new System.Drawing.Size(798, 219);
@@ -1691,6 +1655,7 @@ namespace WindowsFormsApplication1
             this.secondChannelGridView.MultiSelect = false;
             this.secondChannelGridView.Name = "secondChannelGridView";
             this.secondChannelGridView.RowHeadersVisible = false;
+            this.secondChannelGridView.RowHeadersWidth = 82;
             this.secondChannelGridView.Size = new System.Drawing.Size(297, 190);
             this.secondChannelGridView.TabIndex = 12;
             this.secondChannelGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.secondChannelGridView_CellEndEdit);
@@ -1730,6 +1695,7 @@ namespace WindowsFormsApplication1
             this.firstChannelGrid.Location = new System.Drawing.Point(230, 367);
             this.firstChannelGrid.MultiSelect = false;
             this.firstChannelGrid.Name = "firstChannelGrid";
+            this.firstChannelGrid.RowHeadersWidth = 82;
             this.firstChannelGrid.Size = new System.Drawing.Size(297, 190);
             this.firstChannelGrid.TabIndex = 11;
             this.firstChannelGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.firstChannelGrid_CellContentClick);
@@ -1739,16 +1705,19 @@ namespace WindowsFormsApplication1
             // Column1
             // 
             this.Column1.HeaderText = "Sample#";
+            this.Column1.MinimumWidth = 10;
             this.Column1.Name = "Column1";
             // 
             // Column2
             // 
             this.Column2.HeaderText = "Reading";
+            this.Column2.MinimumWidth = 10;
             this.Column2.Name = "Column2";
             // 
             // Column3
             // 
             this.Column3.HeaderText = "Unit";
+            this.Column3.MinimumWidth = 10;
             this.Column3.Name = "Column3";
             // 
             // big_graph
@@ -1757,11 +1726,7 @@ namespace WindowsFormsApplication1
             this.big_graph.Controls.Add(this.chart1);
             this.big_graph.Location = new System.Drawing.Point(8, 38);
             this.big_graph.Name = "big_graph";
-<<<<<<< HEAD
-            this.big_graph.Size = new System.Drawing.Size(1674, 877);
-=======
-            this.big_graph.Size = new System.Drawing.Size(1723, 1152);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.big_graph.Size = new System.Drawing.Size(1768, 859);
             this.big_graph.TabIndex = 3;
             this.big_graph.Text = "Big Reading with Graph";
             this.big_graph.UseVisualStyleBackColor = true;
@@ -1776,33 +1741,19 @@ namespace WindowsFormsApplication1
             this.Label_Data3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.Label_Data3.Location = new System.Drawing.Point(0, 0);
             this.Label_Data3.Name = "Label_Data3";
-<<<<<<< HEAD
-            this.Label_Data3.Size = new System.Drawing.Size(1674, 424);
-=======
-            this.Label_Data3.Size = new System.Drawing.Size(1723, 699);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.Label_Data3.Size = new System.Drawing.Size(1768, 406);
             this.Label_Data3.TabIndex = 26;
             this.Label_Data3.Text = "0.0000";
             this.Label_Data3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // chart1
             // 
-            chartArea5.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea5);
+            chartArea8.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea8);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Bottom;
-<<<<<<< HEAD
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(0, 424);
+            this.chart1.Location = new System.Drawing.Point(0, 406);
             this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(1674, 453);
-=======
-            legend5.Name = "Legend1";
-            this.chart1.Legends.Add(legend5);
-            this.chart1.Location = new System.Drawing.Point(0, 699);
-            this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(1723, 453);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.chart1.Size = new System.Drawing.Size(1768, 453);
             this.chart1.TabIndex = 25;
             this.chart1.Text = "chart1";
             // 
@@ -1823,11 +1774,7 @@ namespace WindowsFormsApplication1
             this.read_graph_col.Controls.Add(this.groupBox3);
             this.read_graph_col.Location = new System.Drawing.Point(8, 38);
             this.read_graph_col.Name = "read_graph_col";
-<<<<<<< HEAD
-            this.read_graph_col.Size = new System.Drawing.Size(1674, 877);
-=======
-            this.read_graph_col.Size = new System.Drawing.Size(1723, 1152);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.read_graph_col.Size = new System.Drawing.Size(1768, 859);
             this.read_graph_col.TabIndex = 4;
             this.read_graph_col.Text = "Single Channel";
             this.read_graph_col.UseVisualStyleBackColor = true;
@@ -1868,6 +1815,7 @@ namespace WindowsFormsApplication1
             this.masterGridView.Location = new System.Drawing.Point(1713, 67);
             this.masterGridView.Name = "masterGridView";
             this.masterGridView.ReadOnly = true;
+            this.masterGridView.RowHeadersWidth = 82;
             this.masterGridView.Size = new System.Drawing.Size(411, 601);
             this.masterGridView.TabIndex = 20;
             this.masterGridView.Visible = false;
@@ -1903,6 +1851,7 @@ namespace WindowsFormsApplication1
             this.masterGrid_noCurrent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.masterGrid_noCurrent.Location = new System.Drawing.Point(0, 54);
             this.masterGrid_noCurrent.Name = "masterGrid_noCurrent";
+            this.masterGrid_noCurrent.RowHeadersWidth = 82;
             this.masterGrid_noCurrent.Size = new System.Drawing.Size(438, 621);
             this.masterGrid_noCurrent.TabIndex = 4;
             // 
@@ -1978,8 +1927,8 @@ namespace WindowsFormsApplication1
             // 
             // singleChart
             // 
-            chartArea6.Name = "ChartArea1";
-            this.singleChart.ChartAreas.Add(chartArea6);
+            chartArea9.Name = "ChartArea1";
+            this.singleChart.ChartAreas.Add(chartArea9);
             legend6.Enabled = false;
             legend6.Name = "Legend1";
             this.singleChart.Legends.Add(legend6);
@@ -2197,11 +2146,7 @@ namespace WindowsFormsApplication1
             this.comList3.ItemHeight = 25;
             this.comList3.Location = new System.Drawing.Point(9, 49);
             this.comList3.Name = "comList3";
-<<<<<<< HEAD
             this.comList3.Size = new System.Drawing.Size(191, 29);
-=======
-            this.comList3.Size = new System.Drawing.Size(191, 60);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.comList3.TabIndex = 5;
             // 
             // refresh2
@@ -2669,6 +2614,7 @@ namespace WindowsFormsApplication1
             this.singleChannel_gridView.Location = new System.Drawing.Point(40, 71);
             this.singleChannel_gridView.Name = "singleChannel_gridView";
             this.singleChannel_gridView.ReadOnly = true;
+            this.singleChannel_gridView.RowHeadersWidth = 82;
             this.singleChannel_gridView.Size = new System.Drawing.Size(337, 385);
             this.singleChannel_gridView.TabIndex = 4;
             this.singleChannel_gridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridview1_CellEndEdit);
@@ -2677,21 +2623,27 @@ namespace WindowsFormsApplication1
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "Sample #";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 10;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Width = 200;
             // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.HeaderText = "Reading";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 10;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 200;
             // 
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.HeaderText = "Unit";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 10;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 200;
             // 
             // simple_col
             // 
@@ -2709,11 +2661,7 @@ namespace WindowsFormsApplication1
             this.simple_col.Location = new System.Drawing.Point(8, 38);
             this.simple_col.Name = "simple_col";
             this.simple_col.Padding = new System.Windows.Forms.Padding(3);
-<<<<<<< HEAD
-            this.simple_col.Size = new System.Drawing.Size(1674, 877);
-=======
-            this.simple_col.Size = new System.Drawing.Size(1723, 1152);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.simple_col.Size = new System.Drawing.Size(1768, 859);
             this.simple_col.TabIndex = 1;
             this.simple_col.Text = "Simple Reading with Option to Save";
             this.simple_col.UseVisualStyleBackColor = true;
@@ -2810,11 +2758,7 @@ namespace WindowsFormsApplication1
             this.comList2.ItemHeight = 25;
             this.comList2.Location = new System.Drawing.Point(25, 282);
             this.comList2.Name = "comList2";
-<<<<<<< HEAD
             this.comList2.Size = new System.Drawing.Size(214, 54);
-=======
-            this.comList2.Size = new System.Drawing.Size(214, 46);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.comList2.TabIndex = 33;
             // 
             // button5
@@ -2882,6 +2826,7 @@ namespace WindowsFormsApplication1
             this.unit});
             this.gridview.Location = new System.Drawing.Point(20, 30);
             this.gridview.Name = "gridview";
+            this.gridview.RowHeadersWidth = 82;
             this.gridview.Size = new System.Drawing.Size(337, 304);
             this.gridview.TabIndex = 18;
             this.gridview.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridview_CellEndEdit);
@@ -2889,17 +2834,23 @@ namespace WindowsFormsApplication1
             // mem_cell
             // 
             this.mem_cell.HeaderText = "Memory Location";
+            this.mem_cell.MinimumWidth = 10;
             this.mem_cell.Name = "mem_cell";
+            this.mem_cell.Width = 200;
             // 
             // reading
             // 
             this.reading.HeaderText = "Reading";
+            this.reading.MinimumWidth = 10;
             this.reading.Name = "reading";
+            this.reading.Width = 200;
             // 
             // unit
             // 
             this.unit.HeaderText = "Unit";
+            this.unit.MinimumWidth = 10;
             this.unit.Name = "unit";
+            this.unit.Width = 200;
             // 
             // simple_reading
             // 
@@ -2915,11 +2866,7 @@ namespace WindowsFormsApplication1
             this.simple_reading.Location = new System.Drawing.Point(8, 38);
             this.simple_reading.Name = "simple_reading";
             this.simple_reading.Padding = new System.Windows.Forms.Padding(3);
-<<<<<<< HEAD
-            this.simple_reading.Size = new System.Drawing.Size(1768, 859);
-=======
-            this.simple_reading.Size = new System.Drawing.Size(1723, 1152);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.simple_reading.Size = new System.Drawing.Size(1768, 1128);
             this.simple_reading.TabIndex = 0;
             this.simple_reading.Text = "Torque To Spreadsheet";
             this.simple_reading.UseVisualStyleBackColor = true;
@@ -3111,11 +3058,7 @@ namespace WindowsFormsApplication1
             this.comList.ItemHeight = 25;
             this.comList.Location = new System.Drawing.Point(11, 355);
             this.comList.Name = "comList";
-<<<<<<< HEAD
             this.comList.Size = new System.Drawing.Size(170, 29);
-=======
-            this.comList.Size = new System.Drawing.Size(170, 60);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.comList.TabIndex = 1;
             this.comList.SelectedIndexChanged += new System.EventHandler(this.comList_SelectedIndexChanged);
             // 
@@ -3136,11 +3079,7 @@ namespace WindowsFormsApplication1
             this.TabPages.Multiline = true;
             this.TabPages.Name = "TabPages";
             this.TabPages.SelectedIndex = 0;
-<<<<<<< HEAD
-            this.TabPages.Size = new System.Drawing.Size(1784, 905);
-=======
-            this.TabPages.Size = new System.Drawing.Size(1731, 1190);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.TabPages.Size = new System.Drawing.Size(1784, 1140);
             this.TabPages.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabPages.TabIndex = 27;
             // 
@@ -3153,11 +3092,7 @@ namespace WindowsFormsApplication1
             this.big_reading.Controls.Add(this.reading_bigReading_lbl);
             this.big_reading.Location = new System.Drawing.Point(8, 38);
             this.big_reading.Name = "big_reading";
-<<<<<<< HEAD
-            this.big_reading.Size = new System.Drawing.Size(1674, 877);
-=======
-            this.big_reading.Size = new System.Drawing.Size(1723, 1152);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.big_reading.Size = new System.Drawing.Size(1768, 859);
             this.big_reading.TabIndex = 2;
             this.big_reading.Text = "Big Reading";
             // 
@@ -3180,15 +3115,9 @@ namespace WindowsFormsApplication1
             this.panel3.Controls.Add(this.refreshCOMList_btn_bigReading);
             this.panel3.Controls.Add(this.comList_bigReading);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-<<<<<<< HEAD
-            this.panel3.Location = new System.Drawing.Point(0, 442);
+            this.panel3.Location = new System.Drawing.Point(0, 424);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1674, 435);
-=======
-            this.panel3.Location = new System.Drawing.Point(0, 717);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1723, 435);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.panel3.Size = new System.Drawing.Size(1768, 435);
             this.panel3.TabIndex = 26;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
@@ -3347,11 +3276,7 @@ namespace WindowsFormsApplication1
             this.comList_bigReading.ItemHeight = 61;
             this.comList_bigReading.Location = new System.Drawing.Point(566, 12);
             this.comList_bigReading.Name = "comList_bigReading";
-<<<<<<< HEAD
             this.comList_bigReading.Size = new System.Drawing.Size(514, 4);
-=======
-            this.comList_bigReading.Size = new System.Drawing.Size(514, 100);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.comList_bigReading.TabIndex = 7;
             // 
             // upSize_btn
@@ -3375,11 +3300,7 @@ namespace WindowsFormsApplication1
             this.reading_bigReading_lbl.Location = new System.Drawing.Point(0, 0);
             this.reading_bigReading_lbl.Name = "reading_bigReading_lbl";
             this.reading_bigReading_lbl.Padding = new System.Windows.Forms.Padding(0, 0, 100, 430);
-<<<<<<< HEAD
-            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1674, 877);
-=======
-            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1723, 1152);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1768, 859);
             this.reading_bigReading_lbl.TabIndex = 27;
             this.reading_bigReading_lbl.Text = "0.0000";
             this.reading_bigReading_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3400,11 +3321,7 @@ namespace WindowsFormsApplication1
             this.calibrationTab.Controls.Add(this.target_groupBox);
             this.calibrationTab.Location = new System.Drawing.Point(8, 38);
             this.calibrationTab.Name = "calibrationTab";
-<<<<<<< HEAD
-            this.calibrationTab.Size = new System.Drawing.Size(1768, 859);
-=======
-            this.calibrationTab.Size = new System.Drawing.Size(1723, 1152);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.calibrationTab.Size = new System.Drawing.Size(1768, 1094);
             this.calibrationTab.TabIndex = 6;
             this.calibrationTab.Text = "Cal Cert";
             this.calibrationTab.UseVisualStyleBackColor = true;
@@ -3426,11 +3343,7 @@ namespace WindowsFormsApplication1
             this.ch2Target_select.Checked = true;
             this.ch2Target_select.Location = new System.Drawing.Point(86, 16);
             this.ch2Target_select.Name = "ch2Target_select";
-<<<<<<< HEAD
             this.ch2Target_select.Size = new System.Drawing.Size(138, 29);
-=======
-            this.ch2Target_select.Size = new System.Drawing.Size(73, 18);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.ch2Target_select.TabIndex = 67;
             this.ch2Target_select.TabStop = true;
             this.ch2Target_select.Text = "Channel 2";
@@ -3441,11 +3354,7 @@ namespace WindowsFormsApplication1
             this.ch1Target_select.AutoSize = true;
             this.ch1Target_select.Location = new System.Drawing.Point(3, 16);
             this.ch1Target_select.Name = "ch1Target_select";
-<<<<<<< HEAD
             this.ch1Target_select.Size = new System.Drawing.Size(138, 29);
-=======
-            this.ch1Target_select.Size = new System.Drawing.Size(73, 18);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.ch1Target_select.TabIndex = 65;
             this.ch1Target_select.Text = "Channel 1";
             this.ch1Target_select.UseVisualStyleBackColor = true;
@@ -3490,10 +3399,6 @@ namespace WindowsFormsApplication1
             // 
             // groupBox17
             // 
-<<<<<<< HEAD
-=======
-            this.groupBox17.Controls.Add(this.openOldStream_btn);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.groupBox17.Controls.Add(this.ALCCWChart_radio);
             this.groupBox17.Controls.Add(this.AFCCWChart_radio);
             this.groupBox17.Controls.Add(this.ALCWChart_radio);
@@ -3531,29 +3436,12 @@ namespace WindowsFormsApplication1
             this.groupBox17.TabIndex = 29;
             this.groupBox17.TabStop = false;
             // 
-<<<<<<< HEAD
-=======
-            // openOldStream_btn
-            // 
-            this.openOldStream_btn.Location = new System.Drawing.Point(955, 507);
-            this.openOldStream_btn.Name = "openOldStream_btn";
-            this.openOldStream_btn.Size = new System.Drawing.Size(115, 35);
-            this.openOldStream_btn.TabIndex = 72;
-            this.openOldStream_btn.Text = "View Stream";
-            this.openOldStream_btn.UseVisualStyleBackColor = true;
-            this.openOldStream_btn.Click += new System.EventHandler(this.openOldStream_btn_Click);
-            // 
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             // ALCCWChart_radio
             // 
             this.ALCCWChart_radio.AutoSize = true;
             this.ALCCWChart_radio.Location = new System.Drawing.Point(804, 269);
             this.ALCCWChart_radio.Name = "ALCCWChart_radio";
-<<<<<<< HEAD
             this.ALCCWChart_radio.Size = new System.Drawing.Size(102, 29);
-=======
-            this.ALCCWChart_radio.Size = new System.Drawing.Size(55, 18);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.ALCCWChart_radio.TabIndex = 71;
             this.ALCCWChart_radio.TabStop = true;
             this.ALCCWChart_radio.Text = "Graph";
@@ -3562,13 +3450,9 @@ namespace WindowsFormsApplication1
             // AFCCWChart_radio
             // 
             this.AFCCWChart_radio.AutoSize = true;
-            this.AFCCWChart_radio.Location = new System.Drawing.Point(189, 269);
+            this.AFCCWChart_radio.Location = new System.Drawing.Point(0, 0);
             this.AFCCWChart_radio.Name = "AFCCWChart_radio";
-<<<<<<< HEAD
             this.AFCCWChart_radio.Size = new System.Drawing.Size(102, 29);
-=======
-            this.AFCCWChart_radio.Size = new System.Drawing.Size(55, 18);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.AFCCWChart_radio.TabIndex = 70;
             this.AFCCWChart_radio.TabStop = true;
             this.AFCCWChart_radio.Text = "Graph";
@@ -3579,11 +3463,7 @@ namespace WindowsFormsApplication1
             this.ALCWChart_radio.AutoSize = true;
             this.ALCWChart_radio.Location = new System.Drawing.Point(811, 12);
             this.ALCWChart_radio.Name = "ALCWChart_radio";
-<<<<<<< HEAD
             this.ALCWChart_radio.Size = new System.Drawing.Size(102, 29);
-=======
-            this.ALCWChart_radio.Size = new System.Drawing.Size(55, 18);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.ALCWChart_radio.TabIndex = 69;
             this.ALCWChart_radio.TabStop = true;
             this.ALCWChart_radio.Text = "Graph";
@@ -3594,11 +3474,7 @@ namespace WindowsFormsApplication1
             this.AFCWChart_radio.AutoSize = true;
             this.AFCWChart_radio.Location = new System.Drawing.Point(203, 12);
             this.AFCWChart_radio.Name = "AFCWChart_radio";
-<<<<<<< HEAD
             this.AFCWChart_radio.Size = new System.Drawing.Size(102, 29);
-=======
-            this.AFCWChart_radio.Size = new System.Drawing.Size(55, 18);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.AFCWChart_radio.TabIndex = 68;
             this.AFCWChart_radio.TabStop = true;
             this.AFCWChart_radio.Text = "Graph";
@@ -3606,30 +3482,13 @@ namespace WindowsFormsApplication1
             // 
             // exportChart_btn
             // 
-<<<<<<< HEAD
             this.exportChart_btn.Location = new System.Drawing.Point(583, 261);
-=======
-            this.exportChart_btn.Location = new System.Drawing.Point(513, 258);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.exportChart_btn.Name = "exportChart_btn";
             this.exportChart_btn.Size = new System.Drawing.Size(115, 35);
             this.exportChart_btn.TabIndex = 67;
             this.exportChart_btn.Text = "Export Torque Chart";
             this.exportChart_btn.UseVisualStyleBackColor = true;
             this.exportChart_btn.Click += new System.EventHandler(this.ExportChart_btn_Click);
-<<<<<<< HEAD
-            // 
-            // stream_btn
-            // 
-            this.stream_btn.Location = new System.Drawing.Point(903, 205);
-            this.stream_btn.Name = "stream_btn";
-            this.stream_btn.Size = new System.Drawing.Size(108, 29);
-            this.stream_btn.TabIndex = 66;
-            this.stream_btn.Text = "Stream";
-            this.stream_btn.UseVisualStyleBackColor = true;
-            this.stream_btn.Click += new System.EventHandler(this.stream_btn_Click);
-=======
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             // 
             // exportAverage_chckbox
             // 
@@ -3668,6 +3527,7 @@ namespace WindowsFormsApplication1
             this.AFCW_grid.EnableHeadersVisualStyles = false;
             this.AFCW_grid.Location = new System.Drawing.Point(4, 39);
             this.AFCW_grid.Name = "AFCW_grid";
+            this.AFCW_grid.RowHeadersWidth = 82;
             this.AFCW_grid.Size = new System.Drawing.Size(537, 200);
             this.AFCW_grid.TabIndex = 51;
             // 
@@ -3758,6 +3618,7 @@ namespace WindowsFormsApplication1
             this.ALCCW_grid.EnableHeadersVisualStyles = false;
             this.ALCCW_grid.Location = new System.Drawing.Point(610, 301);
             this.ALCCW_grid.Name = "ALCCW_grid";
+            this.ALCCW_grid.RowHeadersWidth = 82;
             this.ALCCW_grid.Size = new System.Drawing.Size(537, 200);
             this.ALCCW_grid.TabIndex = 5;
             // 
@@ -3778,6 +3639,7 @@ namespace WindowsFormsApplication1
             this.AFCCW_grid.EnableHeadersVisualStyles = false;
             this.AFCCW_grid.Location = new System.Drawing.Point(0, 301);
             this.AFCCW_grid.Name = "AFCCW_grid";
+            this.AFCCW_grid.RowHeadersWidth = 82;
             this.AFCCW_grid.Size = new System.Drawing.Size(537, 200);
             this.AFCCW_grid.TabIndex = 3;
             // 
@@ -3788,6 +3650,7 @@ namespace WindowsFormsApplication1
             this.ALCW_grid.EnableHeadersVisualStyles = false;
             this.ALCW_grid.Location = new System.Drawing.Point(613, 39);
             this.ALCW_grid.Name = "ALCW_grid";
+            this.ALCW_grid.RowHeadersWidth = 82;
             this.ALCW_grid.Size = new System.Drawing.Size(537, 200);
             this.ALCW_grid.TabIndex = 4;
             // 
@@ -4221,11 +4084,7 @@ namespace WindowsFormsApplication1
             this.testOrder_list.ItemHeight = 25;
             this.testOrder_list.Location = new System.Drawing.Point(133, 225);
             this.testOrder_list.Name = "testOrder_list";
-<<<<<<< HEAD
             this.testOrder_list.Size = new System.Drawing.Size(100, 29);
-=======
-            this.testOrder_list.Size = new System.Drawing.Size(100, 18);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
             this.testOrder_list.TabIndex = 45;
             // 
             // resetCurrTestSettings_btn
@@ -4429,11 +4288,7 @@ namespace WindowsFormsApplication1
             this.comList_calibration.ItemHeight = 25;
             this.comList_calibration.Location = new System.Drawing.Point(9, 49);
             this.comList_calibration.Name = "comList_calibration";
-<<<<<<< HEAD
-            this.comList_calibration.Size = new System.Drawing.Size(264, 29);
-=======
-            this.comList_calibration.Size = new System.Drawing.Size(264, 60);
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
+            this.comList_calibration.Size = new System.Drawing.Size(264, 54);
             this.comList_calibration.TabIndex = 1;
             // 
             // ch2ConnectBtn_calTab
@@ -5354,10 +5209,6 @@ namespace WindowsFormsApplication1
         private RadioButton AFCCWChart_radio;
         private RadioButton ALCWChart_radio;
         private RadioButton AFCWChart_radio;
-<<<<<<< HEAD
-=======
-        private Button openOldStream_btn;
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
     }
 }
 

@@ -6991,7 +6991,7 @@ namespace WindowsFormsApplication1
                 
                 //Write Test Grid
                 int startTestGridRow = nextAvaiExcelRow;
-                xlWorkSheet = writeAllTestGridsToExcelWsheet(xlWorkSheet, testOrder[runningWsheetCount].ToString());
+                xlWorkSheet = writeAllTestGridsToExcelWsheet(xlWorkSheet, testOrder[runningWsheetCount].ToString(),isTorqueChart);
                 
                 //Write Stream
                 //Todo: Implement

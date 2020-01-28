@@ -31,7 +31,8 @@ namespace WindowsFormsApplication1
             this.targets = targets;
             this.channelCount = channelCount;
             this.channelToCompare = channelToCompare;
-            initStreamTable();
+            initStreamTable(ref streamTableCh1);
+            initStreamTable(ref streamTableCh2);
             initStreamChart();
             initPort();
             bindStreamGrid();
@@ -67,22 +68,23 @@ namespace WindowsFormsApplication1
             streamTimer.Interval = tickInterval;
             streamTimer.Start();
         }
-
         //Trigger when timer tick
         //Update live reading, update stream grid
+        //Todo: write stream 2 to separate spreadsheet
         private void streamTimer_Tick(object sender, EventArgs e)
         {
             try
             {
                 if (isStream == true)
                 {
-                    showStreamData(ref runningByteStreamCh1, masterStreamCh1,streamReadingsListCh1);
-                    showStreamData(ref runningByteStreamCh2, masterStreamCh2, streamReadingsListCh2);
+
+                    showStreamData(ref runningByteStreamCh1, masterStreamCh1,streamReadingsListCh1,ref streamTableCh1);
+                    showStreamData(ref runningByteStreamCh2, masterStreamCh2, streamReadingsListCh2,ref streamTableCh2);
                 }
             }
             catch { }
         }
-        private void showStreamData(ref int runningByteStream,List<byte> masterStream,List<READINGS_ANGLES>streamReadingsList )
+        private void showStreamData(ref int runningByteStream,List<byte> masterStream,List<READINGS_ANGLES>streamReadingsList,ref DataTable streamTable )
         {
             if ((runningByteStream == 0) && (masterStream.Count >= 2) && (masterStream.Count >= ((masterStream[1] & 0xFF) + offsetPacketLength)))
                     {
@@ -92,7 +94,7 @@ namespace WindowsFormsApplication1
                     {
                         runningByteStream = decodeMasterStream(masterStream, runningByteStream,streamReadingsList);
                         bindStreamGrid();
-                        writeToStreamTable(streamReadingsList);
+                        writeToStreamTable(streamReadingsList,ref streamTable);
                     }
                     if (endOfStream==true)
                     {
@@ -192,7 +194,7 @@ namespace WindowsFormsApplication1
         int baud250k = 250000;
         SerialPort streamingPort1 = new SerialPort(),streamingPort2=new SerialPort();
         SerialPort streamPort = new SerialPort();
-        DataTable streamTable = new DataTable();
+        DataTable streamTableCh1 = new DataTable(),streamTableCh2=new DataTable();
 
         private void autoStartStream(int channelCount)
         {
@@ -353,7 +355,7 @@ namespace WindowsFormsApplication1
             var sourceList = new BindingList<READINGS_ANGLES>(streamReadingsListCh1);
             var source = new BindingSource(sourceList, null);
 
-            streamGrid.DataSource = streamTable;
+            streamGrid.DataSource = streamTableCh1;
 
         }
         private void bindResultGrid()
@@ -404,8 +406,9 @@ namespace WindowsFormsApplication1
             int startingPos = getPosAfterHeaderPacket(masterStreamCh1);
             streamReadingsListCh1 = new List<READINGS_ANGLES>();
             decodeMasterStream(masterStreamCh1, startingPos,streamReadingsListCh1);
-            streamTable.Clear();
-            writeToStreamTable(streamReadingsListCh1);
+            streamTableCh1.Clear();
+            writeToStreamTable(streamReadingsListCh1,ref streamTableCh1);
+            writeToStreamTable(streamReadingsListCh2, ref streamTableCh2);
             streamGrid.Refresh();
         }
         private void prepareToStartStream()
@@ -419,7 +422,7 @@ namespace WindowsFormsApplication1
             tempMasterCh1 = new List<byte>();
             tempMasterCh2=new List<byte>();
             isStream = true;
-            streamTable.Clear();
+            streamTableCh1.Clear();
             if (streamingPort1.IsOpen == true)
                 streamingPort1.DiscardInBuffer();
             if (streamingPort2.IsOpen == true)
@@ -457,7 +460,7 @@ namespace WindowsFormsApplication1
             serialPort.BaudRate = baud9600;
         }
 
-        private void initStreamTable()
+        private void initStreamTable(ref DataTable streamTable)
         {
             streamTable = new DataTable("StreamTable");
 
@@ -492,7 +495,7 @@ namespace WindowsFormsApplication1
             streamTable.Columns.Add(dtColumn);
         }
 
-        private void writeToStreamTable(List<READINGS_ANGLES> listToWrite)
+        private void writeToStreamTable(List<READINGS_ANGLES> listToWrite,ref DataTable streamTable)
         {
             int lineStart = streamTable.Rows.Count - 1;
             if (lineStart < 0)
@@ -593,7 +596,7 @@ namespace WindowsFormsApplication1
         //extract results from streaming datatable that match with target
         private DataTable getMatchingResultFromTarget(List<double> targets, DataTable table, int channelToCompare)
         {
-            DataTable returnTable = streamTable.Clone();
+            DataTable returnTable = streamTableCh1.Clone();
             double currReading = 0, prevReading = 0;
             int targetIndex = 0;
             bool okToImportRow = false;//decide whether the row readings match with target
@@ -637,8 +640,8 @@ namespace WindowsFormsApplication1
         }
         private void importResult()
         {
-            returnResultTable = streamTable.Clone();
-            returnResultTable = getMatchingResultFromTarget(targets, streamTable, channelToCompare);
+            returnResultTable = streamTableCh1.Clone();
+            returnResultTable = getMatchingResultFromTarget(targets, streamTableCh1, channelToCompare);
             bindResultGrid();
         }
         private void saveResult_btn_Click(object sender, EventArgs e)
@@ -695,10 +698,10 @@ namespace WindowsFormsApplication1
             initChartSerie(ref streamChart, angle2StreamSerie);
             streamChart = setChart(streamChart, angle2StreamSerie, 1);
 
-            bindChartXYwithTableHeader(ref streamTable, 0, 1, ref streamChart, ch1StreamSerie);
-            bindChartXYwithTableHeader(ref streamTable, 0, 2, ref streamChart, ch2StreamSerie);
-            bindChartXYwithTableHeader(ref streamTable, 0, 3, ref streamChart, angle1StreamSerie);
-            bindChartXYwithTableHeader(ref streamTable, 0, 4, ref streamChart, angle2StreamSerie);
+            bindChartXYwithTableHeader(ref streamTableCh1, 0, 1, ref streamChart, ch1StreamSerie);
+            bindChartXYwithTableHeader(ref streamTableCh2, 0, 1, ref streamChart, ch2StreamSerie);
+            bindChartXYwithTableHeader(ref streamTableCh1, 0, 3, ref streamChart, angle1StreamSerie);
+            bindChartXYwithTableHeader(ref streamTableCh1, 0, 4, ref streamChart, angle2StreamSerie);
 
             streamChart.ChartAreas[chartAreaName].AxisY.RoundAxisValues();
             streamChart.DataBind();
@@ -759,8 +762,8 @@ namespace WindowsFormsApplication1
 
         private void DualStream_btn_Click(object sender, EventArgs e)
         {
-            string streamRate = "960";
-            startSyncDualStreamCommand += streamRate;
+            string streamRate ="240";
+            startSyncDualStreamCommand += streamRate+";";
             waitForCh1Sync = true;
             waitForCh2Sync = true;
             //send sync stream command to ch1 and ch2 
