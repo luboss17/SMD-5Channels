@@ -4106,7 +4106,7 @@ namespace WindowsFormsApplication1
                 FSLowHighchanged();
             }
         }
-
+        
         //Handle event BEFORE Key has been pressed
         private void lowLimit_txt_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -5353,7 +5353,7 @@ namespace WindowsFormsApplication1
             }
             return returnStr;
         }
-
+        //added 1/29/20
         //Call when Calibration Tab first bring up 
         private void loadALLCalibrationTabSetting()
         {
@@ -5362,7 +5362,11 @@ namespace WindowsFormsApplication1
                 calTabMiscSetting(); //Load all misc for calTab appearance
                 readFromTestSetUpCSV(); //Read from TestSequences.csv and assign all saved Setups into testSetups
                 refreshTestIDComboBox(); //Assign testID to drop down list
-
+                lowLimit_txt.Leave += LowLimit_txt_Leave;
+                highLimit_txt.Leave += HighLimit_txt_Leave;
+                sampleNum_txt.Leave += SampleNum_txt_Leave;
+                FS_txt.Leave += FS_txt_Leave;
+                maxPoint_txt.Leave += MaxPoint_txt_Leave;
                 //Set all extra event handlers for Caltab
                 calTab_eventHandlerCollections();
 
@@ -5378,6 +5382,31 @@ namespace WindowsFormsApplication1
                 }
 
             }
+        }
+        //added 1/29/20
+        private void MaxPoint_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
+        }
+        //added 1/29/20
+        private void FS_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
+        }
+        //added 1/29/20
+        private void SampleNum_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
+        }
+        //added 1/29/20
+        private void HighLimit_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
+        }
+
+        private void LowLimit_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
         }
 
         //Assign testID to drop down list
@@ -7582,8 +7611,10 @@ namespace WindowsFormsApplication1
         }
 
         //This method is called when user change either fullscale, low or high of currtestSetup, rewrite to test grid
+        //changed 1/29/20
         private void FSLowHighchanged()
         {
+            changeSaveStartTestBtn();
             bool proceed = false;
             if (testSetup_comboBox.SelectedIndex > 0) //Not new test, maxPoint text can be empty
             {
