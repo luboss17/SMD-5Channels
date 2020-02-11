@@ -16,6 +16,7 @@ namespace WindowsFormsApplication1
 
     public partial class StreamingForm : Form
     {
+        public int readingColIndex = 1;
         private const int maxReadTimeOut = 100;
         private int channelToCompare = 0,channelCount=1;
         List<double> targets = new List<double>();
@@ -23,11 +24,17 @@ namespace WindowsFormsApplication1
         Chart streamChartCh1 = new Chart(),streamChartCh2=new Chart();
         public bool isSave = false,endOfStream=false;
         bool waitForCh1Sync = false, waitForCh2Sync = false;
+        bool singleChStream = false, dualChStream = false, CalCertStream = false;
+        List<int> freqList = new List<int> { 7, 62, 125, 250, 500, 1000, 1500, 2000 };
         public StreamingForm(SerialPort ch1Port,SerialPort ch2Port, List<double> targets, int channelToCompare,int channelCount)
         {
             InitializeComponent();
+            bindFrequencyBox();
             streamingPort1 = ch1Port;
             streamingPort2 = ch2Port;
+            changeTo250kbaud(ref streamingPort1);
+            changeTo250kbaud(ref streamingPort2);
+            CalCertStream = true;
             this.targets = targets;
             this.channelCount = channelCount;
             this.channelToCompare = channelToCompare;
@@ -43,7 +50,51 @@ namespace WindowsFormsApplication1
             isStream = false;
             autoStartStream(channelCount);//auto start streaming
         }
+        public StreamingForm(SerialPort ch1Port,int channelCount)
+        {
+            InitializeComponent();
+            bindFrequencyBox();
+            streamingPort1 = ch1Port;
+            changeTo250kbaud(ref streamingPort1);
+            singleChStream = true;
+            this.channelCount = channelCount;
 
+            initStreamTable(ref streamTableCh1);
+            initStreamChart(ref streamChartCh1, ref streamTableCh1, chart1LocX, chartLocY, chartSizeX, chartSizeY);
+            initPort();
+            bindStreamGrid();
+            
+            InitTimer();
+            isStream = false;
+        }
+        public StreamingForm(SerialPort ch1Port, SerialPort ch2Port,int channelCount)
+        {
+            InitializeComponent();
+            bindFrequencyBox();
+            streamingPort1 = ch1Port;
+            streamingPort2 = ch2Port;
+            changeTo250kbaud(ref streamingPort1);
+            changeTo250kbaud(ref streamingPort2);
+            dualChStream = true;
+            this.channelCount = channelCount;
+
+            initStreamTable(ref streamTableCh1);
+            initStreamTable(ref streamTableCh2);
+            initStreamChart(ref streamChartCh1, ref streamTableCh1, chart1LocX, chartLocY, chartSizeX, chartSizeY);
+            initStreamChart(ref streamChartCh2, ref streamTableCh2, chart2LocX, chartLocY, chartSizeX, chartSizeY);
+            initPort();
+            bindStreamGrid();
+
+            InitTimer();
+            isStream = false;
+        }
+        private void bindFrequencyBox()
+        {
+            var bindingSource1 = new BindingSource();
+            bindingSource1.DataSource = freqList;
+
+            frequency_comboBox.DataSource = bindingSource1.DataSource;
+        }
         private void StreamingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             isStream = false;
@@ -194,7 +245,7 @@ namespace WindowsFormsApplication1
         int baud250k = 250000;
         SerialPort streamingPort1 = new SerialPort(),streamingPort2=new SerialPort();
         SerialPort streamPort = new SerialPort();
-        DataTable streamTableCh1 = new DataTable(),streamTableCh2=new DataTable();
+        public DataTable streamTableCh1 = new DataTable(),streamTableCh2=new DataTable();
         private void changeMode(SerialPort thisPort, int mode)
         {
             string queryCommand = "";
@@ -371,7 +422,8 @@ namespace WindowsFormsApplication1
             var source = new BindingSource(sourceList, null);
 
             streamGridCh1.DataSource = streamTableCh1;
-            streamGridCh2.DataSource = streamTableCh2;
+            if (((CalCertStream==true) || (dualChStream==true)) && (singleChStream==false))
+                streamGridCh2.DataSource = streamTableCh2;
 
         }
         private void bindResultGrid()
@@ -557,10 +609,14 @@ namespace WindowsFormsApplication1
             catch { }
         }
 
-        private void startStream_btn_Click(object sender, EventArgs e)
+        private void startSingleStream_btn_Click(object sender, EventArgs e)
         {
-            prepareToStartStream();
-            startSingleStream(streamingPort1);
+            if (isStream == true)
+            {
+                stopStream(streamingPort1);
+            }
+            int channelCount = 1;
+            autoStartStream(channelCount);
         }
 
         private void startDualStream_btn_Click(object sender, EventArgs e)
@@ -798,12 +854,17 @@ namespace WindowsFormsApplication1
                 correctedRate = 307200 / Convert.ToInt16(307200 / oriRate);
             return correctedRate;
         }
+        private int getFreqRate()
+        {
+            int freqSelect = (int)frequency_comboBox.SelectedItem;
+            int returnRate = 240;
+            returnRate = getCorrectedRate(freqSelect);
+            return returnRate;
+        }
         private void startDualStream()
         {
             startSyncDualStreamCommand = "?*Y";
-            string streamRate = "240";
-            if (streamRate_txt.Text != "")
-                streamRate = streamRate_txt.Text;
+            int streamRate = getFreqRate();
             startSyncDualStreamCommand += streamRate + ";";
             waitForCh1Sync = true;
             waitForCh2Sync = true;
@@ -836,6 +897,10 @@ namespace WindowsFormsApplication1
         }
         private void DualStream_btn_Click(object sender, EventArgs e)
         {
+            if (streamingPort1.IsOpen)
+                changeMode(streamingPort1, trackMode);
+            if (streamingPort2.IsOpen)
+                changeMode(streamingPort2, trackMode);
             startDualStream();
         }
         /// <summary>

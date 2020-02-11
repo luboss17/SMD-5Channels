@@ -8659,6 +8659,23 @@ namespace WindowsFormsApplication1
             timer2.Start();
         }
 
+        private void singleCHStream_btn_Click(object sender, EventArgs e)
+        {
+            timer2.Stop();
+            int channelCount = 1;
+            StreamingForm streamingForm = new StreamingForm(serialPort1,channelCount);
+            streamingForm.ShowDialog();
+
+            //Write to current Test
+            if (streamingForm.isSave == true)
+            {//Todo: To be implement
+                populateGridwithDataColumn(ref singleChannel_gridView, streamingForm.streamTableCh1,streamingForm.readingColIndex);
+                updateTableandChart(ref singleChart, singleChannel_gridView);
+            }
+            streamingForm.Dispose();
+            timer2.Start();
+        }
+
         private void ExportChart_btn_Click(object sender, EventArgs e)
         {
             if (testSetup_groupBox.Enabled == false)

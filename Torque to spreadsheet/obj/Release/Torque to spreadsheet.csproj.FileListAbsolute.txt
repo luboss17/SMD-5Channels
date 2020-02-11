@@ -109,10 +109,8 @@ C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsh
 C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.exe
 C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.pdb
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csprojAssemblyReference.cache
-<<<<<<< HEAD
 =======
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.CoreCompileInputs.cache
->>>>>>> 749b134cbd48190f5284306ade5d08134718bb5e
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.CopyComplete
 C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.exe.manifest
 C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.application
