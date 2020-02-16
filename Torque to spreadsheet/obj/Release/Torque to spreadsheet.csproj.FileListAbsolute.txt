@@ -110,7 +110,6 @@ C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsh
 C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.pdb
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csprojAssemblyReference.cache
 =======
-C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.CoreCompileInputs.cache
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.CopyComplete
 C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.exe.manifest
 C:\Users\huyhu\Desktop\SMD Software\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.application
@@ -258,3 +257,4 @@ C:\Users\huyhu\OneDrive\Desktop\SMD-Tools_Dev\Torque to spreadsheet\obj\Release\
 C:\Users\huyhu\OneDrive\Desktop\SMD-Tools_Dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.exe.manifest
 C:\Users\huyhu\OneDrive\Desktop\SMD-Tools_Dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.application
 C:\Users\huyhu\OneDrive\Desktop\SMD-Tools_Dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.CopyComplete
+C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_PointSaveCount.resources

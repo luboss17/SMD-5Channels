@@ -44,7 +44,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>22</ApplicationRevision>
+    <ApplicationRevision>24</ApplicationRevision>
     <ApplicationVersion>6.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -153,6 +153,12 @@
     </Compile>
     <Compile Include="Form_MenuControl.Designer.cs">
       <DependentUpon>Form_MenuControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_PointSaveCount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_PointSaveCount.Designer.cs">
+      <DependentUpon>Form_PointSaveCount.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Rename.cs">
       <SubType>Form</SubType>
@@ -267,6 +273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_MenuControl.resx">
       <DependentUpon>Form_MenuControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_PointSaveCount.resx">
+      <DependentUpon>Form_PointSaveCount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Rename.resx">
       <DependentUpon>Form_Rename.cs</DependentUpon>

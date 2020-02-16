@@ -94,6 +94,7 @@ namespace WindowsFormsApplication1
             bindingSource1.DataSource = freqList;
 
             frequency_comboBox.DataSource = bindingSource1.DataSource;
+            frequency_comboBox.SelectedIndex = 4;//default freq=500 samples/sec
         }
         private void StreamingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -724,9 +725,32 @@ namespace WindowsFormsApplication1
             returnResultTable = getMatchingResultFromTarget(targets, streamTableCh1, channelToCompare);
             bindResultGrid();
         }
+        private DataTable reduceTableCount(DataTable oriTable,int newRowCount)
+        {
+            int rowCountToSkip = oriTable.Rows.Count / newRowCount;
+            DataTable returnTable = oriTable.Clone();
+            for (int rowCount=0;rowCount<oriTable.Rows.Count;rowCount++)
+            {
+                if ((((rowCount+1)%rowCountToSkip)==0)&&(returnTable.Rows.Count<newRowCount))
+                {
+                    returnTable.ImportRow(oriTable.Rows[rowCount]);
+                }
+            }
+            return returnTable;
+        }
         private void saveResult_btn_Click(object sender, EventArgs e)
         {
+            if (singleChStream == true)
+            {
+                Form_PointSaveCount savePointsCountForm = new Form_PointSaveCount(streamTableCh1.Rows.Count);
+                savePointsCountForm.ShowDialog();
+                if (savePointsCountForm.returnPointsToSave<streamTableCh1.Rows.Count)
+                {
+                    streamTableCh1 = reduceTableCount(streamTableCh1, savePointsCountForm.returnPointsToSave).Copy();
+                }
+            }
             isSave = true;
+            
             closeForm();
         }
 
@@ -857,9 +881,9 @@ namespace WindowsFormsApplication1
         private int getFreqRate()
         {
             int freqSelect = (int)frequency_comboBox.SelectedItem;
-            int returnRate = 240;
-            returnRate = getCorrectedRate(freqSelect);
-            return returnRate;
+            /*int returnRate = 240;
+            returnRate = getCorrectedRate(freqSelect);*/
+            return freqSelect;
         }
         private void startDualStream()
         {
