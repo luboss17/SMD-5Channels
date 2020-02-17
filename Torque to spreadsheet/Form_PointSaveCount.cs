@@ -18,6 +18,7 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             this.maxPoints = maxPoints;
             returnPointsToSave = maxPoints;
+            pointCount_txt.Enabled = false;
         }
 
         private void saveCloseBtn_Click(object sender, EventArgs e)

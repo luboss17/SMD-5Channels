@@ -26,6 +26,7 @@ namespace WindowsFormsApplication1
         bool waitForCh1Sync = false, waitForCh2Sync = false;
         bool singleChStream = false, dualChStream = false, CalCertStream = false;
         List<int> freqList = new List<int> { 7, 62, 125, 250, 500, 1000, 1500, 2000 };
+        //For Cal Cert Tab Stream
         public StreamingForm(SerialPort ch1Port,SerialPort ch2Port, List<double> targets, int channelToCompare,int channelCount)
         {
             InitializeComponent();
@@ -50,6 +51,7 @@ namespace WindowsFormsApplication1
             isStream = false;
             autoStartStream(channelCount);//auto start streaming
         }
+        //For Single Channel Tab Stream
         public StreamingForm(SerialPort ch1Port,int channelCount)
         {
             InitializeComponent();
@@ -67,6 +69,7 @@ namespace WindowsFormsApplication1
             InitTimer();
             isStream = false;
         }
+        //For future Dual Channel Tab Stream
         public StreamingForm(SerialPort ch1Port, SerialPort ch2Port,int channelCount)
         {
             InitializeComponent();
