@@ -8647,7 +8647,7 @@ namespace WindowsFormsApplication1
                 target_Channel = 1;
             else if (ch2Target_select.Checked)
                 target_Channel = 2;
-            StreamingForm streamingForm = new StreamingForm(serialPort1,serialPort2, Targets, target_Channel, channelCount);
+            Form_Streaming streamingForm = new Form_Streaming(serialPort1,serialPort2, Targets, target_Channel, channelCount);
             streamingForm.ShowDialog();
 
             //Write to current Test
@@ -8663,7 +8663,7 @@ namespace WindowsFormsApplication1
         {
             timer2.Stop();
             int channelCount = 1;
-            StreamingForm streamingForm = new StreamingForm(serialPort1,channelCount);
+            Form_Streaming streamingForm = new Form_Streaming(serialPort1,channelCount);
             streamingForm.ShowDialog();
 
             //Write to current Test

@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication1
 {
-    partial class StreamingForm
+    partial class Form_Streaming
     {
         /// <summary>
         /// Required designer variable.

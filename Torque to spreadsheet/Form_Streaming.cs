@@ -14,7 +14,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 namespace WindowsFormsApplication1
 {
 
-    public partial class StreamingForm : Form
+    public partial class Form_Streaming : Form
     {
         public int readingColIndex = 1;
         private const int maxReadTimeOut = 100;
@@ -27,7 +27,7 @@ namespace WindowsFormsApplication1
         bool singleChStream = false, dualChStream = false, CalCertStream = false;
         List<int> freqList = new List<int> { 7, 62, 125, 250, 500, 1000, 1500, 2000 };
         //For Cal Cert Tab Stream
-        public StreamingForm(SerialPort ch1Port,SerialPort ch2Port, List<double> targets, int channelToCompare,int channelCount)
+        public Form_Streaming(SerialPort ch1Port,SerialPort ch2Port, List<double> targets, int channelToCompare,int channelCount)
         {
             InitializeComponent();
             bindFrequencyBox();
@@ -52,7 +52,7 @@ namespace WindowsFormsApplication1
             autoStartStream(channelCount);//auto start streaming
         }
         //For Single Channel Tab Stream
-        public StreamingForm(SerialPort ch1Port,int channelCount)
+        public Form_Streaming(SerialPort ch1Port,int channelCount)
         {
             InitializeComponent();
             bindFrequencyBox();
@@ -70,7 +70,7 @@ namespace WindowsFormsApplication1
             isStream = false;
         }
         //For future Dual Channel Tab Stream
-        public StreamingForm(SerialPort ch1Port, SerialPort ch2Port,int channelCount)
+        public Form_Streaming(SerialPort ch1Port, SerialPort ch2Port,int channelCount)
         {
             InitializeComponent();
             bindFrequencyBox();
@@ -762,6 +762,7 @@ namespace WindowsFormsApplication1
         {
             chart.Series[serieName].XValueMember = tableToBind.Columns[xTableIndex].ColumnName;
             chart.Series[serieName].YValueMembers = tableToBind.Columns[yTableIndex].ColumnName;
+            
             chart.DataSource = tableToBind;
         }
 
@@ -807,6 +808,31 @@ namespace WindowsFormsApplication1
         {
             chart = new Chart();
             chart.Location=new Point(chartLocX, chartLocY);
+            chart.Size = new Size(chartSizeX, chartSizeY);
+            chart.ChartAreas.Add(chartAreaName);
+            Controls.Add(chart);
+
+            initChartSerie(ref chart, ch1StreamSerie);
+            chart = setChart(chart, ch1StreamSerie, 1);
+            /*initChartSerie(ref chart, angle1StreamSerie);
+            chart = setChart(chart, angle1StreamSerie, 1);
+            initChartSerie(ref chart, ch2StreamSerie);
+            chart = setChart(chart, ch2StreamSerie, 1);
+            initChartSerie(ref chart, angle2StreamSerie);
+            chart = setChart(chart, angle2StreamSerie, 1);
+            */
+            bindChartXYwithTableHeader(ref tableToBind, 0, 1, ref chart, ch1StreamSerie);
+            /*bindChartXYwithTableHeader(ref tableToBind, 0, 2, ref chart, ch2StreamSerie);
+            bindChartXYwithTableHeader(ref tableToBind, 0, 3, ref chart, angle1StreamSerie);
+            bindChartXYwithTableHeader(ref tableToBind, 0, 4, ref chart, angle2StreamSerie);
+            */
+            chart.ChartAreas[chartAreaName].AxisY.RoundAxisValues();
+            chart.DataBind();
+        }
+        private void init2YAxisChart(ref Chart chart, ref DataTable tableToBind, int chartLocX, int chartLocY, int chartSizeX, int chartSizeY)
+        {
+            chart = new Chart();
+            chart.Location = new Point(chartLocX, chartLocY);
             chart.Size = new Size(chartSizeX, chartSizeY);
             chart.ChartAreas.Add(chartAreaName);
             Controls.Add(chart);
