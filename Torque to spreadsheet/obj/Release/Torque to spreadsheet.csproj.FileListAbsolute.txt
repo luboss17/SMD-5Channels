@@ -287,7 +287,6 @@ C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\ob
 C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.PrintDymo.resources
 C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.PrintLabel2.resources
 C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
-C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.StreamingForm.resources
 C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.TestSequenceManager_form.resources
 C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.GenerateResource.cache
 C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.TrustInfo.xml
@@ -296,3 +295,4 @@ C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\ob
 C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.CopyComplete
 C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.exe
 C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.pdb
+C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_Streaming.resources

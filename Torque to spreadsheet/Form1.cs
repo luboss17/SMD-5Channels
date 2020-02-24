@@ -8671,9 +8671,25 @@ namespace WindowsFormsApplication1
             {
                 populateGridwithDataColumn(ref singleChannel_gridView, streamingForm.streamTableCh1,streamingForm.readingColIndex);
                 updateTableandChart(ref singleChart, singleChannel_gridView);
+                if (streamingForm.savePeak==true)
+                {
+                    double peakVal = streamingForm.peakVal;
+                    if (peakVal != 0)
+                    {
+                        peakVal_lbl.Visible = true;
+                        peakLabel_lbl.Visible = true;
+                        peakVal_lbl.Text = peakVal.ToString();
+                    }
+                }
+                else
+                {
+                    peakVal_lbl.Visible = false;
+                    peakLabel_lbl.Visible = false;
+                }
             }
             streamingForm.Dispose();
             timer2.Start();
+
         }
 
         private void ExportChart_btn_Click(object sender, EventArgs e)

@@ -46,6 +46,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.streamGridCh2 = new System.Windows.Forms.DataGridView();
             this.frequency_comboBox = new System.Windows.Forms.ComboBox();
+            this.chartStyle_comboBox = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.savePeak_chkBox = new System.Windows.Forms.CheckBox();
+            this.saveTrough_chkBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.targetGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.streamGridCh1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.streamGridCh2)).BeginInit();
@@ -76,7 +80,7 @@
             // 
             // to9600baudrate_btn
             // 
-            this.to9600baudrate_btn.Location = new System.Drawing.Point(986, 1404);
+            this.to9600baudrate_btn.Location = new System.Drawing.Point(1350, 1678);
             this.to9600baudrate_btn.Margin = new System.Windows.Forms.Padding(6);
             this.to9600baudrate_btn.Name = "to9600baudrate_btn";
             this.to9600baudrate_btn.Size = new System.Drawing.Size(246, 44);
@@ -88,7 +92,7 @@
             // 
             // to25kbaud_btn
             // 
-            this.to25kbaud_btn.Location = new System.Drawing.Point(986, 1348);
+            this.to25kbaud_btn.Location = new System.Drawing.Point(1350, 1622);
             this.to25kbaud_btn.Margin = new System.Windows.Forms.Padding(6);
             this.to25kbaud_btn.Name = "to25kbaud_btn";
             this.to25kbaud_btn.Size = new System.Drawing.Size(246, 44);
@@ -219,7 +223,7 @@
             // 
             // streamRate_txt
             // 
-            this.streamRate_txt.Location = new System.Drawing.Point(986, 1577);
+            this.streamRate_txt.Location = new System.Drawing.Point(1638, 1649);
             this.streamRate_txt.Margin = new System.Windows.Forms.Padding(6);
             this.streamRate_txt.Name = "streamRate_txt";
             this.streamRate_txt.Size = new System.Drawing.Size(196, 31);
@@ -250,17 +254,69 @@
             // frequency_comboBox
             // 
             this.frequency_comboBox.FormattingEnabled = true;
+            this.frequency_comboBox.Items.AddRange(new object[] {
+            "Ch1 vs Ch2",
+            "Ch2 vs Ch1",
+            "Ch1 vs Ch2 vs Count"});
             this.frequency_comboBox.Location = new System.Drawing.Point(986, 1283);
             this.frequency_comboBox.Margin = new System.Windows.Forms.Padding(4);
             this.frequency_comboBox.Name = "frequency_comboBox";
             this.frequency_comboBox.Size = new System.Drawing.Size(246, 33);
             this.frequency_comboBox.TabIndex = 153;
             // 
-            // StreamingForm
+            // chartStyle_comboBox
+            // 
+            this.chartStyle_comboBox.FormattingEnabled = true;
+            this.chartStyle_comboBox.Items.AddRange(new object[] {
+            "Ch1 vs Ch2",
+            "Ch2 vs Ch1",
+            "Count vs Ch1 vs Ch2 "});
+            this.chartStyle_comboBox.Location = new System.Drawing.Point(1236, 13);
+            this.chartStyle_comboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.chartStyle_comboBox.Name = "chartStyle_comboBox";
+            this.chartStyle_comboBox.Size = new System.Drawing.Size(246, 33);
+            this.chartStyle_comboBox.TabIndex = 154;
+            this.chartStyle_comboBox.SelectedIndexChanged += new System.EventHandler(this.chartStyle_comboBox_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(1064, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(152, 25);
+            this.label4.TabIndex = 155;
+            this.label4.Text = "Change Graph";
+            // 
+            // savePeak_chkBox
+            // 
+            this.savePeak_chkBox.AutoSize = true;
+            this.savePeak_chkBox.Location = new System.Drawing.Point(1009, 1381);
+            this.savePeak_chkBox.Name = "savePeak_chkBox";
+            this.savePeak_chkBox.Size = new System.Drawing.Size(148, 29);
+            this.savePeak_chkBox.TabIndex = 156;
+            this.savePeak_chkBox.Text = "Save Peak";
+            this.savePeak_chkBox.UseVisualStyleBackColor = true;
+            // 
+            // saveTrough_chkBox
+            // 
+            this.saveTrough_chkBox.AutoSize = true;
+            this.saveTrough_chkBox.Location = new System.Drawing.Point(1009, 1425);
+            this.saveTrough_chkBox.Name = "saveTrough_chkBox";
+            this.saveTrough_chkBox.Size = new System.Drawing.Size(167, 29);
+            this.saveTrough_chkBox.TabIndex = 157;
+            this.saveTrough_chkBox.Text = "Save Trough";
+            this.saveTrough_chkBox.UseVisualStyleBackColor = true;
+            this.saveTrough_chkBox.Visible = false;
+            // 
+            // Form_Streaming
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2740, 1779);
+            this.Controls.Add(this.saveTrough_chkBox);
+            this.Controls.Add(this.savePeak_chkBox);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.chartStyle_comboBox);
             this.Controls.Add(this.frequency_comboBox);
             this.Controls.Add(this.streamGridCh2);
             this.Controls.Add(this.label3);
@@ -280,7 +336,7 @@
             this.Controls.Add(this.startSingleStream_btn);
             this.Controls.Add(this.streamGridCh1);
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "StreamingForm";
+            this.Name = "Form_Streaming";
             this.Text = "StreamingForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StreamingForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.targetGrid)).EndInit();
@@ -312,5 +368,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView streamGridCh2;
         private System.Windows.Forms.ComboBox frequency_comboBox;
+        private System.Windows.Forms.ComboBox chartStyle_comboBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox savePeak_chkBox;
+        private System.Windows.Forms.CheckBox saveTrough_chkBox;
     }
 }

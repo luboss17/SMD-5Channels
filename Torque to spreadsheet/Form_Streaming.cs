@@ -21,16 +21,20 @@ namespace WindowsFormsApplication1
         private int channelToCompare = 0,channelCount=1;
         List<double> targets = new List<double>();
         public DataTable returnResultTable = new DataTable();
-        Chart streamChartCh1 = new Chart(),streamChartCh2=new Chart();
+        Chart streamChartCh1 = new Chart(),streamChartCh2=new Chart(),streamChartDual=new Chart();
         public bool isSave = false,endOfStream=false;
         bool waitForCh1Sync = false, waitForCh2Sync = false;
         bool singleChStream = false, dualChStream = false, CalCertStream = false;
         List<int> freqList = new List<int> { 7, 62, 125, 250, 500, 1000, 1500, 2000 };
+        public bool savePeak = false, saveTrough = false;
+        public double peakVal = 0;
         //For Cal Cert Tab Stream
         public Form_Streaming(SerialPort ch1Port,SerialPort ch2Port, List<double> targets, int channelToCompare,int channelCount)
         {
             InitializeComponent();
             bindFrequencyBox();
+            savePeak_chkBox.Visible = false;
+            saveTrough_chkBox.Visible = false;
             streamingPort1 = ch1Port;
             streamingPort2 = ch2Port;
             changeTo250kbaud(ref streamingPort1);
@@ -39,29 +43,33 @@ namespace WindowsFormsApplication1
             this.targets = targets;
             this.channelCount = channelCount;
             this.channelToCompare = channelToCompare;
-            initStreamTable(ref streamTableCh1);
-            initStreamTable(ref streamTableCh2);
+            init1CHStreamTable(ref streamTableCh1);
+            init1CHStreamTable(ref streamTableCh2);
+            initDualCHStreamTable(ref streamTableDualChannel);
+
             initStreamChart(ref streamChartCh1, ref streamTableCh1,chart1LocX,chartLocY,chartSizeX,chartSizeY);
             initStreamChart(ref streamChartCh2, ref streamTableCh2, chart2LocX, chartLocY, chartSizeX, chartSizeY);
+            initCH1vCH2Chart(ref streamChartDual, ch2StreamSerie, ref streamTableDualChannel, chartDualLocX, chartLocY, chartSizeX, chartSizeY);
             initPort();
             bindStreamGrid();
 
             bindResultGrid();
             InitTimer();
             isStream = false;
-            autoStartStream(channelCount);//auto start streaming
+            //autoStartStream(channelCount);//auto start streaming
         }
         //For Single Channel Tab Stream
         public Form_Streaming(SerialPort ch1Port,int channelCount)
         {
             InitializeComponent();
+            chartStyle_comboBox.Visible = false;
             bindFrequencyBox();
             streamingPort1 = ch1Port;
             changeTo250kbaud(ref streamingPort1);
             singleChStream = true;
             this.channelCount = channelCount;
 
-            initStreamTable(ref streamTableCh1);
+            init1CHStreamTable(ref streamTableCh1);
             initStreamChart(ref streamChartCh1, ref streamTableCh1, chart1LocX, chartLocY, chartSizeX, chartSizeY);
             initPort();
             bindStreamGrid();
@@ -81,10 +89,10 @@ namespace WindowsFormsApplication1
             dualChStream = true;
             this.channelCount = channelCount;
 
-            initStreamTable(ref streamTableCh1);
-            initStreamTable(ref streamTableCh2);
-            initStreamChart(ref streamChartCh1, ref streamTableCh1, chart1LocX, chartLocY, chartSizeX, chartSizeY);
-            initStreamChart(ref streamChartCh2, ref streamTableCh2, chart2LocX, chartLocY, chartSizeX, chartSizeY);
+            init1CHStreamTable(ref streamTableCh1);
+            init1CHStreamTable(ref streamTableCh2);
+            initDualCHStreamTable(ref streamTableDualChannel);
+            
             initPort();
             bindStreamGrid();
 
@@ -135,9 +143,26 @@ namespace WindowsFormsApplication1
                 {
                     showStreamData(ref runningByteStreamCh1, masterStreamCh1,streamReadingsListCh1,ref streamTableCh1);
                     showStreamData(ref runningByteStreamCh2, masterStreamCh2, streamReadingsListCh2,ref streamTableCh2);
+
+                    //Todo: combine streamtablech1 and streamtablech2 to dualtable
+                    combine2StreamTable(streamTableCh1, streamTableCh2,ref streamTableDualChannel);
                 }
             }
             catch { }
+        }
+        private void combine2StreamTable(DataTable streamTable1, DataTable streamTable2, ref DataTable combinedTable)
+        {
+            int readingColIndex = 1;
+            combinedTable.Clear();
+            for (int rowIndex=0;rowIndex<streamTable1.Rows.Count;rowIndex++)
+            {
+                if (rowIndex<streamTable2.Rows.Count)
+                {
+                    double ch1Reading = streamTable1.Rows[rowIndex].Field<double>(readingColIndex);
+                    double ch2Reading = streamTable2.Rows[rowIndex].Field<double>(readingColIndex);
+                    combinedTable.Rows.Add(rowIndex + 1, ch1Reading, ch2Reading);
+                }
+            }
         }
         private void showStreamData(ref int runningByteStream,List<byte> masterStream,List<READINGS_ANGLES>streamReadingsList,ref DataTable streamTable )
         {
@@ -249,7 +274,7 @@ namespace WindowsFormsApplication1
         int baud250k = 250000;
         SerialPort streamingPort1 = new SerialPort(),streamingPort2=new SerialPort();
         SerialPort streamPort = new SerialPort();
-        public DataTable streamTableCh1 = new DataTable(),streamTableCh2=new DataTable();
+        public DataTable streamTableCh1 = new DataTable(),streamTableCh2=new DataTable(),streamTableDualChannel=new DataTable();
         private void changeMode(SerialPort thisPort, int mode)
         {
             string queryCommand = "";
@@ -540,7 +565,7 @@ namespace WindowsFormsApplication1
             serialPort.BaudRate = baud9600;
         }
 
-        private void initStreamTable(ref DataTable streamTable)
+        private void init1CHStreamTable(ref DataTable streamTable)
         {
             streamTable = new DataTable("StreamTable");
 
@@ -574,8 +599,30 @@ namespace WindowsFormsApplication1
             dtColumn.Unique = false;
             streamTable.Columns.Add(dtColumn);*/
         }
+        private void initDualCHStreamTable(ref DataTable streamTable)
+        {
+            streamTable = new DataTable("StreamTable");
 
-        private void writeToStreamTable(List<READINGS_ANGLES> listToWrite,ref DataTable streamTable)
+            DataColumn dtColumn = new DataColumn();
+            dtColumn.DataType = typeof(Int32);
+            dtColumn.ColumnName = "Index";
+            dtColumn.Unique = true;
+            streamTable.Columns.Add(dtColumn);
+
+            dtColumn = new DataColumn();
+            dtColumn.DataType = typeof(double);
+            dtColumn.ColumnName = ch1StreamSerie;
+            dtColumn.Unique = false;
+            streamTable.Columns.Add(dtColumn);
+
+            dtColumn = new DataColumn();
+            dtColumn.DataType = typeof(double);
+            dtColumn.ColumnName = ch2StreamSerie;
+            dtColumn.Unique = false;
+            streamTable.Columns.Add(dtColumn);
+        }
+
+            private void writeToStreamTable(List<READINGS_ANGLES> listToWrite,ref DataTable streamTable)
         {
             int lineStart = streamTable.Rows.Count - 1;
             if (lineStart < 0)
@@ -590,7 +637,7 @@ namespace WindowsFormsApplication1
                     /*dtRow[2] = listToWrite[lineIndex].reading2;
                     dtRow[3] = listToWrite[lineIndex].angle1;
                     dtRow[4] = listToWrite[lineIndex].angle2;*/
-                    streamTable.Rows.Add(dtRow);
+            streamTable.Rows.Add(dtRow);
                 }
                 catch (Exception e)
                 {
@@ -741,6 +788,37 @@ namespace WindowsFormsApplication1
             }
             return returnTable;
         }
+        
+        private void chartStyle_comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            const int ch1vch2 = 0, ch2vch1 = 1, ch1vch2vcount = 2;
+            switch (chartStyle_comboBox.SelectedIndex)
+            {
+                case ch1vch2://Ch2 is Y Axis
+                    initCH1vCH2Chart(ref streamChartDual, ch2StreamSerie, ref streamTableDualChannel, chartDualLocX, chartLocY, chartSizeX, chartSizeY);
+                    break;
+                case ch2vch1://Ch1 is Y Axis
+                    initCH1vCH2Chart(ref streamChartDual, ch1StreamSerie, ref streamTableDualChannel, chartDualLocX, chartLocY, chartSizeX, chartSizeY);
+                    break;
+                case ch1vch2vcount:
+                    init2YAxisChart(ref streamChartDual, ref streamTableDualChannel, chartDualLocX, chartLocY, chartSizeX, chartSizeY);
+                    break;
+                default://Ch2 is Y Axis
+                    initCH1vCH2Chart(ref streamChartDual, ch2StreamSerie, ref streamTableDualChannel, chartDualLocX, chartLocY, chartSizeX, chartSizeY);
+                    break;
+            }
+        }
+        private double getPeak(DataTable streamTable,int colIndex)
+        {
+            double peakVal = 0,readingVal=0;
+            foreach (DataRow dataRow in streamTable.Rows)
+            {
+                readingVal = dataRow.Field<double>(colIndex);
+                if (Math.Abs(readingVal) > Math.Abs(peakVal))
+                    peakVal = readingVal;
+            }
+            return readingVal;
+        }
         private void saveResult_btn_Click(object sender, EventArgs e)
         {
             if (singleChStream == true)
@@ -752,20 +830,35 @@ namespace WindowsFormsApplication1
                     streamTableCh1 = reduceTableCount(streamTableCh1, savePointsCountForm.returnPointsToSave).Copy();
                 }
             }
+            if (savePeak==true)
+            {
+                int ch1ColIndex = 1;
+                peakVal = getPeak(streamTableCh1, ch1ColIndex);
+            }
+            if (saveTrough==true)
+            {
+                throw new NotImplementedException();
+            }
             isSave = true;
             
             closeForm();
         }
 
-
+        //bind chart with primary Y axis
         private void bindChartXYwithTableHeader(ref DataTable tableToBind, int xTableIndex, int yTableIndex, ref Chart chart, string serieName)
         {
             chart.Series[serieName].XValueMember = tableToBind.Columns[xTableIndex].ColumnName;
             chart.Series[serieName].YValueMembers = tableToBind.Columns[yTableIndex].ColumnName;
-            
             chart.DataSource = tableToBind;
         }
-
+        //bind chart with 2nd Y axis
+        private void bindChartX2ndYwithTableHeader(ref DataTable tableToBind, int xTableIndex, int yTableIndex, ref Chart chart, string serieName)
+        {
+            chart.Series[serieName].XValueMember = tableToBind.Columns[xTableIndex].ColumnName;
+            chart.Series[serieName].YValueMembers = tableToBind.Columns[yTableIndex].ColumnName;
+            chart.Series[serieName].YAxisType = AxisType.Secondary;
+            chart.DataSource = tableToBind;
+        }
         private void retakeStreaming_btn_Click(object sender, EventArgs e)
         {
             if (isStream==true)
@@ -804,8 +897,11 @@ namespace WindowsFormsApplication1
         const int chart1LocX=541,chartLocY=40;
         const int chartSizeX = 732, chartSizeY = 555;
         const int chart2LocX = 1273;
+        const int chartDualLocX = 2005;
         private void initStreamChart(ref Chart chart, ref DataTable tableToBind,int chartLocX, int chartLocY, int chartSizeX, int chartSizeY)
         {
+            int xAxisTableColIndex = 0;
+            int yAxisTableColIndex = 1;
             chart = new Chart();
             chart.Location=new Point(chartLocX, chartLocY);
             chart.Size = new Size(chartSizeX, chartSizeY);
@@ -821,7 +917,7 @@ namespace WindowsFormsApplication1
             initChartSerie(ref chart, angle2StreamSerie);
             chart = setChart(chart, angle2StreamSerie, 1);
             */
-            bindChartXYwithTableHeader(ref tableToBind, 0, 1, ref chart, ch1StreamSerie);
+            bindChartXYwithTableHeader(ref tableToBind, xAxisTableColIndex, yAxisTableColIndex, ref chart, ch1StreamSerie);
             /*bindChartXYwithTableHeader(ref tableToBind, 0, 2, ref chart, ch2StreamSerie);
             bindChartXYwithTableHeader(ref tableToBind, 0, 3, ref chart, angle1StreamSerie);
             bindChartXYwithTableHeader(ref tableToBind, 0, 4, ref chart, angle2StreamSerie);
@@ -829,8 +925,12 @@ namespace WindowsFormsApplication1
             chart.ChartAreas[chartAreaName].AxisY.RoundAxisValues();
             chart.DataBind();
         }
+
+        //Passin tabletoBind should have both ch1 and ch2
         private void init2YAxisChart(ref Chart chart, ref DataTable tableToBind, int chartLocX, int chartLocY, int chartSizeX, int chartSizeY)
         {
+            int x1AxisTableColIndex = 0, x2AxisTableColIndex = 0;
+            int y1AxisTableColIndex = 1, y2AxisTableColIndex = 1;
             chart = new Chart();
             chart.Location = new Point(chartLocX, chartLocY);
             chart.Size = new Size(chartSizeX, chartSizeY);
@@ -839,18 +939,42 @@ namespace WindowsFormsApplication1
 
             initChartSerie(ref chart, ch1StreamSerie);
             chart = setChart(chart, ch1StreamSerie, 1);
-            /*initChartSerie(ref chart, angle1StreamSerie);
-            chart = setChart(chart, angle1StreamSerie, 1);
+            bindChartXYwithTableHeader(ref tableToBind, x1AxisTableColIndex, y1AxisTableColIndex, ref chart, ch1StreamSerie);
+
             initChartSerie(ref chart, ch2StreamSerie);
             chart = setChart(chart, ch2StreamSerie, 1);
-            initChartSerie(ref chart, angle2StreamSerie);
-            chart = setChart(chart, angle2StreamSerie, 1);
-            */
-            bindChartXYwithTableHeader(ref tableToBind, 0, 1, ref chart, ch1StreamSerie);
-            /*bindChartXYwithTableHeader(ref tableToBind, 0, 2, ref chart, ch2StreamSerie);
-            bindChartXYwithTableHeader(ref tableToBind, 0, 3, ref chart, angle1StreamSerie);
-            bindChartXYwithTableHeader(ref tableToBind, 0, 4, ref chart, angle2StreamSerie);
-            */
+            bindChartX2ndYwithTableHeader(ref tableToBind, x2AxisTableColIndex, y2AxisTableColIndex, ref chart, ch2StreamSerie);
+
+            chart.ChartAreas[chartAreaName].AxisY.RoundAxisValues();
+            chart.DataBind();
+        }
+        //Passin tabletoBind should have both ch1 and ch2
+        private void initCH1vCH2Chart(ref Chart chart,string YSerieName, ref DataTable tableToBind, int chartLocX, int chartLocY, int chartSizeX, int chartSizeY)
+        {
+            int xAxisTableColIndex = 0;
+            int yAxisTableColIndex = 1;
+            int ch1ColIndex = 1, ch2ColIndex = 2;
+            if (YSerieName==ch1StreamSerie)//Ch1 is Y,Ch2 is X
+            {
+                xAxisTableColIndex = ch2ColIndex;
+                yAxisTableColIndex = ch1ColIndex;
+            }
+            else if (YSerieName==ch2StreamSerie)//Ch1 is X, Ch2 is Y
+            {
+                xAxisTableColIndex = ch1ColIndex;
+                yAxisTableColIndex = ch2ColIndex;
+            }
+            
+            chart = new Chart();
+            chart.Location = new Point(chartLocX, chartLocY);
+            chart.Size = new Size(chartSizeX, chartSizeY);
+            chart.ChartAreas.Add(chartAreaName);
+            Controls.Add(chart);
+
+            initChartSerie(ref chart, YSerieName);
+            chart = setChart(chart, YSerieName, 1);
+            bindChartXYwithTableHeader(ref tableToBind, xAxisTableColIndex, yAxisTableColIndex, ref chart, YSerieName);
+
             chart.ChartAreas[chartAreaName].AxisY.RoundAxisValues();
             chart.DataBind();
         }
