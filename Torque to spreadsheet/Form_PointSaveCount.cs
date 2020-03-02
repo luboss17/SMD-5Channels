@@ -58,5 +58,10 @@ namespace WindowsFormsApplication1
             pointCount_txt.Enabled = true;
             
         }
+
+        private void pointCount_txt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

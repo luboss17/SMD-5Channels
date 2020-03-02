@@ -53,6 +53,7 @@
             this.pointCount_txt.Name = "pointCount_txt";
             this.pointCount_txt.Size = new System.Drawing.Size(75, 20);
             this.pointCount_txt.TabIndex = 1;
+            this.pointCount_txt.TextChanged += new System.EventHandler(this.pointCount_txt_TextChanged);
             // 
             // label1
             // 

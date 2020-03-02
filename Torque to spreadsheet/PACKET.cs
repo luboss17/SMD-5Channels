@@ -71,7 +71,7 @@ namespace WindowsFormsApplication1
                 int totalEachReadingLen = 3;//this value=how many bytes existed for each reading(including angle). For now, set it to 3
                 totalEachReadingLen = setTDandAngleCount();//set TD count and if there is angle
 
-                while (pos < packet.Length - totalEachReadingLen)
+                while ((pos < packet.Length - totalEachReadingLen)&&(TDcount>0))
                 {
                     reading = decodeReading(packet.Skip(pos).Take(totalEachReadingLen).ToArray());
                     readings.Add(reading);

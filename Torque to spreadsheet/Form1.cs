@@ -8641,12 +8641,15 @@ namespace WindowsFormsApplication1
                 channelCount = 1;
             else if (currTestSetup.testType == "2")
                 channelCount = 2;
+            else if ((serialPort1.IsOpen == true) && (serialPort2.IsOpen == true))
+                channelCount = 2;
 
             int target_Channel = 1;
             if ((ch1Target_select.Checked) || (channelCount == 1))
                 target_Channel = 1;
             else if (ch2Target_select.Checked)
                 target_Channel = 2;
+            
             Form_Streaming streamingForm = new Form_Streaming(serialPort1,serialPort2, Targets, target_Channel, channelCount);
             streamingForm.ShowDialog();
 

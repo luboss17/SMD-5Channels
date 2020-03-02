@@ -59,20 +59,18 @@
             // 
             this.targetGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.targetGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.targetGrid.Location = new System.Drawing.Point(28, 1246);
-            this.targetGrid.Margin = new System.Windows.Forms.Padding(6);
+            this.targetGrid.Location = new System.Drawing.Point(14, 648);
             this.targetGrid.Name = "targetGrid";
             this.targetGrid.RowHeadersWidth = 82;
-            this.targetGrid.Size = new System.Drawing.Size(946, 362);
+            this.targetGrid.Size = new System.Drawing.Size(473, 188);
             this.targetGrid.TabIndex = 144;
             // 
             // saveResult_btn
             // 
             this.saveResult_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveResult_btn.Location = new System.Drawing.Point(1286, 1381);
-            this.saveResult_btn.Margin = new System.Windows.Forms.Padding(6);
+            this.saveResult_btn.Location = new System.Drawing.Point(643, 718);
             this.saveResult_btn.Name = "saveResult_btn";
-            this.saveResult_btn.Size = new System.Drawing.Size(720, 90);
+            this.saveResult_btn.Size = new System.Drawing.Size(360, 47);
             this.saveResult_btn.TabIndex = 143;
             this.saveResult_btn.Text = "Save";
             this.saveResult_btn.UseVisualStyleBackColor = true;
@@ -80,10 +78,9 @@
             // 
             // to9600baudrate_btn
             // 
-            this.to9600baudrate_btn.Location = new System.Drawing.Point(1350, 1678);
-            this.to9600baudrate_btn.Margin = new System.Windows.Forms.Padding(6);
+            this.to9600baudrate_btn.Location = new System.Drawing.Point(675, 873);
             this.to9600baudrate_btn.Name = "to9600baudrate_btn";
-            this.to9600baudrate_btn.Size = new System.Drawing.Size(246, 44);
+            this.to9600baudrate_btn.Size = new System.Drawing.Size(123, 23);
             this.to9600baudrate_btn.TabIndex = 142;
             this.to9600baudrate_btn.Text = "9600 Baud";
             this.to9600baudrate_btn.UseVisualStyleBackColor = true;
@@ -92,10 +89,9 @@
             // 
             // to25kbaud_btn
             // 
-            this.to25kbaud_btn.Location = new System.Drawing.Point(1350, 1622);
-            this.to25kbaud_btn.Margin = new System.Windows.Forms.Padding(6);
+            this.to25kbaud_btn.Location = new System.Drawing.Point(675, 843);
             this.to25kbaud_btn.Name = "to25kbaud_btn";
-            this.to25kbaud_btn.Size = new System.Drawing.Size(246, 44);
+            this.to25kbaud_btn.Size = new System.Drawing.Size(123, 23);
             this.to25kbaud_btn.TabIndex = 141;
             this.to25kbaud_btn.Text = "25000 Baud";
             this.to25kbaud_btn.UseVisualStyleBackColor = true;
@@ -105,10 +101,9 @@
             // stropStream_btn
             // 
             this.stropStream_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stropStream_btn.Location = new System.Drawing.Point(2018, 1177);
-            this.stropStream_btn.Margin = new System.Windows.Forms.Padding(6);
+            this.stropStream_btn.Location = new System.Drawing.Point(1009, 612);
             this.stropStream_btn.Name = "stropStream_btn";
-            this.stropStream_btn.Size = new System.Drawing.Size(720, 90);
+            this.stropStream_btn.Size = new System.Drawing.Size(360, 47);
             this.stropStream_btn.TabIndex = 140;
             this.stropStream_btn.Text = "Stop Stream-Track";
             this.stropStream_btn.UseVisualStyleBackColor = true;
@@ -116,10 +111,9 @@
             // 
             // startDualStream_btn
             // 
-            this.startDualStream_btn.Location = new System.Drawing.Point(2182, 1696);
-            this.startDualStream_btn.Margin = new System.Windows.Forms.Padding(6);
+            this.startDualStream_btn.Location = new System.Drawing.Point(1091, 882);
             this.startDualStream_btn.Name = "startDualStream_btn";
-            this.startDualStream_btn.Size = new System.Drawing.Size(282, 98);
+            this.startDualStream_btn.Size = new System.Drawing.Size(141, 51);
             this.startDualStream_btn.TabIndex = 139;
             this.startDualStream_btn.Text = "Dual Stream";
             this.startDualStream_btn.UseVisualStyleBackColor = true;
@@ -129,10 +123,9 @@
             // doneStream_btn
             // 
             this.doneStream_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.doneStream_btn.Location = new System.Drawing.Point(2182, 1631);
-            this.doneStream_btn.Margin = new System.Windows.Forms.Padding(6);
+            this.doneStream_btn.Location = new System.Drawing.Point(1091, 848);
             this.doneStream_btn.Name = "doneStream_btn";
-            this.doneStream_btn.Size = new System.Drawing.Size(272, 60);
+            this.doneStream_btn.Size = new System.Drawing.Size(136, 31);
             this.doneStream_btn.TabIndex = 138;
             this.doneStream_btn.Text = "Done Stream";
             this.doneStream_btn.UseVisualStyleBackColor = true;
@@ -142,10 +135,9 @@
             // startSingleStream_btn
             // 
             this.startSingleStream_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold);
-            this.startSingleStream_btn.Location = new System.Drawing.Point(1286, 1279);
-            this.startSingleStream_btn.Margin = new System.Windows.Forms.Padding(6);
+            this.startSingleStream_btn.Location = new System.Drawing.Point(643, 665);
             this.startSingleStream_btn.Name = "startSingleStream_btn";
-            this.startSingleStream_btn.Size = new System.Drawing.Size(720, 90);
+            this.startSingleStream_btn.Size = new System.Drawing.Size(360, 47);
             this.startSingleStream_btn.TabIndex = 137;
             this.startSingleStream_btn.Text = "Single Stream-Peak";
             this.startSingleStream_btn.UseVisualStyleBackColor = true;
@@ -155,20 +147,18 @@
             // 
             this.streamGridCh1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.streamGridCh1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.streamGridCh1.Location = new System.Drawing.Point(24, 77);
-            this.streamGridCh1.Margin = new System.Windows.Forms.Padding(6);
+            this.streamGridCh1.Location = new System.Drawing.Point(12, 40);
             this.streamGridCh1.Name = "streamGridCh1";
             this.streamGridCh1.RowHeadersWidth = 82;
-            this.streamGridCh1.Size = new System.Drawing.Size(490, 1067);
+            this.streamGridCh1.Size = new System.Drawing.Size(245, 555);
             this.streamGridCh1.TabIndex = 136;
             // 
             // close_btn
             // 
             this.close_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.close_btn.Location = new System.Drawing.Point(1286, 1483);
-            this.close_btn.Margin = new System.Windows.Forms.Padding(6);
+            this.close_btn.Location = new System.Drawing.Point(643, 771);
             this.close_btn.Name = "close_btn";
-            this.close_btn.Size = new System.Drawing.Size(720, 90);
+            this.close_btn.Size = new System.Drawing.Size(360, 47);
             this.close_btn.TabIndex = 145;
             this.close_btn.Text = "Close";
             this.close_btn.UseVisualStyleBackColor = true;
@@ -178,20 +168,18 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(302, 1181);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label1.Location = new System.Drawing.Point(151, 614);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(388, 63);
+            this.label1.Size = new System.Drawing.Size(203, 31);
             this.label1.TabIndex = 146;
             this.label1.Text = "Points to Save";
             // 
             // retakeStreaming_btn
             // 
             this.retakeStreaming_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.retakeStreaming_btn.Location = new System.Drawing.Point(2204, 1327);
-            this.retakeStreaming_btn.Margin = new System.Windows.Forms.Padding(6);
+            this.retakeStreaming_btn.Location = new System.Drawing.Point(1102, 690);
             this.retakeStreaming_btn.Name = "retakeStreaming_btn";
-            this.retakeStreaming_btn.Size = new System.Drawing.Size(720, 90);
+            this.retakeStreaming_btn.Size = new System.Drawing.Size(360, 47);
             this.retakeStreaming_btn.TabIndex = 147;
             this.retakeStreaming_btn.Text = "Retake";
             this.retakeStreaming_btn.UseVisualStyleBackColor = true;
@@ -202,20 +190,18 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(340, 12);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label2.Location = new System.Drawing.Point(170, 6);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(340, 63);
+            this.label2.Size = new System.Drawing.Size(177, 31);
             this.label2.TabIndex = 148;
             this.label2.Text = "Stream Data";
             // 
             // dualStream_btn
             // 
             this.dualStream_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dualStream_btn.Location = new System.Drawing.Point(1286, 1177);
-            this.dualStream_btn.Margin = new System.Windows.Forms.Padding(6);
+            this.dualStream_btn.Location = new System.Drawing.Point(643, 612);
             this.dualStream_btn.Name = "dualStream_btn";
-            this.dualStream_btn.Size = new System.Drawing.Size(720, 90);
+            this.dualStream_btn.Size = new System.Drawing.Size(360, 47);
             this.dualStream_btn.TabIndex = 149;
             this.dualStream_btn.Text = "Start Stream-Track";
             this.dualStream_btn.UseVisualStyleBackColor = true;
@@ -223,20 +209,18 @@
             // 
             // streamRate_txt
             // 
-            this.streamRate_txt.Location = new System.Drawing.Point(1638, 1649);
-            this.streamRate_txt.Margin = new System.Windows.Forms.Padding(6);
+            this.streamRate_txt.Location = new System.Drawing.Point(819, 857);
             this.streamRate_txt.Name = "streamRate_txt";
-            this.streamRate_txt.Size = new System.Drawing.Size(196, 31);
+            this.streamRate_txt.Size = new System.Drawing.Size(100, 20);
             this.streamRate_txt.TabIndex = 150;
             this.streamRate_txt.Visible = false;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1004, 1246);
-            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label3.Location = new System.Drawing.Point(502, 648);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(131, 25);
+            this.label3.Size = new System.Drawing.Size(66, 13);
             this.label3.TabIndex = 151;
             this.label3.Text = "Stream Rate";
             // 
@@ -244,11 +228,10 @@
             // 
             this.streamGridCh2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.streamGridCh2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.streamGridCh2.Location = new System.Drawing.Point(526, 77);
-            this.streamGridCh2.Margin = new System.Windows.Forms.Padding(6);
+            this.streamGridCh2.Location = new System.Drawing.Point(263, 40);
             this.streamGridCh2.Name = "streamGridCh2";
             this.streamGridCh2.RowHeadersWidth = 82;
-            this.streamGridCh2.Size = new System.Drawing.Size(490, 1067);
+            this.streamGridCh2.Size = new System.Drawing.Size(245, 555);
             this.streamGridCh2.TabIndex = 152;
             // 
             // frequency_comboBox
@@ -258,10 +241,10 @@
             "Ch1 vs Ch2",
             "Ch2 vs Ch1",
             "Ch1 vs Ch2 vs Count"});
-            this.frequency_comboBox.Location = new System.Drawing.Point(986, 1283);
-            this.frequency_comboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.frequency_comboBox.Location = new System.Drawing.Point(493, 667);
+            this.frequency_comboBox.Margin = new System.Windows.Forms.Padding(2);
             this.frequency_comboBox.Name = "frequency_comboBox";
-            this.frequency_comboBox.Size = new System.Drawing.Size(246, 33);
+            this.frequency_comboBox.Size = new System.Drawing.Size(125, 21);
             this.frequency_comboBox.TabIndex = 153;
             // 
             // chartStyle_comboBox
@@ -271,38 +254,42 @@
             "Ch1 vs Ch2",
             "Ch2 vs Ch1",
             "Count vs Ch1 vs Ch2 "});
-            this.chartStyle_comboBox.Location = new System.Drawing.Point(1236, 13);
-            this.chartStyle_comboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.chartStyle_comboBox.Location = new System.Drawing.Point(618, 7);
+            this.chartStyle_comboBox.Margin = new System.Windows.Forms.Padding(2);
             this.chartStyle_comboBox.Name = "chartStyle_comboBox";
-            this.chartStyle_comboBox.Size = new System.Drawing.Size(246, 33);
+            this.chartStyle_comboBox.Size = new System.Drawing.Size(125, 21);
             this.chartStyle_comboBox.TabIndex = 154;
             this.chartStyle_comboBox.SelectedIndexChanged += new System.EventHandler(this.chartStyle_comboBox_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1064, 21);
+            this.label4.Location = new System.Drawing.Point(532, 11);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(152, 25);
+            this.label4.Size = new System.Drawing.Size(76, 13);
             this.label4.TabIndex = 155;
             this.label4.Text = "Change Graph";
             // 
             // savePeak_chkBox
             // 
             this.savePeak_chkBox.AutoSize = true;
-            this.savePeak_chkBox.Location = new System.Drawing.Point(1009, 1381);
+            this.savePeak_chkBox.Location = new System.Drawing.Point(504, 718);
+            this.savePeak_chkBox.Margin = new System.Windows.Forms.Padding(2);
             this.savePeak_chkBox.Name = "savePeak_chkBox";
-            this.savePeak_chkBox.Size = new System.Drawing.Size(148, 29);
+            this.savePeak_chkBox.Size = new System.Drawing.Size(79, 17);
             this.savePeak_chkBox.TabIndex = 156;
             this.savePeak_chkBox.Text = "Save Peak";
             this.savePeak_chkBox.UseVisualStyleBackColor = true;
+            this.savePeak_chkBox.CheckedChanged += new System.EventHandler(this.savePeak_chkBox_CheckedChanged);
             // 
             // saveTrough_chkBox
             // 
             this.saveTrough_chkBox.AutoSize = true;
-            this.saveTrough_chkBox.Location = new System.Drawing.Point(1009, 1425);
+            this.saveTrough_chkBox.Location = new System.Drawing.Point(504, 741);
+            this.saveTrough_chkBox.Margin = new System.Windows.Forms.Padding(2);
             this.saveTrough_chkBox.Name = "saveTrough_chkBox";
-            this.saveTrough_chkBox.Size = new System.Drawing.Size(167, 29);
+            this.saveTrough_chkBox.Size = new System.Drawing.Size(88, 17);
             this.saveTrough_chkBox.TabIndex = 157;
             this.saveTrough_chkBox.Text = "Save Trough";
             this.saveTrough_chkBox.UseVisualStyleBackColor = true;
@@ -310,9 +297,9 @@
             // 
             // Form_Streaming
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2740, 1779);
+            this.ClientSize = new System.Drawing.Size(1370, 739);
             this.Controls.Add(this.saveTrough_chkBox);
             this.Controls.Add(this.savePeak_chkBox);
             this.Controls.Add(this.label4);
@@ -335,7 +322,6 @@
             this.Controls.Add(this.doneStream_btn);
             this.Controls.Add(this.startSingleStream_btn);
             this.Controls.Add(this.streamGridCh1);
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form_Streaming";
             this.Text = "StreamingForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StreamingForm_FormClosing);

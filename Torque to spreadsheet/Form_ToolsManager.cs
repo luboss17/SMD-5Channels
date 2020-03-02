@@ -202,37 +202,44 @@ namespace WindowsFormsApplication1
         private void loadToolorModel(DataTable thisTable, string colName, string IDtoCompare, int offset)
         {
             currTestID = "";
-            foreach (DataRow tableRow in thisTable.Rows)
+            try
             {
-                if (tableRow[colName].ToString() == IDtoCompare)
+                foreach (DataRow tableRow in thisTable.Rows)
                 {
-                    if (offset <= 0)
+                    if (tableRow[colName].ToString() == IDtoCompare)
                     {
-                        toolID_txt.Text = tableRow[pack.toolID_colName].ToString();
-                        model_txt.Text = tableRow[pack.model_colName].ToString();
-                        equipment_txt.Text = tableRow[pack.equipment_colName].ToString();
-                        manufacture_txt.Text = tableRow[pack.manufacturer_colName].ToString();
-                        SN_txt.Text = tableRow[pack.SN_colName].ToString();
-                        lotID_txt.Text = tableRow[pack.lotID_colName].ToString();
-                        ch1Mode_comboBox.SelectedIndex = getModeIndexfromTable(tableRow[pack.mode_colName].ToString());
-                        ch2Mode_comboBox.SelectedIndex = getModeIndexfromTable(tableRow[pack.imode_colName].ToString());
-                        scanOperator_chk.Checked = convertIntToBool(tableRow[pack.scanOperator_colName].ToString());
-                        scan1_chk.Checked = convertIntToBool(tableRow[pack.scan1_colName].ToString());
-                        scan2_chk.Checked = convertIntToBool(tableRow[pack.scan2_colName].ToString());
-                        pauseTool_chk.Checked = convertIntToBool(tableRow[pack.setupPause_colName].ToString());
+                        if (offset <= 0)
+                        {
+                            toolID_txt.Text = tableRow[pack.toolID_colName].ToString();
+                            model_txt.Text = tableRow[pack.model_colName].ToString();
+                            equipment_txt.Text = tableRow[pack.equipment_colName].ToString();
+                            manufacture_txt.Text = tableRow[pack.manufacturer_colName].ToString();
+                            SN_txt.Text = tableRow[pack.SN_colName].ToString();
+                            lotID_txt.Text = tableRow[pack.lotID_colName].ToString();
+                            ch1Mode_comboBox.SelectedIndex = getModeIndexfromTable(tableRow[pack.mode_colName].ToString());
+                            ch2Mode_comboBox.SelectedIndex = getModeIndexfromTable(tableRow[pack.imode_colName].ToString());
+                            scanOperator_chk.Checked = convertIntToBool(tableRow[pack.scanOperator_colName].ToString());
+                            scan1_chk.Checked = convertIntToBool(tableRow[pack.scan1_colName].ToString());
+                            scan2_chk.Checked = convertIntToBool(tableRow[pack.scan2_colName].ToString());
+                            pauseTool_chk.Checked = convertIntToBool(tableRow[pack.setupPause_colName].ToString());
 
-                        //Assign the name of test associated with this tool or model
-                        currTestID = tableRow[pack.testID_colName].ToString();
+                            //Assign the name of test associated with this tool or model
+                            currTestID = tableRow[pack.testID_colName].ToString();
 
-                        //import this toolRow into toolCondTable
-                        toolCondTable = thisTable.Clone();
-                        toolCondTable.ImportRow(tableRow);
+                            //import this toolRow into toolCondTable
+                            toolCondTable = thisTable.Clone();
+                            toolCondTable.ImportRow(tableRow);
 
-                        break;
+                            break;
+                        }
+                        else
+                            offset--;
                     }
-                    else
-                        offset--;
                 }
+            }
+            catch
+            {
+                //check if colName is valid column in tableRow
             }
         }
         //find the index of passed in testID and select that test
@@ -268,6 +275,7 @@ namespace WindowsFormsApplication1
                 if (toolsModel_comboBox.Text == toolText)
                 {
                     colName = toolSearchSubject_matchTable[searchSubject_comboBox.SelectedIndex];
+                    
                     int offset = offsetSameSearchName();
                     loadToolorModel(toolsTable, colName, searchResult_listBox.SelectedItem.ToString(), offset);
 

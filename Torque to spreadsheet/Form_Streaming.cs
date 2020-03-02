@@ -46,10 +46,16 @@ namespace WindowsFormsApplication1
             init1CHStreamTable(ref streamTableCh1);
             init1CHStreamTable(ref streamTableCh2);
             initDualCHStreamTable(ref streamTableDualChannel);
-
-            initStreamChart(ref streamChartCh1, ref streamTableCh1,chart1LocX,chartLocY,chartSizeX,chartSizeY);
-            initStreamChart(ref streamChartCh2, ref streamTableCh2, chart2LocX, chartLocY, chartSizeX, chartSizeY);
-            initCH1vCH2Chart(ref streamChartDual, ch2StreamSerie, ref streamTableDualChannel, chartDualLocX, chartLocY, chartSizeX, chartSizeY);
+            if (channelCount == 1)
+            {
+                initStreamChart(ref streamChartCh1, ref streamTableCh1, chart1LocX, chartLocY, chartSizeX, chartSizeY);
+            }
+            else
+            {
+                //initStreamChart(ref streamChartCh2, ref streamTableCh2, chart2LocX, chartLocY, chartSizeX, chartSizeY);
+                //initCH1vCH2Chart(ref streamChartDual, ch2StreamSerie, ref streamTableDualChannel, chartDualLocX, chartLocY, chartSizeX, chartSizeY);
+                //init2YAxisChart(ref streamChartDual, ref streamTableDualChannel, chartDualLocX, chartLocY, chartSizeX, chartSizeY);
+            }
             initPort();
             bindStreamGrid();
 
@@ -146,6 +152,7 @@ namespace WindowsFormsApplication1
 
                     //Todo: combine streamtablech1 and streamtablech2 to dualtable
                     combine2StreamTable(streamTableCh1, streamTableCh2,ref streamTableDualChannel);
+                    bindChart();
                 }
             }
             catch { }
@@ -791,6 +798,8 @@ namespace WindowsFormsApplication1
         
         private void chartStyle_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            streamChartDual.Dispose();
+            streamChartDual = new Chart();
             const int ch1vch2 = 0, ch2vch1 = 1, ch1vch2vcount = 2;
             switch (chartStyle_comboBox.SelectedIndex)
             {
@@ -813,11 +822,13 @@ namespace WindowsFormsApplication1
             double peakVal = 0,readingVal=0;
             foreach (DataRow dataRow in streamTable.Rows)
             {
+                double reading = Math.Abs(readingVal);
+                double peak = Math.Abs(peakVal);
                 readingVal = dataRow.Field<double>(colIndex);
-                if (Math.Abs(readingVal) > Math.Abs(peakVal))
+                if (reading>peak)
                     peakVal = readingVal;
             }
-            return readingVal;
+            return peakVal;
         }
         private void saveResult_btn_Click(object sender, EventArgs e)
         {
@@ -842,6 +853,14 @@ namespace WindowsFormsApplication1
             isSave = true;
             
             closeForm();
+        }
+
+        private void savePeak_chkBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (savePeak_chkBox.Checked == true)
+                savePeak = true;
+            else
+                savePeak = false;
         }
 
         //bind chart with primary Y axis
@@ -892,12 +911,13 @@ namespace WindowsFormsApplication1
         {
             streamChartCh1.DataBind();
             streamChartCh2.DataBind();
+            streamChartDual.DataBind();
         }
         string chartAreaName = "StreamChartArea";
         const int chart1LocX=541,chartLocY=40;
         const int chartSizeX = 732, chartSizeY = 555;
         const int chart2LocX = 1273;
-        const int chartDualLocX = 2005;
+        const int chartDualLocX = 541;//2005;
         private void initStreamChart(ref Chart chart, ref DataTable tableToBind,int chartLocX, int chartLocY, int chartSizeX, int chartSizeY)
         {
             int xAxisTableColIndex = 0;
@@ -925,26 +945,34 @@ namespace WindowsFormsApplication1
             chart.ChartAreas[chartAreaName].AxisY.RoundAxisValues();
             chart.DataBind();
         }
+        Color channel1Color = Color.Red,channel2Color=Color.Blue;
 
         //Passin tabletoBind should have both ch1 and ch2
         private void init2YAxisChart(ref Chart chart, ref DataTable tableToBind, int chartLocX, int chartLocY, int chartSizeX, int chartSizeY)
         {
             int x1AxisTableColIndex = 0, x2AxisTableColIndex = 0;
-            int y1AxisTableColIndex = 1, y2AxisTableColIndex = 1;
+            int y1AxisTableColIndex = 1, y2AxisTableColIndex = 2;
             chart = new Chart();
             chart.Location = new Point(chartLocX, chartLocY);
             chart.Size = new Size(chartSizeX, chartSizeY);
             chart.ChartAreas.Add(chartAreaName);
+            chart.ChartAreas[0].AxisX.Title = "Count";
+            chart.ChartAreas[0].AxisY.Title = "Channel1";
+            chart.ChartAreas[0].AxisY.LabelStyle.ForeColor = channel1Color;
+            chart.ChartAreas[0].AxisY2.Title = "Channel2";
+            chart.ChartAreas[0].AxisY2.LabelStyle.ForeColor = channel2Color; ;
             Controls.Add(chart);
 
             initChartSerie(ref chart, ch1StreamSerie);
             chart = setChart(chart, ch1StreamSerie, 1);
             bindChartXYwithTableHeader(ref tableToBind, x1AxisTableColIndex, y1AxisTableColIndex, ref chart, ch1StreamSerie);
+            chart.Series[ch1StreamSerie].Color = channel1Color;
+            
 
             initChartSerie(ref chart, ch2StreamSerie);
             chart = setChart(chart, ch2StreamSerie, 1);
             bindChartX2ndYwithTableHeader(ref tableToBind, x2AxisTableColIndex, y2AxisTableColIndex, ref chart, ch2StreamSerie);
-
+            chart.Series[ch2StreamSerie].Color = channel2Color;
             chart.ChartAreas[chartAreaName].AxisY.RoundAxisValues();
             chart.DataBind();
         }
