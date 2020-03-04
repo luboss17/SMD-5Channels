@@ -150,7 +150,7 @@ namespace WindowsFormsApplication1
                     showStreamData(ref runningByteStreamCh1, masterStreamCh1,streamReadingsListCh1,ref streamTableCh1);
                     showStreamData(ref runningByteStreamCh2, masterStreamCh2, streamReadingsListCh2,ref streamTableCh2);
 
-                    //Todo: combine streamtablech1 and streamtablech2 to dualtable
+                    //Combine streamtablech1 and streamtablech2 to dualtable
                     combine2StreamTable(streamTableCh1, streamTableCh2,ref streamTableDualChannel);
                     bindChart();
                 }
@@ -732,6 +732,7 @@ namespace WindowsFormsApplication1
             changeTo9600baud(ref streamingPort2);
         }
         //extract results from streaming datatable that match with target
+        //Todo: returnTable clone from 
         private DataTable getMatchingResultFromTarget(List<double> targets, DataTable table, int channelToCompare)
         {
             DataTable returnTable = streamTableCh1.Clone();
@@ -782,6 +783,7 @@ namespace WindowsFormsApplication1
             returnResultTable = getMatchingResultFromTarget(targets, streamTableCh1, channelToCompare);
             bindResultGrid();
         }
+
         private DataTable reduceTableCount(DataTable oriTable,int newRowCount)
         {
             int rowCountToSkip = oriTable.Rows.Count / newRowCount;
