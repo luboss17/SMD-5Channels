@@ -44,7 +44,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>26</ApplicationRevision>
+    <ApplicationRevision>28</ApplicationRevision>
     <ApplicationVersion>6.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -237,11 +237,11 @@
     <Compile Include="TesterControl.cs" />
     <Compile Include="CertTestSequence.cs" />
     <Compile Include="TestFormula.cs" />
-    <Compile Include="TestSequenceManager_form.cs">
+    <Compile Include="Form_TestSequenceManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TestSequenceManager_form.Designer.cs">
-      <DependentUpon>TestSequenceManager_form.cs</DependentUpon>
+    <Compile Include="Form_TestSequenceManager.Designer.cs">
+      <DependentUpon>Form_TestSequenceManager.cs</DependentUpon>
     </Compile>
     <Compile Include="TestSetup.cs" />
     <EmbeddedResource Include="AboutBox1.resx">
@@ -317,8 +317,8 @@
     <EmbeddedResource Include="Form_Streaming.resx">
       <DependentUpon>Form_Streaming.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TestSequenceManager_form.resx">
-      <DependentUpon>TestSequenceManager_form.cs</DependentUpon>
+    <EmbeddedResource Include="Form_TestSequenceManager.resx">
+      <DependentUpon>Form_TestSequenceManager.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram2.cd" />
     <None Include="ClassDiagram3.cd" />

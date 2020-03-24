@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication1
 {
-    partial class TestSequenceManager_form
+    partial class Form_TestSequenceManager
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestSequenceManager_form));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_TestSequenceManager));
             this.testSetups_listBox = new System.Windows.Forms.ListBox();
             this.up_btn = new System.Windows.Forms.Button();
             this.down_btn = new System.Windows.Forms.Button();
@@ -393,6 +393,7 @@
             this.sampleNum_txt.Size = new System.Drawing.Size(100, 20);
             this.sampleNum_txt.TabIndex = 6;
             this.sampleNum_txt.Text = "1";
+            this.sampleNum_txt.TextChanged += new System.EventHandler(this.sampleNum_txt_TextChanged);
             this.sampleNum_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sampleNum_txt_KeyDown);
             // 
             // label30

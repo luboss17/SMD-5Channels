@@ -19,7 +19,6 @@ C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.newTestConfirm_form.resources
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.newTool_frm.resources
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
-C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.TestSequenceManager_form.resources
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.csproj.GenerateResource.Cache
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.exe
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\bin\Release\Torque to spreadsheet.pdb
@@ -296,3 +295,4 @@ C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\ob
 C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\obj\Release\Torque to spreadsheet.pdb
 C:\Users\huyhu\OneDrive\Desktop\TorqueToSpreadsheet_dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_Streaming.resources
 C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_Streaming.resources
+C:\Users\Huy\Desktop\TTS-Master\Torque to spreadsheet-dev\Torque to spreadsheet\obj\Release\WindowsFormsApplication1.Form_TestSequenceManager.resources

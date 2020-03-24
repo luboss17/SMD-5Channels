@@ -6437,7 +6437,7 @@ namespace WindowsFormsApplication1
         }
         private void testSequenceManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TestSequenceManager_form frm = new TestSequenceManager_form(testSetups);
+            Form_TestSequenceManager frm = new Form_TestSequenceManager(testSetups);
             frm.ShowDialog();
             testSetups = frm.returnTestSetups();
             /*
@@ -7675,7 +7675,7 @@ namespace WindowsFormsApplication1
         private int[] pointsBracket_arr = new int[] { 1, 2, 3, 5, 6, 7, 10, 11, 20 };
         private void testManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TestSequenceManager_form frm = new TestSequenceManager_form(testSetups);
+            Form_TestSequenceManager frm = new Form_TestSequenceManager(testSetups);
             frm.ShowDialog();
 
             if (frm.isTestSetupSaved)

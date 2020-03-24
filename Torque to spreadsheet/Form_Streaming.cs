@@ -27,6 +27,7 @@ namespace WindowsFormsApplication1
         bool singleChStream = false, dualChStream = false, CalCertStream = false;
         List<int> freqList = new List<int> { 7, 62, 125, 250, 500, 1000, 1500, 2000 };
         public bool savePeak = false, saveTrough = false;
+        const int ch1vch2 = 0, ch2vch1 = 1, ch1vch2vcount = 2;
         public double peakVal = 0;
         //For Cal Cert Tab Stream
         public Form_Streaming(SerialPort ch1Port,SerialPort ch2Port, List<double> targets, int channelToCompare,int channelCount)
@@ -62,6 +63,7 @@ namespace WindowsFormsApplication1
             bindResultGrid();
             InitTimer();
             isStream = false;
+            chartStyle_comboBox.SelectedIndex = ch1vch2vcount;
             //autoStartStream(channelCount);//auto start streaming
         }
         //For Single Channel Tab Stream
@@ -185,7 +187,10 @@ namespace WindowsFormsApplication1
                     }
                     if (endOfStream==true)
                     {
-                        importResult();
+                        if (channelCount == 1)
+                            importResult(streamTableCh1);
+                        else if (channelCount == 2)
+                            importResult(streamTableDualChannel);
                         endOfStream = false;
                     }
         }
@@ -629,7 +634,7 @@ namespace WindowsFormsApplication1
             streamTable.Columns.Add(dtColumn);
         }
 
-            private void writeToStreamTable(List<READINGS_ANGLES> listToWrite,ref DataTable streamTable)
+        private void writeToStreamTable(List<READINGS_ANGLES> listToWrite,ref DataTable streamTable)
         {
             int lineStart = streamTable.Rows.Count - 1;
             if (lineStart < 0)
@@ -734,7 +739,7 @@ namespace WindowsFormsApplication1
         //extract results from streaming datatable that match with target
         private DataTable getMatchingResultFromTarget(List<double> targets, DataTable table, int channelToCompare)
         {
-            DataTable returnTable = streamTableCh1.Clone();
+            DataTable returnTable = table.Clone();
             double currReading = 0, prevReading = 0;
             int targetIndex = 0;
             bool okToImportRow = false;//decide whether the row readings match with target
@@ -776,12 +781,13 @@ namespace WindowsFormsApplication1
             }
             return returnTable;
         }
-        private void importResult()
+        private void importResult(DataTable streamTable)
         {
             returnResultTable = streamTableCh1.Clone();
-            returnResultTable = getMatchingResultFromTarget(targets, streamTableCh1, channelToCompare);
+            returnResultTable = getMatchingResultFromTarget(targets, streamTable, channelToCompare);
             bindResultGrid();
         }
+
         private DataTable reduceTableCount(DataTable oriTable,int newRowCount)
         {
             int rowCountToSkip = oriTable.Rows.Count / newRowCount;
@@ -800,7 +806,6 @@ namespace WindowsFormsApplication1
         {
             streamChartDual.Dispose();
             streamChartDual = new Chart();
-            const int ch1vch2 = 0, ch2vch1 = 1, ch1vch2vcount = 2;
             switch (chartStyle_comboBox.SelectedIndex)
             {
                 case ch1vch2://Ch2 is Y Axis
@@ -1073,6 +1078,12 @@ namespace WindowsFormsApplication1
             startSyncDualStreamCommand += streamRate + ";";
             waitForCh1Sync = true;
             waitForCh2Sync = true;
+
+            if (streamingPort1.IsOpen == true)
+                streamingPort1.DiscardInBuffer();
+            if (streamingPort2.IsOpen == true)
+                streamingPort2.DiscardInBuffer();
+
             //send sync stream command to ch1 and ch2 
             sendCommandNoResponse(startSyncDualStreamCommand, streamingPort1);
             waitForCh1Sync = false;
@@ -1094,10 +1105,6 @@ namespace WindowsFormsApplication1
             streamTableCh1.Clear();
             streamTableCh2.Clear();
 
-            if (streamingPort1.IsOpen == true)
-                streamingPort1.DiscardInBuffer();
-            if (streamingPort2.IsOpen == true)
-                streamingPort2.DiscardInBuffer();
             bindChart();
         }
         private void DualStream_btn_Click(object sender, EventArgs e)

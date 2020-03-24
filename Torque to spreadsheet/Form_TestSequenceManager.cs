@@ -9,14 +9,26 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
-    public partial class TestSequenceManager_form : Form
+    public partial class Form_TestSequenceManager : Form
     {
         private List<string> default_testList=new List<string>();
         private BindingList<string> testList_toShow = new BindingList<string>();
         public List<int> return_IndexList=new List<int>();
         public List<TestSetup> testSetups;
-        
-        public TestSequenceManager_form(List<TestSetup> testSetups)
+
+        //Changed 3/15/20
+        public Form_TestSequenceManager(List<TestSetup> testSetups)
+        {
+            Form_Load_Common(testSetups);
+        }
+        //Added 3/15/20
+        public Form_TestSequenceManager(List<TestSetup> testSetups, int testSelectingIndex)
+        {
+            Form_Load_Common(testSetups);
+            testSetups_listBox.SelectedIndex = testSelectingIndex;
+        }
+        //Changed 3/15/20
+        private void Form_Load_Common(List<TestSetup> testSetups)
         {
             InitializeComponent();
             initTestGridView(ref AFCW_grid);
@@ -26,7 +38,7 @@ namespace WindowsFormsApplication1
 
             this.testSetups = testSetups;
             saveClose_btn.Text = "Save && Close";
-            
+
             //create default_testList, these testID can't be deleted
             default_testList = getDefaultTestList(testSetups);
 
@@ -41,6 +53,37 @@ namespace WindowsFormsApplication1
             ALCW_grid.CellValueChanged += ALCW_grid_CellValueChanged;
             ALCCW_grid.CellValueChanged += ALCCW_grid_CellValueChanged;
             update_testSetups_listbox();
+
+            lowLimit_txt.Leave += LowLimit_txt_Leave;
+            highLimit_txt.Leave += HighLimit_txt_Leave;
+            sampleNum_txt.Leave += SampleNum_txt_Leave;
+            FS_txt.Leave += FS_txt_Leave;
+            maxPoint_txt.Leave += MaxPoint_txt_Leave;
+        }
+        //Added 3/15/20
+        private void MaxPoint_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
+        }
+        //Added 3/15/20
+        private void FS_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
+        }
+        //Added 3/15/20
+        private void SampleNum_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
+        }
+        //Added 3/15/20
+        private void HighLimit_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
+        }
+        //Added 3/15/20
+        private void LowLimit_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
         }
         //create and return list of all testID that are default Test-Can not be deleted
         private List<string> getDefaultTestList(List<TestSetup> testSetups)
@@ -947,6 +990,12 @@ namespace WindowsFormsApplication1
                 FSLowHighchanged();
             }
         }
+
+        private void sampleNum_txt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void FS_txt_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

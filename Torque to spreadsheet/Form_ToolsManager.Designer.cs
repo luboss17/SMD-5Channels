@@ -33,20 +33,20 @@
             this.testManager_btn = new System.Windows.Forms.Button();
             this.testID_comboBox = new System.Windows.Forms.ComboBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.limitEngPercent_comboBox = new System.Windows.Forms.ComboBox();
-            this.sampleNum_txt = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.maxPoint_txt = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
-            this.highLimit_txt = new System.Windows.Forms.TextBox();
-            this.lowLimit_txt = new System.Windows.Forms.TextBox();
-            this.FS_txt = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.FSTarget_label = new System.Windows.Forms.Label();
-            this.testType_comboBox = new System.Windows.Forms.ComboBox();
             this.label37 = new System.Windows.Forms.Label();
+            this.limitEngPercent_comboBox = new System.Windows.Forms.ComboBox();
+            this.sampleNum_txt = new System.Windows.Forms.TextBox();
+            this.maxPoint_txt = new System.Windows.Forms.TextBox();
+            this.highLimit_txt = new System.Windows.Forms.TextBox();
+            this.lowLimit_txt = new System.Windows.Forms.TextBox();
+            this.FS_txt = new System.Windows.Forms.TextBox();
+            this.testType_comboBox = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ch2Mode_comboBox = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -103,13 +103,10 @@
             this.saveClose_btn = new System.Windows.Forms.Button();
             this.testSetupGroupBox = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.saveAsTest_btn = new System.Windows.Forms.Button();
             this.label28 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.testOrder_list = new System.Windows.Forms.ListBox();
@@ -118,16 +115,19 @@
             this.saveTest_btn = new System.Windows.Forms.Button();
             this.AL_chkbox = new System.Windows.Forms.CheckBox();
             this.AF_chkbox = new System.Windows.Forms.CheckBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
             this.CCW_chkbox = new System.Windows.Forms.CheckBox();
             this.label14 = new System.Windows.Forms.Label();
             this.CW_chkbox = new System.Windows.Forms.CheckBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.testSetup_groupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -143,22 +143,22 @@
             // testSetup_groupBox
             // 
             this.testSetup_groupBox.Controls.Add(this.testManager_btn);
+            this.testSetup_groupBox.Controls.Add(this.comboBox1);
             this.testSetup_groupBox.Controls.Add(this.testID_comboBox);
             this.testSetup_groupBox.Controls.Add(this.label27);
-            this.testSetup_groupBox.Controls.Add(this.limitEngPercent_comboBox);
-            this.testSetup_groupBox.Controls.Add(this.sampleNum_txt);
             this.testSetup_groupBox.Controls.Add(this.label30);
             this.testSetup_groupBox.Controls.Add(this.label31);
-            this.testSetup_groupBox.Controls.Add(this.maxPoint_txt);
+            this.testSetup_groupBox.Controls.Add(this.textBox1);
             this.testSetup_groupBox.Controls.Add(this.label33);
-            this.testSetup_groupBox.Controls.Add(this.highLimit_txt);
-            this.testSetup_groupBox.Controls.Add(this.lowLimit_txt);
-            this.testSetup_groupBox.Controls.Add(this.FS_txt);
             this.testSetup_groupBox.Controls.Add(this.label35);
             this.testSetup_groupBox.Controls.Add(this.label36);
             this.testSetup_groupBox.Controls.Add(this.FSTarget_label);
-            this.testSetup_groupBox.Controls.Add(this.testType_comboBox);
+            this.testSetup_groupBox.Controls.Add(this.textBox4);
+            this.testSetup_groupBox.Controls.Add(this.textBox2);
+            this.testSetup_groupBox.Controls.Add(this.textBox3);
             this.testSetup_groupBox.Controls.Add(this.label37);
+            this.testSetup_groupBox.Controls.Add(this.comboBox2);
+            this.testSetup_groupBox.Controls.Add(this.textBox5);
             this.testSetup_groupBox.Location = new System.Drawing.Point(1202, 342);
             this.testSetup_groupBox.Name = "testSetup_groupBox";
             this.testSetup_groupBox.Size = new System.Drawing.Size(266, 324);
@@ -196,27 +196,6 @@
             this.label27.TabIndex = 59;
             this.label27.Text = "% or Eng. Unit *";
             // 
-            // limitEngPercent_comboBox
-            // 
-            this.limitEngPercent_comboBox.Enabled = false;
-            this.limitEngPercent_comboBox.FormattingEnabled = true;
-            this.limitEngPercent_comboBox.Items.AddRange(new object[] {
-            "%",
-            "Eng. Unit"});
-            this.limitEngPercent_comboBox.Location = new System.Drawing.Point(127, 224);
-            this.limitEngPercent_comboBox.Name = "limitEngPercent_comboBox";
-            this.limitEngPercent_comboBox.Size = new System.Drawing.Size(133, 21);
-            this.limitEngPercent_comboBox.TabIndex = 9;
-            // 
-            // sampleNum_txt
-            // 
-            this.sampleNum_txt.Enabled = false;
-            this.sampleNum_txt.Location = new System.Drawing.Point(127, 146);
-            this.sampleNum_txt.Name = "sampleNum_txt";
-            this.sampleNum_txt.Size = new System.Drawing.Size(133, 20);
-            this.sampleNum_txt.TabIndex = 6;
-            this.sampleNum_txt.Text = "1";
-            // 
             // label30
             // 
             this.label30.AutoSize = true;
@@ -237,14 +216,6 @@
             this.label31.TabIndex = 49;
             this.label31.Text = "# of Points";
             // 
-            // maxPoint_txt
-            // 
-            this.maxPoint_txt.Enabled = false;
-            this.maxPoint_txt.Location = new System.Drawing.Point(127, 92);
-            this.maxPoint_txt.Name = "maxPoint_txt";
-            this.maxPoint_txt.Size = new System.Drawing.Size(133, 20);
-            this.maxPoint_txt.TabIndex = 3;
-            // 
             // label33
             // 
             this.label33.AutoSize = true;
@@ -254,30 +225,6 @@
             this.label33.Size = new System.Drawing.Size(58, 13);
             this.label33.TabIndex = 46;
             this.label33.Text = "Test ID *";
-            // 
-            // highLimit_txt
-            // 
-            this.highLimit_txt.Enabled = false;
-            this.highLimit_txt.Location = new System.Drawing.Point(127, 198);
-            this.highLimit_txt.Name = "highLimit_txt";
-            this.highLimit_txt.Size = new System.Drawing.Size(133, 20);
-            this.highLimit_txt.TabIndex = 8;
-            // 
-            // lowLimit_txt
-            // 
-            this.lowLimit_txt.Enabled = false;
-            this.lowLimit_txt.Location = new System.Drawing.Point(127, 172);
-            this.lowLimit_txt.Name = "lowLimit_txt";
-            this.lowLimit_txt.Size = new System.Drawing.Size(133, 20);
-            this.lowLimit_txt.TabIndex = 7;
-            // 
-            // FS_txt
-            // 
-            this.FS_txt.Enabled = false;
-            this.FS_txt.Location = new System.Drawing.Point(127, 120);
-            this.FS_txt.Name = "FS_txt";
-            this.FS_txt.Size = new System.Drawing.Size(133, 20);
-            this.FS_txt.TabIndex = 4;
             // 
             // label35
             // 
@@ -309,19 +256,6 @@
             this.FSTarget_label.TabIndex = 31;
             this.FSTarget_label.Text = "Target Full Scale*";
             // 
-            // testType_comboBox
-            // 
-            this.testType_comboBox.Enabled = false;
-            this.testType_comboBox.FormattingEnabled = true;
-            this.testType_comboBox.Items.AddRange(new object[] {
-            "Single Channel Test",
-            "Dual Channel Test"});
-            this.testType_comboBox.Location = new System.Drawing.Point(127, 61);
-            this.testType_comboBox.Name = "testType_comboBox";
-            this.testType_comboBox.Size = new System.Drawing.Size(133, 21);
-            this.testType_comboBox.TabIndex = 2;
-            this.testType_comboBox.SelectedIndexChanged += new System.EventHandler(this.testType_comboBox_SelectedIndexChanged);
-            // 
             // label37
             // 
             this.label37.AutoSize = true;
@@ -331,6 +265,71 @@
             this.label37.Size = new System.Drawing.Size(73, 13);
             this.label37.TabIndex = 12;
             this.label37.Text = "Test Type *";
+            // 
+            // limitEngPercent_comboBox
+            // 
+            this.limitEngPercent_comboBox.FormattingEnabled = true;
+            this.limitEngPercent_comboBox.Items.AddRange(new object[] {
+            "%",
+            "Eng. Unit"});
+            this.limitEngPercent_comboBox.Location = new System.Drawing.Point(359, 111);
+            this.limitEngPercent_comboBox.Name = "limitEngPercent_comboBox";
+            this.limitEngPercent_comboBox.Size = new System.Drawing.Size(100, 21);
+            this.limitEngPercent_comboBox.TabIndex = 9;
+            // 
+            // sampleNum_txt
+            // 
+            this.sampleNum_txt.Location = new System.Drawing.Point(359, 26);
+            this.sampleNum_txt.Name = "sampleNum_txt";
+            this.sampleNum_txt.Size = new System.Drawing.Size(100, 20);
+            this.sampleNum_txt.TabIndex = 6;
+            this.sampleNum_txt.Text = "1";
+            this.sampleNum_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sampleNum_txt_KeyDown);
+            // 
+            // maxPoint_txt
+            // 
+            this.maxPoint_txt.Location = new System.Drawing.Point(125, 88);
+            this.maxPoint_txt.Name = "maxPoint_txt";
+            this.maxPoint_txt.Size = new System.Drawing.Size(100, 20);
+            this.maxPoint_txt.TabIndex = 3;
+            this.maxPoint_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maxPoint_txt_KeyDown);
+            // 
+            // highLimit_txt
+            // 
+            this.highLimit_txt.Location = new System.Drawing.Point(359, 81);
+            this.highLimit_txt.Name = "highLimit_txt";
+            this.highLimit_txt.Size = new System.Drawing.Size(100, 20);
+            this.highLimit_txt.TabIndex = 8;
+            this.highLimit_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.highLimit_txt_KeyDown);
+            // 
+            // lowLimit_txt
+            // 
+            this.lowLimit_txt.Location = new System.Drawing.Point(359, 55);
+            this.lowLimit_txt.Name = "lowLimit_txt";
+            this.lowLimit_txt.Size = new System.Drawing.Size(100, 20);
+            this.lowLimit_txt.TabIndex = 7;
+            this.lowLimit_txt.Text = "w";
+            this.lowLimit_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lowLimit_txt_KeyDown);
+            // 
+            // FS_txt
+            // 
+            this.FS_txt.Location = new System.Drawing.Point(125, 119);
+            this.FS_txt.Name = "FS_txt";
+            this.FS_txt.Size = new System.Drawing.Size(100, 20);
+            this.FS_txt.TabIndex = 4;
+            this.FS_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FS_txt_KeyDown);
+            // 
+            // testType_comboBox
+            // 
+            this.testType_comboBox.FormattingEnabled = true;
+            this.testType_comboBox.Items.AddRange(new object[] {
+            "Single Channel Test",
+            "Dual Channel Test"});
+            this.testType_comboBox.Location = new System.Drawing.Point(125, 57);
+            this.testType_comboBox.Name = "testType_comboBox";
+            this.testType_comboBox.Size = new System.Drawing.Size(100, 21);
+            this.testType_comboBox.TabIndex = 2;
+            this.testType_comboBox.SelectedIndexChanged += new System.EventHandler(this.testType_comboBox_SelectedIndexChanged);
             // 
             // groupBox2
             // 
@@ -900,30 +899,30 @@
             // testSetupGroupBox
             // 
             this.testSetupGroupBox.Controls.Add(this.label10);
-            this.testSetupGroupBox.Controls.Add(this.comboBox1);
             this.testSetupGroupBox.Controls.Add(this.saveAsTest_btn);
             this.testSetupGroupBox.Controls.Add(this.label28);
-            this.testSetupGroupBox.Controls.Add(this.textBox1);
+            this.testSetupGroupBox.Controls.Add(this.limitEngPercent_comboBox);
+            this.testSetupGroupBox.Controls.Add(this.sampleNum_txt);
             this.testSetupGroupBox.Controls.Add(this.label11);
             this.testSetupGroupBox.Controls.Add(this.label12);
-            this.testSetupGroupBox.Controls.Add(this.textBox2);
+            this.testSetupGroupBox.Controls.Add(this.highLimit_txt);
+            this.testSetupGroupBox.Controls.Add(this.maxPoint_txt);
+            this.testSetupGroupBox.Controls.Add(this.lowLimit_txt);
             this.testSetupGroupBox.Controls.Add(this.label32);
             this.testSetupGroupBox.Controls.Add(this.label13);
+            this.testSetupGroupBox.Controls.Add(this.FS_txt);
             this.testSetupGroupBox.Controls.Add(this.testOrder_list);
             this.testSetupGroupBox.Controls.Add(this.resetCurrTestSettings_btn);
             this.testSetupGroupBox.Controls.Add(this.testID_txt);
             this.testSetupGroupBox.Controls.Add(this.saveTest_btn);
             this.testSetupGroupBox.Controls.Add(this.AL_chkbox);
+            this.testSetupGroupBox.Controls.Add(this.testType_comboBox);
             this.testSetupGroupBox.Controls.Add(this.AF_chkbox);
-            this.testSetupGroupBox.Controls.Add(this.textBox3);
-            this.testSetupGroupBox.Controls.Add(this.textBox4);
-            this.testSetupGroupBox.Controls.Add(this.textBox5);
             this.testSetupGroupBox.Controls.Add(this.CCW_chkbox);
             this.testSetupGroupBox.Controls.Add(this.label14);
             this.testSetupGroupBox.Controls.Add(this.CW_chkbox);
             this.testSetupGroupBox.Controls.Add(this.label15);
             this.testSetupGroupBox.Controls.Add(this.label16);
-            this.testSetupGroupBox.Controls.Add(this.comboBox2);
             this.testSetupGroupBox.Controls.Add(this.label17);
             this.testSetupGroupBox.Location = new System.Drawing.Point(805, 12);
             this.testSetupGroupBox.Name = "testSetupGroupBox";
@@ -941,17 +940,6 @@
             this.label10.Size = new System.Drawing.Size(97, 13);
             this.label10.TabIndex = 59;
             this.label10.Text = "% or Eng. Unit *";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "%",
-            "Eng. Unit"});
-            this.comboBox1.Location = new System.Drawing.Point(359, 108);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
-            this.comboBox1.TabIndex = 9;
             // 
             // saveAsTest_btn
             // 
@@ -972,14 +960,6 @@
             this.label28.TabIndex = 53;
             this.label28.Text = "(Drag to Change Order)";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(359, 30);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 6;
-            this.textBox1.Text = "1";
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -999,13 +979,6 @@
             this.label12.Size = new System.Drawing.Size(69, 13);
             this.label12.TabIndex = 49;
             this.label12.Text = "# of Points";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(125, 85);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 3;
             // 
             // label32
             // 
@@ -1085,27 +1058,6 @@
             this.AF_chkbox.UseVisualStyleBackColor = true;
             this.AF_chkbox.CheckedChanged += new System.EventHandler(this.AF_chkbox_CheckedChanged);
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(359, 82);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 8;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(359, 56);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 7;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(125, 116);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 4;
-            // 
             // CCW_chkbox
             // 
             this.CCW_chkbox.AutoSize = true;
@@ -1158,17 +1110,6 @@
             this.label16.TabIndex = 31;
             this.label16.Text = "Target Full Scale*";
             // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "Single Channel Test",
-            "Dual Channel Test"});
-            this.comboBox2.Location = new System.Drawing.Point(125, 55);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(100, 21);
-            this.comboBox2.TabIndex = 2;
-            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -1179,11 +1120,76 @@
             this.label17.TabIndex = 12;
             this.label17.Text = "Test Type *";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "%",
+            "Eng. Unit"});
+            this.comboBox1.Location = new System.Drawing.Point(127, 224);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(100, 21);
+            this.comboBox1.TabIndex = 9;
+            this.comboBox1.Visible = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(127, 146);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 6;
+            this.textBox1.Text = "1";
+            this.textBox1.Visible = false;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(127, 88);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 3;
+            this.textBox2.Visible = false;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(127, 201);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 8;
+            this.textBox3.Visible = false;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(127, 172);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 7;
+            this.textBox4.Visible = false;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(127, 114);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 20);
+            this.textBox5.TabIndex = 4;
+            this.textBox5.Visible = false;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Single Channel Test",
+            "Dual Channel Test"});
+            this.comboBox2.Location = new System.Drawing.Point(127, 56);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(100, 21);
+            this.comboBox2.TabIndex = 2;
+            this.comboBox2.Visible = false;
+            // 
             // Form_ToolsManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1503, 719);
+            this.ClientSize = new System.Drawing.Size(1655, 719);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.testSetupGroupBox);
             this.Controls.Add(this.testPointGroupBox);

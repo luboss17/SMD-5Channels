@@ -27,6 +27,9 @@ namespace WindowsFormsApplication1
             //Todo: return pack and testSetups back to Form1 after done w this form
             InitializeComponent();
             pack = passedinPack;
+            //Assign colName of tool field(follow same order as toolSearchSubject_showUser)
+            toolSearchSubject_matchTable = new string[] { pack.toolID_colName, pack.SN_colName, pack.model_colName, pack.equipment_colName, pack.manufacturer_colName, pack.lotID_colName, pack.testID_colName };
+            
             this.testSetups = testSetups;
             getToolsModelTable(pack);
             toolCondTable = toolsTable.Clone();//default toolcondtable to Tools table first
@@ -39,8 +42,7 @@ namespace WindowsFormsApplication1
             //Show the search subject to user
             searchSubject_comboBox.DataSource = toolSearchSubject_showUser;
 
-            //Assign colName of tool field(follow same order as toolSearchSubject_showUser)
-            toolSearchSubject_matchTable = new string[] { pack.toolID_colName, pack.SN_colName, pack.model_colName, pack.equipment_colName, pack.manufacturer_colName, pack.lotID_colName, pack.testID_colName };
+            
 
 
             TestSequenceManager_form();
@@ -246,7 +248,9 @@ namespace WindowsFormsApplication1
         private void loadTest(string testID)
         {
             int testIndex = Array.IndexOf(testIDStr_arr, testID);
-            testID_comboBox.SelectedIndex = testIndex + 1;
+            //testID_comboBox.SelectedIndex = testIndex + 1;
+            if (testSetups_listBox.Items.Count>0)
+                testSetups_listBox.SelectedIndex = testIndex;
         }
 
         //offset the index of the same selected text that occured before the selected index in searchResult_listbox
@@ -274,7 +278,10 @@ namespace WindowsFormsApplication1
             {
                 if (toolsModel_comboBox.Text == toolText)
                 {
-                    colName = toolSearchSubject_matchTable[searchSubject_comboBox.SelectedIndex];
+                    int searchSubjIndex = searchSubject_comboBox.SelectedIndex;
+                    if (searchSubjIndex < 0)
+                        searchSubjIndex = 0;
+                    colName = toolSearchSubject_matchTable[searchSubjIndex];
                     
                     int offset = offsetSameSearchName();
                     loadToolorModel(toolsTable, colName, searchResult_listBox.SelectedItem.ToString(), offset);
@@ -380,7 +387,7 @@ namespace WindowsFormsApplication1
                 toolCondTable.Rows[0][pack.scan1_colName] = convertBoolToInt(scan1_chk.Checked);
                 toolCondTable.Rows[0][pack.scan2_colName] = convertBoolToInt(scan2_chk.Checked);
                 toolCondTable.Rows[0][pack.setupPause_colName] = convertBoolToInt(pauseTool_chk.Checked);
-                toolCondTable.Rows[0][pack.testID_colName] = testID_comboBox.Text;
+                toolCondTable.Rows[0][pack.testID_colName] = testSetups_listBox.Text;
                 toolCondTable.Rows[0][pack.mode_colName] = ch1Mode_comboBox.SelectedIndex;
                 toolCondTable.Rows[0][pack.imode_colName] = ch2Mode_comboBox.SelectedIndex;
                 pack.obj = "tool";
@@ -453,7 +460,7 @@ namespace WindowsFormsApplication1
                 prev_testID = testID_comboBox.SelectedItem.ToString();
             else
                 prev_testID = testID_comboBox.Items[0].ToString();
-            TestSequenceManager_form frm = new TestSequenceManager_form(testSetups);
+            Form_TestSequenceManager frm = new Form_TestSequenceManager(testSetups);
             frm.ShowDialog();
 
             if (frm.isTestSetupSaved)
@@ -804,7 +811,14 @@ namespace WindowsFormsApplication1
             //Assign TestSetup from TestSetups Collection at passed in index
             //Also set the value of the test on screen
             TestSetup thisTestSetup = new TestSetup();
-            thisTestSetup = testSetups[selectedIndex];
+            if (selectedIndex < 0)
+            {
+                thisTestSetup = new TestSetup();
+            }
+            else
+            {
+                thisTestSetup = testSetups[selectedIndex];
+            }
 
             //Show test Values on Screen
             testID_txt.Text = thisTestSetup.testID;
@@ -830,9 +844,13 @@ namespace WindowsFormsApplication1
             }
 
             //Assign currTestSetup so updateTestOrderChecked can use currTestSetup to write to testGrid
-            currTestSetup = testSetups[selectedIndex];
+            if (selectedIndex >= 0)
+            {
+                currTestSetup = testSetups[selectedIndex];
+                checkDefaultTestSelected(currTestSetup.defaultTest);//check if default test then not allow to change certain field
+            }
             updateTestOrderChecked(thisTestSetup.testOrder);
-            checkDefaultTestSelected(currTestSetup.defaultTest);//check if default test then not allow to change certain field
+            
 
             /*Todo: Implement this later when user want to create new test
             else if (testSetup_comboBox.SelectedIndex == 0) //New Test is selected
@@ -1501,6 +1519,7 @@ namespace WindowsFormsApplication1
                 FSLowHighchanged();
             }
         }
+
 
         private void sampleNum_txt_KeyDown(object sender, KeyEventArgs e)
         {
