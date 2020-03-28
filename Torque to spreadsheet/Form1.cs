@@ -6520,20 +6520,30 @@ namespace WindowsFormsApplication1
         }
 
         //write a value to Excel.Worksheet-this uses C# built in Excel Interlope
+        //Changed 3/25/20
         private Excel.Worksheet writeCellToExcelWorkBook(string cellID, string cellValue, Excel.Worksheet wsheet)
         {
             int rowIndex = Int32.Parse(cellID.Substring(1));
             string colID = cellID.Substring(0, 1);
-            try//Write as float
+            if (cellValue.StartsWith("0"))
             {
-                float dataToWrite;
-                dataToWrite = Convert.ToSingle(cellValue);
-                wsheet.Cells[rowIndex, colID] = dataToWrite;
-            }
-            catch//write as string
-            {
+                wsheet.Cells[rowIndex, colID].NumberFormat = "@";
                 string dataToWrite = cellValue;
                 wsheet.Cells[rowIndex, colID] = dataToWrite;
+            }
+            else
+            {
+                try//Write as float
+                {
+                    float dataToWrite;
+                    dataToWrite = Convert.ToSingle(cellValue);
+                    wsheet.Cells[rowIndex, colID] = dataToWrite;
+                }
+                catch//write as string
+                {
+                    string dataToWrite = cellValue;
+                    wsheet.Cells[rowIndex, colID] = dataToWrite;
+                }
             }
 
             return wsheet;
@@ -8154,6 +8164,7 @@ namespace WindowsFormsApplication1
             return returnVal;
         }
         //return the next available Target of passed in target DataGridView
+        //changed 3/25/20
         private float getActiveTargetfrTestGridName(ref DataGridView activeTestGrid)
         {
             float returnTarget = 0;
@@ -8173,9 +8184,29 @@ namespace WindowsFormsApplication1
             {
                 returnTarget = 0;
             }
+            if (returnTarget == 0)
+            {
+                if (calculatePassFail() == true)
+                {
+                    showPassLbl();
+                }
+                else
+                {
+                    showFailLbl();
+                }
+            }
             return returnTarget;
         }
-
+        private void showPassLbl()
+        {
+            PassFailLbl.Text = "PASS";
+            PassFailLbl.ForeColor = Color.Green;
+        }
+        private void showFailLbl()
+        {
+            PassFailLbl.Text = "FAIL";
+            PassFailLbl.ForeColor = Color.Red;
+        }
         //return the next available Target of passed in testGrid Number in char format
         //this method calls getActiveTargetfrTestGridName to actually look for Target
         private float getActiveTargetfrTestGridChr(char activeGridNum)
@@ -8706,6 +8737,31 @@ namespace WindowsFormsApplication1
         private const int portNum = 58008;
         private const int major = 1;
         private const int minor = 0;
+
+        private void checkAverage_radioBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (calculatePassFail() == true)
+            {
+                showPassLbl();
+            }
+            else
+            {
+                showFailLbl();
+            }
+        }
+
+        private void checkAllReading_radioBtn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (calculatePassFail() == true)
+            {
+                showPassLbl();
+            }
+            else
+            {
+                showFailLbl();
+            }
+        }
+
         private BindingList<string> toolsIDListSearch = new BindingList<string>();
         private void toolsManagerToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -9398,6 +9454,97 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Invalid Tool is selected");
             }
 
+        }
+        //Added 3/25/20
+
+        private const string pointGridName = "pointNum",
+            ch1ReadingGridName = "ch1Reading",
+            ch2ReadingGridName = "ch2Reading",
+            lowGridName = "low",
+            targetGridName = "target",
+            highGridName = "high";
+        //Check if test is done, if done, return Pass/Fail
+        private bool calculatePassFail()
+        {
+            bool isPass = false;
+            if (checkAllReading_radioBtn.Checked == true)
+            {
+                isPass = checkPassFailBasedOnAllReadingPass();
+
+            }
+            else if (checkAverage_radioBtn.Checked == true)
+            {
+                isPass = checkPassFailBasedOnAverage();
+            }
+            return isPass;
+        }
+        //check if average readings in GridView pass or not
+        private bool checkPassFailBasedOnAverage()
+        {
+            float readingTotal = 0, lowTotal = 0, highTotal = 0, readingAverage = 0, lowAverage = 0, highAverage = 0;
+            int count = 0;
+            List<DataGridView> gridList = new List<DataGridView> { AFCW_grid, ALCW_grid, AFCCW_grid, ALCCW_grid };
+            foreach (DataGridView grid in gridList)
+            {
+                foreach (DataGridViewRow row in grid.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        try
+                        {
+                            float reading = Single.Parse(row.Cells[ch1ReadingGridName].Value.ToString()),
+                                lowtarget = Single.Parse(row.Cells[lowGridName].Value.ToString()),
+                                hightarget = Single.Parse(row.Cells[highGridName].Value.ToString());
+                            count++;
+                            readingTotal += reading;
+                            lowTotal += lowtarget;
+                            highTotal += hightarget;
+                        }
+                        catch { }
+                    }
+                }
+            }
+            if (count > 0)
+            {
+                readingAverage = readingTotal / count;
+                lowAverage = lowTotal / count;
+                highAverage = highTotal / count;
+            }
+            if ((lowAverage <= readingAverage) && (readingAverage <= highAverage))
+                return true;
+            else
+                return false;
+
+        }
+
+        //Check if all readings in GridViews pass or not
+        private bool checkPassFailBasedOnAllReadingPass()
+        {
+            bool isPassed = true;
+            List<DataGridView> gridList = new List<DataGridView> { AFCW_grid, ALCW_grid, AFCCW_grid, ALCCW_grid };
+            foreach (DataGridView grid in gridList)
+            {
+                foreach (DataGridViewRow row in grid.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        try
+                        {
+                            float reading = Single.Parse(row.Cells[ch1ReadingGridName].Value.ToString()),
+                                lowtarget = Single.Parse(row.Cells[lowGridName].Value.ToString()),
+                                hightarget = Single.Parse(row.Cells[highGridName].Value.ToString());
+
+                            if ((reading < lowtarget) || (reading > hightarget))
+                            {
+                                isPassed = false;
+                                return isPassed;
+                            }
+                        }
+                        catch { }
+                    }
+                }
+            }
+            return isPassed;
         }
     }
 

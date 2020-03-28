@@ -630,6 +630,38 @@ namespace WindowsFormsApplication1
             ALCW_grid.CellValueChanged += ALCW_grid_CellValueChanged;
             ALCCW_grid.CellValueChanged += ALCCW_grid_CellValueChanged;
             update_testSetups_listbox();
+
+            lowLimit_txt.Leave += LowLimit_txt_Leave;
+            highLimit_txt.Leave += HighLimit_txt_Leave;
+            sampleNum_txt.Leave += SampleNum_txt_Leave;
+            FS_txt.Leave += FS_txt_Leave;
+            maxPoint_txt.Leave += MaxPoint_txt_Leave;
+
+        }
+        //Added 3/15/20
+        private void MaxPoint_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
+        }
+        //Added 3/15/20
+        private void FS_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
+        }
+        //Added 3/15/20
+        private void SampleNum_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
+        }
+        //Added 3/15/20
+        private void HighLimit_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
+        }
+        //Added 3/15/20
+        private void LowLimit_txt_Leave(object sender, EventArgs e)
+        {
+            FSLowHighchanged();
         }
         //create and return list of all testID that are default Test-Can not be deleted
         private List<string> getDefaultTestList(List<TestSetup> testSetups)
