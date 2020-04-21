@@ -422,6 +422,7 @@
             this.maxPoint_txt.Name = "maxPoint_txt";
             this.maxPoint_txt.Size = new System.Drawing.Size(100, 20);
             this.maxPoint_txt.TabIndex = 3;
+            this.maxPoint_txt.TextChanged += new System.EventHandler(this.maxPoint_txt_TextChanged);
             this.maxPoint_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maxPoint_txt_KeyDown);
             // 
             // label32
@@ -624,7 +625,7 @@
             this.newTest_btn.UseVisualStyleBackColor = true;
             this.newTest_btn.Click += new System.EventHandler(this.newTest_btn_Click);
             // 
-            // TestSequenceManager_form
+            // Form_TestSequenceManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -634,7 +635,7 @@
             this.Controls.Add(this.groupBox17);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "TestSequenceManager_form";
+            this.Name = "Form_TestSequenceManager";
             this.Text = "Test Manager";
             this.Load += new System.EventHandler(this.TestSequenceManager_form_Load);
             this.groupBox17.ResumeLayout(false);

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
-    public partial class Form_TestSequence : Form
+    public partial class Form_TestSequence_DEMO : Form
     {
         public string[] arr_testPointList=new string[] {"Custom","3 points: 20%, 60%, 100%", "5 equal points" , "5 points and 10%" , "5 points, 10% and 5%", "10 equal points", "10 points and 5%", "20 equal points"};
         private string[] arr_mode=new string[] {"Track","Peak","First Peak"};
@@ -21,7 +21,7 @@ namespace WindowsFormsApplication1
         private int rowIndexFromMouseDown;
         private DataGridViewRow rw;
         public bool isTestSave = false;
-        public Form_TestSequence()
+        public Form_TestSequence_DEMO()
         {
             InitializeComponent();
         }

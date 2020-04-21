@@ -996,6 +996,11 @@ namespace WindowsFormsApplication1
 
         }
 
+        private void maxPoint_txt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void FS_txt_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

@@ -172,11 +172,11 @@
     <Compile Include="Form_setForceAutoClear.Designer.cs">
       <DependentUpon>Form_setForceAutoClear.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_TestSequence.cs">
+    <Compile Include="Form_TestSequence_DEMO.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_TestSequence.Designer.cs">
-      <DependentUpon>Form_TestSequence.cs</DependentUpon>
+    <Compile Include="Form_TestSequence_DEMO.Designer.cs">
+      <DependentUpon>Form_TestSequence_DEMO.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_ToolsManager.cs">
       <SubType>Form</SubType>
@@ -283,8 +283,8 @@
     <EmbeddedResource Include="Form_setForceAutoClear.resx">
       <DependentUpon>Form_setForceAutoClear.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_TestSequence.resx">
-      <DependentUpon>Form_TestSequence.cs</DependentUpon>
+    <EmbeddedResource Include="Form_TestSequence_DEMO.resx">
+      <DependentUpon>Form_TestSequence_DEMO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_ToolsManager.resx">
       <DependentUpon>Form_ToolsManager.cs</DependentUpon>

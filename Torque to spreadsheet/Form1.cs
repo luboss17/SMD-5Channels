@@ -8,6 +8,7 @@ using System.Data;
 using System.Deployment.Application;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
@@ -5732,6 +5733,7 @@ namespace WindowsFormsApplication1
 
             return thistestTable;
         }
+        //Changed 3/25/20
         private void cellValueChanged(ref DataGridView grid, DataGridViewCellEventArgs e, int Sign)
         {
             if (e.ColumnIndex == targetGridCol)
@@ -5752,6 +5754,16 @@ namespace WindowsFormsApplication1
             }
             if (testSetup_groupBox.Enabled == false)
                 reevaluatePassFailData(ref grid, Sign);
+
+            //update Active Target if it is single channel test
+            if (currTestSetup.testType == "1")
+            {
+                char activeTestGridChr = lookForActiveTestGrid();
+                float activeTarget;
+                activeTarget = getActiveTargetfrTestGridChr(activeTestGridChr);
+                if (activeTarget!=0)
+                    testTarget_lbl.Text = activeTarget.ToString();
+            }
         }
         private void AFCW_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -5925,6 +5937,7 @@ namespace WindowsFormsApplication1
         }
 
         //Get back to set up Test Mode for Cal Tab
+        //changed 3/25/20
         private void abandonCurrentTest()
         {
             if (testSetup_groupBox.Enabled == true)
@@ -5951,6 +5964,8 @@ namespace WindowsFormsApplication1
                 showActiveTestGrid('0'); //0 to deactivate all testgrid
                 initCurrTestSetup(currTestIndex);
             }
+            testTarget_lbl.Text = "";
+            testTarget_lbl.ForeColor = Color.Black;
         }
         private void abandonTest_btn_Click(object sender, EventArgs e)
         {
@@ -6738,6 +6753,16 @@ namespace WindowsFormsApplication1
             DataGridView torqueChartGrid = convertToTorqueChartGrid(oldGrid);
             return convertGridDatatoFloats(torqueChartGrid, rowCount, colCount);
         }
+        //Copy struct and value of datagridRow to a returned row
+        private DataGridViewRow CopyGridRow(DataGridViewRow oriRow)
+        {
+            DataGridViewRow newRow = oriRow.Clone() as DataGridViewRow;
+            for (int colIndex=0; colIndex<oriRow.Cells.Count;colIndex++)
+            {
+                newRow.Cells[colIndex].Value = oriRow.Cells[colIndex].Value;
+            }
+            return newRow;
+        }
         //convert datagridview test set up into a torque chat with 10 times the amount of points
         //Pass in old grid, the increment amount for each point for both ch1 and ch2 delta
         private DataGridView convertToTorqueChartGrid(DataGridView oldGrid)
@@ -6745,12 +6770,13 @@ namespace WindowsFormsApplication1
             float ch1Delta=0, ch2Delta=0;
             const int decimalPlace = 4;
             //create newGrid with same struct
-            DataGridView newGridView = new DataGridView();
+            DataGridView newGrid = new DataGridView();
             for (int j = 0; j < oldGrid.Columns.Count; j++)
             {
-                newGridView.Columns.Add(oldGrid.Columns[j].Clone() as DataGridViewColumn);
+                newGrid.Columns.Add(oldGrid.Columns[j].Clone() as DataGridViewColumn);
             }
-
+            //copy the first line from oldgrid to newGrid
+            newGrid.Rows.Add(CopyGridRow(oldGrid.Rows[0]));
             //populate each row in new grid
             float ch1startBlockVal = 0,ch2startBlockVal = 0,targetStartBlockVal=0,lowStartBlockVal=0,highStartBlockVal=0;
             int newGridRowCount = 0;
@@ -6759,13 +6785,13 @@ namespace WindowsFormsApplication1
             //for each old row, expand to 9 smaller ones
             foreach (DataGridViewRow oldRow in oldGrid.Rows)
             {
-                if (!oldRow.IsNewRow)
+                if ((!oldRow.IsNewRow)&&(oldGridRowCount!=0))
                 {
                     //find delta for each block
-                    if (oldGridRowCount<oldGrid.Rows.Count-2)
+                    if ((oldGridRowCount<oldGrid.Rows.Count-1))
                     {
-                        ch1Delta = getTorqueChartDelta(convertGridCellToFloat(oldRow.Cells[ch1ReadingGridCol]),
-                            convertGridCellToFloat(oldGrid.Rows[oldGridRowCount+1].Cells[ch1ReadingGridCol]), pointCount);
+                        ch1Delta = getTorqueChartDelta(convertGridCellToFloat(oldGrid.Rows[oldGridRowCount-1].Cells[ch1ReadingGridCol]), 
+                            convertGridCellToFloat(oldRow.Cells[ch1ReadingGridCol]), pointCount);
                         ch2Delta = getTorqueChartDelta(convertGridCellToFloat(oldRow.Cells[ch2ReadingGridCol]),
                             convertGridCellToFloat(oldGrid.Rows[oldGridRowCount+1].Cells[ch2ReadingGridCol]), pointCount);
                     }
@@ -6778,7 +6804,7 @@ namespace WindowsFormsApplication1
                     {
                         newGridRowCount++;
                         DataGridViewRow newRow = (DataGridViewRow)oldRow.Clone();
-                        newRow.Cells[0].Value = newGridRowCount;
+                        newRow.Cells[0].Value = newGridRowCount+1;
                         //first row of this block, just add ch1startBlockVal and ch2startBlockVal
                         if (rowCount == 1)
                         {
@@ -6790,21 +6816,21 @@ namespace WindowsFormsApplication1
                         }
                         else//For the rest of the row, add delta to calculate value
                         {
-                            DataGridViewRow prevRow = newGridView.Rows[newGridView.Rows.Count - 2];
+                            DataGridViewRow prevRow = newGrid.Rows[newGrid.Rows.Count - 2];
                             newRow = populateNextTorqueChartRow(prevRow, newRow, ch1Delta, ch2Delta); 
                         }
 
-                        newGridView.Rows.Add(newRow);
+                        newGrid.Rows.Add(newRow);
                     }
-                    oldGridRowCount++;
                 }
+                oldGridRowCount++;
             }
             //remove target, high low column
-            newGridView = removeColumn(newGridView, highGridCol);
-            newGridView = removeColumn(newGridView, targetGridCol);
-            newGridView = removeColumn(newGridView, lowGridCol);
+            newGrid = removeColumn(newGrid, highGridCol);
+            newGrid = removeColumn(newGrid, targetGridCol);
+            newGrid = removeColumn(newGrid, lowGridCol);
             
-            return newGridView;
+            return newGrid;
         }
         //remove column from datagridview
         private DataGridView removeColumn(DataGridView grid, int colIndex)
@@ -6908,7 +6934,8 @@ namespace WindowsFormsApplication1
             
             if (isTorqueChart==true)
             {
-                rowRange = 10*(thisGrid.Rows.Count-1);
+                int rowCount = (thisGrid.Rows.Count - 1);
+                rowRange = 9*rowCount+1;
                 floatArr = convertGridDatatoFloatsTorqueChart(thisGrid, rowRange, colRange);
             }
             else
@@ -7313,6 +7340,7 @@ namespace WindowsFormsApplication1
             highGridCol = 5;
 
         //init TestGridview, set what it looks like and clear all datas
+        //changed 3/25/20
         private void initTestGridView(ref DataGridView thisGrid, int colCount)
         {
             if (thisGrid.ColumnCount == 0)
@@ -7334,6 +7362,7 @@ namespace WindowsFormsApplication1
             {
                 thisGrid.Columns[col].Width = colWidth;
             }
+            thisGrid.RowHeadersWidth = thisGrid.Width - (colWidth * colCount) - 25;
             //Clear all Rows
             thisGrid.Rows.Clear();
         }
@@ -8148,7 +8177,8 @@ namespace WindowsFormsApplication1
                 char activeTestGridChr = lookForActiveTestGrid();
                 float activeTarget;
                 activeTarget = getActiveTargetfrTestGridChr(activeTestGridChr);
-                testTarget_lbl.Text = activeTarget.ToString();
+                if (activeTarget!=0)
+                    testTarget_lbl.Text = activeTarget.ToString();
             }
 
             return success;
@@ -8184,6 +8214,7 @@ namespace WindowsFormsApplication1
             {
                 returnTarget = 0;
             }
+            
             if (returnTarget == 0)
             {
                 if (calculatePassFail() == true)
@@ -8197,15 +8228,17 @@ namespace WindowsFormsApplication1
             }
             return returnTarget;
         }
+        //Added 3/25/20
         private void showPassLbl()
         {
-            PassFailLbl.Text = "PASS";
-            PassFailLbl.ForeColor = Color.Green;
+            testTarget_lbl.Text = "PASS";
+            testTarget_lbl.ForeColor = Color.Green;
         }
+        //Added 3/25/20
         private void showFailLbl()
         {
-            PassFailLbl.Text = "FAIL";
-            PassFailLbl.ForeColor = Color.Red;
+            testTarget_lbl.Text = "FAIL";
+            testTarget_lbl.ForeColor = Color.Red;
         }
         //return the next available Target of passed in testGrid Number in char format
         //this method calls getActiveTargetfrTestGridName to actually look for Target
@@ -8737,7 +8770,7 @@ namespace WindowsFormsApplication1
         private const int portNum = 58008;
         private const int major = 1;
         private const int minor = 0;
-
+        //Added 3/25/20
         private void checkAverage_radioBtn_CheckedChanged(object sender, EventArgs e)
         {
             if (calculatePassFail() == true)
@@ -8749,7 +8782,7 @@ namespace WindowsFormsApplication1
                 showFailLbl();
             }
         }
-
+        //Added 3/25/20
         private void checkAllReading_radioBtn_CheckedChanged(object sender, EventArgs e)
         {
             if (calculatePassFail() == true)
@@ -8760,6 +8793,11 @@ namespace WindowsFormsApplication1
             {
                 showFailLbl();
             }
+        }
+
+        private void maxPoint_txt_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private BindingList<string> toolsIDListSearch = new BindingList<string>();
@@ -9464,6 +9502,7 @@ namespace WindowsFormsApplication1
             targetGridName = "target",
             highGridName = "high";
         //Check if test is done, if done, return Pass/Fail
+        //Added 3/25/20
         private bool calculatePassFail()
         {
             bool isPass = false;
@@ -9479,6 +9518,7 @@ namespace WindowsFormsApplication1
             return isPass;
         }
         //check if average readings in GridView pass or not
+        //Added 3/25/20
         private bool checkPassFailBasedOnAverage()
         {
             float readingTotal = 0, lowTotal = 0, highTotal = 0, readingAverage = 0, lowAverage = 0, highAverage = 0;
@@ -9492,9 +9532,9 @@ namespace WindowsFormsApplication1
                     {
                         try
                         {
-                            float reading = Single.Parse(row.Cells[ch1ReadingGridName].Value.ToString()),
-                                lowtarget = Single.Parse(row.Cells[lowGridName].Value.ToString()),
-                                hightarget = Single.Parse(row.Cells[highGridName].Value.ToString());
+                            float reading =Math.Abs(Single.Parse(row.Cells[ch1ReadingGridName].Value.ToString())),
+                                lowtarget = Math.Abs(Single.Parse(row.Cells[lowGridName].Value.ToString())),
+                                hightarget = Math.Abs(Single.Parse(row.Cells[highGridName].Value.ToString()));
                             count++;
                             readingTotal += reading;
                             lowTotal += lowtarget;
@@ -9518,6 +9558,7 @@ namespace WindowsFormsApplication1
         }
 
         //Check if all readings in GridViews pass or not
+        //Added 3/25/20
         private bool checkPassFailBasedOnAllReadingPass()
         {
             bool isPassed = true;

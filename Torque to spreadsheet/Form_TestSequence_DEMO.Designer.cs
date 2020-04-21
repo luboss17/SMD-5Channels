@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication1
 {
-    partial class Form_TestSequence
+    partial class Form_TestSequence_DEMO
     {
         /// <summary>
         /// Required designer variable.

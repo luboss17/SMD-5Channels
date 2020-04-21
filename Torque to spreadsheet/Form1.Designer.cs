@@ -932,7 +932,7 @@ namespace WindowsFormsApplication1
             this.dualChannelTab.Controls.Add(this.firstChannelGrid);
             this.dualChannelTab.Location = new System.Drawing.Point(4, 34);
             this.dualChannelTab.Name = "dualChannelTab";
-            this.dualChannelTab.Size = new System.Drawing.Size(1723, 999);
+            this.dualChannelTab.Size = new System.Drawing.Size(1776, 1323);
             this.dualChannelTab.TabIndex = 5;
             this.dualChannelTab.Text = "Dual Channel";
             this.dualChannelTab.UseVisualStyleBackColor = true;
@@ -1730,7 +1730,7 @@ namespace WindowsFormsApplication1
             this.big_graph.Controls.Add(this.chart1);
             this.big_graph.Location = new System.Drawing.Point(4, 34);
             this.big_graph.Name = "big_graph";
-            this.big_graph.Size = new System.Drawing.Size(1723, 999);
+            this.big_graph.Size = new System.Drawing.Size(1776, 1323);
             this.big_graph.TabIndex = 3;
             this.big_graph.Text = "Big Reading with Graph";
             this.big_graph.UseVisualStyleBackColor = true;
@@ -1745,7 +1745,7 @@ namespace WindowsFormsApplication1
             this.Label_Data3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.Label_Data3.Location = new System.Drawing.Point(0, 0);
             this.Label_Data3.Name = "Label_Data3";
-            this.Label_Data3.Size = new System.Drawing.Size(1723, 546);
+            this.Label_Data3.Size = new System.Drawing.Size(1776, 870);
             this.Label_Data3.TabIndex = 26;
             this.Label_Data3.Text = "0.0000";
             this.Label_Data3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1755,9 +1755,9 @@ namespace WindowsFormsApplication1
             chartArea2.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea2);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.chart1.Location = new System.Drawing.Point(0, 546);
+            this.chart1.Location = new System.Drawing.Point(0, 870);
             this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(1723, 453);
+            this.chart1.Size = new System.Drawing.Size(1776, 453);
             this.chart1.TabIndex = 25;
             this.chart1.Text = "chart1";
             // 
@@ -1778,7 +1778,7 @@ namespace WindowsFormsApplication1
             this.read_graph_col.Controls.Add(this.groupBox3);
             this.read_graph_col.Location = new System.Drawing.Point(4, 34);
             this.read_graph_col.Name = "read_graph_col";
-            this.read_graph_col.Size = new System.Drawing.Size(1723, 999);
+            this.read_graph_col.Size = new System.Drawing.Size(1776, 1323);
             this.read_graph_col.TabIndex = 4;
             this.read_graph_col.Text = "Single Channel";
             this.read_graph_col.UseVisualStyleBackColor = true;
@@ -2696,7 +2696,7 @@ namespace WindowsFormsApplication1
             this.simple_col.Location = new System.Drawing.Point(4, 34);
             this.simple_col.Name = "simple_col";
             this.simple_col.Padding = new System.Windows.Forms.Padding(3);
-            this.simple_col.Size = new System.Drawing.Size(1723, 999);
+            this.simple_col.Size = new System.Drawing.Size(1776, 1323);
             this.simple_col.TabIndex = 1;
             this.simple_col.Text = "Simple Reading with Option to Save";
             this.simple_col.UseVisualStyleBackColor = true;
@@ -3127,7 +3127,7 @@ namespace WindowsFormsApplication1
             this.big_reading.Controls.Add(this.reading_bigReading_lbl);
             this.big_reading.Location = new System.Drawing.Point(4, 34);
             this.big_reading.Name = "big_reading";
-            this.big_reading.Size = new System.Drawing.Size(1723, 999);
+            this.big_reading.Size = new System.Drawing.Size(1776, 1323);
             this.big_reading.TabIndex = 2;
             this.big_reading.Text = "Big Reading";
             // 
@@ -3150,9 +3150,9 @@ namespace WindowsFormsApplication1
             this.panel3.Controls.Add(this.refreshCOMList_btn_bigReading);
             this.panel3.Controls.Add(this.comList_bigReading);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 564);
+            this.panel3.Location = new System.Drawing.Point(0, 888);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1723, 435);
+            this.panel3.Size = new System.Drawing.Size(1776, 435);
             this.panel3.TabIndex = 26;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
@@ -3335,7 +3335,7 @@ namespace WindowsFormsApplication1
             this.reading_bigReading_lbl.Location = new System.Drawing.Point(0, 0);
             this.reading_bigReading_lbl.Name = "reading_bigReading_lbl";
             this.reading_bigReading_lbl.Padding = new System.Windows.Forms.Padding(0, 0, 100, 430);
-            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1723, 999);
+            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1776, 1323);
             this.reading_bigReading_lbl.TabIndex = 27;
             this.reading_bigReading_lbl.Text = "0.0000";
             this.reading_bigReading_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3809,7 +3809,7 @@ namespace WindowsFormsApplication1
             this.ch2Reading_groupBox.Controls.Add(this.ch2ZeroBtn_calTab);
             this.ch2Reading_groupBox.Controls.Add(this.ch2ModeControlBtn_calTab);
             this.ch2Reading_groupBox.Controls.Add(this.ch2UnitBtn_calTab);
-            this.ch2Reading_groupBox.Location = new System.Drawing.Point(1468, 276);
+            this.ch2Reading_groupBox.Location = new System.Drawing.Point(956, 0);
             this.ch2Reading_groupBox.Name = "ch2Reading_groupBox";
             this.ch2Reading_groupBox.Size = new System.Drawing.Size(486, 307);
             this.ch2Reading_groupBox.TabIndex = 25;
@@ -3862,7 +3862,7 @@ namespace WindowsFormsApplication1
             // 
             this.ch2ConnectLabel_calTab.AutoSize = true;
             this.ch2ConnectLabel_calTab.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ch2ConnectLabel_calTab.Location = new System.Drawing.Point(338, 16);
+            this.ch2ConnectLabel_calTab.Location = new System.Drawing.Point(248, 16);
             this.ch2ConnectLabel_calTab.Name = "ch2ConnectLabel_calTab";
             this.ch2ConnectLabel_calTab.Size = new System.Drawing.Size(148, 16);
             this.ch2ConnectLabel_calTab.TabIndex = 66;
@@ -4090,6 +4090,7 @@ namespace WindowsFormsApplication1
             this.maxPoint_txt.Name = "maxPoint_txt";
             this.maxPoint_txt.Size = new System.Drawing.Size(100, 20);
             this.maxPoint_txt.TabIndex = 3;
+            this.maxPoint_txt.TextChanged += new System.EventHandler(this.maxPoint_txt_TextChanged);
             this.maxPoint_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maxPoint_txt_Keydown);
             this.maxPoint_txt.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.maxPoint_txt_PreviewKeyDown);
             // 
@@ -4120,7 +4121,7 @@ namespace WindowsFormsApplication1
             this.testOrder_list.ItemHeight = 14;
             this.testOrder_list.Location = new System.Drawing.Point(133, 225);
             this.testOrder_list.Name = "testOrder_list";
-            this.testOrder_list.Size = new System.Drawing.Size(100, 46);
+            this.testOrder_list.Size = new System.Drawing.Size(100, 18);
             this.testOrder_list.TabIndex = 45;
             // 
             // resetCurrTestSettings_btn
