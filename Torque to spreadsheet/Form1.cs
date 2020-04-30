@@ -6723,10 +6723,11 @@ namespace WindowsFormsApplication1
         }
 
         //Put all readings from passed in Gridview into 2 dimensions array float
-        private float[,] convertGridDatatoFloats(DataGridView thisGrid, int rowCount, int colCount)
+        //changed 04/20/20
+        private float[,] convertGridDatatoFloats(DataGridView thisGrid,int startRow, int rowCount, int colCount)
         {
             float[,] returnFloats = new float[rowCount, colCount];
-            for (int rowIndex = 0; rowIndex < thisGrid.RowCount - 1; rowIndex++)
+            for (int rowIndex = startRow; rowIndex < thisGrid.RowCount - 1; rowIndex++)
             {
                 if (!thisGrid.Rows[rowIndex].IsNewRow)
                 {
@@ -6735,7 +6736,7 @@ namespace WindowsFormsApplication1
                         try
                         {
                             float reading = Single.Parse(thisGrid.Rows[rowIndex].Cells[colIndex].Value.ToString());
-                            returnFloats[rowIndex, colIndex] = reading;
+                            returnFloats[rowIndex-startRow, colIndex] = reading;
                         }
                         catch
                         {
@@ -6748,10 +6749,11 @@ namespace WindowsFormsApplication1
             return returnFloats;
         }
         //Like convertGridDatatoFloats, but convert from 10 to 100 points
-        private float[,] convertGridDatatoFloatsTorqueChart(DataGridView oldGrid, int rowCount, int colCount)
+        //changed 04/20/20
+        private float[,] convertGridDatatoFloatsTorqueChart(DataGridView oldGrid,int startRow, int rowCount, int colCount)
         {
             DataGridView torqueChartGrid = convertToTorqueChartGrid(oldGrid);
-            return convertGridDatatoFloats(torqueChartGrid, rowCount, colCount);
+            return convertGridDatatoFloats(torqueChartGrid, startRow,rowCount, colCount);
         }
         //Copy struct and value of datagridRow to a returned row
         private DataGridViewRow CopyGridRow(DataGridViewRow oriRow)
@@ -6763,6 +6765,8 @@ namespace WindowsFormsApplication1
             }
             return newRow;
         }
+
+        //Added 4/20/20
         //convert datagridview test set up into a torque chat with 10 times the amount of points
         //Pass in old grid, the increment amount for each point for both ch1 and ch2 delta
         private DataGridView convertToTorqueChartGrid(DataGridView oldGrid)
@@ -6792,10 +6796,12 @@ namespace WindowsFormsApplication1
                     {
                         ch1Delta = getTorqueChartDelta(convertGridCellToFloat(oldGrid.Rows[oldGridRowCount-1].Cells[ch1ReadingGridCol]), 
                             convertGridCellToFloat(oldRow.Cells[ch1ReadingGridCol]), pointCount);
-                        ch2Delta = getTorqueChartDelta(convertGridCellToFloat(oldRow.Cells[ch2ReadingGridCol]),
-                            convertGridCellToFloat(oldGrid.Rows[oldGridRowCount+1].Cells[ch2ReadingGridCol]), pointCount);
+                        ch2Delta = getTorqueChartDelta(convertGridCellToFloat(oldGrid.Rows[oldGridRowCount - 1].Cells[ch2ReadingGridCol]),
+                            convertGridCellToFloat(oldRow.Cells[ch2ReadingGridCol]), pointCount);
+
+                        //ch2Delta = getTorqueChartDelta(convertGridCellToFloat(oldRow.Cells[ch2ReadingGridCol]),
+                        //    convertGridCellToFloat(oldGrid.Rows[oldGridRowCount+1].Cells[ch2ReadingGridCol]), pointCount);
                     }
-                    
                     
                     ch1startBlockVal = getbeginBlockVal(convertGridCellToFloat(oldRow.Cells[ch1ReadingGridCol]), ch1Delta);
                     ch2startBlockVal = getbeginBlockVal(convertGridCellToFloat(oldRow.Cells[ch2ReadingGridCol]), ch2Delta);
@@ -6904,8 +6910,10 @@ namespace WindowsFormsApplication1
                 retVal=endVal - (9 * delta);
             return retVal;
         }
+
+
         //Write passed in Datagridview into worksheet
-        //Changed 9/12/18
+        //Changed 4/20/20
         private Excel.Worksheet writeSingleGridToExcel(ref DataGridView thisGrid, string quadrantName, Excel.Worksheet wsheet, int startCol, int startRow, bool isTorqueChart)
         {
             int colNum = startCol;
@@ -6920,33 +6928,88 @@ namespace WindowsFormsApplication1
 
             //Write the header of each column
             rowNum++;
-            foreach (DataGridViewColumn gridCol in thisGrid.Columns)
+            int maxColCountForTorqueChart=2;//max column count that will be written from gridview to excel
+            if (currTestSetup.testType=="1")
+                maxColCountForTorqueChart = 2;
+            else if (currTestSetup.testType == "2")
+                maxColCountForTorqueChart = 3;
+            const int repeatTimeToWriteTorqueChartCol = 3;//how many times we break up the readings to write to different columns
+            if (isTorqueChart == true)
             {
-                cellID = convertNumToColCharExcel(colNum).ToString() + rowNum;
-                wsheet = writeCellToExcelWorkBook(cellID, gridCol.HeaderText, wsheet);
-                colNum++;
+                for (int timeWriteCount = 0; timeWriteCount < repeatTimeToWriteTorqueChartCol; timeWriteCount++)
+                {
+                    for (int colIndex = 0; colIndex < maxColCountForTorqueChart; colIndex++)
+                    {
+                        cellID = convertNumToColCharExcel(colNum).ToString() + rowNum;
+                        string headerTxt = thisGrid.Columns[colIndex].HeaderText;
+                        //Instead of write Channel 1 Readings, only write Channel 1
+                        if (headerTxt.Contains(" Readings"))
+                        {
+                            int indexWhereToCutOffReadingsHeaderTxt = 9;
+                            headerTxt=headerTxt.Remove(indexWhereToCutOffReadingsHeaderTxt);
+                        }
+                        wsheet = writeCellToExcelWorkBook(cellID, headerTxt, wsheet);
+                        colNum ++;
+                    }
+                    colNum+=(4-maxColCountForTorqueChart);
+                }
+            }
+            else
+            {
+                foreach (DataGridViewColumn gridCol in thisGrid.Columns)
+                {
+                    cellID = convertNumToColCharExcel(colNum).ToString() + rowNum;
+                    wsheet = writeCellToExcelWorkBook(cellID, gridCol.HeaderText, wsheet);
+                    colNum++;
+                }
             }
             colNum = startCol;//reset colNum to A
             rowNum++;//go to next row
 
             //Write actual readings into Excel
             float[,] floatArr;
-            
+
+            int startRowToCopyGrid = 0;//start on this row to start copy Gridview to floatArr
             if (isTorqueChart==true)
             {
+                colRange = maxColCountForTorqueChart;
                 int rowCount = (thisGrid.Rows.Count - 1);
                 rowRange = 9*rowCount+1;
-                floatArr = convertGridDatatoFloatsTorqueChart(thisGrid, rowRange, colRange);
+                
+                //write floatArr to 3 column
+                rowRange = (rowRange / 3);
+
+                //Convert thisGrid to torquechartGrid(91 points)
+                DataGridView torqueChartGrid = convertToTorqueChartGrid(thisGrid);
+
+                for (int colCount = 0; colCount < repeatTimeToWriteTorqueChartCol; colCount++)
+                {
+                    int colIndex = colNum + colCount * 4;
+                    //Copy values from gridview to floatArr
+                    if (colCount == repeatTimeToWriteTorqueChartCol - 1)//last repeated time to write torque chart column
+                    {
+                        //set rowRange=remaining row from grid
+                        rowRange = torqueChartGrid.RowCount - startRowToCopyGrid-1;
+                    }
+                    floatArr= convertGridDatatoFloats(torqueChartGrid, startRowToCopyGrid, rowRange, maxColCountForTorqueChart);
+                    startRowToCopyGrid += rowRange;
+
+                    Excel.Range datarange = (Excel.Range)wsheet.Cells[rowNum, convertNumToColCharExcel(colIndex).ToString()];//Set initial cell of datarange
+                    datarange = datarange.get_Resize(rowRange, colRange);//Set the size of datarange
+                    datarange.set_Value(Excel.XlRangeValueDataType.xlRangeValueDefault, floatArr);
+                }
+                rowNum += (9 * rowCount + 1)/3+1;
             }
             else
             {
-                floatArr = convertGridDatatoFloats(thisGrid, rowRange, colRange);
-            }
-            Excel.Range datarange = (Excel.Range)wsheet.Cells[rowNum, convertNumToColCharExcel(colNum).ToString()];//Set initial cell of datarange
-            datarange = datarange.get_Resize(rowRange, colRange);//Set the size of datarange
-            datarange.set_Value(Excel.XlRangeValueDataType.xlRangeValueDefault, floatArr);
+                floatArr = convertGridDatatoFloats(thisGrid,startRowToCopyGrid, rowRange, colRange);
 
-            rowNum += rowRange;
+                Excel.Range datarange = (Excel.Range)wsheet.Cells[rowNum, convertNumToColCharExcel(colNum).ToString()];//Set initial cell of datarange
+                datarange = datarange.get_Resize(rowRange, colRange);//Set the size of datarange
+                datarange.set_Value(Excel.XlRangeValueDataType.xlRangeValueDefault, floatArr);
+                rowNum += rowRange;
+            }
+            
             nextAvaiExcelRow = rowNum;//update nextAvaiExcelRow
             return wsheet;
         }
@@ -6978,14 +7041,70 @@ namespace WindowsFormsApplication1
             }
             return wsheet;
         }
-        //Added 9/12/19
+
+        //Changed 4/20/20
         //Draw graph to CalCert excel export
         private int nextAvaiExcelRow;
-        private Excel.Worksheet drawGraphToExcel(Excel.Worksheet xlWorkSheet, int startRow, int endRow, int col, string chartTitle)
+        private Excel.Worksheet drawGraphToExcel(Excel.Worksheet xlDataSheet,Excel.Worksheet xlChartSheet, int startRow, int endRow, int col, string chartTitle, bool isTorqueChart)
         {
             object misValue = System.Reflection.Missing.Value;
             //init Chart setting
-            Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlWorkSheet.ChartObjects(Type.Missing);
+            Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlChartSheet.ChartObjects(Type.Missing);
+            Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(200, 80, 500, 250);
+            Excel.Chart chartPage = myChart.Chart;
+
+            //set line chart
+            chartPage.ChartType = Excel.XlChartType.xlXYScatterLines;
+
+            chartPage.HasTitle = true;
+            chartPage.ChartTitle.Text = chartTitle;
+            chartPage.ChartTitle.Font.Size = 12;
+            chartPage.HasLegend = true;
+
+            //Set values for target,reading,low high
+            Excel.SeriesCollection oSeries = (Excel.SeriesCollection)myChart.Chart.SeriesCollection(misValue);
+            Excel.Series reading = oSeries.NewSeries();
+            reading.Name = colName;
+            reading.Border.Color = Color.Blue;
+            Excel.Range reading_range;
+            if (isTorqueChart == false)
+            {
+                string beginReading, endReading;
+                beginReading = getColLetter(0) + (startRow + 1);
+                endReading = getColLetter(0) + endRow;
+                reading_range = xlDataSheet.get_Range(beginReading, endReading);
+            }
+            else
+            {
+                string range;
+                string beginReading1, beginReading2, beginReading3, endReading1, endReading2, endReading3;//set range for chart data
+                int startCol_int = 0;
+                if (currTestSetup.testType == "1")
+                    startCol_int = 0;
+                else if (currTestSetup.testType=="2")
+                    startCol_int = 1;
+                beginReading1 = getColLetter(startCol_int) + (startRow + 1);
+                endReading1 = getColLetter(startCol_int) + endRow;
+                beginReading2 = getColLetter(startCol_int+4) + (startRow + 1);
+                endReading2 = getColLetter(startCol_int+4) + endRow;
+                beginReading3 = getColLetter(startCol_int+8) + (startRow + 1);
+                endReading3 = getColLetter(startCol_int+8) + (endRow+1);
+                range = beginReading1 + ":" + endReading1 + "," + beginReading2 + ":" + endReading2 + "," + beginReading3 + ":" + endReading3;
+                reading_range = xlDataSheet.get_Range(range);
+            }
+            reading.Values = reading_range;
+
+            return xlChartSheet;
+
+        }
+        //added 04/20/20
+        //Draw graph to CalCert excel torque chart
+        //Todo: divide xlworksheet into 3 columns and get multiple range for chart
+        private Excel.Worksheet drawGraphToExcelTorqueChart(Excel.Worksheet xlChartSheet,Excel.Worksheet xlWorkSheet, int startRow, int endRow, int col, string chartTitle)
+        {
+            object misValue = System.Reflection.Missing.Value;
+            //init Chart setting
+            Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlChartSheet.ChartObjects(Type.Missing);
             Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(200, 80, 500, 250);
             Excel.Chart chartPage = myChart.Chart;
 
@@ -7014,7 +7133,7 @@ namespace WindowsFormsApplication1
 
         }
         //convert char of grid sequence to name of grid
-        //Added 9/12/19
+        //Changed 4/20/20
         private string getGridNameToGraph(char sequenceChr)
         {
             string gridNameToGraph = "";
@@ -7028,14 +7147,15 @@ namespace WindowsFormsApplication1
                 gridNameToGraph = ALCCW;
             return gridNameToGraph;
         }
-        //Changed 9/12/19
+        //Changed 4/20/20
         //Write Tools info and testGridView Readings into Excel file
         private void saveTestResultExcel(string excelPath, string testOrder, bool isGraph,bool isTorqueChart)
         {
             //Init Excel to write
             Excel.Application xlApp;
             Excel.Workbook xlWorkBook;
-            Excel.Worksheet xlWorkSheet=new Excel.Worksheet();
+            Excel.Worksheet xlChartSheet = new Excel.Worksheet();
+            Excel.Worksheet xlDataSheet=new Excel.Worksheet();
             object misValue = System.Reflection.Missing.Value;
 
             xlApp = new Excel.Application();
@@ -7045,58 +7165,70 @@ namespace WindowsFormsApplication1
             int toolExcelRow = nextAvaiExcelRow;//since we are writing tool info first for each wsheet, save this row and reassign it to nextAvaiExcelRow for next wsheet quadrant
             while (runningWsheetCount<testOrder.Length)
             {
-                //runningWsheetCount = xlWorkBook.Worksheets.Count;
-                xlWorkSheet = new Excel.Worksheet();
-                if (runningWsheetCount < 1)
-                    xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                string gridName="";
+                switch (testOrder[runningWsheetCount])
+                {
+                    case '1':
+                        gridName = AFCW;
+                        break;
+                    case '2':
+                        gridName = AFCCW;
+                        break;
+                    case '3':
+                        gridName = ALCW;
+                        break;
+                    case '4':
+                        gridName = ALCCW;
+                        break;
+                }
+                //Init DataSheet and ChartSheet
+                if (isTorqueChart)
+                {
+                    xlChartSheet = new Excel.Worksheet();
+                    xlChartSheet = (Excel.Worksheet)xlWorkBook.Worksheets.Add();
+                    xlChartSheet.Name = gridName + " Chart";
+                    xlDataSheet = new Excel.Worksheet();
+                    xlDataSheet = (Excel.Worksheet)xlWorkBook.Worksheets.Add();
+                    xlDataSheet.Name = gridName + " Data";
+                }
                 else
-                    xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.Add();
-
+                {
+                    xlDataSheet = new Excel.Worksheet();
+                    if (runningWsheetCount < 1)
+                        xlDataSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                    else
+                        xlDataSheet = (Excel.Worksheet)xlWorkBook.Worksheets.Add();
+                    xlDataSheet.Name = gridName + " Data";
+                }
                 //Write Tool Info
-                xlWorkSheet = writeAllToolsInfoExcelWorkbook(xlWorkSheet, toolExcelRow);
+                xlDataSheet = writeAllToolsInfoExcelWorkbook(xlDataSheet, toolExcelRow);
                 
                 //Write Test Grid
                 int startTestGridRow = nextAvaiExcelRow;
-                xlWorkSheet = writeAllTestGridsToExcelWsheet(xlWorkSheet, testOrder[runningWsheetCount].ToString(),isTorqueChart);
+                xlDataSheet = writeAllTestGridsToExcelWsheet(xlDataSheet, testOrder[runningWsheetCount].ToString(),isTorqueChart);
                 
                 //Write Stream
                 //Todo: Implement
 
                 //Draw Graph
-                //Todo: for now test to see if work w graph for each quadrant first
-                string gridName = getGridNameToGraph(testOrder[runningWsheetCount]);
-                if ((gridName != "") && (isGraph == true))
-                    xlWorkSheet = drawGraphToExcel(xlWorkSheet, startTestGridRow + 1, nextAvaiExcelRow - 1, 0, gridName);
+                string gridNameToGraph = getGridNameToGraph(testOrder[runningWsheetCount]);
+                if ((gridNameToGraph != "") && (isGraph == true) && (isTorqueChart==false))
+                    xlDataSheet = drawGraphToExcel(xlDataSheet,xlDataSheet, startTestGridRow + 1, nextAvaiExcelRow - 1, 0, gridNameToGraph,isTorqueChart);
+                else if (isTorqueChart==true)
+                {
+                    xlChartSheet = drawGraphToExcel(xlDataSheet, xlChartSheet, startTestGridRow + 2, nextAvaiExcelRow - 2, 0, gridName, isTorqueChart);
+                }
 
                 runningWsheetCount++;
             }
-
-            /*
-            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-
-            //Write Tools headers and Tools value
-            xlWorkSheet = writeAllToolsInfoExcelWorkbook(xlWorkSheet, nextAvaiExcelRow);
-
-            int startTestGridRow = nextAvaiExcelRow;
-            //Write all testGrid to excelworksheet
-            xlWorkSheet = writeAllTestGridsToExcelWsheet(xlWorkSheet, testOrder,isTorqueChart);
-
-            //Draw graph for first quadrant if required
-            string gridName = getGridNameToGraph(testOrder[0]);
-            if ((gridName != "") && (isGraph == true))
-                xlWorkSheet = drawGraphToExcel(xlWorkSheet, startTestGridRow + 1, nextAvaiExcelRow - 1, 0, gridName);
-
-            //Draw graph for first quadrant if required
-            string gridName = getGridNameToGraph(testOrder[0]);
-            if ((gridName != "") && (isGraph == true))
-                xlWorkSheet = drawGraphToExcel(xlWorkSheet, startTestGridRow + 1, nextAvaiExcelRow - 1, 0, gridName);*/
 
             //Save and release Excel object
             xlWorkBook.SaveAs(excelPath, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(true, misValue, misValue);
             xlApp.Quit();
 
-            releaseObject(xlWorkSheet);
+            releaseObject(xlDataSheet);
+            releaseObject(xlChartSheet);
             releaseObject(xlWorkBook);
             releaseObject(xlApp);
 
@@ -7164,7 +7296,8 @@ namespace WindowsFormsApplication1
         {
             if (testSetup_groupBox.Enabled == false)
             {
-                calTab_excelExport(false,false);
+                bool isGraph = true, isTorqueChart=false;
+                calTab_excelExport(isGraph,isTorqueChart);
             }
         }
 

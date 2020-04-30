@@ -12,13 +12,13 @@
     <AssemblyName>Torque to spreadsheet</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>aws.ico</ApplicationIcon>
-    <ManifestCertificateThumbprint>45D8DE4CF4F6354F020F98CF059BC817C49BA34D</ManifestCertificateThumbprint>
-    <ManifestKeyFile>Torque to spreadsheet_3_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>EE2F4061E9187D629B693A15FED06A1E75CBBAD3</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Torque to spreadsheet_4_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <TargetZone>Internet</TargetZone>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
     <StartupObject>WindowsFormsApplication1.Program</StartupObject>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
     <FileUpgradeFlags>
@@ -44,7 +44,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>28</ApplicationRevision>
+    <ApplicationRevision>31</ApplicationRevision>
     <ApplicationVersion>6.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -76,7 +76,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>torque.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Torque to spreadsheet_4_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Excel, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7b835b529fb706c3, processorArchitecture=MSIL">
@@ -333,6 +333,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Settings.cs" />
+    <None Include="Torque to spreadsheet_4_TemporaryKey.pfx" />
     <None Include="torque.pfx" />
   </ItemGroup>
   <ItemGroup>
