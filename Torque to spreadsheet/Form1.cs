@@ -5160,6 +5160,7 @@ namespace WindowsFormsApplication1
         }
         //Assign TestSetup from TestSetups Collection at passed in index
         //Also set the value of the test on screen
+        //changed 4/20/20
         private TestSetup initCurrTestSetup(int index)
         {
             TestSetup thisTestSetup = new TestSetup();
@@ -5170,8 +5171,10 @@ namespace WindowsFormsApplication1
             FS_txt.Text = thisTestSetup.FullScale;
             lowLimit_txt.Text = thisTestSetup.low;
             highLimit_txt.Text = thisTestSetup.high;
-            ch1Unit_txt.Text = ch1UnitLabel_calTab.Text;
-            ch2Unit_txt.Text = ch2UnitLabel_calTab.Text;
+            if (ch1UnitLabel_calTab.Text!="")
+                ch1Unit_txt.Text = ch1UnitLabel_calTab.Text;
+            if (ch2UnitLabel_calTab.Text != "")
+                ch2Unit_txt.Text = ch2UnitLabel_calTab.Text;
             maxPoint_txt.Text = thisTestSetup.pointAmount;
             sampleNum_txt.Text = thisTestSetup.sampleNum;
 
@@ -7066,72 +7069,53 @@ namespace WindowsFormsApplication1
             Excel.Series reading = oSeries.NewSeries();
             reading.Name = colName;
             reading.Border.Color = Color.Blue;
-            Excel.Range reading_range;
+            Excel.Range YRange;
             if (isTorqueChart == false)
             {
                 string beginReading, endReading;
                 beginReading = getColLetter(0) + (startRow + 1);
                 endReading = getColLetter(0) + endRow;
-                reading_range = xlDataSheet.get_Range(beginReading, endReading);
+                YRange = xlDataSheet.get_Range(beginReading, endReading);
             }
             else
             {
-                string range;
-                string beginReading1, beginReading2, beginReading3, endReading1, endReading2, endReading3;//set range for chart data
-                int startCol_int = 0;
+                string YRange_Str,XRange_Str;
+                Excel.Range XRange;
+                int YstartCol_int = 0,XstartCol_int=0;
                 if (currTestSetup.testType == "1")
-                    startCol_int = 0;
+                    YstartCol_int = 0;
                 else if (currTestSetup.testType=="2")
-                    startCol_int = 1;
-                beginReading1 = getColLetter(startCol_int) + (startRow + 1);
-                endReading1 = getColLetter(startCol_int) + endRow;
-                beginReading2 = getColLetter(startCol_int+4) + (startRow + 1);
-                endReading2 = getColLetter(startCol_int+4) + endRow;
-                beginReading3 = getColLetter(startCol_int+8) + (startRow + 1);
-                endReading3 = getColLetter(startCol_int+8) + (endRow+1);
-                range = beginReading1 + ":" + endReading1 + "," + beginReading2 + ":" + endReading2 + "," + beginReading3 + ":" + endReading3;
-                reading_range = xlDataSheet.get_Range(range);
+                    YstartCol_int = 1;
+                XstartCol_int = YstartCol_int - 1;
+
+                YRange_Str = getRangeStrForTorqueChart(YstartCol_int,startRow,endRow);
+                YRange = xlDataSheet.get_Range(YRange_Str);
+
+                XRange_Str= getRangeStrForTorqueChart(XstartCol_int, startRow, endRow);
+                XRange = xlDataSheet.get_Range(XRange_Str);
+                reading.XValues = XRange;
             }
-            reading.Values = reading_range;
+            reading.Values = YRange;
 
             return xlChartSheet;
 
         }
-        //added 04/20/20
-        //Draw graph to CalCert excel torque chart
-        //Todo: divide xlworksheet into 3 columns and get multiple range for chart
-        private Excel.Worksheet drawGraphToExcelTorqueChart(Excel.Worksheet xlChartSheet,Excel.Worksheet xlWorkSheet, int startRow, int endRow, int col, string chartTitle)
+        //Added 4/20/20
+        //get range in string for torque chart export
+        private string getRangeStrForTorqueChart(int startCol_int, int startRow_int,int endRow_int)
         {
-            object misValue = System.Reflection.Missing.Value;
-            //init Chart setting
-            Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlChartSheet.ChartObjects(Type.Missing);
-            Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(200, 80, 500, 250);
-            Excel.Chart chartPage = myChart.Chart;
-
-            //set line chart
-            chartPage.ChartType = Excel.XlChartType.xlXYScatterLines;
-
-            chartPage.HasTitle = true;
-            chartPage.ChartTitle.Text = chartTitle;
-            chartPage.ChartTitle.Font.Size = 12;
-            chartPage.HasLegend = true;
-
-            //Set values for target,reading,low high
-            string begin_reading, end_reading;
-            Excel.SeriesCollection oSeries = (Excel.SeriesCollection)myChart.Chart.SeriesCollection(misValue);
-            Excel.Series reading = oSeries.NewSeries();
-            reading.Name = colName;
-            reading.Border.Color = Color.Blue;
-
-            begin_reading = getColLetter(0) + (startRow + 1);
-            end_reading = getColLetter(0) + endRow;
-            Excel.Range reading_range = xlWorkSheet.get_Range(begin_reading, end_reading);
-
-            reading.Values = reading_range;
-
-            return xlWorkSheet;
-
+            string range_Str;
+            string beginRange1, beginRange2, beginRange3, endRange1, endRange2, endRange3;//set range for chart data
+            beginRange1 = getColLetter(startCol_int) + (startRow_int + 1);
+            endRange1 = getColLetter(startCol_int) + endRow_int;
+            beginRange2 = getColLetter(startCol_int + 4) + (startRow_int + 1);
+            endRange2 = getColLetter(startCol_int + 4) + endRow_int;
+            beginRange3 = getColLetter(startCol_int + 8) + (startRow_int + 1);
+            endRange3 = getColLetter(startCol_int + 8) + (endRow_int + 1);
+            range_Str = beginRange1 + ":" + endRange1 + "," + beginRange2 + ":" + endRange2 + "," + beginRange3 + ":" + endRange3;
+            return range_Str;
         }
+        
         //convert char of grid sequence to name of grid
         //Changed 4/20/20
         private string getGridNameToGraph(char sequenceChr)
