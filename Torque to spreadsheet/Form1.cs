@@ -803,6 +803,7 @@ namespace WindowsFormsApplication1
         //read_graph_col
         //big_reading
         //big_graph
+        //Changed 4/20/20 to make Cal Cert Tab bigger
         private void changeWinSize(string currTab)
         {
             switch (currTab)
@@ -833,7 +834,7 @@ namespace WindowsFormsApplication1
                     pingTester(serialPort2);//Lock UI from Tester
                     break;
                 case calTabName:
-                    this.Size = new Size(1475, 943);
+                    this.Size = new Size(1475, 970);
                     this.Text = "Calibration";
                     pingTester(serialPort1);//Lock UI from Tester
                     pingTester(serialPort2);//Lock UI from Tester
@@ -6218,6 +6219,7 @@ namespace WindowsFormsApplication1
         }
 
         //Save all current test readings to Cert CSV
+        //changed 4/20/20 to match Cal Cert Label for Dual Channel
         private bool saveTestReadingsToCert()
         {
             bool saveSucceed;
@@ -6254,8 +6256,6 @@ namespace WindowsFormsApplication1
                 return false;
             }
 
-
-
             int singleOrDual = 1;
             string timeStamp = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
             string duedate = "", equipment = "", accuracy = "", testID = "", unit = "", capacity = "";
@@ -6274,8 +6274,8 @@ namespace WindowsFormsApplication1
                 unit = ch1Unit_txt.Text;
             }
             else
-            {
-                unit = ch1Unit_txt.Text + " vs " + ch2Unit_txt.Text;
+            {//changed to match cal cert dual channel label
+                unit = ch2Unit_txt.Text + " vs " + ch1Unit_txt.Text;
             }
 
             //Init all headers for currCert
@@ -6305,7 +6305,8 @@ namespace WindowsFormsApplication1
                         else if (singleOrDual == 2) //write to testTable for Dual Channel
                         {
                             ch2ReadingList = appendListStrFromGridTestColumn(thisGrid, ch2ReadingGridCol);
-                            currCert.set_dualcertTable(ch1ReadingList, ch2ReadingList);
+                            //changed to match cal cert dual channel label
+                            currCert.set_dualcertTable(ch2ReadingList, ch1ReadingList);
                         }
 
                         //Write datas in currCert to CSV
@@ -7341,7 +7342,7 @@ namespace WindowsFormsApplication1
 
 
         //Assign color code for each Data Row of passed in gridview
-        //changed 6/9/19
+        //changed 4/20/20 to match cal cert dual test label
         private void reevaluatePassFailData(ref DataGridView thisGrid, int posOrneg)
         {
             try
@@ -7359,10 +7360,11 @@ namespace WindowsFormsApplication1
                         target = Single.Parse(gridRow.Cells[target_colName].Value.ToString()) * posOrneg;
                         low = Single.Parse(gridRow.Cells[low_colName].Value.ToString()) * posOrneg;
                         high = Single.Parse(gridRow.Cells[high_colName].Value.ToString()) * posOrneg;
-                        if ((testType == 1) || ((testType == 2) && (ch1Target_select.Checked)))
-                            reading = Single.Parse(gridRow.Cells[chan1Readings_colName].Value.ToString()) * posOrneg;
-                        else if ((testType == 2) && (ch2Target_select.Checked))
-                            reading = Single.Parse(gridRow.Cells[chan2Readings_colName].Value.ToString()) * posOrneg;
+                        //changed to match cal cert dual channel label
+                        //if ((testType == 1) || ((testType == 2) && (ch1Target_select.Checked)))
+                        reading = Single.Parse(gridRow.Cells[chan1Readings_colName].Value.ToString()) * posOrneg;
+                        //else if ((testType == 2) && (ch2Target_select.Checked))
+                        //    reading = Single.Parse(gridRow.Cells[chan2Readings_colName].Value.ToString()) * posOrneg;
                     }
                     catch { floatValid = false; }
                     if (floatValid == false)
