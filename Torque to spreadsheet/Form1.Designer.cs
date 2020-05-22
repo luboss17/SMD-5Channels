@@ -3365,6 +3365,7 @@ namespace WindowsFormsApplication1
             // 
             this.groupBox18.Controls.Add(this.ch2Target_select);
             this.groupBox18.Controls.Add(this.ch1Target_select);
+            this.groupBox18.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox18.Location = new System.Drawing.Point(877, 0);
             this.groupBox18.Name = "groupBox18";
             this.groupBox18.Size = new System.Drawing.Size(159, 40);
@@ -3378,21 +3379,23 @@ namespace WindowsFormsApplication1
             this.ch2Target_select.Checked = true;
             this.ch2Target_select.Location = new System.Drawing.Point(86, 16);
             this.ch2Target_select.Name = "ch2Target_select";
-            this.ch2Target_select.Size = new System.Drawing.Size(73, 18);
+            this.ch2Target_select.Size = new System.Drawing.Size(79, 18);
             this.ch2Target_select.TabIndex = 67;
             this.ch2Target_select.TabStop = true;
             this.ch2Target_select.Text = "Channel 2";
             this.ch2Target_select.UseVisualStyleBackColor = true;
+            this.ch2Target_select.CheckedChanged += new System.EventHandler(this.ch2Target_select_CheckedChanged);
             // 
             // ch1Target_select
             // 
             this.ch1Target_select.AutoSize = true;
             this.ch1Target_select.Location = new System.Drawing.Point(3, 16);
             this.ch1Target_select.Name = "ch1Target_select";
-            this.ch1Target_select.Size = new System.Drawing.Size(73, 18);
+            this.ch1Target_select.Size = new System.Drawing.Size(79, 18);
             this.ch1Target_select.TabIndex = 65;
             this.ch1Target_select.Text = "Channel 1";
             this.ch1Target_select.UseVisualStyleBackColor = true;
+            this.ch1Target_select.CheckedChanged += new System.EventHandler(this.ch1Target_select_CheckedChanged);
             // 
             // startTest_btn
             // 

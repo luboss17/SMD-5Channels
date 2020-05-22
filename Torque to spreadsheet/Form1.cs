@@ -5001,7 +5001,9 @@ namespace WindowsFormsApplication1
         ///Some button click Method may be randomly put somewhere else////////////////////////////////////////////////////////////////////
         //Return a BindingList<string> that has order of Test Sequence
         private int testType = 0;//1 for Single Channel Test, 2 for Dual Channel Test
-        private Color highColor = Color.Red, lowColor = Color.Yellow, passColor = SystemColors.HighlightText;
+        //changed 4/20/20 to match cal cert dual test label
+        private Color highColor = Color.Red, lowColor = Color.Yellow, whiteColor = SystemColors.HighlightText, passColor=Color.LightGreen;
+
         private string pointNum_colName, chan1Readings_colName, chan2Readings_colName, target_colName, low_colName, high_colName;//Represent column name of the test Sequence GridView
         private const string AFCW = "As Found-CW", AFCCW = "As Found-CCW", ALCW = "As Left-CW", ALCCW = "As Left-CCW";
         private int dragIndex = -1, dropIndex = -1;
@@ -5834,9 +5836,10 @@ namespace WindowsFormsApplication1
         {
             set_testOrderList();
         }
-
+        //Changed 04/20/20 to match Cal Cert Dual Chan
         private void testType_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int chan1ColIndex = 1, chan2ColIndex = 2;
             if (testType_comboBox.SelectedIndex == 0)//Single Channel test
             {
                 ch2Unit_txt.Enabled = false;
@@ -5847,6 +5850,8 @@ namespace WindowsFormsApplication1
 
                 ch2Reading_groupBox.Visible = false;
                 target_groupBox.Visible = true;
+                //make chan2 column grey
+                changeAllCalCertGridColumnColor(chan2ColIndex, DefaultBackColor);
             }
             else if (testType_comboBox.SelectedIndex == 1)
             {
@@ -5856,6 +5861,9 @@ namespace WindowsFormsApplication1
 
                 ch2Reading_groupBox.Visible = true;
                 target_groupBox.Visible = false;
+                //make chan1,chan2 column white
+                changeAllCalCertGridColumnColor(chan1ColIndex, whiteColor);
+                changeAllCalCertGridColumnColor(chan2ColIndex, whiteColor);
             }
 
             changeSaveStartTestBtn();
@@ -6275,7 +6283,11 @@ namespace WindowsFormsApplication1
             }
             else
             {//changed to match cal cert dual channel label
-                unit = ch2Unit_txt.Text + " vs " + ch1Unit_txt.Text;
+                if (ch1Target_select.Checked==true)
+                    unit = ch2Unit_txt.Text + " vs " + ch1Unit_txt.Text;
+                else
+                    unit = ch1Unit_txt.Text + " vs " + ch2Unit_txt.Text;
+
             }
 
             //Init all headers for currCert
@@ -6306,7 +6318,10 @@ namespace WindowsFormsApplication1
                         {
                             ch2ReadingList = appendListStrFromGridTestColumn(thisGrid, ch2ReadingGridCol);
                             //changed to match cal cert dual channel label
-                            currCert.set_dualcertTable(ch2ReadingList, ch1ReadingList);
+                            if (ch1Target_select.Checked==true)
+                                currCert.set_dualcertTable(ch2ReadingList, ch1ReadingList);
+                            else
+                                currCert.set_dualcertTable(ch1ReadingList, ch2ReadingList);
                         }
 
                         //Write datas in currCert to CSV
@@ -7299,8 +7314,8 @@ namespace WindowsFormsApplication1
             DataGridView lastGrid = testGridFromChar(lastTestGridChr);
             //if not a new row and ch1reading and ch2reading on first Row are both empty
             //then lastTestGrid is the 1 before this currTestGrid
-            if ((!lastGrid.Rows[0].IsNewRow) && (lastGrid.Rows[0].Cells[ch1ReadingGridCol].Value == "") &&
-                        (lastGrid.Rows[0].Cells[ch2ReadingGridCol].Value == ""))
+            if ((!lastGrid.Rows[0].IsNewRow) && (lastGrid.Rows[0].Cells[ch1ReadingGridCol].Value.ToString() == "") &&
+                        (lastGrid.Rows[0].Cells[ch2ReadingGridCol].Value.ToString() == ""))
             {
                 //If this is the first grid in testOrder then there is no grid before it
                 if (lastTestGridChr == currTestSetup.testOrder[0])
@@ -7355,16 +7370,25 @@ namespace WindowsFormsApplication1
                 foreach (DataGridViewRow gridRow in thisGrid.Rows)
                 {
                     bool floatValid = true;
+                    string channelToTarget=chan1Readings_colName,channelToNotTarget=chan2Readings_colName;
                     try
                     {
                         target = Single.Parse(gridRow.Cells[target_colName].Value.ToString()) * posOrneg;
                         low = Single.Parse(gridRow.Cells[low_colName].Value.ToString()) * posOrneg;
                         high = Single.Parse(gridRow.Cells[high_colName].Value.ToString()) * posOrneg;
                         //changed to match cal cert dual channel label
-                        //if ((testType == 1) || ((testType == 2) && (ch1Target_select.Checked)))
-                        reading = Single.Parse(gridRow.Cells[chan1Readings_colName].Value.ToString()) * posOrneg;
-                        //else if ((testType == 2) && (ch2Target_select.Checked))
-                        //    reading = Single.Parse(gridRow.Cells[chan2Readings_colName].Value.ToString()) * posOrneg;
+                        if ((testType == 1) || ((testType == 2) && (ch1Target_select.Checked)))
+                        {//chan1=target
+                            reading = Single.Parse(gridRow.Cells[chan1Readings_colName].Value.ToString()) * posOrneg;
+                            channelToTarget = chan1Readings_colName;
+                            channelToNotTarget = chan2Readings_colName;
+                        }
+                        else if ((testType == 2) && (ch2Target_select.Checked))
+                        {//chan2=target
+                            reading = Single.Parse(gridRow.Cells[chan2Readings_colName].Value.ToString()) * posOrneg;
+                            channelToTarget = chan2Readings_colName;
+                            channelToNotTarget = chan1Readings_colName;
+                        }
                     }
                     catch { floatValid = false; }
                     if (floatValid == false)
@@ -7374,7 +7398,8 @@ namespace WindowsFormsApplication1
                         low = 0;
                         high = 0;
                     }
-                    changeGridColor(ref thisGrid, gridRowIndex, reading, target, low, high);
+                    else
+                        changeGridColor(ref thisGrid, gridRowIndex, reading, target, low, high,channelToTarget,channelToNotTarget);
 
                     gridRowIndex++;
                 }
@@ -7390,12 +7415,11 @@ namespace WindowsFormsApplication1
         }
 
         //Change color of testGrid Row based on whether passed in reading is within limit
-        private void changeGridColor(ref DataGridView thisGrid, int rowIndex, float reading, float target, float low, float high)
+        //changed 4/20/20 to match cal cert dual test label
+        private void changeGridColor(ref DataGridView thisGrid, int rowIndex, float reading, float target, float low, float high,string channelToTarget,string channelToNotTarget)
         {
-            int passFail = 0; //0=pass,-1=low,1=high
-            if ((reading == target) ||
-                            ((reading >= low) &&
-                             (reading <= high)))
+            int passFail = -2; //0=pass,-1=low,1=high
+            if ((reading == target) || ((reading >= low) && (reading <= high)))
             {
                 passFail = 0;
             }
@@ -7411,19 +7435,25 @@ namespace WindowsFormsApplication1
             //Assign color code for Reading if it is too high or low
             if (passFail == 0)
             {
-                thisGrid.Rows[rowIndex].Cells[chan1Readings_colName].Style.BackColor = passColor;
-                thisGrid.Rows[rowIndex].Cells[chan2Readings_colName].Style.BackColor = passColor;
+                thisGrid.Rows[rowIndex].Cells[channelToTarget].Style.BackColor = passColor;
+                //thisGrid.Rows[rowIndex].Cells[chan1Readings_colName].Style.BackColor = passColor;
+                //thisGrid.Rows[rowIndex].Cells[chan2Readings_colName].Style.BackColor = passColor;
             }
             if (passFail == -1)
             {
-                thisGrid.Rows[rowIndex].Cells[chan1Readings_colName].Style.BackColor = lowColor;
-                thisGrid.Rows[rowIndex].Cells[chan2Readings_colName].Style.BackColor = lowColor;
+                thisGrid.Rows[rowIndex].Cells[channelToTarget].Style.BackColor = lowColor;
+                //thisGrid.Rows[rowIndex].Cells[chan1Readings_colName].Style.BackColor = lowColor;
+                //thisGrid.Rows[rowIndex].Cells[chan2Readings_colName].Style.BackColor = lowColor;
             }
             if (passFail == 1)
             {
-                thisGrid.Rows[rowIndex].Cells[chan1Readings_colName].Style.BackColor = highColor;
-                thisGrid.Rows[rowIndex].Cells[chan2Readings_colName].Style.BackColor = highColor;
+                thisGrid.Rows[rowIndex].Cells[channelToTarget].Style.BackColor = highColor;
+                //thisGrid.Rows[rowIndex].Cells[chan1Readings_colName].Style.BackColor = highColor;
+                //thisGrid.Rows[rowIndex].Cells[chan2Readings_colName].Style.BackColor = highColor;
             }
+            //for dual channel, set color for the other channel to clear
+            if (currTestSetup.testType == "2")
+                thisGrid.Rows[rowIndex].Cells[channelToNotTarget].Style.BackColor = whiteColor;
         }
 
         //Return testOrder in term of Number, determined by passed in TestList
@@ -8205,6 +8235,7 @@ namespace WindowsFormsApplication1
         }
 
         //Start test in Cal Cert Tab
+        //changed 4/20/20 to change grid color
         private void startTest_calCert()
         {
             try
@@ -8232,20 +8263,32 @@ namespace WindowsFormsApplication1
 
                 //Activate the first testGrid in testOrder
                 showActiveTestGrid(currTestSetup.testOrder[0]);
-
+                int chan2ColIndex = 2;
                 //if it is single channel,display active Target
                 if (currTestSetup.testType == "1")
                 {
                     float activeTarget;
                     activeTarget = getActiveTargetfrTestGridChr(currTestSetup.testOrder[0]);
                     testTarget_lbl.Text = activeTarget.ToString();
+                    //make chan2 column grey
+                    changeAllCalCertGridColumnColor(chan2ColIndex, DefaultBackColor);
                 }
+                else
+                    changeAllCalCertGridColumnColor(chan2ColIndex, whiteColor);
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Unable to start test due to error: \n\n" + ex.Message);
             }
+        }
+        //changed 4/20/20 to change grid color
+        private void changeAllCalCertGridColumnColor(int colIndex, Color color)
+        {
+            AFCW_grid.Columns[colIndex].DefaultCellStyle.BackColor = color;
+            AFCCW_grid.Columns[colIndex].DefaultCellStyle.BackColor = color;
+            ALCW_grid.Columns[colIndex].DefaultCellStyle.BackColor = color;
+            ALCCW_grid.Columns[colIndex].DefaultCellStyle.BackColor = color;
         }
         //Attempt to write reading to end of passed in testGrid using colName
         //Return true or false of success write
@@ -8913,10 +8956,36 @@ namespace WindowsFormsApplication1
                 showFailLbl();
             }
         }
-
+        //Added 4/20/20 to match cal cert dual test label
         private void maxPoint_txt_TextChanged(object sender, EventArgs e)
         {
 
+        }
+        //Added 4/20/20 to match cal cert dual test label
+        private void reevaluateAllTestGridPassFail()
+        {
+            reevaluatePassFailData(ref AFCW_grid, 1);
+            reevaluatePassFailData(ref AFCCW_grid, -1);
+            reevaluatePassFailData(ref ALCW_grid, 1);
+            reevaluatePassFailData(ref ALCCW_grid, -1);
+        }
+        //Added 4/20/20 to match cal cert dual test label
+        private void ch2Target_select_CheckedChanged(object sender, EventArgs e)
+        {
+            int chan1ColIndex = 1;
+            //if single channel test, do nothing. If dual, ch1 back to default
+            if (currTestSetup.testType == "2")
+                reevaluateAllTestGridPassFail();
+                //changeAllCalCertGridColumnColor(chan1ColIndex, SystemColors.HighlightText);
+        }
+        //Added 4/20/20 to match cal cert dual test label
+        private void ch1Target_select_CheckedChanged(object sender, EventArgs e)
+        {
+            int chan2ColIndex = 2;
+            //if single channel test, do nothing. If dual, ch2 back to default
+            if (currTestSetup.testType == "2")
+                reevaluateAllTestGridPassFail();
+            //changeAllCalCertGridColumnColor(chan2ColIndex, Color.White);
         }
 
         private BindingList<string> toolsIDListSearch = new BindingList<string>();
