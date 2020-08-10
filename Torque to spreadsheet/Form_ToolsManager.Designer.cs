@@ -636,6 +636,7 @@
             this.groupBox1.Controls.Add(this.searchField_txt);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.toolsModel_comboBox);
+            this.groupBox1.Controls.Add(this.saveClose_btn);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(234, 324);
@@ -645,7 +646,7 @@
             // searchSubject_comboBox
             // 
             this.searchSubject_comboBox.FormattingEnabled = true;
-            this.searchSubject_comboBox.Location = new System.Drawing.Point(15, 57);
+            this.searchSubject_comboBox.Location = new System.Drawing.Point(15, 56);
             this.searchSubject_comboBox.Name = "searchSubject_comboBox";
             this.searchSubject_comboBox.Size = new System.Drawing.Size(80, 21);
             this.searchSubject_comboBox.TabIndex = 0;
@@ -653,7 +654,7 @@
             // 
             // newTool_btn
             // 
-            this.newTool_btn.Location = new System.Drawing.Point(32, 278);
+            this.newTool_btn.Location = new System.Drawing.Point(20, 265);
             this.newTool_btn.Name = "newTool_btn";
             this.newTool_btn.Size = new System.Drawing.Size(75, 23);
             this.newTool_btn.TabIndex = 3;
@@ -664,7 +665,7 @@
             // searchResult_listBox
             // 
             this.searchResult_listBox.FormattingEnabled = true;
-            this.searchResult_listBox.Location = new System.Drawing.Point(15, 83);
+            this.searchResult_listBox.Location = new System.Drawing.Point(15, 78);
             this.searchResult_listBox.Name = "searchResult_listBox";
             this.searchResult_listBox.Size = new System.Drawing.Size(204, 186);
             this.searchResult_listBox.TabIndex = 2;
@@ -672,7 +673,7 @@
             // 
             // toolDelete_btn
             // 
-            this.toolDelete_btn.Location = new System.Drawing.Point(130, 278);
+            this.toolDelete_btn.Location = new System.Drawing.Point(130, 265);
             this.toolDelete_btn.Name = "toolDelete_btn";
             this.toolDelete_btn.Size = new System.Drawing.Size(75, 23);
             this.toolDelete_btn.TabIndex = 4;
@@ -873,7 +874,6 @@
             this.groupBox3.Controls.Add(this.down_btn);
             this.groupBox3.Controls.Add(this.delete_btn);
             this.groupBox3.Controls.Add(this.cancel_btn);
-            this.groupBox3.Controls.Add(this.saveClose_btn);
             this.groupBox3.Location = new System.Drawing.Point(514, 12);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(285, 324);
@@ -942,7 +942,7 @@
             // 
             // cancel_btn
             // 
-            this.cancel_btn.Location = new System.Drawing.Point(117, 238);
+            this.cancel_btn.Location = new System.Drawing.Point(58, 237);
             this.cancel_btn.Name = "cancel_btn";
             this.cancel_btn.Size = new System.Drawing.Size(75, 23);
             this.cancel_btn.TabIndex = 6;
@@ -952,12 +952,13 @@
             // 
             // saveClose_btn
             // 
-            this.saveClose_btn.Location = new System.Drawing.Point(6, 238);
+            this.saveClose_btn.Location = new System.Drawing.Point(59, 291);
             this.saveClose_btn.Name = "saveClose_btn";
             this.saveClose_btn.Size = new System.Drawing.Size(105, 23);
             this.saveClose_btn.TabIndex = 5;
             this.saveClose_btn.Text = "Save Close";
             this.saveClose_btn.UseVisualStyleBackColor = true;
+            this.saveClose_btn.Visible = false;
             this.saveClose_btn.Click += new System.EventHandler(this.saveClose_btn_Click);
             // 
             // testSetupGroupBox

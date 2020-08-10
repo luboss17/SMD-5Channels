@@ -303,44 +303,44 @@ namespace WindowsFormsApplication1
             this.upSize_btn = new System.Windows.Forms.Button();
             this.reading_bigReading_lbl = new System.Windows.Forms.Label();
             this.calibrationTab = new System.Windows.Forms.TabPage();
+            this.AFCWChart_radio = new System.Windows.Forms.RadioButton();
+            this.AFCCWChart_radio = new System.Windows.Forms.RadioButton();
+            this.ALCCWChart_radio = new System.Windows.Forms.RadioButton();
+            this.AFCWactive_label = new System.Windows.Forms.Label();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.ch2Target_select = new System.Windows.Forms.RadioButton();
             this.ch1Target_select = new System.Windows.Forms.RadioButton();
+            this.copyAllStruct_btn = new System.Windows.Forms.Button();
             this.startTest_btn = new System.Windows.Forms.Button();
+            this.ALCWChart_radio = new System.Windows.Forms.RadioButton();
             this.continue_pauseTest_btn = new System.Windows.Forms.Button();
             this.captureBtn_calTab = new System.Windows.Forms.Button();
+            this.AFCCWactive_label = new System.Windows.Forms.Label();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
-            this.ALCCWChart_radio = new System.Windows.Forms.RadioButton();
-            this.AFCCWChart_radio = new System.Windows.Forms.RadioButton();
-            this.ALCWChart_radio = new System.Windows.Forms.RadioButton();
-            this.AFCWChart_radio = new System.Windows.Forms.RadioButton();
-            this.exportChart_btn = new System.Windows.Forms.Button();
+            this.ALCCW_btn = new System.Windows.Forms.Button();
+            this.AFCCW_btn = new System.Windows.Forms.Button();
+            this.ALCW_btn = new System.Windows.Forms.Button();
+            this.AFCW_btn = new System.Windows.Forms.Button();
             this.exportAverage_chckbox = new System.Windows.Forms.CheckBox();
             this.excelExport_calTab_btn = new System.Windows.Forms.Button();
-            this.copyAllStruct_btn = new System.Windows.Forms.Button();
             this.AFCW_grid = new System.Windows.Forms.DataGridView();
-            this.ALCCWactive_label = new System.Windows.Forms.Label();
-            this.ALCWactive_label = new System.Windows.Forms.Label();
-            this.AFCCWactive_label = new System.Windows.Forms.Label();
-            this.AFCWactive_label = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.lowColor_label = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.highColor_label = new System.Windows.Forms.Label();
-            this.ALCCW_grid = new System.Windows.Forms.DataGridView();
+            this.exportChart_btn = new System.Windows.Forms.Button();
             this.abandonTest_btn = new System.Windows.Forms.Button();
-            this.AFCCW_grid = new System.Windows.Forms.DataGridView();
-            this.ALCW_grid = new System.Windows.Forms.DataGridView();
             this.openCert_btn = new System.Windows.Forms.Button();
+            this.AFCW_lbl = new System.Windows.Forms.Label();
             this.saveTestToCert_btn = new System.Windows.Forms.Button();
             this.restartTest_btn = new System.Windows.Forms.Button();
             this.deleteLastTestRow_btn = new System.Windows.Forms.Button();
-            this.copyCCW_btn = new System.Windows.Forms.Button();
-            this.copyCW_btn = new System.Windows.Forms.Button();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
+            this.AFCCW_grid = new System.Windows.Forms.DataGridView();
+            this.ALCW_grid = new System.Windows.Forms.DataGridView();
+            this.ALCCW_grid = new System.Windows.Forms.DataGridView();
+            this.ALCW_lbl = new System.Windows.Forms.Label();
+            this.AFCCW_lbl = new System.Windows.Forms.Label();
+            this.ALCCW_lbl = new System.Windows.Forms.Label();
             this.stream_btn = new System.Windows.Forms.Button();
             this.ch2Reading_groupBox = new System.Windows.Forms.GroupBox();
             this.ch2Trough_chckbox = new System.Windows.Forms.CheckBox();
@@ -387,12 +387,13 @@ namespace WindowsFormsApplication1
             this.label37 = new System.Windows.Forms.Label();
             this.testSetup_comboBox = new System.Windows.Forms.ComboBox();
             this.label38 = new System.Windows.Forms.Label();
-            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.comConnect_calCert_groupBox = new System.Windows.Forms.GroupBox();
             this.label41 = new System.Windows.Forms.Label();
             this.comList_calibration = new System.Windows.Forms.ListBox();
             this.ch2ConnectBtn_calTab = new System.Windows.Forms.Button();
             this.ch1ConnectBtn_calTab = new System.Windows.Forms.Button();
             this.comRefreshBtn_calTab = new System.Windows.Forms.Button();
+            this.ALCCWactive_label = new System.Windows.Forms.Label();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
             this.ch1Trough_chckbox = new System.Windows.Forms.CheckBox();
             this.label34 = new System.Windows.Forms.Label();
@@ -403,7 +404,8 @@ namespace WindowsFormsApplication1
             this.ch1UnitLabel_calTab = new System.Windows.Forms.Label();
             this.ch1ReadingLabel_calTab = new System.Windows.Forms.Label();
             this.ch1ConnectLabel_calTab = new System.Windows.Forms.Label();
-            this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.ALCWactive_label = new System.Windows.Forms.Label();
+            this.toolInfo_groupBox = new System.Windows.Forms.GroupBox();
             this.comment_txt = new System.Windows.Forms.TextBox();
             this.comment_lbl = new System.Windows.Forms.Label();
             this.toolID_comboBox = new System.Windows.Forms.ComboBox();
@@ -432,6 +434,8 @@ namespace WindowsFormsApplication1
             this.checkAllReading_radioBtn = new System.Windows.Forms.RadioButton();
             this.testTarget_lbl = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.copyCW_btn = new System.Windows.Forms.Button();
+            this.copyCCW_btn = new System.Windows.Forms.Button();
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -482,14 +486,14 @@ namespace WindowsFormsApplication1
             this.groupBox18.SuspendLayout();
             this.groupBox17.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AFCW_grid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ALCCW_grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AFCCW_grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ALCW_grid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ALCCW_grid)).BeginInit();
             this.ch2Reading_groupBox.SuspendLayout();
             this.testSetup_groupBox.SuspendLayout();
-            this.groupBox20.SuspendLayout();
+            this.comConnect_calCert_groupBox.SuspendLayout();
             this.groupBox21.SuspendLayout();
-            this.groupBox22.SuspendLayout();
+            this.toolInfo_groupBox.SuspendLayout();
             this.target_groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -506,7 +510,7 @@ namespace WindowsFormsApplication1
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3,
             this.SpreadSheetModeLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(947, 977);
+            this.statusStrip1.Location = new System.Drawing.Point(1626, 1349);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1977, 22);
             this.statusStrip1.TabIndex = 5;
@@ -563,7 +567,7 @@ namespace WindowsFormsApplication1
             this.printToolToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1731, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1907, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -932,7 +936,7 @@ namespace WindowsFormsApplication1
             this.dualChannelTab.Controls.Add(this.firstChannelGrid);
             this.dualChannelTab.Location = new System.Drawing.Point(4, 34);
             this.dualChannelTab.Name = "dualChannelTab";
-            this.dualChannelTab.Size = new System.Drawing.Size(1723, 999);
+            this.dualChannelTab.Size = new System.Drawing.Size(1899, 883);
             this.dualChannelTab.TabIndex = 5;
             this.dualChannelTab.Text = "Dual Channel";
             this.dualChannelTab.UseVisualStyleBackColor = true;
@@ -1268,7 +1272,7 @@ namespace WindowsFormsApplication1
             this.comList4.ItemHeight = 14;
             this.comList4.Location = new System.Drawing.Point(9, 49);
             this.comList4.Name = "comList4";
-            this.comList4.Size = new System.Drawing.Size(191, 46);
+            this.comList4.Size = new System.Drawing.Size(191, 60);
             this.comList4.TabIndex = 1;
             // 
             // openCloseSecondPort
@@ -1730,7 +1734,7 @@ namespace WindowsFormsApplication1
             this.big_graph.Controls.Add(this.chart1);
             this.big_graph.Location = new System.Drawing.Point(4, 34);
             this.big_graph.Name = "big_graph";
-            this.big_graph.Size = new System.Drawing.Size(1723, 999);
+            this.big_graph.Size = new System.Drawing.Size(1899, 883);
             this.big_graph.TabIndex = 3;
             this.big_graph.Text = "Big Reading with Graph";
             this.big_graph.UseVisualStyleBackColor = true;
@@ -1745,7 +1749,7 @@ namespace WindowsFormsApplication1
             this.Label_Data3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.Label_Data3.Location = new System.Drawing.Point(0, 0);
             this.Label_Data3.Name = "Label_Data3";
-            this.Label_Data3.Size = new System.Drawing.Size(1723, 546);
+            this.Label_Data3.Size = new System.Drawing.Size(1899, 430);
             this.Label_Data3.TabIndex = 26;
             this.Label_Data3.Text = "0.0000";
             this.Label_Data3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1755,9 +1759,9 @@ namespace WindowsFormsApplication1
             chartArea2.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea2);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.chart1.Location = new System.Drawing.Point(0, 546);
+            this.chart1.Location = new System.Drawing.Point(0, 430);
             this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(1723, 453);
+            this.chart1.Size = new System.Drawing.Size(1899, 453);
             this.chart1.TabIndex = 25;
             this.chart1.Text = "chart1";
             // 
@@ -1778,7 +1782,7 @@ namespace WindowsFormsApplication1
             this.read_graph_col.Controls.Add(this.groupBox3);
             this.read_graph_col.Location = new System.Drawing.Point(4, 34);
             this.read_graph_col.Name = "read_graph_col";
-            this.read_graph_col.Size = new System.Drawing.Size(1723, 999);
+            this.read_graph_col.Size = new System.Drawing.Size(1899, 883);
             this.read_graph_col.TabIndex = 4;
             this.read_graph_col.Text = "Single Channel";
             this.read_graph_col.UseVisualStyleBackColor = true;
@@ -2150,7 +2154,7 @@ namespace WindowsFormsApplication1
             this.comList3.ItemHeight = 14;
             this.comList3.Location = new System.Drawing.Point(9, 49);
             this.comList3.Name = "comList3";
-            this.comList3.Size = new System.Drawing.Size(191, 46);
+            this.comList3.Size = new System.Drawing.Size(191, 60);
             this.comList3.TabIndex = 5;
             // 
             // refresh2
@@ -2696,7 +2700,7 @@ namespace WindowsFormsApplication1
             this.simple_col.Location = new System.Drawing.Point(4, 34);
             this.simple_col.Name = "simple_col";
             this.simple_col.Padding = new System.Windows.Forms.Padding(3);
-            this.simple_col.Size = new System.Drawing.Size(1723, 999);
+            this.simple_col.Size = new System.Drawing.Size(1899, 883);
             this.simple_col.TabIndex = 1;
             this.simple_col.Text = "Simple Reading with Option to Save";
             this.simple_col.UseVisualStyleBackColor = true;
@@ -2901,7 +2905,7 @@ namespace WindowsFormsApplication1
             this.simple_reading.Location = new System.Drawing.Point(4, 34);
             this.simple_reading.Name = "simple_reading";
             this.simple_reading.Padding = new System.Windows.Forms.Padding(3);
-            this.simple_reading.Size = new System.Drawing.Size(1723, 999);
+            this.simple_reading.Size = new System.Drawing.Size(1899, 883);
             this.simple_reading.TabIndex = 0;
             this.simple_reading.Text = "Torque To Spreadsheet";
             this.simple_reading.UseVisualStyleBackColor = true;
@@ -2949,13 +2953,14 @@ namespace WindowsFormsApplication1
             // 
             // Button_Aquire
             // 
-            this.Button_Aquire.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Aquire.BackColor = System.Drawing.Color.LightGreen;
+            this.Button_Aquire.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button_Aquire.Location = new System.Drawing.Point(118, 25);
             this.Button_Aquire.Name = "Button_Aquire";
             this.Button_Aquire.Size = new System.Drawing.Size(139, 60);
             this.Button_Aquire.TabIndex = 2;
-            this.Button_Aquire.Text = "Activate Spreadsheet Transfer";
-            this.Button_Aquire.UseVisualStyleBackColor = true;
+            this.Button_Aquire.Text = "Spreadsheet Transfer: OFF";
+            this.Button_Aquire.UseVisualStyleBackColor = false;
             this.Button_Aquire.Click += new System.EventHandler(this.Button_Aquire_Click);
             // 
             // button1
@@ -3093,7 +3098,7 @@ namespace WindowsFormsApplication1
             this.comList.ItemHeight = 14;
             this.comList.Location = new System.Drawing.Point(11, 355);
             this.comList.Name = "comList";
-            this.comList.Size = new System.Drawing.Size(170, 46);
+            this.comList.Size = new System.Drawing.Size(170, 60);
             this.comList.TabIndex = 1;
             this.comList.SelectedIndexChanged += new System.EventHandler(this.comList_SelectedIndexChanged);
             // 
@@ -3114,7 +3119,7 @@ namespace WindowsFormsApplication1
             this.TabPages.Multiline = true;
             this.TabPages.Name = "TabPages";
             this.TabPages.SelectedIndex = 0;
-            this.TabPages.Size = new System.Drawing.Size(1731, 1037);
+            this.TabPages.Size = new System.Drawing.Size(1907, 921);
             this.TabPages.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabPages.TabIndex = 27;
             // 
@@ -3127,7 +3132,7 @@ namespace WindowsFormsApplication1
             this.big_reading.Controls.Add(this.reading_bigReading_lbl);
             this.big_reading.Location = new System.Drawing.Point(4, 34);
             this.big_reading.Name = "big_reading";
-            this.big_reading.Size = new System.Drawing.Size(1723, 999);
+            this.big_reading.Size = new System.Drawing.Size(1899, 883);
             this.big_reading.TabIndex = 2;
             this.big_reading.Text = "Big Reading";
             // 
@@ -3150,9 +3155,9 @@ namespace WindowsFormsApplication1
             this.panel3.Controls.Add(this.refreshCOMList_btn_bigReading);
             this.panel3.Controls.Add(this.comList_bigReading);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 564);
+            this.panel3.Location = new System.Drawing.Point(0, 448);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1723, 435);
+            this.panel3.Size = new System.Drawing.Size(1899, 435);
             this.panel3.TabIndex = 26;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
@@ -3311,7 +3316,7 @@ namespace WindowsFormsApplication1
             this.comList_bigReading.ItemHeight = 32;
             this.comList_bigReading.Location = new System.Drawing.Point(566, 12);
             this.comList_bigReading.Name = "comList_bigReading";
-            this.comList_bigReading.Size = new System.Drawing.Size(514, 4);
+            this.comList_bigReading.Size = new System.Drawing.Size(514, 100);
             this.comList_bigReading.TabIndex = 7;
             // 
             // upSize_btn
@@ -3335,38 +3340,97 @@ namespace WindowsFormsApplication1
             this.reading_bigReading_lbl.Location = new System.Drawing.Point(0, 0);
             this.reading_bigReading_lbl.Name = "reading_bigReading_lbl";
             this.reading_bigReading_lbl.Padding = new System.Windows.Forms.Padding(0, 0, 100, 430);
-            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1723, 999);
+            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1899, 883);
             this.reading_bigReading_lbl.TabIndex = 27;
             this.reading_bigReading_lbl.Text = "0.0000";
             this.reading_bigReading_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // calibrationTab
             // 
+            this.calibrationTab.Controls.Add(this.AFCWChart_radio);
+            this.calibrationTab.Controls.Add(this.AFCCWChart_radio);
+            this.calibrationTab.Controls.Add(this.ALCCWChart_radio);
+            this.calibrationTab.Controls.Add(this.AFCWactive_label);
             this.calibrationTab.Controls.Add(this.groupBox18);
+            this.calibrationTab.Controls.Add(this.copyAllStruct_btn);
             this.calibrationTab.Controls.Add(this.startTest_btn);
+            this.calibrationTab.Controls.Add(this.ALCWChart_radio);
             this.calibrationTab.Controls.Add(this.continue_pauseTest_btn);
             this.calibrationTab.Controls.Add(this.captureBtn_calTab);
+            this.calibrationTab.Controls.Add(this.AFCCWactive_label);
             this.calibrationTab.Controls.Add(this.groupBox17);
             this.calibrationTab.Controls.Add(this.stream_btn);
             this.calibrationTab.Controls.Add(this.ch2Reading_groupBox);
             this.calibrationTab.Controls.Add(this.testSetup_groupBox);
-            this.calibrationTab.Controls.Add(this.groupBox20);
+            this.calibrationTab.Controls.Add(this.comConnect_calCert_groupBox);
+            this.calibrationTab.Controls.Add(this.ALCCWactive_label);
             this.calibrationTab.Controls.Add(this.groupBox21);
-            this.calibrationTab.Controls.Add(this.groupBox22);
+            this.calibrationTab.Controls.Add(this.ALCWactive_label);
+            this.calibrationTab.Controls.Add(this.toolInfo_groupBox);
             this.calibrationTab.Controls.Add(this.target_groupBox);
+            this.calibrationTab.Controls.Add(this.copyCW_btn);
+            this.calibrationTab.Controls.Add(this.copyCCW_btn);
             this.calibrationTab.Location = new System.Drawing.Point(4, 34);
             this.calibrationTab.Name = "calibrationTab";
-            this.calibrationTab.Size = new System.Drawing.Size(1723, 999);
+            this.calibrationTab.Size = new System.Drawing.Size(1899, 883);
             this.calibrationTab.TabIndex = 6;
             this.calibrationTab.Text = "Cal Cert";
             this.calibrationTab.UseVisualStyleBackColor = true;
+            // 
+            // AFCWChart_radio
+            // 
+            this.AFCWChart_radio.AutoSize = true;
+            this.AFCWChart_radio.Location = new System.Drawing.Point(1451, 506);
+            this.AFCWChart_radio.Name = "AFCWChart_radio";
+            this.AFCWChart_radio.Size = new System.Drawing.Size(55, 18);
+            this.AFCWChart_radio.TabIndex = 68;
+            this.AFCWChart_radio.TabStop = true;
+            this.AFCWChart_radio.Text = "Graph";
+            this.AFCWChart_radio.UseVisualStyleBackColor = true;
+            this.AFCWChart_radio.Visible = false;
+            // 
+            // AFCCWChart_radio
+            // 
+            this.AFCCWChart_radio.AutoSize = true;
+            this.AFCCWChart_radio.Location = new System.Drawing.Point(1471, 835);
+            this.AFCCWChart_radio.Name = "AFCCWChart_radio";
+            this.AFCCWChart_radio.Size = new System.Drawing.Size(55, 18);
+            this.AFCCWChart_radio.TabIndex = 70;
+            this.AFCCWChart_radio.TabStop = true;
+            this.AFCCWChart_radio.Text = "Graph";
+            this.AFCCWChart_radio.UseVisualStyleBackColor = true;
+            this.AFCCWChart_radio.Visible = false;
+            // 
+            // ALCCWChart_radio
+            // 
+            this.ALCCWChart_radio.AutoSize = true;
+            this.ALCCWChart_radio.Location = new System.Drawing.Point(1716, 585);
+            this.ALCCWChart_radio.Name = "ALCCWChart_radio";
+            this.ALCCWChart_radio.Size = new System.Drawing.Size(55, 18);
+            this.ALCCWChart_radio.TabIndex = 71;
+            this.ALCCWChart_radio.TabStop = true;
+            this.ALCCWChart_radio.Text = "Graph";
+            this.ALCCWChart_radio.UseVisualStyleBackColor = true;
+            this.ALCCWChart_radio.Visible = false;
+            // 
+            // AFCWactive_label
+            // 
+            this.AFCWactive_label.AutoSize = true;
+            this.AFCWactive_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AFCWactive_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.AFCWactive_label.Location = new System.Drawing.Point(1445, 642);
+            this.AFCWactive_label.Name = "AFCWactive_label";
+            this.AFCWactive_label.Size = new System.Drawing.Size(65, 18);
+            this.AFCWactive_label.TabIndex = 47;
+            this.AFCWactive_label.Text = "ACTIVE";
+            this.AFCWactive_label.Visible = false;
             // 
             // groupBox18
             // 
             this.groupBox18.Controls.Add(this.ch2Target_select);
             this.groupBox18.Controls.Add(this.ch1Target_select);
             this.groupBox18.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox18.Location = new System.Drawing.Point(877, 0);
+            this.groupBox18.Location = new System.Drawing.Point(781, 0);
             this.groupBox18.Name = "groupBox18";
             this.groupBox18.Size = new System.Drawing.Size(159, 40);
             this.groupBox18.TabIndex = 34;
@@ -3397,9 +3461,20 @@ namespace WindowsFormsApplication1
             this.ch1Target_select.UseVisualStyleBackColor = true;
             this.ch1Target_select.CheckedChanged += new System.EventHandler(this.ch1Target_select_CheckedChanged);
             // 
+            // copyAllStruct_btn
+            // 
+            this.copyAllStruct_btn.Location = new System.Drawing.Point(1344, 830);
+            this.copyAllStruct_btn.Name = "copyAllStruct_btn";
+            this.copyAllStruct_btn.Size = new System.Drawing.Size(94, 23);
+            this.copyAllStruct_btn.TabIndex = 60;
+            this.copyAllStruct_btn.Text = "Copy All";
+            this.copyAllStruct_btn.UseVisualStyleBackColor = true;
+            this.copyAllStruct_btn.Visible = false;
+            this.copyAllStruct_btn.Click += new System.EventHandler(this.copyAllStruct_btn_Click);
+            // 
             // startTest_btn
             // 
-            this.startTest_btn.BackColor = System.Drawing.Color.Green;
+            this.startTest_btn.BackColor = System.Drawing.Color.Red;
             this.startTest_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.startTest_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startTest_btn.Location = new System.Drawing.Point(1444, 167);
@@ -3410,12 +3485,24 @@ namespace WindowsFormsApplication1
             this.startTest_btn.UseVisualStyleBackColor = false;
             this.startTest_btn.Click += new System.EventHandler(this.startTest_btn_Click);
             // 
+            // ALCWChart_radio
+            // 
+            this.ALCWChart_radio.AutoSize = true;
+            this.ALCWChart_radio.Location = new System.Drawing.Point(1723, 328);
+            this.ALCWChart_radio.Name = "ALCWChart_radio";
+            this.ALCWChart_radio.Size = new System.Drawing.Size(55, 18);
+            this.ALCWChart_radio.TabIndex = 69;
+            this.ALCWChart_radio.TabStop = true;
+            this.ALCWChart_radio.Text = "Graph";
+            this.ALCWChart_radio.UseVisualStyleBackColor = true;
+            this.ALCWChart_radio.Visible = false;
+            // 
             // continue_pauseTest_btn
             // 
             this.continue_pauseTest_btn.BackColor = System.Drawing.Color.Green;
             this.continue_pauseTest_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.continue_pauseTest_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.continue_pauseTest_btn.Location = new System.Drawing.Point(909, 150);
+            this.continue_pauseTest_btn.Location = new System.Drawing.Point(813, 150);
             this.continue_pauseTest_btn.Name = "continue_pauseTest_btn";
             this.continue_pauseTest_btn.Size = new System.Drawing.Size(95, 42);
             this.continue_pauseTest_btn.TabIndex = 32;
@@ -3427,7 +3514,7 @@ namespace WindowsFormsApplication1
             // 
             this.captureBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.captureBtn_calTab.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.captureBtn_calTab.Location = new System.Drawing.Point(909, 257);
+            this.captureBtn_calTab.Location = new System.Drawing.Point(813, 257);
             this.captureBtn_calTab.Name = "captureBtn_calTab";
             this.captureBtn_calTab.Size = new System.Drawing.Size(95, 42);
             this.captureBtn_calTab.TabIndex = 5;
@@ -3435,103 +3522,107 @@ namespace WindowsFormsApplication1
             this.captureBtn_calTab.UseVisualStyleBackColor = true;
             this.captureBtn_calTab.Click += new System.EventHandler(this.captureBtn_calTab_Click);
             // 
+            // AFCCWactive_label
+            // 
+            this.AFCCWactive_label.AutoSize = true;
+            this.AFCCWactive_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AFCCWactive_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.AFCCWactive_label.Location = new System.Drawing.Point(1618, 835);
+            this.AFCCWactive_label.Name = "AFCCWactive_label";
+            this.AFCCWactive_label.Size = new System.Drawing.Size(65, 18);
+            this.AFCCWactive_label.TabIndex = 48;
+            this.AFCCWactive_label.Text = "ACTIVE";
+            this.AFCCWactive_label.Visible = false;
+            // 
             // groupBox17
             // 
-            this.groupBox17.Controls.Add(this.ALCCWChart_radio);
-            this.groupBox17.Controls.Add(this.AFCCWChart_radio);
-            this.groupBox17.Controls.Add(this.ALCWChart_radio);
-            this.groupBox17.Controls.Add(this.AFCWChart_radio);
-            this.groupBox17.Controls.Add(this.exportChart_btn);
+            this.groupBox17.Controls.Add(this.ALCCW_btn);
+            this.groupBox17.Controls.Add(this.AFCCW_btn);
+            this.groupBox17.Controls.Add(this.ALCW_btn);
+            this.groupBox17.Controls.Add(this.AFCW_btn);
             this.groupBox17.Controls.Add(this.exportAverage_chckbox);
             this.groupBox17.Controls.Add(this.excelExport_calTab_btn);
-            this.groupBox17.Controls.Add(this.copyAllStruct_btn);
             this.groupBox17.Controls.Add(this.AFCW_grid);
-            this.groupBox17.Controls.Add(this.ALCCWactive_label);
-            this.groupBox17.Controls.Add(this.ALCWactive_label);
-            this.groupBox17.Controls.Add(this.AFCCWactive_label);
-            this.groupBox17.Controls.Add(this.AFCWactive_label);
             this.groupBox17.Controls.Add(this.label26);
             this.groupBox17.Controls.Add(this.lowColor_label);
             this.groupBox17.Controls.Add(this.label25);
             this.groupBox17.Controls.Add(this.highColor_label);
-            this.groupBox17.Controls.Add(this.ALCCW_grid);
+            this.groupBox17.Controls.Add(this.exportChart_btn);
             this.groupBox17.Controls.Add(this.abandonTest_btn);
-            this.groupBox17.Controls.Add(this.AFCCW_grid);
-            this.groupBox17.Controls.Add(this.ALCW_grid);
             this.groupBox17.Controls.Add(this.openCert_btn);
+            this.groupBox17.Controls.Add(this.AFCW_lbl);
             this.groupBox17.Controls.Add(this.saveTestToCert_btn);
             this.groupBox17.Controls.Add(this.restartTest_btn);
             this.groupBox17.Controls.Add(this.deleteLastTestRow_btn);
-            this.groupBox17.Controls.Add(this.copyCCW_btn);
-            this.groupBox17.Controls.Add(this.copyCW_btn);
-            this.groupBox17.Controls.Add(this.label20);
-            this.groupBox17.Controls.Add(this.label22);
-            this.groupBox17.Controls.Add(this.label19);
-            this.groupBox17.Controls.Add(this.label18);
-            this.groupBox17.Location = new System.Drawing.Point(281, 313);
+            this.groupBox17.Controls.Add(this.AFCCW_grid);
+            this.groupBox17.Controls.Add(this.ALCW_grid);
+            this.groupBox17.Controls.Add(this.ALCCW_grid);
+            this.groupBox17.Controls.Add(this.ALCW_lbl);
+            this.groupBox17.Controls.Add(this.AFCCW_lbl);
+            this.groupBox17.Controls.Add(this.ALCCW_lbl);
+            this.groupBox17.Location = new System.Drawing.Point(488, 313);
             this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(1160, 548);
+            this.groupBox17.Size = new System.Drawing.Size(859, 302);
             this.groupBox17.TabIndex = 29;
             this.groupBox17.TabStop = false;
             // 
-            // ALCCWChart_radio
+            // ALCCW_btn
             // 
-            this.ALCCWChart_radio.AutoSize = true;
-            this.ALCCWChart_radio.Location = new System.Drawing.Point(804, 269);
-            this.ALCCWChart_radio.Name = "ALCCWChart_radio";
-            this.ALCCWChart_radio.Size = new System.Drawing.Size(55, 18);
-            this.ALCCWChart_radio.TabIndex = 71;
-            this.ALCCWChart_radio.TabStop = true;
-            this.ALCCWChart_radio.Text = "Graph";
-            this.ALCCWChart_radio.UseVisualStyleBackColor = true;
+            this.ALCCW_btn.FlatAppearance.BorderSize = 0;
+            this.ALCCW_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ALCCW_btn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ALCCW_btn.Location = new System.Drawing.Point(455, 20);
+            this.ALCCW_btn.Name = "ALCCW_btn";
+            this.ALCCW_btn.Size = new System.Drawing.Size(100, 23);
+            this.ALCCW_btn.TabIndex = 86;
+            this.ALCCW_btn.Text = "ALCCW";
+            this.ALCCW_btn.UseVisualStyleBackColor = true;
+            this.ALCCW_btn.Click += new System.EventHandler(this.ALCCW_btn_Click);
             // 
-            // AFCCWChart_radio
+            // AFCCW_btn
             // 
-            this.AFCCWChart_radio.AutoSize = true;
-            this.AFCCWChart_radio.Location = new System.Drawing.Point(189, 269);
-            this.AFCCWChart_radio.Name = "AFCCWChart_radio";
-            this.AFCCWChart_radio.Size = new System.Drawing.Size(55, 18);
-            this.AFCCWChart_radio.TabIndex = 70;
-            this.AFCCWChart_radio.TabStop = true;
-            this.AFCCWChart_radio.Text = "Graph";
-            this.AFCCWChart_radio.UseVisualStyleBackColor = true;
+            this.AFCCW_btn.FlatAppearance.BorderSize = 0;
+            this.AFCCW_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AFCCW_btn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AFCCW_btn.Location = new System.Drawing.Point(308, 20);
+            this.AFCCW_btn.Name = "AFCCW_btn";
+            this.AFCCW_btn.Size = new System.Drawing.Size(101, 23);
+            this.AFCCW_btn.TabIndex = 85;
+            this.AFCCW_btn.Text = "AFCCW";
+            this.AFCCW_btn.UseVisualStyleBackColor = true;
+            this.AFCCW_btn.Click += new System.EventHandler(this.AFCCW_btn_Click);
             // 
-            // ALCWChart_radio
+            // ALCW_btn
             // 
-            this.ALCWChart_radio.AutoSize = true;
-            this.ALCWChart_radio.Location = new System.Drawing.Point(811, 12);
-            this.ALCWChart_radio.Name = "ALCWChart_radio";
-            this.ALCWChart_radio.Size = new System.Drawing.Size(55, 18);
-            this.ALCWChart_radio.TabIndex = 69;
-            this.ALCWChart_radio.TabStop = true;
-            this.ALCWChart_radio.Text = "Graph";
-            this.ALCWChart_radio.UseVisualStyleBackColor = true;
+            this.ALCW_btn.FlatAppearance.BorderSize = 0;
+            this.ALCW_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ALCW_btn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ALCW_btn.Location = new System.Drawing.Point(163, 20);
+            this.ALCW_btn.Name = "ALCW_btn";
+            this.ALCW_btn.Size = new System.Drawing.Size(111, 23);
+            this.ALCW_btn.TabIndex = 84;
+            this.ALCW_btn.Text = "ALCW";
+            this.ALCW_btn.UseVisualStyleBackColor = true;
+            this.ALCW_btn.Click += new System.EventHandler(this.ALCW_btn_Click);
             // 
-            // AFCWChart_radio
+            // AFCW_btn
             // 
-            this.AFCWChart_radio.AutoSize = true;
-            this.AFCWChart_radio.Location = new System.Drawing.Point(203, 12);
-            this.AFCWChart_radio.Name = "AFCWChart_radio";
-            this.AFCWChart_radio.Size = new System.Drawing.Size(55, 18);
-            this.AFCWChart_radio.TabIndex = 68;
-            this.AFCWChart_radio.TabStop = true;
-            this.AFCWChart_radio.Text = "Graph";
-            this.AFCWChart_radio.UseVisualStyleBackColor = true;
-            // 
-            // exportChart_btn
-            // 
-            this.exportChart_btn.Location = new System.Drawing.Point(583, 261);
-            this.exportChart_btn.Name = "exportChart_btn";
-            this.exportChart_btn.Size = new System.Drawing.Size(115, 35);
-            this.exportChart_btn.TabIndex = 67;
-            this.exportChart_btn.Text = "Export Torque Chart";
-            this.exportChart_btn.UseVisualStyleBackColor = true;
-            this.exportChart_btn.Click += new System.EventHandler(this.ExportChart_btn_Click);
+            this.AFCW_btn.BackColor = System.Drawing.Color.Transparent;
+            this.AFCW_btn.FlatAppearance.BorderSize = 0;
+            this.AFCW_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AFCW_btn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AFCW_btn.Location = new System.Drawing.Point(18, 20);
+            this.AFCW_btn.Name = "AFCW_btn";
+            this.AFCW_btn.Size = new System.Drawing.Size(100, 23);
+            this.AFCW_btn.TabIndex = 83;
+            this.AFCW_btn.Text = "AFCW";
+            this.AFCW_btn.UseVisualStyleBackColor = false;
+            this.AFCW_btn.Click += new System.EventHandler(this.AFCW_btn_Click);
             // 
             // exportAverage_chckbox
             // 
             this.exportAverage_chckbox.AutoSize = true;
-            this.exportAverage_chckbox.Location = new System.Drawing.Point(6, 15);
+            this.exportAverage_chckbox.Location = new System.Drawing.Point(587, 64);
             this.exportAverage_chckbox.Name = "exportAverage_chckbox";
             this.exportAverage_chckbox.Size = new System.Drawing.Size(161, 18);
             this.exportAverage_chckbox.TabIndex = 62;
@@ -3540,7 +3631,7 @@ namespace WindowsFormsApplication1
             // 
             // excelExport_calTab_btn
             // 
-            this.excelExport_calTab_btn.Location = new System.Drawing.Point(76, 507);
+            this.excelExport_calTab_btn.Location = new System.Drawing.Point(738, 88);
             this.excelExport_calTab_btn.Name = "excelExport_calTab_btn";
             this.excelExport_calTab_btn.Size = new System.Drawing.Size(115, 35);
             this.excelExport_calTab_btn.TabIndex = 61;
@@ -3548,79 +3639,21 @@ namespace WindowsFormsApplication1
             this.excelExport_calTab_btn.UseVisualStyleBackColor = true;
             this.excelExport_calTab_btn.Click += new System.EventHandler(this.excelExport_calTab_btn_Click);
             // 
-            // copyAllStruct_btn
-            // 
-            this.copyAllStruct_btn.Location = new System.Drawing.Point(447, 10);
-            this.copyAllStruct_btn.Name = "copyAllStruct_btn";
-            this.copyAllStruct_btn.Size = new System.Drawing.Size(94, 23);
-            this.copyAllStruct_btn.TabIndex = 60;
-            this.copyAllStruct_btn.Text = "Copy All";
-            this.copyAllStruct_btn.UseVisualStyleBackColor = true;
-            this.copyAllStruct_btn.Click += new System.EventHandler(this.copyAllStruct_btn_Click);
-            // 
             // AFCW_grid
             // 
             this.AFCW_grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AFCW_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.AFCW_grid.EnableHeadersVisualStyles = false;
-            this.AFCW_grid.Location = new System.Drawing.Point(4, 39);
+            this.AFCW_grid.Location = new System.Drawing.Point(18, 79);
             this.AFCW_grid.Name = "AFCW_grid";
             this.AFCW_grid.RowHeadersWidth = 82;
             this.AFCW_grid.Size = new System.Drawing.Size(537, 200);
             this.AFCW_grid.TabIndex = 51;
             // 
-            // ALCCWactive_label
-            // 
-            this.ALCCWactive_label.AutoSize = true;
-            this.ALCCWactive_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ALCCWactive_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.ALCCWactive_label.Location = new System.Drawing.Point(939, 269);
-            this.ALCCWactive_label.Name = "ALCCWactive_label";
-            this.ALCCWactive_label.Size = new System.Drawing.Size(65, 18);
-            this.ALCCWactive_label.TabIndex = 50;
-            this.ALCCWactive_label.Text = "ACTIVE";
-            this.ALCCWactive_label.Visible = false;
-            // 
-            // ALCWactive_label
-            // 
-            this.ALCWactive_label.AutoSize = true;
-            this.ALCWactive_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ALCWactive_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.ALCWactive_label.Location = new System.Drawing.Point(939, 11);
-            this.ALCWactive_label.Name = "ALCWactive_label";
-            this.ALCWactive_label.Size = new System.Drawing.Size(65, 18);
-            this.ALCWactive_label.TabIndex = 49;
-            this.ALCWactive_label.Text = "ACTIVE";
-            this.ALCWactive_label.Visible = false;
-            // 
-            // AFCCWactive_label
-            // 
-            this.AFCCWactive_label.AutoSize = true;
-            this.AFCCWactive_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AFCCWactive_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.AFCCWactive_label.Location = new System.Drawing.Point(336, 269);
-            this.AFCCWactive_label.Name = "AFCCWactive_label";
-            this.AFCCWactive_label.Size = new System.Drawing.Size(65, 18);
-            this.AFCCWactive_label.TabIndex = 48;
-            this.AFCCWactive_label.Text = "ACTIVE";
-            this.AFCCWactive_label.Visible = false;
-            // 
-            // AFCWactive_label
-            // 
-            this.AFCWactive_label.AutoSize = true;
-            this.AFCWactive_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AFCWactive_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.AFCWactive_label.Location = new System.Drawing.Point(343, 11);
-            this.AFCWactive_label.Name = "AFCWactive_label";
-            this.AFCWactive_label.Size = new System.Drawing.Size(65, 18);
-            this.AFCWactive_label.TabIndex = 47;
-            this.AFCWactive_label.Text = "ACTIVE";
-            this.AFCWactive_label.Visible = false;
-            // 
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(1108, 527);
+            this.label26.Location = new System.Drawing.Point(622, 41);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(29, 14);
             this.label26.TabIndex = 46;
@@ -3628,7 +3661,7 @@ namespace WindowsFormsApplication1
             // 
             // lowColor_label
             // 
-            this.lowColor_label.Location = new System.Drawing.Point(1071, 527);
+            this.lowColor_label.Location = new System.Drawing.Point(585, 41);
             this.lowColor_label.Name = "lowColor_label";
             this.lowColor_label.Size = new System.Drawing.Size(20, 10);
             this.lowColor_label.TabIndex = 45;
@@ -3636,7 +3669,7 @@ namespace WindowsFormsApplication1
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(1108, 506);
+            this.label25.Location = new System.Drawing.Point(622, 20);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(28, 14);
             this.label25.TabIndex = 44;
@@ -3644,25 +3677,24 @@ namespace WindowsFormsApplication1
             // 
             // highColor_label
             // 
-            this.highColor_label.Location = new System.Drawing.Point(1071, 506);
+            this.highColor_label.Location = new System.Drawing.Point(585, 20);
             this.highColor_label.Name = "highColor_label";
             this.highColor_label.Size = new System.Drawing.Size(20, 10);
             this.highColor_label.TabIndex = 43;
             // 
-            // ALCCW_grid
+            // exportChart_btn
             // 
-            this.ALCCW_grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ALCCW_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ALCCW_grid.EnableHeadersVisualStyles = false;
-            this.ALCCW_grid.Location = new System.Drawing.Point(610, 301);
-            this.ALCCW_grid.Name = "ALCCW_grid";
-            this.ALCCW_grid.RowHeadersWidth = 82;
-            this.ALCCW_grid.Size = new System.Drawing.Size(537, 200);
-            this.ALCCW_grid.TabIndex = 5;
+            this.exportChart_btn.Location = new System.Drawing.Point(738, 136);
+            this.exportChart_btn.Name = "exportChart_btn";
+            this.exportChart_btn.Size = new System.Drawing.Size(115, 35);
+            this.exportChart_btn.TabIndex = 67;
+            this.exportChart_btn.Text = "Export Torque Chart";
+            this.exportChart_btn.UseVisualStyleBackColor = true;
+            this.exportChart_btn.Click += new System.EventHandler(this.ExportChart_btn_Click);
             // 
             // abandonTest_btn
             // 
-            this.abandonTest_btn.Location = new System.Drawing.Point(522, 507);
+            this.abandonTest_btn.Location = new System.Drawing.Point(588, 185);
             this.abandonTest_btn.Name = "abandonTest_btn";
             this.abandonTest_btn.Size = new System.Drawing.Size(115, 35);
             this.abandonTest_btn.TabIndex = 42;
@@ -3670,12 +3702,63 @@ namespace WindowsFormsApplication1
             this.abandonTest_btn.UseVisualStyleBackColor = true;
             this.abandonTest_btn.Click += new System.EventHandler(this.abandonTest_btn_Click);
             // 
+            // openCert_btn
+            // 
+            this.openCert_btn.Location = new System.Drawing.Point(739, 238);
+            this.openCert_btn.Name = "openCert_btn";
+            this.openCert_btn.Size = new System.Drawing.Size(115, 35);
+            this.openCert_btn.TabIndex = 37;
+            this.openCert_btn.Text = "Open Cert";
+            this.openCert_btn.UseVisualStyleBackColor = true;
+            this.openCert_btn.Click += new System.EventHandler(this.openCert_btn_Click);
+            // 
+            // AFCW_lbl
+            // 
+            this.AFCW_lbl.AutoSize = true;
+            this.AFCW_lbl.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AFCW_lbl.Location = new System.Drawing.Point(264, 62);
+            this.AFCW_lbl.Name = "AFCW_lbl";
+            this.AFCW_lbl.Size = new System.Drawing.Size(81, 14);
+            this.AFCW_lbl.TabIndex = 23;
+            this.AFCW_lbl.Text = "As Found-CW";
+            this.AFCW_lbl.Visible = false;
+            // 
+            // saveTestToCert_btn
+            // 
+            this.saveTestToCert_btn.Location = new System.Drawing.Point(738, 185);
+            this.saveTestToCert_btn.Name = "saveTestToCert_btn";
+            this.saveTestToCert_btn.Size = new System.Drawing.Size(115, 35);
+            this.saveTestToCert_btn.TabIndex = 36;
+            this.saveTestToCert_btn.Text = "Save To Cert";
+            this.saveTestToCert_btn.UseVisualStyleBackColor = true;
+            this.saveTestToCert_btn.Click += new System.EventHandler(this.saveTestToCert_btn_Click);
+            // 
+            // restartTest_btn
+            // 
+            this.restartTest_btn.Location = new System.Drawing.Point(587, 136);
+            this.restartTest_btn.Name = "restartTest_btn";
+            this.restartTest_btn.Size = new System.Drawing.Size(115, 35);
+            this.restartTest_btn.TabIndex = 35;
+            this.restartTest_btn.Text = "Clear Readings";
+            this.restartTest_btn.UseVisualStyleBackColor = true;
+            this.restartTest_btn.Click += new System.EventHandler(this.restartTest_btn_Click);
+            // 
+            // deleteLastTestRow_btn
+            // 
+            this.deleteLastTestRow_btn.Location = new System.Drawing.Point(587, 88);
+            this.deleteLastTestRow_btn.Name = "deleteLastTestRow_btn";
+            this.deleteLastTestRow_btn.Size = new System.Drawing.Size(115, 35);
+            this.deleteLastTestRow_btn.TabIndex = 34;
+            this.deleteLastTestRow_btn.Text = "Delete Last";
+            this.deleteLastTestRow_btn.UseVisualStyleBackColor = true;
+            this.deleteLastTestRow_btn.Click += new System.EventHandler(this.deleteLastTestRow_btn_Click);
+            // 
             // AFCCW_grid
             // 
             this.AFCCW_grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AFCCW_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.AFCCW_grid.EnableHeadersVisualStyles = false;
-            this.AFCCW_grid.Location = new System.Drawing.Point(0, 301);
+            this.AFCCW_grid.Location = new System.Drawing.Point(53, 298);
             this.AFCCW_grid.Name = "AFCCW_grid";
             this.AFCCW_grid.RowHeadersWidth = 82;
             this.AFCCW_grid.Size = new System.Drawing.Size(537, 200);
@@ -3686,114 +3769,60 @@ namespace WindowsFormsApplication1
             this.ALCW_grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ALCW_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ALCW_grid.EnableHeadersVisualStyles = false;
-            this.ALCW_grid.Location = new System.Drawing.Point(613, 39);
+            this.ALCW_grid.Location = new System.Drawing.Point(236, 316);
             this.ALCW_grid.Name = "ALCW_grid";
             this.ALCW_grid.RowHeadersWidth = 82;
             this.ALCW_grid.Size = new System.Drawing.Size(537, 200);
             this.ALCW_grid.TabIndex = 4;
             // 
-            // openCert_btn
+            // ALCCW_grid
             // 
-            this.openCert_btn.Location = new System.Drawing.Point(818, 507);
-            this.openCert_btn.Name = "openCert_btn";
-            this.openCert_btn.Size = new System.Drawing.Size(115, 35);
-            this.openCert_btn.TabIndex = 37;
-            this.openCert_btn.Text = "Open Cert";
-            this.openCert_btn.UseVisualStyleBackColor = true;
-            this.openCert_btn.Click += new System.EventHandler(this.openCert_btn_Click);
+            this.ALCCW_grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ALCCW_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ALCCW_grid.EnableHeadersVisualStyles = false;
+            this.ALCCW_grid.Location = new System.Drawing.Point(357, 329);
+            this.ALCCW_grid.Name = "ALCCW_grid";
+            this.ALCCW_grid.RowHeadersWidth = 82;
+            this.ALCCW_grid.Size = new System.Drawing.Size(537, 200);
+            this.ALCCW_grid.TabIndex = 5;
             // 
-            // saveTestToCert_btn
+            // ALCW_lbl
             // 
-            this.saveTestToCert_btn.Location = new System.Drawing.Point(670, 507);
-            this.saveTestToCert_btn.Name = "saveTestToCert_btn";
-            this.saveTestToCert_btn.Size = new System.Drawing.Size(115, 35);
-            this.saveTestToCert_btn.TabIndex = 36;
-            this.saveTestToCert_btn.Text = "Save To Cert";
-            this.saveTestToCert_btn.UseVisualStyleBackColor = true;
-            this.saveTestToCert_btn.Click += new System.EventHandler(this.saveTestToCert_btn_Click);
+            this.ALCW_lbl.AutoSize = true;
+            this.ALCW_lbl.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ALCW_lbl.Location = new System.Drawing.Point(264, 62);
+            this.ALCW_lbl.Name = "ALCW_lbl";
+            this.ALCW_lbl.Size = new System.Drawing.Size(69, 14);
+            this.ALCW_lbl.TabIndex = 29;
+            this.ALCW_lbl.Text = "As Left-CW";
+            this.ALCW_lbl.Visible = false;
             // 
-            // restartTest_btn
+            // AFCCW_lbl
             // 
-            this.restartTest_btn.Location = new System.Drawing.Point(374, 507);
-            this.restartTest_btn.Name = "restartTest_btn";
-            this.restartTest_btn.Size = new System.Drawing.Size(113, 35);
-            this.restartTest_btn.TabIndex = 35;
-            this.restartTest_btn.Text = "Clear Readings";
-            this.restartTest_btn.UseVisualStyleBackColor = true;
-            this.restartTest_btn.Click += new System.EventHandler(this.restartTest_btn_Click);
+            this.AFCCW_lbl.AutoSize = true;
+            this.AFCCW_lbl.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AFCCW_lbl.Location = new System.Drawing.Point(264, 62);
+            this.AFCCW_lbl.Name = "AFCCW_lbl";
+            this.AFCCW_lbl.Size = new System.Drawing.Size(89, 14);
+            this.AFCCW_lbl.TabIndex = 25;
+            this.AFCCW_lbl.Text = "As Found-CCW";
+            this.AFCCW_lbl.Visible = false;
             // 
-            // deleteLastTestRow_btn
+            // ALCCW_lbl
             // 
-            this.deleteLastTestRow_btn.Location = new System.Drawing.Point(224, 507);
-            this.deleteLastTestRow_btn.Name = "deleteLastTestRow_btn";
-            this.deleteLastTestRow_btn.Size = new System.Drawing.Size(115, 35);
-            this.deleteLastTestRow_btn.TabIndex = 34;
-            this.deleteLastTestRow_btn.Text = "Delete Last";
-            this.deleteLastTestRow_btn.UseVisualStyleBackColor = true;
-            this.deleteLastTestRow_btn.Click += new System.EventHandler(this.deleteLastTestRow_btn_Click);
-            // 
-            // copyCCW_btn
-            // 
-            this.copyCCW_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.copyCCW_btn.Location = new System.Drawing.Point(536, 377);
-            this.copyCCW_btn.Name = "copyCCW_btn";
-            this.copyCCW_btn.Size = new System.Drawing.Size(75, 23);
-            this.copyCCW_btn.TabIndex = 1;
-            this.copyCCW_btn.Text = "Copy -->";
-            this.copyCCW_btn.UseVisualStyleBackColor = true;
-            this.copyCCW_btn.Click += new System.EventHandler(this.copyCCW_btn_Click);
-            // 
-            // copyCW_btn
-            // 
-            this.copyCW_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.copyCW_btn.Location = new System.Drawing.Point(539, 115);
-            this.copyCW_btn.Name = "copyCW_btn";
-            this.copyCW_btn.Size = new System.Drawing.Size(75, 23);
-            this.copyCW_btn.TabIndex = 0;
-            this.copyCW_btn.Text = "Copy -->";
-            this.copyCW_btn.UseVisualStyleBackColor = true;
-            this.copyCW_btn.Click += new System.EventHandler(this.copyCW_btn_Click);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(865, 273);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(71, 14);
-            this.label20.TabIndex = 31;
-            this.label20.Text = "As Left-CCW";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(872, 16);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(64, 14);
-            this.label22.TabIndex = 29;
-            this.label22.Text = "As Left-CW";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(250, 273);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(82, 14);
-            this.label19.TabIndex = 25;
-            this.label19.Text = "As Found-CCW";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(264, 16);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(75, 14);
-            this.label18.TabIndex = 23;
-            this.label18.Text = "As Found-CW";
+            this.ALCCW_lbl.AutoSize = true;
+            this.ALCCW_lbl.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ALCCW_lbl.Location = new System.Drawing.Point(264, 62);
+            this.ALCCW_lbl.Name = "ALCCW_lbl";
+            this.ALCCW_lbl.Size = new System.Drawing.Size(77, 14);
+            this.ALCCW_lbl.TabIndex = 31;
+            this.ALCCW_lbl.Text = "As Left-CCW";
+            this.ALCCW_lbl.Visible = false;
             // 
             // stream_btn
             // 
             this.stream_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.stream_btn.Location = new System.Drawing.Point(909, 205);
+            this.stream_btn.Location = new System.Drawing.Point(813, 205);
             this.stream_btn.Name = "stream_btn";
             this.stream_btn.Size = new System.Drawing.Size(95, 38);
             this.stream_btn.TabIndex = 66;
@@ -3812,7 +3841,7 @@ namespace WindowsFormsApplication1
             this.ch2Reading_groupBox.Controls.Add(this.ch2ZeroBtn_calTab);
             this.ch2Reading_groupBox.Controls.Add(this.ch2ModeControlBtn_calTab);
             this.ch2Reading_groupBox.Controls.Add(this.ch2UnitBtn_calTab);
-            this.ch2Reading_groupBox.Location = new System.Drawing.Point(956, 0);
+            this.ch2Reading_groupBox.Location = new System.Drawing.Point(860, 0);
             this.ch2Reading_groupBox.Name = "ch2Reading_groupBox";
             this.ch2Reading_groupBox.Size = new System.Drawing.Size(486, 307);
             this.ch2Reading_groupBox.TabIndex = 25;
@@ -3865,7 +3894,7 @@ namespace WindowsFormsApplication1
             // 
             this.ch2ConnectLabel_calTab.AutoSize = true;
             this.ch2ConnectLabel_calTab.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ch2ConnectLabel_calTab.Location = new System.Drawing.Point(248, 16);
+            this.ch2ConnectLabel_calTab.Location = new System.Drawing.Point(248, 22);
             this.ch2ConnectLabel_calTab.Name = "ch2ConnectLabel_calTab";
             this.ch2ConnectLabel_calTab.Size = new System.Drawing.Size(148, 16);
             this.ch2ConnectLabel_calTab.TabIndex = 66;
@@ -3956,16 +3985,16 @@ namespace WindowsFormsApplication1
             this.testSetup_groupBox.Controls.Add(this.label38);
             this.testSetup_groupBox.Location = new System.Drawing.Point(0, 0);
             this.testSetup_groupBox.Name = "testSetup_groupBox";
-            this.testSetup_groupBox.Size = new System.Drawing.Size(488, 307);
+            this.testSetup_groupBox.Size = new System.Drawing.Size(396, 307);
             this.testSetup_groupBox.TabIndex = 23;
             this.testSetup_groupBox.TabStop = false;
             this.testSetup_groupBox.Text = "Test Set up";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(133, 190);
+            this.textBox1.Location = new System.Drawing.Point(111, 190);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.Size = new System.Drawing.Size(76, 20);
             this.textBox1.TabIndex = 5;
             this.textBox1.Visible = false;
             // 
@@ -3984,7 +4013,7 @@ namespace WindowsFormsApplication1
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(246, 140);
+            this.label27.Location = new System.Drawing.Point(191, 140);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(97, 13);
             this.label27.TabIndex = 59;
@@ -3996,15 +4025,15 @@ namespace WindowsFormsApplication1
             this.limitEngPercent_comboBox.Items.AddRange(new object[] {
             "%",
             "Eng. Unit"});
-            this.limitEngPercent_comboBox.Location = new System.Drawing.Point(367, 137);
+            this.limitEngPercent_comboBox.Location = new System.Drawing.Point(312, 137);
             this.limitEngPercent_comboBox.Name = "limitEngPercent_comboBox";
-            this.limitEngPercent_comboBox.Size = new System.Drawing.Size(100, 22);
+            this.limitEngPercent_comboBox.Size = new System.Drawing.Size(73, 22);
             this.limitEngPercent_comboBox.TabIndex = 9;
             this.limitEngPercent_comboBox.SelectedIndexChanged += new System.EventHandler(this.limitEngPercent_comboBox_SelectedIndexChanged);
             // 
             // saveAsTest_btn
             // 
-            this.saveAsTest_btn.Location = new System.Drawing.Point(314, 276);
+            this.saveAsTest_btn.Location = new System.Drawing.Point(237, 276);
             this.saveAsTest_btn.Name = "saveAsTest_btn";
             this.saveAsTest_btn.Size = new System.Drawing.Size(75, 23);
             this.saveAsTest_btn.TabIndex = 17;
@@ -4014,9 +4043,9 @@ namespace WindowsFormsApplication1
             // 
             // ch2Unit_txt
             // 
-            this.ch2Unit_txt.Location = new System.Drawing.Point(367, 190);
+            this.ch2Unit_txt.Location = new System.Drawing.Point(312, 190);
             this.ch2Unit_txt.Name = "ch2Unit_txt";
-            this.ch2Unit_txt.Size = new System.Drawing.Size(100, 20);
+            this.ch2Unit_txt.Size = new System.Drawing.Size(73, 20);
             this.ch2Unit_txt.TabIndex = 11;
             this.ch2Unit_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch2Unit_txt_Keydown);
             // 
@@ -4024,7 +4053,7 @@ namespace WindowsFormsApplication1
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(248, 193);
+            this.label24.Location = new System.Drawing.Point(193, 193);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(91, 13);
             this.label24.TabIndex = 55;
@@ -4032,16 +4061,16 @@ namespace WindowsFormsApplication1
             // 
             // ch1Unit_txt
             // 
-            this.ch1Unit_txt.Location = new System.Drawing.Point(367, 164);
+            this.ch1Unit_txt.Location = new System.Drawing.Point(312, 164);
             this.ch1Unit_txt.Name = "ch1Unit_txt";
-            this.ch1Unit_txt.Size = new System.Drawing.Size(100, 20);
+            this.ch1Unit_txt.Size = new System.Drawing.Size(73, 20);
             this.ch1Unit_txt.TabIndex = 10;
             this.ch1Unit_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch1Unit_txt_Keydown);
             // 
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(12, 240);
+            this.label28.Location = new System.Drawing.Point(3, 240);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(121, 14);
             this.label28.TabIndex = 53;
@@ -4049,9 +4078,9 @@ namespace WindowsFormsApplication1
             // 
             // sampleNum_txt
             // 
-            this.sampleNum_txt.Location = new System.Drawing.Point(367, 59);
+            this.sampleNum_txt.Location = new System.Drawing.Point(312, 59);
             this.sampleNum_txt.Name = "sampleNum_txt";
-            this.sampleNum_txt.Size = new System.Drawing.Size(100, 20);
+            this.sampleNum_txt.Size = new System.Drawing.Size(73, 20);
             this.sampleNum_txt.TabIndex = 6;
             this.sampleNum_txt.Text = "1";
             this.sampleNum_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sampleNum_txt_Keydown);
@@ -4061,7 +4090,7 @@ namespace WindowsFormsApplication1
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(246, 62);
+            this.label30.Location = new System.Drawing.Point(191, 62);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(109, 13);
             this.label30.TabIndex = 51;
@@ -4071,7 +4100,7 @@ namespace WindowsFormsApplication1
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(248, 167);
+            this.label29.Location = new System.Drawing.Point(193, 167);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(91, 13);
             this.label29.TabIndex = 50;
@@ -4081,7 +4110,7 @@ namespace WindowsFormsApplication1
             // 
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(12, 122);
+            this.label31.Location = new System.Drawing.Point(3, 122);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(69, 13);
             this.label31.TabIndex = 49;
@@ -4089,11 +4118,10 @@ namespace WindowsFormsApplication1
             // 
             // maxPoint_txt
             // 
-            this.maxPoint_txt.Location = new System.Drawing.Point(133, 119);
+            this.maxPoint_txt.Location = new System.Drawing.Point(84, 119);
             this.maxPoint_txt.Name = "maxPoint_txt";
-            this.maxPoint_txt.Size = new System.Drawing.Size(100, 20);
+            this.maxPoint_txt.Size = new System.Drawing.Size(103, 20);
             this.maxPoint_txt.TabIndex = 3;
-            this.maxPoint_txt.TextChanged += new System.EventHandler(this.maxPoint_txt_TextChanged);
             this.maxPoint_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maxPoint_txt_Keydown);
             this.maxPoint_txt.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.maxPoint_txt_PreviewKeyDown);
             // 
@@ -4101,7 +4129,7 @@ namespace WindowsFormsApplication1
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.Location = new System.Drawing.Point(12, 225);
+            this.label32.Location = new System.Drawing.Point(3, 225);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(57, 13);
             this.label32.TabIndex = 47;
@@ -4111,7 +4139,7 @@ namespace WindowsFormsApplication1
             // 
             this.testID_lbl.AutoSize = true;
             this.testID_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.testID_lbl.Location = new System.Drawing.Point(12, 62);
+            this.testID_lbl.Location = new System.Drawing.Point(3, 62);
             this.testID_lbl.Name = "testID_lbl";
             this.testID_lbl.Size = new System.Drawing.Size(58, 13);
             this.testID_lbl.TabIndex = 46;
@@ -4122,14 +4150,15 @@ namespace WindowsFormsApplication1
             this.testOrder_list.AllowDrop = true;
             this.testOrder_list.FormattingEnabled = true;
             this.testOrder_list.ItemHeight = 14;
-            this.testOrder_list.Location = new System.Drawing.Point(133, 225);
+            this.testOrder_list.Location = new System.Drawing.Point(84, 225);
             this.testOrder_list.Name = "testOrder_list";
-            this.testOrder_list.Size = new System.Drawing.Size(100, 74);
+            this.testOrder_list.Size = new System.Drawing.Size(102, 46);
             this.testOrder_list.TabIndex = 45;
+            this.testOrder_list.SelectedIndexChanged += new System.EventHandler(this.testOrder_list_SelectedIndexChanged);
             // 
             // resetCurrTestSettings_btn
             // 
-            this.resetCurrTestSettings_btn.Location = new System.Drawing.Point(394, 276);
+            this.resetCurrTestSettings_btn.Location = new System.Drawing.Point(317, 276);
             this.resetCurrTestSettings_btn.Name = "resetCurrTestSettings_btn";
             this.resetCurrTestSettings_btn.Size = new System.Drawing.Size(73, 23);
             this.resetCurrTestSettings_btn.TabIndex = 18;
@@ -4139,16 +4168,16 @@ namespace WindowsFormsApplication1
             // 
             // testID_txt
             // 
-            this.testID_txt.Location = new System.Drawing.Point(133, 59);
+            this.testID_txt.Location = new System.Drawing.Point(84, 59);
             this.testID_txt.Name = "testID_txt";
-            this.testID_txt.Size = new System.Drawing.Size(100, 20);
+            this.testID_txt.Size = new System.Drawing.Size(103, 20);
             this.testID_txt.TabIndex = 1;
             this.testID_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.testID_txt_Keydown);
             this.testID_txt.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.testID_txt_PreviewKeyDown);
             // 
             // saveStartTest_btn
             // 
-            this.saveStartTest_btn.Location = new System.Drawing.Point(239, 276);
+            this.saveStartTest_btn.Location = new System.Drawing.Point(162, 276);
             this.saveStartTest_btn.Name = "saveStartTest_btn";
             this.saveStartTest_btn.Size = new System.Drawing.Size(71, 23);
             this.saveStartTest_btn.TabIndex = 16;
@@ -4159,7 +4188,7 @@ namespace WindowsFormsApplication1
             // AL_chkbox
             // 
             this.AL_chkbox.AutoSize = true;
-            this.AL_chkbox.Location = new System.Drawing.Point(350, 222);
+            this.AL_chkbox.Location = new System.Drawing.Point(281, 224);
             this.AL_chkbox.Name = "AL_chkbox";
             this.AL_chkbox.Size = new System.Drawing.Size(62, 18);
             this.AL_chkbox.TabIndex = 13;
@@ -4170,7 +4199,7 @@ namespace WindowsFormsApplication1
             // AF_chkbox
             // 
             this.AF_chkbox.AutoSize = true;
-            this.AF_chkbox.Location = new System.Drawing.Point(248, 222);
+            this.AF_chkbox.Location = new System.Drawing.Point(202, 224);
             this.AF_chkbox.Name = "AF_chkbox";
             this.AF_chkbox.Size = new System.Drawing.Size(73, 18);
             this.AF_chkbox.TabIndex = 12;
@@ -4180,27 +4209,27 @@ namespace WindowsFormsApplication1
             // 
             // highLimit_txt
             // 
-            this.highLimit_txt.Location = new System.Drawing.Point(367, 111);
+            this.highLimit_txt.Location = new System.Drawing.Point(312, 111);
             this.highLimit_txt.Name = "highLimit_txt";
-            this.highLimit_txt.Size = new System.Drawing.Size(100, 20);
+            this.highLimit_txt.Size = new System.Drawing.Size(73, 20);
             this.highLimit_txt.TabIndex = 8;
             this.highLimit_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.highLimit_txt_Keydown);
             this.highLimit_txt.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.highLimit_txt_PreviewKeyDown);
             // 
             // lowLimit_txt
             // 
-            this.lowLimit_txt.Location = new System.Drawing.Point(367, 85);
+            this.lowLimit_txt.Location = new System.Drawing.Point(312, 85);
             this.lowLimit_txt.Name = "lowLimit_txt";
-            this.lowLimit_txt.Size = new System.Drawing.Size(100, 20);
+            this.lowLimit_txt.Size = new System.Drawing.Size(73, 20);
             this.lowLimit_txt.TabIndex = 7;
             this.lowLimit_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lowLimit_txt_Keydown);
             this.lowLimit_txt.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.lowLimit_txt_PreviewKeyDown);
             // 
             // FS_txt
             // 
-            this.FS_txt.Location = new System.Drawing.Point(133, 164);
+            this.FS_txt.Location = new System.Drawing.Point(84, 164);
             this.FS_txt.Name = "FS_txt";
-            this.FS_txt.Size = new System.Drawing.Size(100, 20);
+            this.FS_txt.Size = new System.Drawing.Size(103, 20);
             this.FS_txt.TabIndex = 4;
             this.FS_txt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FS_txt_Keydown);
             this.FS_txt.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.FS_txt_PreviewKeyDown);
@@ -4208,7 +4237,7 @@ namespace WindowsFormsApplication1
             // CCW_chkbox
             // 
             this.CCW_chkbox.AutoSize = true;
-            this.CCW_chkbox.Location = new System.Drawing.Point(350, 252);
+            this.CCW_chkbox.Location = new System.Drawing.Point(281, 254);
             this.CCW_chkbox.Name = "CCW_chkbox";
             this.CCW_chkbox.Size = new System.Drawing.Size(117, 18);
             this.CCW_chkbox.TabIndex = 15;
@@ -4220,7 +4249,7 @@ namespace WindowsFormsApplication1
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(248, 114);
+            this.label35.Location = new System.Drawing.Point(193, 114);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(72, 13);
             this.label35.TabIndex = 33;
@@ -4229,7 +4258,7 @@ namespace WindowsFormsApplication1
             // CW_chkbox
             // 
             this.CW_chkbox.AutoSize = true;
-            this.CW_chkbox.Location = new System.Drawing.Point(248, 252);
+            this.CW_chkbox.Location = new System.Drawing.Point(202, 254);
             this.CW_chkbox.Name = "CW_chkbox";
             this.CW_chkbox.Size = new System.Drawing.Size(76, 18);
             this.CW_chkbox.TabIndex = 14;
@@ -4241,7 +4270,7 @@ namespace WindowsFormsApplication1
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(246, 88);
+            this.label36.Location = new System.Drawing.Point(191, 88);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(69, 13);
             this.label36.TabIndex = 32;
@@ -4251,11 +4280,11 @@ namespace WindowsFormsApplication1
             // 
             this.FSTarget_label.AutoSize = true;
             this.FSTarget_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FSTarget_label.Location = new System.Drawing.Point(12, 167);
+            this.FSTarget_label.Location = new System.Drawing.Point(3, 167);
             this.FSTarget_label.Name = "FSTarget_label";
-            this.FSTarget_label.Size = new System.Drawing.Size(109, 13);
+            this.FSTarget_label.Size = new System.Drawing.Size(68, 13);
             this.FSTarget_label.TabIndex = 31;
-            this.FSTarget_label.Text = "Target Full Scale*";
+            this.FSTarget_label.Text = "Full Scale*";
             // 
             // testType_comboBox
             // 
@@ -4263,9 +4292,9 @@ namespace WindowsFormsApplication1
             this.testType_comboBox.Items.AddRange(new object[] {
             "Single Channel Test",
             "Dual Channel Test"});
-            this.testType_comboBox.Location = new System.Drawing.Point(133, 88);
+            this.testType_comboBox.Location = new System.Drawing.Point(84, 88);
             this.testType_comboBox.Name = "testType_comboBox";
-            this.testType_comboBox.Size = new System.Drawing.Size(100, 22);
+            this.testType_comboBox.Size = new System.Drawing.Size(103, 22);
             this.testType_comboBox.TabIndex = 2;
             this.testType_comboBox.SelectedIndexChanged += new System.EventHandler(this.testType_comboBox_SelectedIndexChanged);
             // 
@@ -4273,7 +4302,7 @@ namespace WindowsFormsApplication1
             // 
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.Location = new System.Drawing.Point(12, 91);
+            this.label37.Location = new System.Drawing.Point(3, 91);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(73, 13);
             this.label37.TabIndex = 12;
@@ -4282,9 +4311,9 @@ namespace WindowsFormsApplication1
             // testSetup_comboBox
             // 
             this.testSetup_comboBox.FormattingEnabled = true;
-            this.testSetup_comboBox.Location = new System.Drawing.Point(133, 27);
+            this.testSetup_comboBox.Location = new System.Drawing.Point(84, 27);
             this.testSetup_comboBox.Name = "testSetup_comboBox";
-            this.testSetup_comboBox.Size = new System.Drawing.Size(334, 22);
+            this.testSetup_comboBox.Size = new System.Drawing.Size(302, 22);
             this.testSetup_comboBox.TabIndex = 0;
             this.testSetup_comboBox.SelectedIndexChanged += new System.EventHandler(this.testSetup_comboBox_SelectedIndexChanged);
             // 
@@ -4292,25 +4321,25 @@ namespace WindowsFormsApplication1
             // 
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.Location = new System.Drawing.Point(12, 30);
+            this.label38.Location = new System.Drawing.Point(3, 30);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(81, 13);
             this.label38.TabIndex = 1;
             this.label38.Text = "Select Test *";
             // 
-            // groupBox20
+            // comConnect_calCert_groupBox
             // 
-            this.groupBox20.Controls.Add(this.label41);
-            this.groupBox20.Controls.Add(this.comList_calibration);
-            this.groupBox20.Controls.Add(this.ch2ConnectBtn_calTab);
-            this.groupBox20.Controls.Add(this.ch1ConnectBtn_calTab);
-            this.groupBox20.Controls.Add(this.comRefreshBtn_calTab);
-            this.groupBox20.Location = new System.Drawing.Point(0, 614);
-            this.groupBox20.Name = "groupBox20";
-            this.groupBox20.Size = new System.Drawing.Size(279, 229);
-            this.groupBox20.TabIndex = 27;
-            this.groupBox20.TabStop = false;
-            this.groupBox20.Text = "Select available COM";
+            this.comConnect_calCert_groupBox.Controls.Add(this.label41);
+            this.comConnect_calCert_groupBox.Controls.Add(this.comList_calibration);
+            this.comConnect_calCert_groupBox.Controls.Add(this.ch2ConnectBtn_calTab);
+            this.comConnect_calCert_groupBox.Controls.Add(this.ch1ConnectBtn_calTab);
+            this.comConnect_calCert_groupBox.Controls.Add(this.comRefreshBtn_calTab);
+            this.comConnect_calCert_groupBox.Location = new System.Drawing.Point(0, 313);
+            this.comConnect_calCert_groupBox.Name = "comConnect_calCert_groupBox";
+            this.comConnect_calCert_groupBox.Size = new System.Drawing.Size(209, 302);
+            this.comConnect_calCert_groupBox.TabIndex = 27;
+            this.comConnect_calCert_groupBox.TabStop = false;
+            this.comConnect_calCert_groupBox.Text = "Select available COM";
             // 
             // label41
             // 
@@ -4328,15 +4357,15 @@ namespace WindowsFormsApplication1
             this.comList_calibration.ItemHeight = 14;
             this.comList_calibration.Location = new System.Drawing.Point(9, 49);
             this.comList_calibration.Name = "comList_calibration";
-            this.comList_calibration.Size = new System.Drawing.Size(264, 46);
+            this.comList_calibration.Size = new System.Drawing.Size(187, 116);
             this.comList_calibration.TabIndex = 1;
             // 
             // ch2ConnectBtn_calTab
             // 
             this.ch2ConnectBtn_calTab.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ch2ConnectBtn_calTab.Location = new System.Drawing.Point(9, 189);
+            this.ch2ConnectBtn_calTab.Location = new System.Drawing.Point(9, 263);
             this.ch2ConnectBtn_calTab.Name = "ch2ConnectBtn_calTab";
-            this.ch2ConnectBtn_calTab.Size = new System.Drawing.Size(264, 31);
+            this.ch2ConnectBtn_calTab.Size = new System.Drawing.Size(187, 31);
             this.ch2ConnectBtn_calTab.TabIndex = 4;
             this.ch2ConnectBtn_calTab.Text = "Open/Close Channel 2";
             this.ch2ConnectBtn_calTab.UseVisualStyleBackColor = true;
@@ -4345,9 +4374,9 @@ namespace WindowsFormsApplication1
             // ch1ConnectBtn_calTab
             // 
             this.ch1ConnectBtn_calTab.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ch1ConnectBtn_calTab.Location = new System.Drawing.Point(9, 152);
+            this.ch1ConnectBtn_calTab.Location = new System.Drawing.Point(9, 226);
             this.ch1ConnectBtn_calTab.Name = "ch1ConnectBtn_calTab";
-            this.ch1ConnectBtn_calTab.Size = new System.Drawing.Size(264, 31);
+            this.ch1ConnectBtn_calTab.Size = new System.Drawing.Size(187, 31);
             this.ch1ConnectBtn_calTab.TabIndex = 3;
             this.ch1ConnectBtn_calTab.Text = "Open/Close Channel 1";
             this.ch1ConnectBtn_calTab.UseVisualStyleBackColor = true;
@@ -4356,13 +4385,25 @@ namespace WindowsFormsApplication1
             // comRefreshBtn_calTab
             // 
             this.comRefreshBtn_calTab.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comRefreshBtn_calTab.Location = new System.Drawing.Point(9, 115);
+            this.comRefreshBtn_calTab.Location = new System.Drawing.Point(9, 189);
             this.comRefreshBtn_calTab.Name = "comRefreshBtn_calTab";
-            this.comRefreshBtn_calTab.Size = new System.Drawing.Size(264, 31);
+            this.comRefreshBtn_calTab.Size = new System.Drawing.Size(187, 31);
             this.comRefreshBtn_calTab.TabIndex = 2;
             this.comRefreshBtn_calTab.Text = "Refresh COM List";
             this.comRefreshBtn_calTab.UseVisualStyleBackColor = true;
             this.comRefreshBtn_calTab.Click += new System.EventHandler(this.comRefreshBtn_calTab_Click);
+            // 
+            // ALCCWactive_label
+            // 
+            this.ALCCWactive_label.AutoSize = true;
+            this.ALCCWactive_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ALCCWactive_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.ALCCWactive_label.Location = new System.Drawing.Point(1851, 585);
+            this.ALCCWactive_label.Name = "ALCCWactive_label";
+            this.ALCCWactive_label.Size = new System.Drawing.Size(65, 18);
+            this.ALCCWactive_label.TabIndex = 50;
+            this.ALCCWactive_label.Text = "ACTIVE";
+            this.ALCCWactive_label.Visible = false;
             // 
             // groupBox21
             // 
@@ -4375,7 +4416,7 @@ namespace WindowsFormsApplication1
             this.groupBox21.Controls.Add(this.ch1UnitLabel_calTab);
             this.groupBox21.Controls.Add(this.ch1ReadingLabel_calTab);
             this.groupBox21.Controls.Add(this.ch1ConnectLabel_calTab);
-            this.groupBox21.Location = new System.Drawing.Point(488, 0);
+            this.groupBox21.Location = new System.Drawing.Point(392, 0);
             this.groupBox21.Name = "groupBox21";
             this.groupBox21.Size = new System.Drawing.Size(469, 307);
             this.groupBox21.TabIndex = 24;
@@ -4481,37 +4522,49 @@ namespace WindowsFormsApplication1
             this.ch1ConnectLabel_calTab.TabIndex = 65;
             this.ch1ConnectLabel_calTab.Text = "No COM Port Connect";
             // 
-            // groupBox22
+            // ALCWactive_label
             // 
-            this.groupBox22.Controls.Add(this.comment_txt);
-            this.groupBox22.Controls.Add(this.comment_lbl);
-            this.groupBox22.Controls.Add(this.toolID_comboBox);
-            this.groupBox22.Controls.Add(this.toolOperatorID_txt);
-            this.groupBox22.Controls.Add(this.operatorID_lbl);
-            this.groupBox22.Controls.Add(this.toolProcedure_txt);
-            this.groupBox22.Controls.Add(this.procedure_lbl);
-            this.groupBox22.Controls.Add(this.label15);
-            this.groupBox22.Controls.Add(this.toolCertLot_txt);
-            this.groupBox22.Controls.Add(this.certLot_lbl);
-            this.groupBox22.Controls.Add(this.toolManufacture_txt);
-            this.groupBox22.Controls.Add(this.manu_lbl);
-            this.groupBox22.Controls.Add(this.toolModel_txt);
-            this.groupBox22.Controls.Add(this.model_lbl);
-            this.groupBox22.Controls.Add(this.humid_txt);
-            this.groupBox22.Controls.Add(this.humid_lbl);
-            this.groupBox22.Controls.Add(this.temperature_txt);
-            this.groupBox22.Controls.Add(this.temperature_lbl);
-            this.groupBox22.Controls.Add(this.recall_txt);
-            this.groupBox22.Controls.Add(this.recall_lbl);
-            this.groupBox22.Controls.Add(this.toolSN_txt);
-            this.groupBox22.Controls.Add(this.toolSN_lbl);
-            this.groupBox22.Controls.Add(this.toolID_lbl);
-            this.groupBox22.Location = new System.Drawing.Point(0, 313);
-            this.groupBox22.Name = "groupBox22";
-            this.groupBox22.Size = new System.Drawing.Size(279, 302);
-            this.groupBox22.TabIndex = 28;
-            this.groupBox22.TabStop = false;
-            this.groupBox22.Text = "Tools Info";
+            this.ALCWactive_label.AutoSize = true;
+            this.ALCWactive_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ALCWactive_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.ALCWactive_label.Location = new System.Drawing.Point(1851, 327);
+            this.ALCWactive_label.Name = "ALCWactive_label";
+            this.ALCWactive_label.Size = new System.Drawing.Size(65, 18);
+            this.ALCWactive_label.TabIndex = 49;
+            this.ALCWactive_label.Text = "ACTIVE";
+            this.ALCWactive_label.Visible = false;
+            // 
+            // toolInfo_groupBox
+            // 
+            this.toolInfo_groupBox.Controls.Add(this.comment_txt);
+            this.toolInfo_groupBox.Controls.Add(this.comment_lbl);
+            this.toolInfo_groupBox.Controls.Add(this.toolID_comboBox);
+            this.toolInfo_groupBox.Controls.Add(this.toolOperatorID_txt);
+            this.toolInfo_groupBox.Controls.Add(this.operatorID_lbl);
+            this.toolInfo_groupBox.Controls.Add(this.toolProcedure_txt);
+            this.toolInfo_groupBox.Controls.Add(this.procedure_lbl);
+            this.toolInfo_groupBox.Controls.Add(this.label15);
+            this.toolInfo_groupBox.Controls.Add(this.toolCertLot_txt);
+            this.toolInfo_groupBox.Controls.Add(this.certLot_lbl);
+            this.toolInfo_groupBox.Controls.Add(this.toolManufacture_txt);
+            this.toolInfo_groupBox.Controls.Add(this.manu_lbl);
+            this.toolInfo_groupBox.Controls.Add(this.toolModel_txt);
+            this.toolInfo_groupBox.Controls.Add(this.model_lbl);
+            this.toolInfo_groupBox.Controls.Add(this.humid_txt);
+            this.toolInfo_groupBox.Controls.Add(this.humid_lbl);
+            this.toolInfo_groupBox.Controls.Add(this.temperature_txt);
+            this.toolInfo_groupBox.Controls.Add(this.temperature_lbl);
+            this.toolInfo_groupBox.Controls.Add(this.recall_txt);
+            this.toolInfo_groupBox.Controls.Add(this.recall_lbl);
+            this.toolInfo_groupBox.Controls.Add(this.toolSN_txt);
+            this.toolInfo_groupBox.Controls.Add(this.toolSN_lbl);
+            this.toolInfo_groupBox.Controls.Add(this.toolID_lbl);
+            this.toolInfo_groupBox.Location = new System.Drawing.Point(209, 313);
+            this.toolInfo_groupBox.Name = "toolInfo_groupBox";
+            this.toolInfo_groupBox.Size = new System.Drawing.Size(279, 302);
+            this.toolInfo_groupBox.TabIndex = 28;
+            this.toolInfo_groupBox.TabStop = false;
+            this.toolInfo_groupBox.Text = "Tools Info";
             // 
             // comment_txt
             // 
@@ -4709,7 +4762,7 @@ namespace WindowsFormsApplication1
             this.target_groupBox.Controls.Add(this.checkAllReading_radioBtn);
             this.target_groupBox.Controls.Add(this.testTarget_lbl);
             this.target_groupBox.Controls.Add(this.label13);
-            this.target_groupBox.Location = new System.Drawing.Point(956, 0);
+            this.target_groupBox.Location = new System.Drawing.Point(860, 0);
             this.target_groupBox.Name = "target_groupBox";
             this.target_groupBox.Size = new System.Drawing.Size(488, 307);
             this.target_groupBox.TabIndex = 31;
@@ -4761,13 +4814,37 @@ namespace WindowsFormsApplication1
             this.label13.TabIndex = 0;
             this.label13.Text = "Next Target";
             // 
+            // copyCW_btn
+            // 
+            this.copyCW_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.copyCW_btn.Location = new System.Drawing.Point(1451, 431);
+            this.copyCW_btn.Name = "copyCW_btn";
+            this.copyCW_btn.Size = new System.Drawing.Size(75, 23);
+            this.copyCW_btn.TabIndex = 0;
+            this.copyCW_btn.Text = "Copy -->";
+            this.copyCW_btn.UseVisualStyleBackColor = true;
+            this.copyCW_btn.Visible = false;
+            this.copyCW_btn.Click += new System.EventHandler(this.copyCW_btn_Click);
+            // 
+            // copyCCW_btn
+            // 
+            this.copyCCW_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.copyCCW_btn.Location = new System.Drawing.Point(1448, 693);
+            this.copyCCW_btn.Name = "copyCCW_btn";
+            this.copyCCW_btn.Size = new System.Drawing.Size(75, 23);
+            this.copyCCW_btn.TabIndex = 1;
+            this.copyCCW_btn.Text = "Copy -->";
+            this.copyCCW_btn.UseVisualStyleBackColor = true;
+            this.copyCCW_btn.Visible = false;
+            this.copyCCW_btn.Click += new System.EventHandler(this.copyCCW_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.AutoScrollMinSize = new System.Drawing.Size(1473, 945);
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1731, 1061);
+            this.ClientSize = new System.Drawing.Size(1924, 772);
             this.Controls.Add(this.TabPages);
             this.Controls.Add(this.testerType);
             this.Controls.Add(this.groupBox1);
@@ -4854,24 +4931,25 @@ namespace WindowsFormsApplication1
             this.groupBox19.ResumeLayout(false);
             this.groupBox19.PerformLayout();
             this.calibrationTab.ResumeLayout(false);
+            this.calibrationTab.PerformLayout();
             this.groupBox18.ResumeLayout(false);
             this.groupBox18.PerformLayout();
             this.groupBox17.ResumeLayout(false);
             this.groupBox17.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AFCW_grid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ALCCW_grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AFCCW_grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ALCW_grid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ALCCW_grid)).EndInit();
             this.ch2Reading_groupBox.ResumeLayout(false);
             this.ch2Reading_groupBox.PerformLayout();
             this.testSetup_groupBox.ResumeLayout(false);
             this.testSetup_groupBox.PerformLayout();
-            this.groupBox20.ResumeLayout(false);
-            this.groupBox20.PerformLayout();
+            this.comConnect_calCert_groupBox.ResumeLayout(false);
+            this.comConnect_calCert_groupBox.PerformLayout();
             this.groupBox21.ResumeLayout(false);
             this.groupBox21.PerformLayout();
-            this.groupBox22.ResumeLayout(false);
-            this.groupBox22.PerformLayout();
+            this.toolInfo_groupBox.ResumeLayout(false);
+            this.toolInfo_groupBox.PerformLayout();
             this.target_groupBox.ResumeLayout(false);
             this.target_groupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -5110,10 +5188,10 @@ namespace WindowsFormsApplication1
         private Button deleteLastTestRow_btn;
         private Button copyCCW_btn;
         private Button copyCW_btn;
-        private Label label20;
-        private Label label22;
-        private Label label19;
-        private Label label18;
+        private Label ALCCW_lbl;
+        private Label ALCW_lbl;
+        private Label AFCCW_lbl;
+        private Label AFCW_lbl;
         private Button captureBtn_calTab;
         private GroupBox ch2Reading_groupBox;
         private Label ch2UnitLabel_calTab;
@@ -5149,7 +5227,7 @@ namespace WindowsFormsApplication1
         private Label label37;
         private ComboBox testSetup_comboBox;
         private Label label38;
-        private GroupBox groupBox20;
+        private GroupBox comConnect_calCert_groupBox;
         private Label label41;
         private ListBox comList_calibration;
         private Button ch2ConnectBtn_calTab;
@@ -5163,7 +5241,7 @@ namespace WindowsFormsApplication1
         private Label ch1UnitLabel_calTab;
         private Label ch1ReadingLabel_calTab;
         private Label ch1ConnectLabel_calTab;
-        private GroupBox groupBox22;
+        private GroupBox toolInfo_groupBox;
         private TextBox toolOperatorID_txt;
         private Label operatorID_lbl;
         private TextBox toolProcedure_txt;
@@ -5281,6 +5359,10 @@ namespace WindowsFormsApplication1
         private Label peakLabel_lbl;
         private RadioButton checkAverage_radioBtn;
         private RadioButton checkAllReading_radioBtn;
+        private Button ALCCW_btn;
+        private Button AFCCW_btn;
+        private Button ALCW_btn;
+        private Button AFCW_btn;
     }
 }
 

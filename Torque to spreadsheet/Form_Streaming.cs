@@ -60,7 +60,7 @@ namespace WindowsFormsApplication1
             initPort();
             bindStreamGrid();
 
-            bindResultGrid();
+            bindResultGrid(ref returnResultTable);
             InitTimer();
             isStream = false;
             chartStyle_comboBox.SelectedIndex = ch1vch2vcount;
@@ -467,9 +467,9 @@ namespace WindowsFormsApplication1
                 streamGridCh2.DataSource = streamTableCh2;
 
         }
-        private void bindResultGrid()
+        private void bindResultGrid(ref DataTable resultTable)
         {
-            targetGrid.DataSource = returnResultTable;
+            targetGrid.DataSource = resultTable;
         }
         private void writeListToGridView(List<READINGS_ANGLES> readingList, DataGridView thisGrid)
         {
@@ -786,7 +786,7 @@ namespace WindowsFormsApplication1
         {
             returnResultTable = streamTableCh1.Clone();
             returnResultTable = getMatchingResultFromTarget(targets, streamTable, channelToCompare);
-            bindResultGrid();
+            bindResultGrid(ref returnResultTable);
         }
 
         private DataTable reduceTableCount(DataTable oriTable,int newRowCount)

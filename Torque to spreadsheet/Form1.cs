@@ -151,7 +151,7 @@ namespace WindowsFormsApplication1
         {
             unifyScroll(ref secondChannelGridView, ref firstChannelGrid);
         }
-
+        //changed 6/25/20 to changeUI
         private void Form1_Load(object sender, EventArgs e)
         {
             loadALLCalibrationTabSetting();
@@ -215,7 +215,7 @@ namespace WindowsFormsApplication1
             {
                 autoUpdateMenuItem.Checked = false;
             }
-            startTest_btn.Location = new Point(909, 150);
+            startTest_btn.Location = new Point(813, 150);
             menuStrip1.Focus();
             //Runbgw();
         }
@@ -803,7 +803,7 @@ namespace WindowsFormsApplication1
         //read_graph_col
         //big_reading
         //big_graph
-        //Changed 4/20/20 to make Cal Cert Tab bigger
+        //Changed 6/25/20 to changeUI
         private void changeWinSize(string currTab)
         {
             switch (currTab)
@@ -834,7 +834,7 @@ namespace WindowsFormsApplication1
                     pingTester(serialPort2);//Lock UI from Tester
                     break;
                 case calTabName:
-                    this.Size = new Size(1475, 970);
+                    this.Size = new Size(1484, 733);
                     this.Text = "Calibration";
                     pingTester(serialPort1);//Lock UI from Tester
                     pingTester(serialPort2);//Lock UI from Tester
@@ -1112,26 +1112,28 @@ namespace WindowsFormsApplication1
             opencloseFirstCOM(ref comList);
             channel1MenuButtonUpdate();
         }
-
+        //changed 4/20/20
         private void spreadSheetActivate()
         {
             if (aquire)
-            {
+            {//set spreadsheet transfer to false
                 aquire = false;
-                Button_Aquire.Text = "Activate Spreadsheet Transfer";
+                Button_Aquire.Text = "Spreadsheet Transfer: OFF";
+                Button_Aquire.BackColor = Color.LightGreen;
                 button3.Text = "Activate Spreadsheet Transfer";
                 button9.Text = "Activate Spreadsheet Transfer";
                 SpreadSheetModeLabel.Text = "Deactivated";
-                Properties.Settings.Default.Spreadsheet_mode = false;
+                Properties.Settings.Default.Spreadsheet_mode = aquire;
             }
             else
-            {
+            {//set spreadsheet transfer to true
                 aquire = true;
-                Button_Aquire.Text = "Stop Spreadsheet Transfer";
+                Button_Aquire.Text = "Spreadsheet Transfer: ON";
+                Button_Aquire.BackColor = Color.Red;
                 button3.Text = "Stop Spreadsheet Transfer";
                 button9.Text = "Stop Spreadsheet Transfer";
                 SpreadSheetModeLabel.Text = "Activated";
-                Properties.Settings.Default.Spreadsheet_mode = true;
+                Properties.Settings.Default.Spreadsheet_mode = aquire;
             }
         }
 
@@ -1197,8 +1199,7 @@ namespace WindowsFormsApplication1
             //assign rowIndex to add to gridview
             int rowIndex = getFocusedRowFirstChannel(TabPages.SelectedTab.Name);
 
-            //Check if this is the last Row of Data in 1stChannel Grid or not
-            //If it is, 2nd channel grid also capture on last Line of data
+            //Check if last Row of Data in 1stChannel Grid, 2nd channel grid also capture on last Line of data
             if (rowIndex == singleChannel_gridView.RowCount - 2) //-2 because we want to get the row right before New Row
                 is1stChanRow_LastRow = true;
             else
@@ -5739,7 +5740,7 @@ namespace WindowsFormsApplication1
 
             return thistestTable;
         }
-        //Changed 3/25/20
+        //Changed 6/25/20 to changeUI
         private void cellValueChanged(ref DataGridView grid, DataGridViewCellEventArgs e, int Sign)
         {
             if (e.ColumnIndex == targetGridCol)
@@ -5755,11 +5756,10 @@ namespace WindowsFormsApplication1
             }
             else//If not in testsetup mode, update and show the active test Grid
             {
-                currTestGridNum = lookForActiveTestGrid();
+                updateCompletedButtonAfterWriteReading();
                 showActiveTestGrid(currTestGridNum);
-            }
-            if (testSetup_groupBox.Enabled == false)
                 reevaluatePassFailData(ref grid, Sign);
+            }
 
             //update Active Target if it is single channel test
             if (currTestSetup.testType == "1")
@@ -5949,7 +5949,7 @@ namespace WindowsFormsApplication1
         }
 
         //Get back to set up Test Mode for Cal Tab
-        //changed 3/25/20
+        //changed 4/20/20
         private void abandonCurrentTest()
         {
             if (testSetup_groupBox.Enabled == true)
@@ -6767,14 +6767,9 @@ namespace WindowsFormsApplication1
 
             return returnFloats;
         }
-        //Like convertGridDatatoFloats, but convert from 10 to 100 points
-        //changed 04/20/20
-        private float[,] convertGridDatatoFloatsTorqueChart(DataGridView oldGrid,int startRow, int rowCount, int colCount)
-        {
-            DataGridView torqueChartGrid = convertToTorqueChartGrid(oldGrid);
-            return convertGridDatatoFloats(torqueChartGrid, startRow,rowCount, colCount);
-        }
+        
         //Copy struct and value of datagridRow to a returned row
+        //Added 4/20/20
         private DataGridViewRow CopyGridRow(DataGridViewRow oriRow)
         {
             DataGridViewRow newRow = oriRow.Clone() as DataGridViewRow;
@@ -6858,11 +6853,13 @@ namespace WindowsFormsApplication1
             return newGrid;
         }
         //remove column from datagridview
+        //Added 4/20/20
         private DataGridView removeColumn(DataGridView grid, int colIndex)
         {
             grid.Columns.RemoveAt(colIndex);
             return grid;
         }
+        //Added 4/20/20
         private DataGridViewRow populateNextTorqueChartRow(DataGridViewRow prevRow, DataGridViewRow nextRow, float ch1Delta, float ch2Delta)
         {
             const int decimalPlace = 4;
@@ -6882,6 +6879,7 @@ namespace WindowsFormsApplication1
             }
             return nextRow;
         }
+        //Added 4/20/20
         private float convertGridCellToFloat(DataGridViewCell cell)
         {
             float retVal = 0;
@@ -6896,6 +6894,7 @@ namespace WindowsFormsApplication1
             return retVal;
         }
         //get difference between each row for certain Column in Torque Chart
+        //Added 4/20/20
         private float getTorqueChartDelta (float value1, float value2,int pointCount)
         {
             float returnDelta = 0;
@@ -6903,25 +6902,9 @@ namespace WindowsFormsApplication1
                 returnDelta = (value2 - value1) / 10;
             return returnDelta;
         }
-        
-        private float getDelta(DataGridView grid, int colIndex)
-        {
-            float retDelta = 0;
-            if ((grid.Rows[0].Cells[colIndex].Value.ToString() != "") &&
-                    (grid.Rows[1].Cells[colIndex].Value.ToString() != ""))
-            {
-                try
-                {
-                    float row0 = 0, row1 = 0;
-                    row0 = convertGridCellToFloat(grid.Rows[0].Cells[colIndex]);
-                    row1 = convertGridCellToFloat(grid.Rows[1].Cells[colIndex]);
-                    retDelta = (row1 - row0) / 10;
-                }
-                catch { retDelta = 0; }
-            }
-            return retDelta;
-        }
+
         //get the value to start for each block in Torque Chart
+        //Added 4/20/20
         private float getbeginBlockVal(float endVal, float delta)
         {
             float retVal = 0;
@@ -6929,7 +6912,6 @@ namespace WindowsFormsApplication1
                 retVal=endVal - (9 * delta);
             return retVal;
         }
-
 
         //Write passed in Datagridview into worksheet
         //Changed 4/20/20
@@ -7034,8 +7016,7 @@ namespace WindowsFormsApplication1
         }
 
         //Go through each char in testOrder and write corresponding testGrid to Excel worksheet
-        //Changed 9/18/19
-
+        //Changed 4/20/20
         private Excel.Worksheet writeAllTestGridsToExcelWsheet(Excel.Worksheet wsheet, string testOrder, bool isTorqueChart)
         {
             foreach (char chrTestOrder in testOrder)
@@ -7061,9 +7042,9 @@ namespace WindowsFormsApplication1
             return wsheet;
         }
 
-        //Changed 4/20/20
         //Draw graph to CalCert excel export
         private int nextAvaiExcelRow;
+        //Added 4/20/20
         private Excel.Worksheet drawGraphToExcel(Excel.Worksheet xlDataSheet,Excel.Worksheet xlChartSheet, int startRow, int endRow, int col, string chartTitle, bool isTorqueChart)
         {
             object misValue = System.Reflection.Missing.Value;
@@ -7133,7 +7114,7 @@ namespace WindowsFormsApplication1
         }
         
         //convert char of grid sequence to name of grid
-        //Changed 4/20/20
+        //Added 4/20/20
         private string getGridNameToGraph(char sequenceChr)
         {
             string gridNameToGraph = "";
@@ -7235,6 +7216,7 @@ namespace WindowsFormsApplication1
         }
 
         //Handle exporting excel datas in cal Tab
+        //Changed 4/20/20
         private void calTab_excelExport(bool isGraph,bool isTorqueChart)
         {
             string fileName = currentDualSerie + "-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xls";
@@ -7291,7 +7273,7 @@ namespace WindowsFormsApplication1
             }
         }
 
-
+        //Changed 4/20/20
         private void excelExport_calTab_btn_Click(object sender, EventArgs e)
         {
             if (testSetup_groupBox.Enabled == false)
@@ -7963,19 +7945,20 @@ namespace WindowsFormsApplication1
         }
 
         //pause or continue test. Also change the text on continue_pauseTest_btn
+        //Changed 4/20/20
         private void changePauseContinueTestState()
         {
             if (pauseTest == false)
             {//switch to Pause Test
                 pauseTest = true;
                 continue_pauseTest_btn.Text = "Continue Test";
-                continue_pauseTest_btn.BackColor = Color.Red;
+                continue_pauseTest_btn.BackColor = Color.Green;
             }
             else
             {//switch to Running Test
                 pauseTest = false;
                 continue_pauseTest_btn.Text = "Pause Test";
-                continue_pauseTest_btn.BackColor = Color.Green;
+                continue_pauseTest_btn.BackColor = Color.Red;
             }
         }
         private void continue_pause_btn_Click(object sender, EventArgs e)
@@ -8084,8 +8067,8 @@ namespace WindowsFormsApplication1
             catch
             { }
         }
-
-        private void startTest_btn_Click(object sender, EventArgs e)
+        //Added 6/25/20 to changeUI
+        private void saveStartTest()
         {
             if (saveStartTest_btn.Text == "Save")
             {
@@ -8095,6 +8078,12 @@ namespace WindowsFormsApplication1
             {//Implement start test
                 startTest_calCert();
             }
+            currTestGridNum = lookForActiveTestGrid();
+        }
+        //Changed 6/25/20 to changeUI
+        private void startTest_btn_Click(object sender, EventArgs e)
+        {
+            saveStartTest();
         }
 
         private void ch1Connect_btn_bigReading_Click(object sender, EventArgs e)
@@ -8177,19 +8166,10 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Unable to write to " + testsequenceCSVLoc + " due to error\n" + ex.Message);
             }
         }
-
-
-
+        //Changed 6/25/20 to changeUI
         private void saveStartTest_btn_Click(object sender, EventArgs e)
         {
-            if (saveStartTest_btn.Text == "Save")
-            {
-                saveTest_calCert();
-            }
-            else if (saveStartTest_btn.Text == "Start")
-            {//Implement start test
-                startTest_calCert();
-            }
+            saveStartTest();
         }
 
         //Save Test in Calcert
@@ -8233,9 +8213,52 @@ namespace WindowsFormsApplication1
             //Save all test to CSV
             saveAllTestsToCSV();
         }
+        //Added 6/25/20 to changeUI
+        private void updateButtonGridUIWhenStartTest(string testOrder)
+        {
+            int charCount = 0;
+            disableButtonUIChanged(ref AFCW_btn);
+            disableButtonUIChanged(ref AFCCW_btn);
+            disableButtonUIChanged(ref ALCW_btn);
+            disableButtonUIChanged(ref ALCCW_btn);
+            foreach (char gridID in testOrder)
+            {
+                switch (gridID)
+                {
+                    case '1':
+                        if (charCount > 0)
+                            nonActiveButtonUIChanged(ref AFCW_btn);
+                        else
+                            activeButtonUiChanged(ref AFCW_btn);
+                        charCount++;
+                        break;
+                    case '2':
+                        if (charCount > 0)
+                            nonActiveButtonUIChanged(ref AFCCW_btn);
+                        else
+                            activeButtonUiChanged(ref AFCCW_btn);
+                        charCount++;
+                        break;
+                    case '3':
+                        if (charCount > 0)
+                            nonActiveButtonUIChanged(ref ALCW_btn);
+                        else
+                            activeButtonUiChanged(ref ALCW_btn);
+                        charCount++;
+                        break;
+                    case '4':
+                        if (charCount > 0)
+                            nonActiveButtonUIChanged(ref ALCCW_btn);
+                        else
+                            activeButtonUiChanged(ref ALCCW_btn);
+                        charCount++;
+                        break;
+                }
+            }
 
+        }
         //Start test in Cal Cert Tab
-        //changed 4/20/20 to change grid color
+        //Changed 6/25/20 to changeUI
         private void startTest_calCert()
         {
             try
@@ -8263,6 +8286,9 @@ namespace WindowsFormsApplication1
 
                 //Activate the first testGrid in testOrder
                 showActiveTestGrid(currTestSetup.testOrder[0]);
+                //update button to match test Order
+                updateButtonGridUIWhenStartTest(currTestSetup.testOrder);
+
                 int chan2ColIndex = 2;
                 //if it is single channel,display active Target
                 if (currTestSetup.testType == "1")
@@ -8282,7 +8308,7 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Unable to start test due to error: \n\n" + ex.Message);
             }
         }
-        //changed 4/20/20 to change grid color
+        //Added 4/20/20 to change grid color
         private void changeAllCalCertGridColumnColor(int colIndex, Color color)
         {
             AFCW_grid.Columns[colIndex].DefaultCellStyle.BackColor = color;
@@ -8436,8 +8462,10 @@ namespace WindowsFormsApplication1
         }
 
         //return the char that indicates the active testGrid Number (1=AFCW, 2=AFCCW, etc.)
+        //changed 6/25/20 to changeUI
         private char lookForActiveTestGrid()
         {
+            bool testCompleted = true;
             try
             {
                 foreach (char gridIndexChr in currTestSetup.testOrder)
@@ -8449,32 +8477,56 @@ namespace WindowsFormsApplication1
                             {
                                 if ((!row.IsNewRow) && (row.Cells[ch1ReadingGridCol].Value.ToString() == "") &&
                                     (row.Cells[ch2ReadingGridCol].Value.ToString() == ""))
+                                {
+                                    testCompleted = false;
+                                    activeButtonUiChanged(ref AFCW_btn);
                                     return gridIndexChr;
+                                }
                             }
+                            if (gridIndexChr == currTestSetup.testOrder[currTestSetup.testOrder.Length - 1])
+                                completeButtonUIChanged(ref AFCW_btn);
                             break;
                         case '2':
                             foreach (DataGridViewRow row in AFCCW_grid.Rows)
                             {
                                 if ((!row.IsNewRow) && (row.Cells[ch1ReadingGridCol].Value.ToString() == "") &&
                                     (row.Cells[ch2ReadingGridCol].Value.ToString() == ""))
+                                {
+                                    testCompleted = false;
+                                    activeButtonUiChanged(ref AFCCW_btn);
                                     return gridIndexChr;
+                                }
                             }
+                            if (gridIndexChr == currTestSetup.testOrder[currTestSetup.testOrder.Length - 1])
+                                completeButtonUIChanged(ref AFCCW_btn);
                             break;
                         case '3':
                             foreach (DataGridViewRow row in ALCW_grid.Rows)
                             {
                                 if ((!row.IsNewRow) && (row.Cells[ch1ReadingGridCol].Value.ToString() == "") &&
                                     (row.Cells[ch2ReadingGridCol].Value.ToString() == ""))
+                                {
+                                    testCompleted = false;
+                                    activeButtonUiChanged(ref ALCW_btn);
                                     return gridIndexChr;
+                                }
                             }
+                            if (gridIndexChr == currTestSetup.testOrder[currTestSetup.testOrder.Length - 1])
+                                completeButtonUIChanged(ref AFCW_btn);
                             break;
                         case '4':
                             foreach (DataGridViewRow row in ALCCW_grid.Rows)
                             {
                                 if ((!row.IsNewRow) && (row.Cells[ch1ReadingGridCol].Value.ToString() == "") &&
                                     (row.Cells[ch2ReadingGridCol].Value.ToString() == ""))
+                                {
+                                    testCompleted = false;
+                                    activeButtonUiChanged(ref ALCCW_btn);
                                     return gridIndexChr;
+                                }
                             }
+                            if (gridIndexChr == currTestSetup.testOrder[currTestSetup.testOrder.Length - 1])
+                                completeButtonUIChanged(ref ALCCW_btn);
                             break;
                     }
                 }
@@ -8489,122 +8541,89 @@ namespace WindowsFormsApplication1
             }
             return currTestSetup.testOrder[currTestSetup.testOrder.Length - 1];//return the last quadrant in testOrder
         }
-
+        //Added 6/25/20 to changeUI
+        private void changeActiveGridLook(ref DataGridView activeGrid)
+        {
+            activeGrid.Focus();
+            activeGrid.DefaultCellStyle.BackColor = SystemColors.HighlightText;
+            activeGrid.BorderStyle = BorderStyle.FixedSingle;
+        }
+        //changed 6/25/20 to changeUI
         //Passed in the number of current active testGrid (in char format) to show to user the current active Grid
         private void showActiveTestGrid(char activeGridNum)
         {
             switch (activeGridNum)
             {
                 case '1':
-                    AFCW_grid.Focus();
+                    changeActiveGridLook(ref AFCW_grid);
+                    callQuarter(ref AFCW_grid,ref AFCW_lbl);
+                    hideQuarter(ref ALCW_grid);
+                    hideQuarter(ref ALCCW_grid);
+                    hideQuarter(ref AFCCW_grid);
 
-                    AFCW_grid.DefaultCellStyle.BackColor = SystemColors.HighlightText;
                     AFCCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     ALCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     ALCCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
-                    /*
-                    AFCW_grid.ReadOnly = false;
-                    AFCCW_grid.ReadOnly = true;
-                    ALCW_grid.ReadOnly = true;
-                    ALCCW_grid.ReadOnly = true;
-                    */
-                    AFCWactive_label.Visible = true;
-                    AFCCWactive_label.Visible = false;
-                    ALCWactive_label.Visible = false;
-                    ALCCWactive_label.Visible = false;
 
-                    AFCW_grid.BorderStyle = BorderStyle.FixedSingle;
                     AFCCW_grid.BorderStyle = BorderStyle.None;
                     ALCW_grid.BorderStyle = BorderStyle.None;
                     ALCCW_grid.BorderStyle = BorderStyle.None;
                     break;
                 case '2':
-                    AFCCW_grid.Focus();
-                    //AFCCW_grid.CurrentCell = AFCCW_grid.Rows[0].Cells[ch1ReadingGridCol];
+                    changeActiveGridLook(ref AFCCW_grid);
+                    callQuarter(ref AFCCW_grid,ref AFCCW_lbl);
+                    hideQuarter(ref ALCW_grid);
+                    hideQuarter(ref ALCCW_grid);
+                    hideQuarter(ref AFCW_grid);
 
                     AFCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
-                    AFCCW_grid.DefaultCellStyle.BackColor = SystemColors.HighlightText;
                     ALCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     ALCCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
-                    /*
-                    AFCW_grid.ReadOnly = true;
-                    AFCCW_grid.ReadOnly = false;
-                    ALCW_grid.ReadOnly = true;
-                    ALCCW_grid.ReadOnly = true;
-                    */
-                    AFCWactive_label.Visible = false;
-                    AFCCWactive_label.Visible = true;
-                    ALCWactive_label.Visible = false;
-                    ALCCWactive_label.Visible = false;
 
                     AFCW_grid.BorderStyle = BorderStyle.None;
-                    AFCCW_grid.BorderStyle = BorderStyle.FixedSingle;
                     ALCW_grid.BorderStyle = BorderStyle.None;
                     ALCCW_grid.BorderStyle = BorderStyle.None;
                     break;
                 case '3':
-                    ALCW_grid.Focus();
-                    //ALCW_grid.CurrentCell = ALCW_grid.Rows[0].Cells[ch1ReadingGridCol];
+                    changeActiveGridLook(ref ALCW_grid);
+                    callQuarter(ref ALCW_grid,ref ALCW_lbl);
+                    hideQuarter(ref AFCW_grid);
+                    hideQuarter(ref ALCCW_grid);
+                    hideQuarter(ref AFCCW_grid);
 
                     AFCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     AFCCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
-                    ALCW_grid.DefaultCellStyle.BackColor = SystemColors.HighlightText;
                     ALCCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
-                    /*
-                    AFCW_grid.ReadOnly = true;
-                    AFCCW_grid.ReadOnly = true;
-                    ALCW_grid.ReadOnly = false;
-                    ALCCW_grid.ReadOnly = true;
-                    */
-                    AFCWactive_label.Visible = false;
-                    AFCCWactive_label.Visible = false;
-                    ALCWactive_label.Visible = true;
-                    ALCCWactive_label.Visible = false;
 
                     AFCW_grid.BorderStyle = BorderStyle.None;
                     AFCCW_grid.BorderStyle = BorderStyle.None;
-                    ALCW_grid.BorderStyle = BorderStyle.FixedSingle;
                     ALCCW_grid.BorderStyle = BorderStyle.None;
                     break;
                 case '4':
-                    ALCCW_grid.Focus();
-                    //ALCCW_grid.CurrentCell = ALCCW_grid.Rows[0].Cells[ch1ReadingGridCol];
+                    changeActiveGridLook(ref ALCCW_grid);
+                    callQuarter(ref ALCCW_grid,ref ALCCW_lbl);
+                    hideQuarter(ref ALCW_grid);
+                    hideQuarter(ref AFCW_grid);
+                    hideQuarter(ref AFCCW_grid);
 
                     AFCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     AFCCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     ALCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
-                    ALCCW_grid.DefaultCellStyle.BackColor = SystemColors.HighlightText;
-                    /*
-                    AFCW_grid.ReadOnly = true;
-                    AFCCW_grid.ReadOnly = true;
-                    ALCW_grid.ReadOnly = true;
-                    ALCCW_grid.ReadOnly = false;
-                    */
-                    AFCWactive_label.Visible = false;
-                    AFCCWactive_label.Visible = false;
-                    ALCWactive_label.Visible = false;
-                    ALCCWactive_label.Visible = true;
-
+                
                     AFCW_grid.BorderStyle = BorderStyle.None;
                     AFCCW_grid.BorderStyle = BorderStyle.None;
                     ALCW_grid.BorderStyle = BorderStyle.None;
-                    ALCCW_grid.BorderStyle = BorderStyle.FixedSingle;
                     break;
                 default://No testGrid is Active
+                    hideQuarter(ref AFCW_grid);
+                    hideQuarter(ref ALCW_grid);
+                    hideQuarter(ref ALCCW_grid);
+                    hideQuarter(ref AFCCW_grid);
+
                     AFCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     AFCCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     ALCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     ALCCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
-                    /*
-                    AFCW_grid.ReadOnly = false;
-                    AFCCW_grid.ReadOnly = false;
-                    ALCW_grid.ReadOnly = false;
-                    ALCCW_grid.ReadOnly = false;
-                    */
-                    AFCWactive_label.Visible = false;
-                    AFCCWactive_label.Visible = false;
-                    ALCWactive_label.Visible = false;
-                    ALCCWactive_label.Visible = false;
 
                     AFCW_grid.BorderStyle = BorderStyle.None;
                     AFCCW_grid.BorderStyle = BorderStyle.None;
@@ -8671,12 +8690,9 @@ namespace WindowsFormsApplication1
 
         private char currTestGridNum = '0';// value should be 1,2,3 or 4 = AFCW,AFCCW,etc.
         //Pass in array string that has ch1Reading and(or not) ch2Reading,testOrder String to write to Test Grid
+        //Changed 6/25/20 to changeUI
         private void writeReadingsToTest(string[] readings, string testOrder)
         {
-            //if curTestGridNum is not in testOrder, set it as the first char in testOrder
-            if (!testOrder.Contains(currTestGridNum))
-                currTestGridNum = testOrder[0];
-
             bool writeSucceed = false;
             currTestGridNum = lookForActiveTestGrid();//Assign the current grid Index to currAvaiGridChr
 
@@ -8700,34 +8716,34 @@ namespace WindowsFormsApplication1
             //if write success, update and show the new active grid to user
             if (writeSucceed == true)
             {
-                currTestGridNum = lookForActiveTestGrid(); //update currtestgridnum to reflect Current TestGrid
+                updateCompletedButtonAfterWriteReading();
                 showActiveTestGrid(currTestGridNum); //show Curr Active Grid after writing
             }
 
         }
-
-        //passed in array of readings(max is 2 readings, 1 for chan1 and 1 for chan2)
-        //Todo: still need to implement
-        private void showReadingsToUser(string[] readings, string[] unit)
+        //if the active grid is the next grid, mark the finished grid button
+        //Added 6/26/20
+        private void updateCompletedButtonAfterWriteReading()
         {
-            switch (TabPages.SelectedTab.Name)
+            if (currTestGridNum != lookForActiveTestGrid())
             {
-                case TTSTabName:
-                    DataTTS_lbl.Text = readings[0];
-                    unitTTS_lbl.Text = unit[0];
-                    break;
-                case SMDSingleTabName:
-                    DataSMDSingle_lbl.Text = readings[0];
-                    unitSingleCH_lbl.Text = unit[0];
-                    break;
-                case SMDDualTabName:
-                    dataCh1DualChanTab_lbl.Text = readings[0];
-                    unitCH1DualCHTab_lbl.Text = unit[0];
-                    dataCh2DualChTab_lbl.Text = readings[1];
-                    unitCH2DualCHTab_lbl.Text = readings[1];
-                    break;
-                case calTabName:
-                    break;
+                //mark grid button completed 
+                switch (currTestGridNum)
+                {
+                    case '1':
+                        completeButtonUIChanged(ref AFCW_btn);
+                        break;
+                    case '2':
+                        completeButtonUIChanged(ref AFCCW_btn);
+                        break;
+                    case '3':
+                        completeButtonUIChanged(ref ALCW_btn);
+                        break;
+                    case '4':
+                        completeButtonUIChanged(ref ALCCW_btn);
+                        break;
+                }
+                currTestGridNum = lookForActiveTestGrid(); //update currtestgridnum to reflect Current TestGrid
             }
         }
         //Call by backgroundworker, process the passed in serialData and write to active gridview
@@ -8920,7 +8936,7 @@ namespace WindowsFormsApplication1
             timer2.Start();
 
         }
-
+        //Added 4/20/20
         private void ExportChart_btn_Click(object sender, EventArgs e)
         {
             if (testSetup_groupBox.Enabled == false)
@@ -8957,11 +8973,6 @@ namespace WindowsFormsApplication1
             }
         }
         //Added 4/20/20 to match cal cert dual test label
-        private void maxPoint_txt_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        //Added 4/20/20 to match cal cert dual test label
         private void reevaluateAllTestGridPassFail()
         {
             reevaluatePassFailData(ref AFCW_grid, 1);
@@ -8978,6 +8989,102 @@ namespace WindowsFormsApplication1
                 reevaluateAllTestGridPassFail();
                 //changeAllCalCertGridColumnColor(chan1ColIndex, SystemColors.HighlightText);
         }
+        //change UI for grid button that are completed
+        //Added 6/25/20 to changeUI
+        private void completeButtonUIChanged(ref Button completedButton)
+        {
+            completedButton.Enabled = true;
+            completedButton.BackColor = Color.LightGreen;
+            completedButton.FlatStyle = FlatStyle.Popup;
+            completedButton.FlatAppearance.BorderSize = 1;
+        }
+        //change UI for grid button in test order, but not active yet
+        //Added 6/25/20 to changeUI
+        private void nonActiveButtonUIChanged(ref Button nonActiveButton)
+        {
+            nonActiveButton.Enabled = true;
+            nonActiveButton.BackColor = Color.Transparent;
+            nonActiveButton.FlatStyle = FlatStyle.Standard;
+            nonActiveButton.FlatAppearance.BorderSize = 1;
+        }
+        //change UI for active datagrid button
+        //Added 6/25/20 to changeUI
+        private void activeButtonUiChanged(ref Button activeButton)
+        {
+            activeButton.Enabled = true;
+            activeButton.BackColor = Color.Transparent;
+            activeButton.FlatStyle = FlatStyle.Popup;
+            activeButton.FlatAppearance.BorderSize = 1;
+        }
+        //for button not in testOrder
+        //Added 6/25/20 to changeUI
+        private void disableButtonUIChanged(ref Button disableButton)
+        {
+            disableButton.Enabled = false;
+            disableButton.FlatStyle = FlatStyle.Flat;
+            disableButton.BackColor = Color.Transparent;
+            disableButton.FlatAppearance.BorderSize = 0;
+        }
+        private void hideAllQuadLabel()
+        {
+            AFCW_lbl.Visible = false;
+            AFCCW_lbl.Visible = false;
+            ALCW_lbl.Visible = false;
+            ALCCW_lbl.Visible = false;
+        }
+        //change UI for active datagrid
+        //When the next GridView is called, either by click button, or by next target on next grid
+        //Added 6/25/20 to changeUI
+        private void callQuarter(ref DataGridView activeGrid,ref Label quadLabel)
+        {
+            activeGrid.Visible = true;
+            activeGrid.Location = new Point(18, 79);
+            hideAllQuadLabel();
+            quadLabel.Visible = true;
+        }
+        //Added 6/25/20 to changeUI
+        private void hideQuarter (ref DataGridView nonActiveGrid)
+        {
+            nonActiveGrid.Visible = false;
+        }
+        //Added 6/25/20 to changeUI
+        private void AFCW_btn_Click(object sender, EventArgs e)
+        {
+            callQuarter(ref AFCW_grid,ref AFCW_lbl);
+            hideQuarter(ref ALCW_grid);
+            hideQuarter(ref ALCCW_grid);
+            hideQuarter(ref AFCCW_grid);
+        }
+        //Added 6/25/20 to changeUI
+        private void ALCW_btn_Click(object sender, EventArgs e)
+        {
+            callQuarter(ref ALCW_grid,ref ALCW_lbl);
+            hideQuarter(ref AFCW_grid);
+            hideQuarter(ref ALCCW_grid);
+            hideQuarter(ref AFCCW_grid);
+        }
+        //Added 6/25/20 to changeUI
+        private void AFCCW_btn_Click(object sender, EventArgs e)
+        {
+            callQuarter(ref AFCCW_grid,ref AFCCW_lbl);
+            hideQuarter(ref ALCW_grid);
+            hideQuarter(ref ALCCW_grid);
+            hideQuarter(ref AFCW_grid);
+        }
+        //Added 6/25/20 to changeUI
+        private void ALCCW_btn_Click(object sender, EventArgs e)
+        {
+            callQuarter(ref ALCCW_grid,ref ALCCW_lbl);
+            hideQuarter(ref ALCW_grid);
+            hideQuarter(ref AFCW_grid);
+            hideQuarter(ref AFCCW_grid);
+        }
+
+        private void testOrder_list_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         //Added 4/20/20 to match cal cert dual test label
         private void ch1Target_select_CheckedChanged(object sender, EventArgs e)
         {
