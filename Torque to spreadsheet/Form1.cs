@@ -431,7 +431,7 @@ namespace WindowsFormsApplication1
         private void controlTabVisibility()
         {
 
-            HideTabPage(simple_col);
+            //HideTabPage(simple_col);
             //HideTabPage(big_reading);
             HideTabPage(big_graph);
 
@@ -2049,6 +2049,7 @@ namespace WindowsFormsApplication1
         /// </summary>
         /// <param Raw Reading="thismessage"></param>
         /// <param channel "0 for FullScale", "1" or "2"="channel"></param>
+        /// Changed 8/23/20 to read Digital TD Fullscale
         private void decodeMessage(string thismessage, string unitClass, int channel)
         {
             try
@@ -2073,6 +2074,8 @@ namespace WindowsFormsApplication1
                     reading_str = (thismessage.Substring(2)).Replace(" ", "");
                     reading_str = reading_str.Replace("\r", "");
                     reading_str = reading_str.Replace("\n", "");
+                    if ((reading_str.EndsWith("I")) || (reading_str.EndsWith("i")))
+                        reading_str = reading_str.Substring(0, reading_str.Length - 1);
                     reading = Single.Parse(reading_str);
                 }
                 catch (Exception ex)
@@ -5584,10 +5587,10 @@ namespace WindowsFormsApplication1
             CW_chkbox.Checked = true;
             CCW_chkbox.Checked = true;
 
-            initTestGridView(ref AFCW_grid,noTriggerGridColCount);
-            initTestGridView(ref AFCCW_grid, noTriggerGridColCount);
-            initTestGridView(ref ALCW_grid, noTriggerGridColCount);
-            initTestGridView(ref ALCCW_grid, noTriggerGridColCount);
+            initTestGridView(ref AFCW_grid);
+            initTestGridView(ref AFCCW_grid);
+            initTestGridView(ref ALCW_grid);
+            initTestGridView(ref ALCCW_grid);
 
         }
 
@@ -5771,21 +5774,24 @@ namespace WindowsFormsApplication1
                     testTarget_lbl.Text = activeTarget.ToString();
             }
         }
+        //changed 6/25/20 to changeUI
         private void AFCW_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             cellValueChanged(ref AFCW_grid, e, 1);
 
         }
-
+        //changed 6/25/20 to changeUI
         private void AFCCW_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             cellValueChanged(ref AFCCW_grid, e, -1);
 
         }
+        //changed 6/25/20 to changeUI
         private void ALCW_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             cellValueChanged(ref ALCW_grid, e, 1);
         }
+        //changed 6/25/20 to changeUI
         private void ALCCW_grid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             cellValueChanged(ref ALCCW_grid, e, -1);
@@ -6287,7 +6293,7 @@ namespace WindowsFormsApplication1
                     unit = ch2Unit_txt.Text + " vs " + ch1Unit_txt.Text;
                 else
                     unit = ch1Unit_txt.Text + " vs " + ch2Unit_txt.Text;
-
+                unit.TrimStart(' ');
             }
 
             //Init all headers for currCert
@@ -7471,8 +7477,8 @@ namespace WindowsFormsApplication1
             highGridCol = 5;
 
         //init TestGridview, set what it looks like and clear all datas
-        //changed 3/25/20
-        private void initTestGridView(ref DataGridView thisGrid, int colCount)
+        //changed 9/14/20
+        private void initTestGridView(ref DataGridView thisGrid)
         {
             if (thisGrid.ColumnCount == 0)
             {
@@ -7482,18 +7488,18 @@ namespace WindowsFormsApplication1
                 thisGrid.Columns.Add("low", "Low");
                 thisGrid.Columns.Add("target", "Target");
                 thisGrid.Columns.Add("high", "High");
-                if (colCount>5)
-                thisGrid.Columns.Add("trigger","Trigger Value");
             }
             PreventGridSort(ref thisGrid);
             thisGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-            thisGrid.Columns[0].Width = 25;
-            int colWidth = (thisGrid.Width - thisGrid.Columns[0].Width - 37) / colCount;
-            for (int col = 1; col <= colCount; col++)
-            {
-                thisGrid.Columns[col].Width = colWidth;
-            }
-            thisGrid.RowHeadersWidth = thisGrid.Width - (colWidth * colCount) - 25;
+            thisGrid.RowHeadersWidth = 25;
+            thisGrid.Columns[0].Width = 37;
+            int colWidth = (thisGrid.Width - thisGrid.Columns[0].Width - thisGrid.RowHeadersWidth) / 5;
+            thisGrid.Columns[1].Width = colWidth;
+            thisGrid.Columns[2].Width = colWidth;
+            thisGrid.Columns[3].Width = colWidth;
+            thisGrid.Columns[4].Width = colWidth;
+            thisGrid.Columns[5].Width = colWidth;
+
             //Clear all Rows
             thisGrid.Rows.Clear();
         }
@@ -7561,7 +7567,7 @@ namespace WindowsFormsApplication1
             //initiate returnGrid
             DataGridView returnGrid = new DataGridView();
 
-            initTestGridView(ref returnGrid,oriGrid.ColumnCount);
+            initTestGridView(ref returnGrid);
 
             int copyOrFlip = Math.Abs(oriGridIndex - returnGridIndex) % 2;//0=copy, 1=flip
             if (copyOrFlip == 0) //Copy exactly
@@ -8556,10 +8562,13 @@ namespace WindowsFormsApplication1
             {
                 case '1':
                     changeActiveGridLook(ref AFCW_grid);
-                    callQuarter(ref AFCW_grid,ref AFCW_lbl);
+                    callQuarter(ref AFCW_grid, ref AFCW_lbl);
                     hideQuarter(ref ALCW_grid);
                     hideQuarter(ref ALCCW_grid);
                     hideQuarter(ref AFCCW_grid);
+
+                    copyCW_btn.Visible = false;
+                    copyCCW_btn.Visible = false;
 
                     AFCCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     ALCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
@@ -8571,10 +8580,13 @@ namespace WindowsFormsApplication1
                     break;
                 case '2':
                     changeActiveGridLook(ref AFCCW_grid);
-                    callQuarter(ref AFCCW_grid,ref AFCCW_lbl);
+                    callQuarter(ref AFCCW_grid, ref AFCCW_lbl);
                     hideQuarter(ref ALCW_grid);
                     hideQuarter(ref ALCCW_grid);
                     hideQuarter(ref AFCW_grid);
+
+                    copyCW_btn.Visible = false;
+                    copyCCW_btn.Visible = false;
 
                     AFCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     ALCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
@@ -8586,10 +8598,13 @@ namespace WindowsFormsApplication1
                     break;
                 case '3':
                     changeActiveGridLook(ref ALCW_grid);
-                    callQuarter(ref ALCW_grid,ref ALCW_lbl);
+                    callQuarter(ref ALCW_grid, ref ALCW_lbl);
                     hideQuarter(ref AFCW_grid);
                     hideQuarter(ref ALCCW_grid);
                     hideQuarter(ref AFCCW_grid);
+
+                    copyCW_btn.Visible = true;
+                    copyCCW_btn.Visible = false;
 
                     AFCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     AFCCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
@@ -8601,15 +8616,18 @@ namespace WindowsFormsApplication1
                     break;
                 case '4':
                     changeActiveGridLook(ref ALCCW_grid);
-                    callQuarter(ref ALCCW_grid,ref ALCCW_lbl);
+                    callQuarter(ref ALCCW_grid, ref ALCCW_lbl);
                     hideQuarter(ref ALCW_grid);
                     hideQuarter(ref AFCW_grid);
                     hideQuarter(ref AFCCW_grid);
 
+                    copyCW_btn.Visible = false;
+                    copyCCW_btn.Visible = true;
+
                     AFCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     AFCCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     ALCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
-                
+
                     AFCW_grid.BorderStyle = BorderStyle.None;
                     AFCCW_grid.BorderStyle = BorderStyle.None;
                     ALCW_grid.BorderStyle = BorderStyle.None;
@@ -8619,6 +8637,9 @@ namespace WindowsFormsApplication1
                     hideQuarter(ref ALCW_grid);
                     hideQuarter(ref ALCCW_grid);
                     hideQuarter(ref AFCCW_grid);
+
+                    copyCW_btn.Visible = false;
+                    copyCCW_btn.Visible = false;
 
                     AFCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
                     AFCCW_grid.DefaultCellStyle.BackColor = DefaultBackColor;
@@ -9025,6 +9046,7 @@ namespace WindowsFormsApplication1
             disableButton.BackColor = Color.Transparent;
             disableButton.FlatAppearance.BorderSize = 0;
         }
+        //Added 6/25/20
         private void hideAllQuadLabel()
         {
             AFCW_lbl.Visible = false;
@@ -9050,39 +9072,58 @@ namespace WindowsFormsApplication1
         //Added 6/25/20 to changeUI
         private void AFCW_btn_Click(object sender, EventArgs e)
         {
-            callQuarter(ref AFCW_grid,ref AFCW_lbl);
+            callQuarter(ref AFCW_grid, ref AFCW_lbl);
             hideQuarter(ref ALCW_grid);
             hideQuarter(ref ALCCW_grid);
             hideQuarter(ref AFCCW_grid);
+
+            copyCW_btn.Visible = false;
+            copyCCW_btn.Visible = false;
         }
         //Added 6/25/20 to changeUI
         private void ALCW_btn_Click(object sender, EventArgs e)
         {
-            callQuarter(ref ALCW_grid,ref ALCW_lbl);
+            callQuarter(ref ALCW_grid, ref ALCW_lbl);
             hideQuarter(ref AFCW_grid);
             hideQuarter(ref ALCCW_grid);
             hideQuarter(ref AFCCW_grid);
+            copyCW_btn.Visible = true;
+            copyCCW_btn.Visible = false;
         }
         //Added 6/25/20 to changeUI
         private void AFCCW_btn_Click(object sender, EventArgs e)
         {
-            callQuarter(ref AFCCW_grid,ref AFCCW_lbl);
+            callQuarter(ref AFCCW_grid, ref AFCCW_lbl);
             hideQuarter(ref ALCW_grid);
             hideQuarter(ref ALCCW_grid);
             hideQuarter(ref AFCW_grid);
+            copyCW_btn.Visible = false;
+            copyCCW_btn.Visible = false;
         }
         //Added 6/25/20 to changeUI
         private void ALCCW_btn_Click(object sender, EventArgs e)
         {
-            callQuarter(ref ALCCW_grid,ref ALCCW_lbl);
+            callQuarter(ref ALCCW_grid, ref ALCCW_lbl);
             hideQuarter(ref ALCW_grid);
             hideQuarter(ref AFCW_grid);
             hideQuarter(ref AFCCW_grid);
+            copyCW_btn.Visible = false;
+            copyCCW_btn.Visible = true;
         }
 
         private void testOrder_list_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void sendTestCmd_btn_Click(object sender, EventArgs e)
+        {
+            string response = "";
+            response=write_command(testCommand_txtBox.Text, serialPort1);
+
+            if (response == "")
+                response = "No Response";
+            response_lbl.Text = response;
         }
 
         //Added 4/20/20 to match cal cert dual test label

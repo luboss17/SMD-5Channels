@@ -33,11 +33,11 @@ namespace WindowsFormsApplication1
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -244,6 +244,9 @@ namespace WindowsFormsApplication1
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simple_col = new System.Windows.Forms.TabPage();
+            this.response_lbl = new System.Windows.Forms.Label();
+            this.sendTestCmd_btn = new System.Windows.Forms.Button();
+            this.testCommand_txtBox = new System.Windows.Forms.TextBox();
             this.Label_Data1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -337,21 +340,13 @@ namespace WindowsFormsApplication1
             this.deleteLastTestRow_btn = new System.Windows.Forms.Button();
             this.AFCCW_grid = new System.Windows.Forms.DataGridView();
             this.ALCW_grid = new System.Windows.Forms.DataGridView();
+            this.copyCCW_btn = new System.Windows.Forms.Button();
+            this.copyCW_btn = new System.Windows.Forms.Button();
             this.ALCCW_grid = new System.Windows.Forms.DataGridView();
             this.ALCW_lbl = new System.Windows.Forms.Label();
             this.AFCCW_lbl = new System.Windows.Forms.Label();
             this.ALCCW_lbl = new System.Windows.Forms.Label();
             this.stream_btn = new System.Windows.Forms.Button();
-            this.ch2Reading_groupBox = new System.Windows.Forms.GroupBox();
-            this.ch2Trough_chckbox = new System.Windows.Forms.CheckBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.ch2UnitLabel_calTab = new System.Windows.Forms.Label();
-            this.ch2ReadingLabel_calTab = new System.Windows.Forms.Label();
-            this.ch2ConnectLabel_calTab = new System.Windows.Forms.Label();
-            this.ch2MenuControlBtn_calTab = new System.Windows.Forms.Button();
-            this.ch2ZeroBtn_calTab = new System.Windows.Forms.Button();
-            this.ch2ModeControlBtn_calTab = new System.Windows.Forms.Button();
-            this.ch2UnitBtn_calTab = new System.Windows.Forms.Button();
             this.testSetup_groupBox = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label40 = new System.Windows.Forms.Label();
@@ -434,8 +429,16 @@ namespace WindowsFormsApplication1
             this.checkAllReading_radioBtn = new System.Windows.Forms.RadioButton();
             this.testTarget_lbl = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.copyCW_btn = new System.Windows.Forms.Button();
-            this.copyCCW_btn = new System.Windows.Forms.Button();
+            this.ch2Reading_groupBox = new System.Windows.Forms.GroupBox();
+            this.ch2Trough_chckbox = new System.Windows.Forms.CheckBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.ch2UnitLabel_calTab = new System.Windows.Forms.Label();
+            this.ch2ReadingLabel_calTab = new System.Windows.Forms.Label();
+            this.ch2ConnectLabel_calTab = new System.Windows.Forms.Label();
+            this.ch2MenuControlBtn_calTab = new System.Windows.Forms.Button();
+            this.ch2ZeroBtn_calTab = new System.Windows.Forms.Button();
+            this.ch2ModeControlBtn_calTab = new System.Windows.Forms.Button();
+            this.ch2UnitBtn_calTab = new System.Windows.Forms.Button();
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -489,12 +492,12 @@ namespace WindowsFormsApplication1
             ((System.ComponentModel.ISupportInitialize)(this.AFCCW_grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ALCW_grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ALCCW_grid)).BeginInit();
-            this.ch2Reading_groupBox.SuspendLayout();
             this.testSetup_groupBox.SuspendLayout();
             this.comConnect_calCert_groupBox.SuspendLayout();
             this.groupBox21.SuspendLayout();
             this.toolInfo_groupBox.SuspendLayout();
             this.target_groupBox.SuspendLayout();
+            this.ch2Reading_groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -567,7 +570,7 @@ namespace WindowsFormsApplication1
             this.printToolToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1907, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(2509, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -782,7 +785,7 @@ namespace WindowsFormsApplication1
             // checkBox_millivolt
             // 
             this.checkBox_millivolt.AutoSize = true;
-            this.checkBox_millivolt.Location = new System.Drawing.Point(1553, 808);
+            this.checkBox_millivolt.Location = new System.Drawing.Point(1552, 809);
             this.checkBox_millivolt.Name = "checkBox_millivolt";
             this.checkBox_millivolt.Size = new System.Drawing.Size(120, 18);
             this.checkBox_millivolt.TabIndex = 12;
@@ -800,9 +803,9 @@ namespace WindowsFormsApplication1
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.flowLayoutPanel1);
-            this.groupBox1.Location = new System.Drawing.Point(1179, 799);
+            this.groupBox1.Location = new System.Drawing.Point(1768, 1199);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(494, 71);
+            this.groupBox1.Size = new System.Drawing.Size(741, 107);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select fields to send to spreadsheet";
@@ -816,9 +819,9 @@ namespace WindowsFormsApplication1
             this.flowLayoutPanel1.Controls.Add(this.checkBox4);
             this.flowLayoutPanel1.Controls.Add(this.checkBox5);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 39);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 91);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(488, 29);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(735, 13);
             this.flowLayoutPanel1.TabIndex = 0;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -888,7 +891,7 @@ namespace WindowsFormsApplication1
             // 
             this.testerType.AutoSize = true;
             this.testerType.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.testerType.Location = new System.Drawing.Point(15, 217);
+            this.testerType.Location = new System.Drawing.Point(15, 218);
             this.testerType.Name = "testerType";
             this.testerType.Size = new System.Drawing.Size(0, 24);
             this.testerType.TabIndex = 22;
@@ -936,7 +939,7 @@ namespace WindowsFormsApplication1
             this.dualChannelTab.Controls.Add(this.firstChannelGrid);
             this.dualChannelTab.Location = new System.Drawing.Point(4, 34);
             this.dualChannelTab.Name = "dualChannelTab";
-            this.dualChannelTab.Size = new System.Drawing.Size(1899, 883);
+            this.dualChannelTab.Size = new System.Drawing.Size(2501, 1244);
             this.dualChannelTab.TabIndex = 5;
             this.dualChannelTab.Text = "Dual Channel";
             this.dualChannelTab.UseVisualStyleBackColor = true;
@@ -1620,11 +1623,11 @@ namespace WindowsFormsApplication1
             // 
             // dualChart
             // 
-            chartArea1.Name = "ChartArea1";
-            this.dualChart.ChartAreas.Add(chartArea1);
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            this.dualChart.Legends.Add(legend1);
+            chartArea7.Name = "ChartArea1";
+            this.dualChart.ChartAreas.Add(chartArea7);
+            legend5.Enabled = false;
+            legend5.Name = "Legend1";
+            this.dualChart.Legends.Add(legend5);
             this.dualChart.Location = new System.Drawing.Point(8, 561);
             this.dualChart.Name = "dualChart";
             this.dualChart.Size = new System.Drawing.Size(798, 219);
@@ -1734,7 +1737,7 @@ namespace WindowsFormsApplication1
             this.big_graph.Controls.Add(this.chart1);
             this.big_graph.Location = new System.Drawing.Point(4, 34);
             this.big_graph.Name = "big_graph";
-            this.big_graph.Size = new System.Drawing.Size(1899, 883);
+            this.big_graph.Size = new System.Drawing.Size(2501, 1244);
             this.big_graph.TabIndex = 3;
             this.big_graph.Text = "Big Reading with Graph";
             this.big_graph.UseVisualStyleBackColor = true;
@@ -1749,19 +1752,19 @@ namespace WindowsFormsApplication1
             this.Label_Data3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.Label_Data3.Location = new System.Drawing.Point(0, 0);
             this.Label_Data3.Name = "Label_Data3";
-            this.Label_Data3.Size = new System.Drawing.Size(1899, 430);
+            this.Label_Data3.Size = new System.Drawing.Size(2501, 791);
             this.Label_Data3.TabIndex = 26;
             this.Label_Data3.Text = "0.0000";
             this.Label_Data3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
+            chartArea8.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea8);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.chart1.Location = new System.Drawing.Point(0, 430);
+            this.chart1.Location = new System.Drawing.Point(0, 791);
             this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(1899, 453);
+            this.chart1.Size = new System.Drawing.Size(2501, 453);
             this.chart1.TabIndex = 25;
             this.chart1.Text = "chart1";
             // 
@@ -1782,7 +1785,7 @@ namespace WindowsFormsApplication1
             this.read_graph_col.Controls.Add(this.groupBox3);
             this.read_graph_col.Location = new System.Drawing.Point(4, 34);
             this.read_graph_col.Name = "read_graph_col";
-            this.read_graph_col.Size = new System.Drawing.Size(1899, 883);
+            this.read_graph_col.Size = new System.Drawing.Size(2501, 1244);
             this.read_graph_col.TabIndex = 4;
             this.read_graph_col.Text = "Single Channel";
             this.read_graph_col.UseVisualStyleBackColor = true;
@@ -1935,11 +1938,11 @@ namespace WindowsFormsApplication1
             // 
             // singleChart
             // 
-            chartArea3.Name = "ChartArea1";
-            this.singleChart.ChartAreas.Add(chartArea3);
-            legend2.Enabled = false;
-            legend2.Name = "Legend1";
-            this.singleChart.Legends.Add(legend2);
+            chartArea9.Name = "ChartArea1";
+            this.singleChart.ChartAreas.Add(chartArea9);
+            legend6.Enabled = false;
+            legend6.Name = "Legend1";
+            this.singleChart.Legends.Add(legend6);
             this.singleChart.Location = new System.Drawing.Point(8, 516);
             this.singleChart.Name = "singleChart";
             this.singleChart.Size = new System.Drawing.Size(794, 219);
@@ -2686,6 +2689,9 @@ namespace WindowsFormsApplication1
             // 
             // simple_col
             // 
+            this.simple_col.Controls.Add(this.response_lbl);
+            this.simple_col.Controls.Add(this.sendTestCmd_btn);
+            this.simple_col.Controls.Add(this.testCommand_txtBox);
             this.simple_col.Controls.Add(this.Label_Data1);
             this.simple_col.Controls.Add(this.button2);
             this.simple_col.Controls.Add(this.button3);
@@ -2700,10 +2706,36 @@ namespace WindowsFormsApplication1
             this.simple_col.Location = new System.Drawing.Point(4, 34);
             this.simple_col.Name = "simple_col";
             this.simple_col.Padding = new System.Windows.Forms.Padding(3);
-            this.simple_col.Size = new System.Drawing.Size(1899, 883);
+            this.simple_col.Size = new System.Drawing.Size(2501, 1244);
             this.simple_col.TabIndex = 1;
             this.simple_col.Text = "Simple Reading with Option to Save";
             this.simple_col.UseVisualStyleBackColor = true;
+            // 
+            // response_lbl
+            // 
+            this.response_lbl.AutoSize = true;
+            this.response_lbl.Location = new System.Drawing.Point(23, 411);
+            this.response_lbl.Name = "response_lbl";
+            this.response_lbl.Size = new System.Drawing.Size(50, 14);
+            this.response_lbl.TabIndex = 38;
+            this.response_lbl.Text = "Respond";
+            // 
+            // sendTestCmd_btn
+            // 
+            this.sendTestCmd_btn.Location = new System.Drawing.Point(258, 376);
+            this.sendTestCmd_btn.Name = "sendTestCmd_btn";
+            this.sendTestCmd_btn.Size = new System.Drawing.Size(75, 23);
+            this.sendTestCmd_btn.TabIndex = 37;
+            this.sendTestCmd_btn.Text = "Send";
+            this.sendTestCmd_btn.UseVisualStyleBackColor = true;
+            this.sendTestCmd_btn.Click += new System.EventHandler(this.sendTestCmd_btn_Click);
+            // 
+            // testCommand_txtBox
+            // 
+            this.testCommand_txtBox.Location = new System.Drawing.Point(25, 376);
+            this.testCommand_txtBox.Name = "testCommand_txtBox";
+            this.testCommand_txtBox.Size = new System.Drawing.Size(214, 20);
+            this.testCommand_txtBox.TabIndex = 36;
             // 
             // Label_Data1
             // 
@@ -2797,7 +2829,7 @@ namespace WindowsFormsApplication1
             this.comList2.ItemHeight = 14;
             this.comList2.Location = new System.Drawing.Point(25, 282);
             this.comList2.Name = "comList2";
-            this.comList2.Size = new System.Drawing.Size(214, 4);
+            this.comList2.Size = new System.Drawing.Size(214, 60);
             this.comList2.TabIndex = 33;
             // 
             // button5
@@ -2905,7 +2937,7 @@ namespace WindowsFormsApplication1
             this.simple_reading.Location = new System.Drawing.Point(4, 34);
             this.simple_reading.Name = "simple_reading";
             this.simple_reading.Padding = new System.Windows.Forms.Padding(3);
-            this.simple_reading.Size = new System.Drawing.Size(1899, 883);
+            this.simple_reading.Size = new System.Drawing.Size(2501, 1244);
             this.simple_reading.TabIndex = 0;
             this.simple_reading.Text = "Torque To Spreadsheet";
             this.simple_reading.UseVisualStyleBackColor = true;
@@ -3119,7 +3151,7 @@ namespace WindowsFormsApplication1
             this.TabPages.Multiline = true;
             this.TabPages.Name = "TabPages";
             this.TabPages.SelectedIndex = 0;
-            this.TabPages.Size = new System.Drawing.Size(1907, 921);
+            this.TabPages.Size = new System.Drawing.Size(2509, 1282);
             this.TabPages.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.TabPages.TabIndex = 27;
             // 
@@ -3132,7 +3164,7 @@ namespace WindowsFormsApplication1
             this.big_reading.Controls.Add(this.reading_bigReading_lbl);
             this.big_reading.Location = new System.Drawing.Point(4, 34);
             this.big_reading.Name = "big_reading";
-            this.big_reading.Size = new System.Drawing.Size(1899, 883);
+            this.big_reading.Size = new System.Drawing.Size(2501, 1244);
             this.big_reading.TabIndex = 2;
             this.big_reading.Text = "Big Reading";
             // 
@@ -3155,9 +3187,9 @@ namespace WindowsFormsApplication1
             this.panel3.Controls.Add(this.refreshCOMList_btn_bigReading);
             this.panel3.Controls.Add(this.comList_bigReading);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 448);
+            this.panel3.Location = new System.Drawing.Point(0, 809);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1899, 435);
+            this.panel3.Size = new System.Drawing.Size(2501, 435);
             this.panel3.TabIndex = 26;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
@@ -3340,27 +3372,27 @@ namespace WindowsFormsApplication1
             this.reading_bigReading_lbl.Location = new System.Drawing.Point(0, 0);
             this.reading_bigReading_lbl.Name = "reading_bigReading_lbl";
             this.reading_bigReading_lbl.Padding = new System.Windows.Forms.Padding(0, 0, 100, 430);
-            this.reading_bigReading_lbl.Size = new System.Drawing.Size(1899, 883);
+            this.reading_bigReading_lbl.Size = new System.Drawing.Size(2501, 1244);
             this.reading_bigReading_lbl.TabIndex = 27;
             this.reading_bigReading_lbl.Text = "0.0000";
             this.reading_bigReading_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // calibrationTab
             // 
+            this.calibrationTab.Controls.Add(this.groupBox18);
+            this.calibrationTab.Controls.Add(this.captureBtn_calTab);
+            this.calibrationTab.Controls.Add(this.stream_btn);
+            this.calibrationTab.Controls.Add(this.continue_pauseTest_btn);
             this.calibrationTab.Controls.Add(this.AFCWChart_radio);
             this.calibrationTab.Controls.Add(this.AFCCWChart_radio);
             this.calibrationTab.Controls.Add(this.ALCCWChart_radio);
             this.calibrationTab.Controls.Add(this.AFCWactive_label);
-            this.calibrationTab.Controls.Add(this.groupBox18);
+            this.calibrationTab.Controls.Add(this.ch2Reading_groupBox);
             this.calibrationTab.Controls.Add(this.copyAllStruct_btn);
             this.calibrationTab.Controls.Add(this.startTest_btn);
             this.calibrationTab.Controls.Add(this.ALCWChart_radio);
-            this.calibrationTab.Controls.Add(this.continue_pauseTest_btn);
-            this.calibrationTab.Controls.Add(this.captureBtn_calTab);
             this.calibrationTab.Controls.Add(this.AFCCWactive_label);
             this.calibrationTab.Controls.Add(this.groupBox17);
-            this.calibrationTab.Controls.Add(this.stream_btn);
-            this.calibrationTab.Controls.Add(this.ch2Reading_groupBox);
             this.calibrationTab.Controls.Add(this.testSetup_groupBox);
             this.calibrationTab.Controls.Add(this.comConnect_calCert_groupBox);
             this.calibrationTab.Controls.Add(this.ALCCWactive_label);
@@ -3368,11 +3400,9 @@ namespace WindowsFormsApplication1
             this.calibrationTab.Controls.Add(this.ALCWactive_label);
             this.calibrationTab.Controls.Add(this.toolInfo_groupBox);
             this.calibrationTab.Controls.Add(this.target_groupBox);
-            this.calibrationTab.Controls.Add(this.copyCW_btn);
-            this.calibrationTab.Controls.Add(this.copyCCW_btn);
             this.calibrationTab.Location = new System.Drawing.Point(4, 34);
             this.calibrationTab.Name = "calibrationTab";
-            this.calibrationTab.Size = new System.Drawing.Size(1899, 883);
+            this.calibrationTab.Size = new System.Drawing.Size(2501, 1244);
             this.calibrationTab.TabIndex = 6;
             this.calibrationTab.Text = "Cal Cert";
             this.calibrationTab.UseVisualStyleBackColor = true;
@@ -3404,7 +3434,7 @@ namespace WindowsFormsApplication1
             // ALCCWChart_radio
             // 
             this.ALCCWChart_radio.AutoSize = true;
-            this.ALCCWChart_radio.Location = new System.Drawing.Point(1716, 585);
+            this.ALCCWChart_radio.Location = new System.Drawing.Point(1518, 661);
             this.ALCCWChart_radio.Name = "ALCCWChart_radio";
             this.ALCCWChart_radio.Size = new System.Drawing.Size(55, 18);
             this.ALCCWChart_radio.TabIndex = 71;
@@ -3488,7 +3518,7 @@ namespace WindowsFormsApplication1
             // ALCWChart_radio
             // 
             this.ALCWChart_radio.AutoSize = true;
-            this.ALCWChart_radio.Location = new System.Drawing.Point(1723, 328);
+            this.ALCWChart_radio.Location = new System.Drawing.Point(1525, 404);
             this.ALCWChart_radio.Name = "ALCWChart_radio";
             this.ALCWChart_radio.Size = new System.Drawing.Size(55, 18);
             this.ALCWChart_radio.TabIndex = 69;
@@ -3556,6 +3586,8 @@ namespace WindowsFormsApplication1
             this.groupBox17.Controls.Add(this.deleteLastTestRow_btn);
             this.groupBox17.Controls.Add(this.AFCCW_grid);
             this.groupBox17.Controls.Add(this.ALCW_grid);
+            this.groupBox17.Controls.Add(this.copyCCW_btn);
+            this.groupBox17.Controls.Add(this.copyCW_btn);
             this.groupBox17.Controls.Add(this.ALCCW_grid);
             this.groupBox17.Controls.Add(this.ALCW_lbl);
             this.groupBox17.Controls.Add(this.AFCCW_lbl);
@@ -3584,7 +3616,7 @@ namespace WindowsFormsApplication1
             this.AFCCW_btn.FlatAppearance.BorderSize = 0;
             this.AFCCW_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AFCCW_btn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AFCCW_btn.Location = new System.Drawing.Point(308, 20);
+            this.AFCCW_btn.Location = new System.Drawing.Point(142, 20);
             this.AFCCW_btn.Name = "AFCCW_btn";
             this.AFCCW_btn.Size = new System.Drawing.Size(101, 23);
             this.AFCCW_btn.TabIndex = 85;
@@ -3597,7 +3629,7 @@ namespace WindowsFormsApplication1
             this.ALCW_btn.FlatAppearance.BorderSize = 0;
             this.ALCW_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ALCW_btn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ALCW_btn.Location = new System.Drawing.Point(163, 20);
+            this.ALCW_btn.Location = new System.Drawing.Point(309, 20);
             this.ALCW_btn.Name = "ALCW_btn";
             this.ALCW_btn.Size = new System.Drawing.Size(111, 23);
             this.ALCW_btn.TabIndex = 84;
@@ -3775,6 +3807,30 @@ namespace WindowsFormsApplication1
             this.ALCW_grid.Size = new System.Drawing.Size(537, 200);
             this.ALCW_grid.TabIndex = 4;
             // 
+            // copyCCW_btn
+            // 
+            this.copyCCW_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.copyCCW_btn.Location = new System.Drawing.Point(611, 228);
+            this.copyCCW_btn.Name = "copyCCW_btn";
+            this.copyCCW_btn.Size = new System.Drawing.Size(75, 23);
+            this.copyCCW_btn.TabIndex = 1;
+            this.copyCCW_btn.Text = "Copy -->";
+            this.copyCCW_btn.UseVisualStyleBackColor = true;
+            this.copyCCW_btn.Visible = false;
+            this.copyCCW_btn.Click += new System.EventHandler(this.copyCCW_btn_Click);
+            // 
+            // copyCW_btn
+            // 
+            this.copyCW_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.copyCW_btn.Location = new System.Drawing.Point(611, 254);
+            this.copyCW_btn.Name = "copyCW_btn";
+            this.copyCW_btn.Size = new System.Drawing.Size(75, 23);
+            this.copyCW_btn.TabIndex = 0;
+            this.copyCW_btn.Text = "Copy -->";
+            this.copyCW_btn.UseVisualStyleBackColor = true;
+            this.copyCW_btn.Visible = false;
+            this.copyCW_btn.Click += new System.EventHandler(this.copyCW_btn_Click);
+            // 
             // ALCCW_grid
             // 
             this.ALCCW_grid.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -3829,123 +3885,6 @@ namespace WindowsFormsApplication1
             this.stream_btn.Text = "Stream";
             this.stream_btn.UseVisualStyleBackColor = true;
             this.stream_btn.Click += new System.EventHandler(this.stream_btn_Click);
-            // 
-            // ch2Reading_groupBox
-            // 
-            this.ch2Reading_groupBox.Controls.Add(this.ch2Trough_chckbox);
-            this.ch2Reading_groupBox.Controls.Add(this.label39);
-            this.ch2Reading_groupBox.Controls.Add(this.ch2UnitLabel_calTab);
-            this.ch2Reading_groupBox.Controls.Add(this.ch2ReadingLabel_calTab);
-            this.ch2Reading_groupBox.Controls.Add(this.ch2ConnectLabel_calTab);
-            this.ch2Reading_groupBox.Controls.Add(this.ch2MenuControlBtn_calTab);
-            this.ch2Reading_groupBox.Controls.Add(this.ch2ZeroBtn_calTab);
-            this.ch2Reading_groupBox.Controls.Add(this.ch2ModeControlBtn_calTab);
-            this.ch2Reading_groupBox.Controls.Add(this.ch2UnitBtn_calTab);
-            this.ch2Reading_groupBox.Location = new System.Drawing.Point(860, 0);
-            this.ch2Reading_groupBox.Name = "ch2Reading_groupBox";
-            this.ch2Reading_groupBox.Size = new System.Drawing.Size(486, 307);
-            this.ch2Reading_groupBox.TabIndex = 25;
-            this.ch2Reading_groupBox.TabStop = false;
-            // 
-            // ch2Trough_chckbox
-            // 
-            this.ch2Trough_chckbox.AutoSize = true;
-            this.ch2Trough_chckbox.Location = new System.Drawing.Point(60, 252);
-            this.ch2Trough_chckbox.Name = "ch2Trough_chckbox";
-            this.ch2Trough_chckbox.Size = new System.Drawing.Size(89, 18);
-            this.ch2Trough_chckbox.TabIndex = 87;
-            this.ch2Trough_chckbox.Text = "Trough Mode";
-            this.ch2Trough_chckbox.UseVisualStyleBackColor = true;
-            this.ch2Trough_chckbox.CheckedChanged += new System.EventHandler(this.ch2Trough_chckbox_CheckedChanged);
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.BackColor = System.Drawing.Color.White;
-            this.label39.Location = new System.Drawing.Point(185, 2);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(97, 14);
-            this.label39.TabIndex = 86;
-            this.label39.Text = "Channel 2 Reading";
-            // 
-            // ch2UnitLabel_calTab
-            // 
-            this.ch2UnitLabel_calTab.Font = new System.Drawing.Font("Arial", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ch2UnitLabel_calTab.Location = new System.Drawing.Point(3, 182);
-            this.ch2UnitLabel_calTab.Name = "ch2UnitLabel_calTab";
-            this.ch2UnitLabel_calTab.Size = new System.Drawing.Size(392, 56);
-            this.ch2UnitLabel_calTab.TabIndex = 85;
-            this.ch2UnitLabel_calTab.Text = "label13";
-            this.ch2UnitLabel_calTab.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // ch2ReadingLabel_calTab
-            // 
-            this.ch2ReadingLabel_calTab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.ch2ReadingLabel_calTab.AutoSize = true;
-            this.ch2ReadingLabel_calTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 65F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ch2ReadingLabel_calTab.ForeColor = System.Drawing.Color.Blue;
-            this.ch2ReadingLabel_calTab.Location = new System.Drawing.Point(6, 37);
-            this.ch2ReadingLabel_calTab.Name = "ch2ReadingLabel_calTab";
-            this.ch2ReadingLabel_calTab.Size = new System.Drawing.Size(312, 98);
-            this.ch2ReadingLabel_calTab.TabIndex = 73;
-            this.ch2ReadingLabel_calTab.Text = "0.0000";
-            // 
-            // ch2ConnectLabel_calTab
-            // 
-            this.ch2ConnectLabel_calTab.AutoSize = true;
-            this.ch2ConnectLabel_calTab.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ch2ConnectLabel_calTab.Location = new System.Drawing.Point(248, 22);
-            this.ch2ConnectLabel_calTab.Name = "ch2ConnectLabel_calTab";
-            this.ch2ConnectLabel_calTab.Size = new System.Drawing.Size(148, 16);
-            this.ch2ConnectLabel_calTab.TabIndex = 66;
-            this.ch2ConnectLabel_calTab.Text = "No COM Port Connect";
-            // 
-            // ch2MenuControlBtn_calTab
-            // 
-            this.ch2MenuControlBtn_calTab.BackColor = System.Drawing.Color.Transparent;
-            this.ch2MenuControlBtn_calTab.Enabled = false;
-            this.ch2MenuControlBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ch2MenuControlBtn_calTab.Location = new System.Drawing.Point(175, 276);
-            this.ch2MenuControlBtn_calTab.Name = "ch2MenuControlBtn_calTab";
-            this.ch2MenuControlBtn_calTab.Size = new System.Drawing.Size(75, 23);
-            this.ch2MenuControlBtn_calTab.TabIndex = 2;
-            this.ch2MenuControlBtn_calTab.Text = "Menu";
-            this.ch2MenuControlBtn_calTab.UseVisualStyleBackColor = false;
-            this.ch2MenuControlBtn_calTab.Click += new System.EventHandler(this.ch2MenuControlBtn_calTab_Click);
-            // 
-            // ch2ZeroBtn_calTab
-            // 
-            this.ch2ZeroBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ch2ZeroBtn_calTab.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ch2ZeroBtn_calTab.Location = new System.Drawing.Point(60, 276);
-            this.ch2ZeroBtn_calTab.Name = "ch2ZeroBtn_calTab";
-            this.ch2ZeroBtn_calTab.Size = new System.Drawing.Size(75, 23);
-            this.ch2ZeroBtn_calTab.TabIndex = 1;
-            this.ch2ZeroBtn_calTab.Text = "Zero/Clear";
-            this.ch2ZeroBtn_calTab.UseVisualStyleBackColor = true;
-            this.ch2ZeroBtn_calTab.Click += new System.EventHandler(this.ch2ZeroBtn_calTab_Click);
-            // 
-            // ch2ModeControlBtn_calTab
-            // 
-            this.ch2ModeControlBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ch2ModeControlBtn_calTab.Location = new System.Drawing.Point(288, 276);
-            this.ch2ModeControlBtn_calTab.Name = "ch2ModeControlBtn_calTab";
-            this.ch2ModeControlBtn_calTab.Size = new System.Drawing.Size(75, 23);
-            this.ch2ModeControlBtn_calTab.TabIndex = 3;
-            this.ch2ModeControlBtn_calTab.Text = "Mode";
-            this.ch2ModeControlBtn_calTab.UseVisualStyleBackColor = true;
-            this.ch2ModeControlBtn_calTab.Click += new System.EventHandler(this.ch2ModeControlBtn_calTab_Click);
-            // 
-            // ch2UnitBtn_calTab
-            // 
-            this.ch2UnitBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ch2UnitBtn_calTab.Location = new System.Drawing.Point(399, 276);
-            this.ch2UnitBtn_calTab.Name = "ch2UnitBtn_calTab";
-            this.ch2UnitBtn_calTab.Size = new System.Drawing.Size(75, 23);
-            this.ch2UnitBtn_calTab.TabIndex = 4;
-            this.ch2UnitBtn_calTab.Text = "Unit";
-            this.ch2UnitBtn_calTab.UseVisualStyleBackColor = true;
-            this.ch2UnitBtn_calTab.Click += new System.EventHandler(this.ch2UnitBtn_calTab_Click);
             // 
             // testSetup_groupBox
             // 
@@ -4398,7 +4337,7 @@ namespace WindowsFormsApplication1
             this.ALCCWactive_label.AutoSize = true;
             this.ALCCWactive_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ALCCWactive_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.ALCCWactive_label.Location = new System.Drawing.Point(1851, 585);
+            this.ALCCWactive_label.Location = new System.Drawing.Point(1653, 661);
             this.ALCCWactive_label.Name = "ALCCWactive_label";
             this.ALCCWactive_label.Size = new System.Drawing.Size(65, 18);
             this.ALCCWactive_label.TabIndex = 50;
@@ -4527,7 +4466,7 @@ namespace WindowsFormsApplication1
             this.ALCWactive_label.AutoSize = true;
             this.ALCWactive_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ALCWactive_label.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.ALCWactive_label.Location = new System.Drawing.Point(1851, 327);
+            this.ALCWactive_label.Location = new System.Drawing.Point(1653, 403);
             this.ALCWactive_label.Name = "ALCWactive_label";
             this.ALCWactive_label.Size = new System.Drawing.Size(65, 18);
             this.ALCWactive_label.TabIndex = 49;
@@ -4814,29 +4753,122 @@ namespace WindowsFormsApplication1
             this.label13.TabIndex = 0;
             this.label13.Text = "Next Target";
             // 
-            // copyCW_btn
+            // ch2Reading_groupBox
             // 
-            this.copyCW_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.copyCW_btn.Location = new System.Drawing.Point(1451, 431);
-            this.copyCW_btn.Name = "copyCW_btn";
-            this.copyCW_btn.Size = new System.Drawing.Size(75, 23);
-            this.copyCW_btn.TabIndex = 0;
-            this.copyCW_btn.Text = "Copy -->";
-            this.copyCW_btn.UseVisualStyleBackColor = true;
-            this.copyCW_btn.Visible = false;
-            this.copyCW_btn.Click += new System.EventHandler(this.copyCW_btn_Click);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2Trough_chckbox);
+            this.ch2Reading_groupBox.Controls.Add(this.label39);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2UnitLabel_calTab);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2ReadingLabel_calTab);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2ConnectLabel_calTab);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2MenuControlBtn_calTab);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2ZeroBtn_calTab);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2ModeControlBtn_calTab);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2UnitBtn_calTab);
+            this.ch2Reading_groupBox.Location = new System.Drawing.Point(860, 0);
+            this.ch2Reading_groupBox.Name = "ch2Reading_groupBox";
+            this.ch2Reading_groupBox.Size = new System.Drawing.Size(486, 307);
+            this.ch2Reading_groupBox.TabIndex = 25;
+            this.ch2Reading_groupBox.TabStop = false;
             // 
-            // copyCCW_btn
+            // ch2Trough_chckbox
             // 
-            this.copyCCW_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.copyCCW_btn.Location = new System.Drawing.Point(1448, 693);
-            this.copyCCW_btn.Name = "copyCCW_btn";
-            this.copyCCW_btn.Size = new System.Drawing.Size(75, 23);
-            this.copyCCW_btn.TabIndex = 1;
-            this.copyCCW_btn.Text = "Copy -->";
-            this.copyCCW_btn.UseVisualStyleBackColor = true;
-            this.copyCCW_btn.Visible = false;
-            this.copyCCW_btn.Click += new System.EventHandler(this.copyCCW_btn_Click);
+            this.ch2Trough_chckbox.AutoSize = true;
+            this.ch2Trough_chckbox.Location = new System.Drawing.Point(60, 252);
+            this.ch2Trough_chckbox.Name = "ch2Trough_chckbox";
+            this.ch2Trough_chckbox.Size = new System.Drawing.Size(89, 18);
+            this.ch2Trough_chckbox.TabIndex = 87;
+            this.ch2Trough_chckbox.Text = "Trough Mode";
+            this.ch2Trough_chckbox.UseVisualStyleBackColor = true;
+            this.ch2Trough_chckbox.CheckedChanged += new System.EventHandler(this.ch2Trough_chckbox_CheckedChanged);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.BackColor = System.Drawing.Color.White;
+            this.label39.Location = new System.Drawing.Point(185, 2);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(97, 14);
+            this.label39.TabIndex = 86;
+            this.label39.Text = "Channel 2 Reading";
+            // 
+            // ch2UnitLabel_calTab
+            // 
+            this.ch2UnitLabel_calTab.Font = new System.Drawing.Font("Arial", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ch2UnitLabel_calTab.Location = new System.Drawing.Point(3, 182);
+            this.ch2UnitLabel_calTab.Name = "ch2UnitLabel_calTab";
+            this.ch2UnitLabel_calTab.Size = new System.Drawing.Size(392, 56);
+            this.ch2UnitLabel_calTab.TabIndex = 85;
+            this.ch2UnitLabel_calTab.Text = "label13";
+            this.ch2UnitLabel_calTab.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ch2ReadingLabel_calTab
+            // 
+            this.ch2ReadingLabel_calTab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.ch2ReadingLabel_calTab.AutoSize = true;
+            this.ch2ReadingLabel_calTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 65F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ch2ReadingLabel_calTab.ForeColor = System.Drawing.Color.Blue;
+            this.ch2ReadingLabel_calTab.Location = new System.Drawing.Point(6, 37);
+            this.ch2ReadingLabel_calTab.Name = "ch2ReadingLabel_calTab";
+            this.ch2ReadingLabel_calTab.Size = new System.Drawing.Size(312, 98);
+            this.ch2ReadingLabel_calTab.TabIndex = 73;
+            this.ch2ReadingLabel_calTab.Text = "0.0000";
+            // 
+            // ch2ConnectLabel_calTab
+            // 
+            this.ch2ConnectLabel_calTab.AutoSize = true;
+            this.ch2ConnectLabel_calTab.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ch2ConnectLabel_calTab.Location = new System.Drawing.Point(248, 22);
+            this.ch2ConnectLabel_calTab.Name = "ch2ConnectLabel_calTab";
+            this.ch2ConnectLabel_calTab.Size = new System.Drawing.Size(148, 16);
+            this.ch2ConnectLabel_calTab.TabIndex = 66;
+            this.ch2ConnectLabel_calTab.Text = "No COM Port Connect";
+            // 
+            // ch2MenuControlBtn_calTab
+            // 
+            this.ch2MenuControlBtn_calTab.BackColor = System.Drawing.Color.Transparent;
+            this.ch2MenuControlBtn_calTab.Enabled = false;
+            this.ch2MenuControlBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ch2MenuControlBtn_calTab.Location = new System.Drawing.Point(175, 276);
+            this.ch2MenuControlBtn_calTab.Name = "ch2MenuControlBtn_calTab";
+            this.ch2MenuControlBtn_calTab.Size = new System.Drawing.Size(75, 23);
+            this.ch2MenuControlBtn_calTab.TabIndex = 2;
+            this.ch2MenuControlBtn_calTab.Text = "Menu";
+            this.ch2MenuControlBtn_calTab.UseVisualStyleBackColor = false;
+            this.ch2MenuControlBtn_calTab.Click += new System.EventHandler(this.ch2MenuControlBtn_calTab_Click);
+            // 
+            // ch2ZeroBtn_calTab
+            // 
+            this.ch2ZeroBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ch2ZeroBtn_calTab.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ch2ZeroBtn_calTab.Location = new System.Drawing.Point(60, 276);
+            this.ch2ZeroBtn_calTab.Name = "ch2ZeroBtn_calTab";
+            this.ch2ZeroBtn_calTab.Size = new System.Drawing.Size(75, 23);
+            this.ch2ZeroBtn_calTab.TabIndex = 1;
+            this.ch2ZeroBtn_calTab.Text = "Zero/Clear";
+            this.ch2ZeroBtn_calTab.UseVisualStyleBackColor = true;
+            this.ch2ZeroBtn_calTab.Click += new System.EventHandler(this.ch2ZeroBtn_calTab_Click);
+            // 
+            // ch2ModeControlBtn_calTab
+            // 
+            this.ch2ModeControlBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ch2ModeControlBtn_calTab.Location = new System.Drawing.Point(288, 276);
+            this.ch2ModeControlBtn_calTab.Name = "ch2ModeControlBtn_calTab";
+            this.ch2ModeControlBtn_calTab.Size = new System.Drawing.Size(75, 23);
+            this.ch2ModeControlBtn_calTab.TabIndex = 3;
+            this.ch2ModeControlBtn_calTab.Text = "Mode";
+            this.ch2ModeControlBtn_calTab.UseVisualStyleBackColor = true;
+            this.ch2ModeControlBtn_calTab.Click += new System.EventHandler(this.ch2ModeControlBtn_calTab_Click);
+            // 
+            // ch2UnitBtn_calTab
+            // 
+            this.ch2UnitBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ch2UnitBtn_calTab.Location = new System.Drawing.Point(399, 276);
+            this.ch2UnitBtn_calTab.Name = "ch2UnitBtn_calTab";
+            this.ch2UnitBtn_calTab.Size = new System.Drawing.Size(75, 23);
+            this.ch2UnitBtn_calTab.TabIndex = 4;
+            this.ch2UnitBtn_calTab.Text = "Unit";
+            this.ch2UnitBtn_calTab.UseVisualStyleBackColor = true;
+            this.ch2UnitBtn_calTab.Click += new System.EventHandler(this.ch2UnitBtn_calTab_Click);
             // 
             // Form1
             // 
@@ -4844,7 +4876,7 @@ namespace WindowsFormsApplication1
             this.AutoScroll = true;
             this.AutoScrollMinSize = new System.Drawing.Size(1473, 945);
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1924, 772);
+            this.ClientSize = new System.Drawing.Size(1797, 972);
             this.Controls.Add(this.TabPages);
             this.Controls.Add(this.testerType);
             this.Controls.Add(this.groupBox1);
@@ -4940,8 +4972,6 @@ namespace WindowsFormsApplication1
             ((System.ComponentModel.ISupportInitialize)(this.AFCCW_grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ALCW_grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ALCCW_grid)).EndInit();
-            this.ch2Reading_groupBox.ResumeLayout(false);
-            this.ch2Reading_groupBox.PerformLayout();
             this.testSetup_groupBox.ResumeLayout(false);
             this.testSetup_groupBox.PerformLayout();
             this.comConnect_calCert_groupBox.ResumeLayout(false);
@@ -4952,6 +4982,8 @@ namespace WindowsFormsApplication1
             this.toolInfo_groupBox.PerformLayout();
             this.target_groupBox.ResumeLayout(false);
             this.target_groupBox.PerformLayout();
+            this.ch2Reading_groupBox.ResumeLayout(false);
+            this.ch2Reading_groupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5363,6 +5395,9 @@ namespace WindowsFormsApplication1
         private Button AFCCW_btn;
         private Button ALCW_btn;
         private Button AFCW_btn;
+        private Button sendTestCmd_btn;
+        private TextBox testCommand_txtBox;
+        private Label response_lbl;
     }
 }
 
