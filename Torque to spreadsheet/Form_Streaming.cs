@@ -861,6 +861,11 @@ namespace WindowsFormsApplication1
             closeForm();
         }
 
+        private void streamGridCh2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
         private void savePeak_chkBox_CheckedChanged(object sender, EventArgs e)
         {
             if (savePeak_chkBox.Checked == true)

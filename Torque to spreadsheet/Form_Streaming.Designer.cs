@@ -233,6 +233,7 @@
             this.streamGridCh2.RowHeadersWidth = 82;
             this.streamGridCh2.Size = new System.Drawing.Size(245, 555);
             this.streamGridCh2.TabIndex = 152;
+            this.streamGridCh2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.streamGridCh2_CellContentClick);
             // 
             // frequency_comboBox
             // 
@@ -324,6 +325,7 @@
             this.Controls.Add(this.streamGridCh1);
             this.Name = "Form_Streaming";
             this.Text = "StreamingForm";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StreamingForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.targetGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.streamGridCh1)).EndInit();
