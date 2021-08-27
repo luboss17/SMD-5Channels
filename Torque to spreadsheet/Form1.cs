@@ -25,6 +25,7 @@ namespace WindowsFormsApplication1
         private string currentDualSerie = "Reading";
         private string currRunName1 = "Reading-CH1";
         private string currRunName2 = "Reading-CH2";
+        private string currRunName3 = "Reading-CH3";
         public bool newdata = false;
         public bool aquire = false;
         public bool formActive = true;
@@ -44,12 +45,13 @@ namespace WindowsFormsApplication1
         public bool isHighLow = false;
         public bool isSerial = false;
         private string currColumn = "Reading";
-        private BindingSource tableBinding = new BindingSource(), secondtableBinding = new BindingSource(), noCurrentTableBinding = new BindingSource(), dualTableBinding = new BindingSource(), noCurrentDualTableBinding = new BindingSource(), serieBinding = new BindingSource();
+        private BindingSource tableBinding = new BindingSource(), secondtableBinding = new BindingSource(), ch3TableBinding = new BindingSource(), noCurrentTableBinding = new BindingSource(), dualTableBinding = new BindingSource(), noCurrentDualTableBinding = new BindingSource(), serieBinding = new BindingSource();
         private const int maxRuns = 10;//Limit how many runs the users can take
         private string secondChannelReading = "";
         private DataTable secondChannelTable = new DataTable();
-        private string secondUnit, firstUnit;//decoded unit for live channel
-        private float secondReading, firstReading;//decoded reading for live channel
+        private DataTable ch3Table = new DataTable();
+        private string secondUnit, firstUnit,ch3Unit;//decoded unit for live channel
+        private float secondReading, firstReading,ch3Reading;//decoded reading for live channel
         private bool readSuccess = false;//true if successfully read from second channel
         private string firstChannelFullCap = "";
         private bool pauseLiveReading1 = false;
@@ -59,9 +61,10 @@ namespace WindowsFormsApplication1
         private const string noComConnectMessage = "No Transducer is connected";
         public static List<string> arr_dualSeries = new List<string>();
         public static List<string> arr_singleSeries = new List<string>();
-        private const string tail_Channel1 = "-CH1", tail_Channel2 = "-CH2";//used to affix or remove to connecting Com to Channel1 or 2
+        private const string tail_Channel1 = "-CH1", tail_Channel2 = "-CH2", tail_Channel3 = "-CH3";//used to affix or remove to connecting Com to Channel1 or 2
         public static TesterControl chann1Control = new TesterControl();
         public static TesterControl chann2Control = new TesterControl();
+        public static TesterControl chann3Control = new TesterControl();
         public static TesterControl commonChanControl = new TesterControl();
         private const int TTS = 0, smdSingle = 2, smdDual = 5;//use to set registry value for defaultTab
         private const string userRoot = "HKEY_CURRENT_USER";
@@ -87,20 +90,21 @@ namespace WindowsFormsApplication1
         private const string dataLoggerPath = @"C:\datalog\win232.exe";
         private const string dataLoggerTextPath = @"data.txt";
         private static string lastPathName = @"C:\";
-        private bool pauseLiveReading2 = false;
-        private const int lineChart = 0;
-        private const int pointChart = 1;
+        private bool pauseLiveReading2 = false,pauseLiveReading3=false;
+        private const int lineChart = 1;
+        private const int pointChart = 2;
+        private const int noChart = 0;
         private const string err_uniqueRunName = "This Name is already existed";
         private const string channel1 = "Channel 1";
         private const string channel2 = "Channel 2";
+        private const string channel3 = "Channel 3";
         private int xAxis = 2;
         private int yAxis = 1;
         private const int maxReadTimeOut = 100;
         private const string TTSTabName = "simple_reading", SMDSingleTabName = "read_graph_col", SMDDualTabName = "dualChannelTab", calTabName = "calibrationTab";
         private int tickInterval = 200;//start at 200, change to 2000 if no respond from tester-indicate cable is disconnected
         private const int colThreshold = 6;//when gridview columns count is greater than this number, change from fill to AllCell
-        private int CH1Timercounter = 0;
-        private int CH2Timercounter = 0;
+
 
         private const string autoUpdate_yesStr = "Yes", autoUpdate_noStr = "No";
 
@@ -108,8 +112,9 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             activateJetCellLicense();
-            firstChannelGrid.Scroll += new ScrollEventHandler(makeSecondGridScroll);
-            secondChannelGridView.Scroll += new ScrollEventHandler(makeFirstGridScroll);
+            channel1_gridview.Scroll += new ScrollEventHandler(Ch1GridViewScroll);
+            channel2_gridview.Scroll += new ScrollEventHandler(Ch2GridViewScroll);
+            channel3_gridview.Scroll += new ScrollEventHandler(Ch3GridViewScroll);
         }
         //Open Virtual Keyboard, for tablet
         public static void openVirtualKeyboard(object sender, EventArgs e)
@@ -142,22 +147,32 @@ namespace WindowsFormsApplication1
                 //Do nothing
             }
         }
-        private void makeSecondGridScroll(object sender, ScrollEventArgs e)
+        private void Ch1GridViewScroll(object sender, ScrollEventArgs e)
         {
-            unifyScroll(ref firstChannelGrid, ref secondChannelGridView);
+            unifyScroll(ref channel1_gridview, ref channel2_gridview);
+            unifyScroll(ref channel1_gridview, ref channel3_gridview);
         }
 
-        private void makeFirstGridScroll(object sender, ScrollEventArgs e)
+        private void Ch2GridViewScroll(object sender, ScrollEventArgs e)
         {
-            unifyScroll(ref secondChannelGridView, ref firstChannelGrid);
+            unifyScroll(ref channel2_gridview, ref channel1_gridview);
+            unifyScroll(ref channel2_gridview, ref channel3_gridview);
         }
-        //changed 6/25/20 to changeUI
+        private void Ch3GridViewScroll(object sender, ScrollEventArgs e)
+        {
+            unifyScroll(ref channel3_gridview, ref channel1_gridview);
+            unifyScroll(ref channel3_gridview, ref channel2_gridview);
+        }
+        //changed 4/13/21 to add ch3
         private void Form1_Load(object sender, EventArgs e)
         {
+            serialPort1.PortName = "COM101";
+            serialPort2.PortName = "COM102";
+            serialPort3.PortName = "COM103";
             loadALLCalibrationTabSetting();
             target_groupBox.Size = new Size(486, 307);
             singleChannel_gridView.RowsAdded += Gridview1_RowsAdded;
-            firstChannelGrid.RowsAdded += FirstChannelGrid_RowsAdded;
+            channel1_gridview.RowsAdded += FirstChannelGrid_RowsAdded;
             noCurrentTableBinding.ResetBindings(false);
 
             //noCurrentDualTableBinding.ResetBindings(false);
@@ -185,6 +200,7 @@ namespace WindowsFormsApplication1
             createNewSerie_SingleChannel(currColumn);//Add new currColumn="Reading" to Single Channel dataTable when App loads
             PreventGridSort(ref masterGridView);//prevent masterGridView from being sortable by Users
             initSecondChannelTable();//initiate Second Channel table to store data from Second Channel only (not both Channels)
+            initCh3Table();//init channel3 table and binding source for it
             initDualTable();//initiate dualTable to store BOTH channel 1 and 2 Readings
 
             //Show Series on checked list for single Channel
@@ -318,7 +334,7 @@ namespace WindowsFormsApplication1
         }
         private void FirstChannelGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            firstChannelGrid.FirstDisplayedScrollingRowIndex = firstChannelGrid.RowCount - 1;
+            channel1_gridview.FirstDisplayedScrollingRowIndex = channel1_gridview.RowCount - 1;
         }
 
         private void Gridview1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -355,6 +371,7 @@ namespace WindowsFormsApplication1
         }
 
         private System.Drawing.Color readingColor = Color.Blue;
+        //changed 4/13/21 to addCh3
         private void loadSettings()
         {
             //PreventGridSort(ref noCurrDualMasterGrid);
@@ -373,8 +390,8 @@ namespace WindowsFormsApplication1
             singleChannel_gridView.EditMode = DataGridViewEditMode.EditOnEnter;
             gridview.ReadOnly = false;
             gridview.EditMode = DataGridViewEditMode.EditOnEnter;
-            firstChannelGrid.ReadOnly = false;
-            firstChannelGrid.EditMode = DataGridViewEditMode.EditOnEnter;
+            channel1_gridview.ReadOnly = false;
+            channel1_gridview.EditMode = DataGridViewEditMode.EditOnEnter;
             masterGridView.ReadOnly = true;
             //masterGridView.EditMode = DataGridViewEditMode.EditOnEnter;
             high_percent.Checked = true;
@@ -387,6 +404,8 @@ namespace WindowsFormsApplication1
             DataSMDSingle_lbl.ForeColor = readingColor;
             dataCh1DualChanTab_lbl.ForeColor = readingColor;
             dataCh2DualChTab_lbl.ForeColor = readingColor;
+            ch3Reading_lbl.ForeColor = readingColor;
+            ch3Unit_lbl.ForeColor = readingColor;
 
             unitTTS_lbl.ForeColor = readingColor;
             unitSingleCH_lbl.ForeColor = readingColor;
@@ -431,14 +450,14 @@ namespace WindowsFormsApplication1
         private void controlTabVisibility()
         {
 
-            //HideTabPage(simple_col);
-            //HideTabPage(big_reading);
+            HideTabPage(simple_col);
+            HideTabPage(big_reading);
             HideTabPage(big_graph);
 
-            //HideTabPage(simple_reading);
-            //HideTabPage(read_graph_col);
+            HideTabPage(simple_reading);
+            HideTabPage(read_graph_col);
             //HideTabPage(dualChannelTab);
-            //HideTabPage(calibrationTab);
+            HideTabPage(calibrationTab);
         }
 
         //getSerialList is called when User refresh comList, to get serial Number of connected tester
@@ -456,7 +475,7 @@ namespace WindowsFormsApplication1
                         serialPort1.Open();
                     fullscale = write_command("?F;", serialPort1);
                     commonChanControl = new TesterControl();
-                    commonChanControl.setModeAndUnitClass(write_command("?M;", serialPort1), write_command("?C;", serialPort1), write_command("?U;", serialPort1));
+                    commonChanControl.getModeAndUnitClass(write_command("?M;", serialPort1), write_command("?C;", serialPort1), write_command("?U;", serialPort1));
                     serialPort1.Close();
                     serialPort1.PortName = "COM101";
                 }
@@ -634,9 +653,15 @@ namespace WindowsFormsApplication1
         private void bindSecondChannelTable()
         {
             secondtableBinding.DataSource = secondChannelTable;
-            secondChannelGridView.DataSource = secondtableBinding;
+            channel2_gridview.DataSource = secondtableBinding;
         }
-
+        //Added 4/13/21 to addCh3
+        
+        private void bindCh3Table()
+        {
+            ch3TableBinding.DataSource = ch3Table;
+            channel3_gridview.DataSource = ch3TableBinding;
+        }
         //Update back color of listview with series color
         private void updateListViewColor(ref ListView listView, Chart thisChart)
         {
@@ -726,7 +751,15 @@ namespace WindowsFormsApplication1
             //bind second channel gridview to second table
             bindSecondChannelTable();
         }
-
+        //Todo
+        private void initCh3Table()
+        {
+            ch3Table = new DataTable();
+            ch3Table.Columns.Add("Reading", typeof(float));
+            ch3Table.Columns.Add("Unit", typeof(string));
+            //bind channel3_gridview to ch3Table
+            bindCh3Table();
+        }
         //bind mastergridview to Datatable table, and nocurrentTable to mastergrid_nocurrent
         private void bindTable()
         {
@@ -829,7 +862,7 @@ namespace WindowsFormsApplication1
                     break;
                 case SMDDualTabName:
                     this.Size = new Size(1475, 943);
-                    this.Text = "SMD  Dual";
+                    this.Text = "SMD  3-Channels";
                     pingTester(serialPort1);//Lock UI from Tester
                     pingTester(serialPort2);//Lock UI from Tester
                     break;
@@ -876,7 +909,7 @@ namespace WindowsFormsApplication1
                         returnIndex = getCurrentRowOfGrid(ref singleChannel_gridView);
                         break;
                     case "dualChannelTab":
-                        returnIndex = getCurrentRowOfGrid(ref firstChannelGrid);
+                        returnIndex = getCurrentRowOfGrid(ref channel1_gridview);
                         break;
                     default:
                         returnIndex = 0;
@@ -910,6 +943,7 @@ namespace WindowsFormsApplication1
 
         //if passed in ComtoDisconnect contain -Channel1 or -Channel2(depends on channelNumber passed in), then remove that part
         //This method is called after a Comlist is closed
+        //Added 4/19/21 for 3 channels
         private BindingList<string> removeChannelfromComList(int channelNumber, BindingList<string> list, int index)
         {
             string channel = "DMSOMDJNFSDSNDKJW";//Bogus string, just for the heck of it
@@ -917,14 +951,15 @@ namespace WindowsFormsApplication1
                 channel = tail_Channel1;
             else if (channelNumber == 2)
                 channel = tail_Channel2;
+            else if (channelNumber == 3)
+                channel = tail_Channel3;
             list[index] = list[index].Replace(channel, "");
 
             return list;
         }
-
         private void updateDisconnectCOMList(string Com, int channel)
         {
-            for (int index = 0; index < comList.Items.Count; index++)
+            for (int index = 0; index < FSList.Count; index++)
             {
                 if (extractCOM(FSList[index]) == Com)
                 {
@@ -934,6 +969,7 @@ namespace WindowsFormsApplication1
             }
         }
         //Open or close 1st Com
+        
         private void opencloseFirstCOM(ref ListBox list)
         {
             string displaySNandFS = "";
@@ -954,7 +990,7 @@ namespace WindowsFormsApplication1
                         //if selecting port is not same as port 2 or port 2 is not opened, Open port 1
                         if ((!(currentPort == serialPort2.PortName)) || (!serialPort2.IsOpen))
                         {
-                            openport(currentPort);
+                            openport(currentPort,ref serialPort1);
                             changeWinSize(TabPages.SelectedTab.Name);//Call this to ping or unping tester
 
                             //request Com serial number from SerialPort1
@@ -971,7 +1007,7 @@ namespace WindowsFormsApplication1
                             modeMsg = write_command("?M;", serialPort1);
                             CapMsg = write_command("?C;", serialPort1);
                             UnitMsg = write_command("?U;", serialPort1);
-                            chann1Control.setModeAndUnitClass(modeMsg, CapMsg, UnitMsg);
+                            chann1Control.getModeAndUnitClass(modeMsg, CapMsg, UnitMsg);
                             //set the currUnitMode and currUnitClass
 
                             decodeMessage(firstChannelFullCap, chann1Control.getcurrUnitClass(), 0);
@@ -1021,6 +1057,7 @@ namespace WindowsFormsApplication1
             pauseLiveReading1 = false;
         }
         //Open or close 2nd Com for Dual channel
+        //changed 4/13/21 to addCh3
         private void opencloseSecondCom(string currentPort, ListBox list)
         {
             bool readCapSuccess;
@@ -1034,6 +1071,10 @@ namespace WindowsFormsApplication1
                 if ((serialPort1.PortName == currentPort) && (serialPort1.IsOpen == false))
                 {
                     serialPort1.PortName = "COM101";
+                }
+                if ((serialPort3.PortName == currentPort) && (serialPort3.IsOpen == false))
+                {
+                    serialPort3.PortName = "COM103";
                 }
                 if (currentPort != serialPort1.PortName)
                 {
@@ -1049,7 +1090,7 @@ namespace WindowsFormsApplication1
                     CapMsg = write_command("?C;", serialPort2);
                     UnitMsg = write_command("?U;", serialPort2);
 
-                    chann2Control.setModeAndUnitClass(modeMsg, CapMsg, UnitMsg);//set the currUnitMode and currUnitClass
+                    chann2Control.getModeAndUnitClass(modeMsg, CapMsg, UnitMsg);//set the currUnitMode and currUnitClass
 
                     decodeMessage(secondChannelFS, chann2Control.getcurrUnitClass(), 0);//decode query got back from asking for Full Scale, then pass to FSReading and FSUnit-indicated by passing in 0 value for 2nd param
 
@@ -1080,6 +1121,72 @@ namespace WindowsFormsApplication1
                 showComConnect_SecondChan(noComConnectMessage);
             }
         }
+
+        //Open or close Channel3 for Dual channel
+        //Added 4/19/21 for 3 channels
+        private void opencloseChannel3(string currentPort, ListBox list)
+        {
+            bool readCapSuccess;
+            string ch3SN;
+            string ch3FS;
+            string ch3SN_FS;
+            bool portcheck = currentPort.Equals(serialPort3.PortName);
+            if ((serialPort3.IsOpen == false) || (portcheck == false))
+            {//if serial port is not open, OR current selected port is not is different from the SerialPort3
+                //openport(currentPort,ref serialPort3);
+                //closeCh3Port(currentPort);
+                if ((serialPort1.PortName == currentPort) && (serialPort1.IsOpen == false))
+                {
+                    serialPort1.PortName = "COM101";
+                }
+                if ((serialPort2.PortName == currentPort) && (serialPort2.IsOpen == false))
+                {
+                    serialPort2.PortName = "COM102";
+                }
+                if ((currentPort != serialPort1.PortName) && (currentPort!=serialPort2.PortName))
+                {
+                    openCh3Port(currentPort);
+                    ch3SN = write_command("?S;", serialPort3);
+                    ch3FS = write_command("?F;", serialPort3);
+                    resetFSReading();
+                    //Initiate chann3Control
+                    chann3Control = new TesterControl();
+                    string modeMsg = "", CapMsg = "", UnitMsg = "";
+                    modeMsg = write_command("?M;", serialPort3);
+                    CapMsg = write_command("?C;", serialPort3);
+                    UnitMsg = write_command("?U;", serialPort3);
+
+                    chann3Control.getModeAndUnitClass(modeMsg, CapMsg, UnitMsg);//set the currUnitMode and currUnitClass
+
+                    decodeMessage(ch3FS, chann3Control.getcurrUnitClass(), 0);//decode query got back from asking for Full Scale, then pass to FSReading and FSUnit-indicated by passing in 0 value for 2nd param
+
+                    if (FSReading == 0)//if FSReading is 0, that means fail to read FS of tester
+                        readCapSuccess = false;
+                    else
+                        readCapSuccess = true;
+
+                    /*if (secondChannelSerialNum.Length > 0)
+                    {
+                        displaySNandFS = serialPort2.PortName + ": S/N " + secondChannelSerialNum;
+                    }
+                    else*/
+                    ch3SN_FS = serialPort3.PortName + ":";
+                    if (readCapSuccess)
+                        ch3SN_FS += " " + FSReading + " " + FSUnit;
+                    ch3SN_FS += " connected";
+                    showComConnect_Channel3(ch3SN_FS);
+                    FSList[list.SelectedIndex] += tail_Channel3;
+                }
+                else
+                    MessageBox.Show("Channel 1/Channel 2 is currently connecting to this COM.\nPlease free the selecting COM first");
+            }
+            else
+            {
+                closeCh3Port(currentPort);
+                serialPort3.PortName = "COM103";//assign bogus COM name after closing port.
+                showComConnect_Channel3(noComConnectMessage);
+            }
+        }
         //Display the serial Number that connect to Channel1.
         private void showComConnect_FirstChan(string message)
         {
@@ -1087,6 +1194,11 @@ namespace WindowsFormsApplication1
             COMconnect2.Text = message;
             firstComConnect.Text = message;
             ch1ConnectLabel_calTab.Text = message;
+        }
+        private void showComConnect_Channel3(string message)
+        {
+            channel3Connect_lbl.Text = message;
+            //ch2ConnectLabel_calTab.Text = message;
         }
         //Display the serial Number that connect to Channel2.
         private void showComConnect_SecondChan(string message)
@@ -1211,15 +1323,15 @@ namespace WindowsFormsApplication1
             {
                 //addRowToGridAtIndex(ref gridview, dataToAdd, rowIndex);
                 addRowToGridAtIndex(ref singleChannel_gridView, dataToAdd, rowIndex);
-                addRowToGridAtIndex(ref firstChannelGrid, dataToAdd, rowIndex);
+                addRowToGridAtIndex(ref channel1_gridview, dataToAdd, rowIndex);
 
                 removeRowFrGridAtIndex(ref singleChannel_gridView, rowIndex + 1);
                 //removeRowFrGridAtIndex(ref gridview, rowIndex+1);
-                removeRowFrGridAtIndex(ref firstChannelGrid, rowIndex + 1);
+                removeRowFrGridAtIndex(ref channel1_gridview, rowIndex + 1);
 
                 //updateSampleNuminGrid(ref gridview,rowIndex);
                 updateSampleNuminGrid(ref singleChannel_gridView, rowIndex);
-                updateSampleNuminGrid(ref firstChannelGrid, rowIndex);
+                updateSampleNuminGrid(ref channel1_gridview, rowIndex);
             }
             catch (Exception exception)
             {
@@ -1590,23 +1702,22 @@ namespace WindowsFormsApplication1
                 rowIndex = 0;
 
             //Write to either gridview if Overwrite is on, or write to secondTable if new Row
-            //if ((overwriteDataAtCursorToolStripMenuItem.Checked) && (TabPages.SelectedTab.Name== "dualChannelTab") && (rowIndex>=0) && (!secondChannelGridView.Rows[rowIndex].IsNewRow)&&(firstChannelGrid.RowCount-secondChannelGridView.RowCount<2))
             if ((overwriteDataAtCursorToolStripMenuItem.Checked) &&
                 (TabPages.SelectedTab.Name == "dualChannelTab"))
             {
                 //Overwrite Mode is ON, and user is on Dual Channel Tab
-                if ((rowIndex < secondChannelGridView.RowCount) &&
-                    (secondChannelGridView.Rows[rowIndex].IsNewRow))
+                if ((rowIndex < channel2_gridview.RowCount) &&
+                    (channel2_gridview.Rows[rowIndex].IsNewRow))
                 {
                     //if it is New Row then add to bottom of secondUnit
                     addToSecondTable(secondUnit, secondReading);
                     //assign the secondUnit and secondReading to secondtable     
                     bindSecondChannelTable();
                 }
-                else if (rowIndex < secondChannelGridView.RowCount)
+                else if (rowIndex < channel2_gridview.RowCount)
                 {
-                    secondChannelGridView.Rows[rowIndex].Cells[0].Value = secondReading;
-                    secondChannelGridView.Rows[rowIndex].Cells[1].Value = secondUnit;
+                    channel2_gridview.Rows[rowIndex].Cells[0].Value = secondReading;
+                    channel2_gridview.Rows[rowIndex].Cells[1].Value = secondUnit;
                     updateDualTableAndChart();
                 }
             }
@@ -1619,6 +1730,31 @@ namespace WindowsFormsApplication1
 
             updateDualTableAndChart();
             bindDualTable();
+        }
+        //Added 4/13/21 to addch3
+        private void writeToCh3Grid(float reading,string unit)
+        {
+            rowIndex = getFocusedRowFirstChannel(TabPages.SelectedTab.Name) - 1;
+            // -1 because After 1st Channel take reading, the cursor already moved to a +1, needs to offset that new reading location in channel2
+            //If the data was written to last Line of 1st Channel, then no need to subtract 1, because cursor doesn't move down after written in 1st channel grid
+            if (is1stChanRow_LastRow)
+                rowIndex += 1;
+
+            if (rowIndex < 0)
+                rowIndex = 0;
+            if ((overwriteDataAtCursorToolStripMenuItem.Checked) && 
+                (TabPages.SelectedTab.Name == "dualChannelTab") && 
+                (rowIndex < channel3_gridview.RowCount))
+            {
+                //Todo: Change value at ch3Table[rowIndex] and bindCh3Table
+            }
+            else
+            {
+                addToCh3Table(unit, reading);
+                //assign the secondUnit and secondReading to secondtable     
+                bindCh3Table();
+            }
+
         }
         private int rowIndex = 0;
         //Read from Channel2 and update dualTable and chart
@@ -1645,7 +1781,31 @@ namespace WindowsFormsApplication1
             }
             pauseLiveReading2 = false;//resume live reading from channel2
         }
+        //Read from Channel3 and update dualTable and chart
+        //Added 4/13/21 to addCh3
+        private void readFromChannel3()
+        {
+            readSuccess = false;
+            pauseLiveReading3 = true;//set to true to prevent overlap with getting in live reading from channel3
+            try
+            {
+                string ch3Reading = write_command("E", serialPort3); //read in second channel reading
 
+                decodeChannel3(ch3Reading);
+                //decode reading received from channel3, assign to secondUnit and secondReading variable
+
+                if (readSuccess == true)
+                {
+                    writeToCh3Grid(this.ch3Reading,this.ch3Unit);
+                }
+                //decodeSecondChannel(secondChannelReading);
+            }
+            catch
+            {
+                pauseLiveReading3 = false;//resume live reading from channel2
+            }
+            pauseLiveReading3 = false;//resume live reading from channel2
+        }
         //update Live Channel Reading for first Channel
         private void updateFirstChannelLive(float ReadingFloat, string unit)
         {
@@ -1673,6 +1833,7 @@ namespace WindowsFormsApplication1
         }
 
         //update Live Channel Reading for second Channel
+        //changed 4/13/21 to addCh3
         private void updateSecondChannelLive(float ReadingFloat, string unit)
         {
             string reading = "";
@@ -1687,8 +1848,22 @@ namespace WindowsFormsApplication1
             unitCH2DualCHTab_lbl.Text = unit;
             ch2ReadingLabel_calTab.Text = reading;
             ch2UnitLabel_calTab.Text = unit;
+            ch3Unit_lbl.Text = unit;
         }
+        //Add 4/13/21 to addCh3 
+        private void updateCh3Live(float ReadingFloat, string unit)
+        {
+            string reading = "";
+            if (ReadingFloat == 0)
+                reading = ReadingFloat.ToString("0.000");
+            else
+            {
+                reading = ReadingFloat.ToString();
+            }
 
+            ch3Reading_lbl.Text = reading;
+            ch3Unit_lbl.Text = unit;
+        }
 
         /// <summary>
         /// Start init timer2 to display live reading
@@ -1812,17 +1987,20 @@ namespace WindowsFormsApplication1
         }
 
         //call decodemessage for livechannel reading
-        //call decodemessage for livechannel reading
-        //private void updateChannelsReadings()
+        //Changed 4/13/21 to addCh3
         private void updateChannelsReadings()
         {
             string ch1Message = "";
             string ch2Message = "";
-
+            string ch3Message = "";
+            int CH1Timercounter = 0;
+            int CH2Timercounter = 0;
+            int Ch3TimerCounter = 0;
             try
             {
                 CH1Timercounter--;
                 CH2Timercounter--;
+                Ch3TimerCounter--;
                 if ((serialPort1.IsOpen) && (CH1Timercounter <= 0))
                 {
                     float ReadingToDisplay = 0;
@@ -1871,6 +2049,17 @@ namespace WindowsFormsApplication1
 
                     updateSecondChannelLive(ReadingToDisplay, secondUnit);
                 }
+                if ((serialPort3.IsOpen) && (Ch3TimerCounter <= 0) && (pauseLiveReading3 == false))
+                {
+                    float ReadingToDisplay;
+                    ch3Message = write_command("D", serialPort3);
+                    Ch3TimerCounter = changeTimerCounter(ch3Message);//change ch2Timercounter to indicate whether tester is connected physically or not
+                    //decode message passed in
+                    decodeChannel3(ch3Message);
+
+                    ReadingToDisplay = ch3Reading;
+                    updateCh3Live(ReadingToDisplay, ch3Unit);
+                }
 
                 //Happens when readings from pressing Enter and software send command at same time. This also indicates tester just got pressed Enter
                 if (ch1Message.Length > 15)
@@ -1880,7 +2069,7 @@ namespace WindowsFormsApplication1
                 }
                 else
                 {
-                    captureReadingsIfEnterPress(ch1Message, ch2Message);
+                    captureReadingsIfEnterPress(ch1Message, ch2Message, ch3Message);
                 }
             }
             catch { }
@@ -1939,30 +2128,37 @@ namespace WindowsFormsApplication1
         }
         //Passed in ch1message and ch2message got from Sending Command D to Tester
         //If start with E then capture the reading
-        private void captureReadingsIfEnterPress(string ch1Message, string ch2Message)
+        //Changed 4/13/21 to addCh3
+        private void captureReadingsIfEnterPress(string ch1Message, string ch2Message,string ch3Message)
         {
             bool ch1Enter = (ch1Message != "") && (ch1Message[0] == 'E');
             bool ch2Enter = (ch2Message != "") && (ch2Message[0] == 'E');
+            bool ch3Enter= (ch3Message != "") && (ch3Message[0] == 'E');
 
             //If User press Enter on caltab , then call captureReadingsCalTab, which is same as pressing Capture_btn on calTab
             if ((ch1Enter || ch2Enter) && (TabPages.SelectedTab.Name == calTabName) && (pauseTest == false))
             {
                 captureReadingsCalTab();
             }
-            else// if not on caltab
+            else if ((ch1Enter == true) || (ch2Enter == true) || (ch3Enter == true))// if not on caltab & 1 tester press Ent
             {
                 //if user pressed Enter from tester, write to gridview and clear ch1 reading
-                if (ch1Enter == true)
+                if ((serialPort1.IsOpen))
                 {
                     writeToFirstChanGrid();
                     write_command("C;", serialPort1); //Clear tester
                 }
                 //if ch1 pressed Enter while ch2 is connected, or ch2 tester is pressed Enter
                 //Then write to second gridview and clear ch2 reading
-                if (((ch1Enter == true) && (serialPort2.IsOpen)) || (ch2Enter == true))
+                if (serialPort2.IsOpen)
                 {
                     writeToSecondChanGrid();
                     write_command("C;", serialPort2); //Clear Tester
+                }
+                if (serialPort3.IsOpen)
+                {
+                    writeToCh3Grid(ch3Reading, ch3Unit);
+                    write_command("C;", serialPort3);
                 }
             }
         }
@@ -2042,7 +2238,10 @@ namespace WindowsFormsApplication1
             secondChannelTable.Rows.Add(reading, unit);
 
         }
-
+        private void addToCh3Table(string unit, float reading)
+        {
+            ch3Table.Rows.Add(reading, unit);
+        }
 
         /// <summary>
         /// decode Message for live channel, pass in the message from Tester, then assign to either first or second reading and unit
@@ -2050,6 +2249,7 @@ namespace WindowsFormsApplication1
         /// <param Raw Reading="thismessage"></param>
         /// <param channel "0 for FullScale", "1" or "2"="channel"></param>
         /// Changed 8/23/20 to read Digital TD Fullscale
+        /// Changed 4/13/21 to addCh3
         private void decodeMessage(string thismessage, string unitClass, int channel)
         {
             try
@@ -2098,6 +2298,11 @@ namespace WindowsFormsApplication1
                     secondReading = reading;
                     secondUnit = unit;
                 }
+                else if (channel==3)
+                {
+                    ch3Reading = reading;
+                    ch3Unit = unit;
+                }
             }
             catch { }
         }
@@ -2125,7 +2330,30 @@ namespace WindowsFormsApplication1
                 }
             }
         }
+        //pass in reading from channel 3, decode it, then add to ...
+        //Added 4/13/21 to addCh3
+        private void decodeChannel3(string message)
+        {
+            ch3Unit = "";
+            ch3Reading = 0;
+            //message=<peak flag><unit><sign><reading>
 
+            try
+            {
+                ch3Unit = getUnit(message[1], chann3Control.getcurrUnitClass());
+                ch3Reading = Convert.ToSingle(getSign(message[2]) + message.Substring(3));
+                readSuccess = true;
+            }
+            catch
+            {
+                readSuccess = false;
+                if (pauseLiveReading3)//if this is live reading then we do not display the error message
+                {
+                    MessageBox.Show("Unable to read reading from " + serialPort3.PortName);
+                    pauseLiveReading3 = false;
+                }
+            }
+        }
         private void includeTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             includeTimeToolStripMenuItem.Checked = (includeTimeToolStripMenuItem.Checked == false);//toggle time stamp            
@@ -2160,6 +2388,20 @@ namespace WindowsFormsApplication1
                 backgroundWorker1.CancelAsync(); //stop background worker
             }
         }
+        //Added 4/19/21 for 3 channels
+        private void openCh3Port(string portName)
+        {
+            closeCh3Port(serialPort3.PortName);
+            serialPort3.PortName = portName;
+            try
+            {
+                serialPort3.Open();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
         //open second port
         private void openSecondport(string port1)
         {
@@ -2175,19 +2417,20 @@ namespace WindowsFormsApplication1
 
         }
         //open port, assign port name to serialPort1, change status label to open or give error openning, call Runbgw to run background worker
-        private void openport(string port1)
+        private void openport(string port1,ref SerialPort port)
         {
-            closeport(serialPort1.PortName);
+            closeport(port.PortName);
 
-            serialPort1.PortName = port1;
+            port.PortName = port1;
             try
             {
-                serialPort1.Open();
-                toolStripStatusLabel2.Text = " Status: Opened";
+                port.Open();
+                //toolStripStatusLabel2.Text = " Status: Opened";
                 //Runbgw(); //run background worker
             }
             catch
-            { toolStripStatusLabel2.Text = " Status: Error Opening Port!"; }
+            { //toolStripStatusLabel2.Text = " Status: Error Opening Port!"; 
+            }
 
         }
         //close second port, assign passed in port2 name to serialport2
@@ -2200,7 +2443,16 @@ namespace WindowsFormsApplication1
             }
             serialPort2.PortName = port2;
         }
-
+        //Added 4/19/21 for 3 channels
+        private void closeCh3Port(string port)
+        {
+            if (serialPort3.IsOpen)
+            {
+                serialPort3.Close();
+                updateDisconnectCOMList(serialPort3.PortName, 3);//remove -Channel1 from comList for currentPort
+            }
+            serialPort3.PortName = port;
+        }
         //close port from channel 1, change status label to close
         private void closeport(string port1)
         {
@@ -2257,6 +2509,7 @@ namespace WindowsFormsApplication1
         {
             refreshComList();
         }
+        //Changed 4/13/21 to addCh3
         private List<string> testerList = new List<string>();
         private void refreshComList()
         {
@@ -2278,7 +2531,12 @@ namespace WindowsFormsApplication1
                 serialPort2.PortName = "COM102";
                 showComConnect_SecondChan(noComConnectMessage);
             }
-
+            if (serialPort3.IsOpen)
+            {
+                serialPort3.Close();
+                serialPort3.PortName = "COM103";
+                showComConnect_Channel3(noComConnectMessage);
+            }
             foreach (string portName in SerialPort.GetPortNames())
             {
                 bool portcheck = currPort.Equals(portName);//portcheck is true if the currPort is same as PortName
@@ -2356,19 +2614,20 @@ namespace WindowsFormsApplication1
             }
         }
         //pass in and delete line index from gridview
+        //changed 4/13/21 to addCh3
         private void deleteRow(int index)
         {
+            if (!channel1_gridview.Rows[index].IsNewRow)
+            {
+                channel1_gridview.Rows.RemoveAt(index);
+                updateSampleNuminGrid(ref channel1_gridview, index);
+            }
             if (!singleChannel_gridView.Rows[index].IsNewRow)
             {
-                //gridview.Rows.RemoveAt(index);
                 singleChannel_gridView.Rows.RemoveAt(index);
-                firstChannelGrid.Rows.RemoveAt(index);
+                updateSampleNuminGrid(ref singleChannel_gridView, index);
+                updateTableandChart(ref singleChart, singleChannel_gridView);
             }
-            updateSampleNuminGrid(ref singleChannel_gridView, index);
-            updateSampleNuminGrid(ref firstChannelGrid, index);
-
-            //updateTableandChart(ref chart1,singleChannel_gridView);
-            updateTableandChart(ref singleChart, singleChannel_gridView);
         }
         private void delete_Click(object sender, EventArgs e)
         {
@@ -2814,14 +3073,19 @@ namespace WindowsFormsApplication1
                 catch { }
             ch1CMCMKReCalculate = true;
         }
-        //changed 10/2/18
+        //changed 9/25/20 to UIStream
         private void clearRun_SingleTab_Click(object sender, EventArgs e)
+        {
+            clearCurrRun();
+            clear_limit_Click(this, e);
+        }
+        //Added 9/25/20 to UIStream
+        private void clearCurrRun()
         {
             clearGrid(ref singleChannel_gridView);
             USL_txt.Text = "";
             LSL_txt.Text = "";
             ch1CMCMKReCalculate = true;
-            clear_limit_Click(this, e);
         }
 
         private float[,] dataToExcel(DataGridView thisGrid)
@@ -2878,7 +3142,29 @@ namespace WindowsFormsApplication1
         {
             throw new NotImplementedException();
         }
-        //changed 7/31/18
+        //Added 9/25/20 to streamUI
+        private Excel.Worksheet writePeaktoExcel(Excel.Worksheet xlWorksheet,double peakVal)
+        {
+            int startRow = 0;
+            if (peakVal!=0)
+            {
+                startRow = getExcelLastRow(xlWorksheet)+1;
+                int startCol = 1;
+                xlWorksheet.Cells[startRow, startCol] = "Peak";
+                xlWorksheet.Cells[startRow, startCol + 1] = peakVal;
+            }
+            return xlWorksheet;
+
+        }
+        //Added 9/25/20 to streamUI
+        private int getExcelLastRow(Excel.Worksheet xlWorkSheet)
+        {
+            int lastRow= xlWorkSheet.Cells.Find("*", System.Reflection.Missing.Value,
+                    System.Reflection.Missing.Value, System.Reflection.Missing.Value, Excel.XlSearchOrder.xlByRows, Excel.XlSearchDirection.xlPrevious, false, System.Reflection.Missing.Value, System.Reflection.Missing.Value).Row;
+            return lastRow;
+        }
+        //changed 9/25/20 to streamUI
+        //changed 4/13/21 to addCh3
         private void saveExcel(string path, DataTable thisTable, int chartType)
         {
             string currTab = TabPages.SelectedTab.Name;
@@ -2926,58 +3212,62 @@ namespace WindowsFormsApplication1
                 Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlWorkSheet.ChartObjects(Type.Missing);
                 Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(200, 80, 500, 250);
                 Excel.Chart chartPage = myChart.Chart;
-
+                Excel.SeriesCollection oSeries = (Excel.SeriesCollection)myChart.Chart.SeriesCollection(misValue);
+                
                 //For now use Line Chart for all Chart
                 /*if (chartType == lineChart)
                     chartPage.ChartType = Excel.XlChartType.xlXYScatterLines;
                 else
                     chartPage.ChartType = Excel.XlChartType.xlXYScatter;*/
-                chartPage.ChartType = Excel.XlChartType.xlXYScatterLines;
-
-                chartPage.HasTitle = true;
-                chartPage.ChartTitle.Text = "File saved at " + path;
-                chartPage.ChartTitle.Font.Size = 12;
-                chartPage.HasLegend = true;
-
-                Excel.SeriesCollection oSeries = (Excel.SeriesCollection)myChart.Chart.SeriesCollection(misValue);
-
-                //if user defines target, low, high; then draw on Excel
-                if (isHighLow)
+                if (chartType != 0)
                 {
-                    Excel.Series low = oSeries.NewSeries();
-                    Excel.Series high = oSeries.NewSeries();
-                    Excel.Series target = oSeries.NewSeries();
+                    chartPage.ChartType = Excel.XlChartType.xlXYScatterLines;
 
-                    //assign color for series in excel
-                    target.Border.Color = Color.Green;
-                    low.Border.Color = Color.Red;
-                    high.Border.Color = Color.Red;
-                    target.Border.LineStyle = Excel.XlLineStyle.xlDashDot;
+                    chartPage.HasTitle = true;
+                    chartPage.ChartTitle.Text = "File saved at " + path;
+                    chartPage.ChartTitle.Font.Size = 12;
+                    chartPage.HasLegend = true;
 
-                    low.Name = "Low Tolerance";
-                    high.Name = "High Tolerance";
-                    target.Name = "Target";
-                    if (isMasterSave)
+                    
+
+                    //if user defines target, low, high; then draw on Excel
+                    if (isHighLow)
                     {
-                        //if this save is for MasterGrid, change the range of high low target
-                        begin_high = getColLetter(thisTable.Columns.Count - 1) + (startRow + 1);
-                        begin_low = getColLetter(thisTable.Columns.Count) + (startRow + 1);
-                        begin_target = getColLetter(thisTable.Columns.Count + 1) + (startRow + 1);
+                        Excel.Series low = oSeries.NewSeries();
+                        Excel.Series high = oSeries.NewSeries();
+                        Excel.Series target = oSeries.NewSeries();
 
-                        range_high = getColLetter(thisTable.Columns.Count - 1) + (thisTable.Rows.Count + startRow);
-                        range_low = getColLetter(thisTable.Columns.Count) + (thisTable.Rows.Count + startRow);
-                        range_target = getColLetter(thisTable.Columns.Count + 1) + (thisTable.Rows.Count + startRow);
+                        //assign color for series in excel
+                        target.Border.Color = Color.Green;
+                        low.Border.Color = Color.Red;
+                        high.Border.Color = Color.Red;
+                        target.Border.LineStyle = Excel.XlLineStyle.xlDashDot;
 
+                        low.Name = "Low Tolerance";
+                        high.Name = "High Tolerance";
+                        target.Name = "Target";
+                        if (isMasterSave)
+                        {
+                            //if this save is for MasterGrid, change the range of high low target
+                            begin_high = getColLetter(thisTable.Columns.Count - 1) + (startRow + 1);
+                            begin_low = getColLetter(thisTable.Columns.Count) + (startRow + 1);
+                            begin_target = getColLetter(thisTable.Columns.Count + 1) + (startRow + 1);
+
+                            range_high = getColLetter(thisTable.Columns.Count - 1) + (thisTable.Rows.Count + startRow);
+                            range_low = getColLetter(thisTable.Columns.Count) + (thisTable.Rows.Count + startRow);
+                            range_target = getColLetter(thisTable.Columns.Count + 1) + (thisTable.Rows.Count + startRow);
+
+                        }
+
+                        Excel.Range high_range = xlWorkSheet.get_Range(begin_high, range_high);
+                        Excel.Range low_range = xlWorkSheet.get_Range(begin_low, range_low);
+                        Excel.Range target_range = xlWorkSheet.get_Range(begin_target, range_target);
+
+                        //Bind value of high low target Series to apporpriate range on Excel worksheet
+                        low.Values = low_range;
+                        high.Values = high_range;
+                        target.Values = target_range;
                     }
-
-                    Excel.Range high_range = xlWorkSheet.get_Range(begin_high, range_high);
-                    Excel.Range low_range = xlWorkSheet.get_Range(begin_low, range_low);
-                    Excel.Range target_range = xlWorkSheet.get_Range(begin_target, range_target);
-
-                    //Bind value of high low target Series to apporpriate range on Excel worksheet
-                    low.Values = low_range;
-                    high.Values = high_range;
-                    target.Values = target_range;
                 }
 
                 //write readings on Excel
@@ -2988,25 +3278,30 @@ namespace WindowsFormsApplication1
                     xlWorkSheet = writeCMCMKtoExcel(xlWorkSheet, startCMCMKRow, startCMCMKCol);
 
                     // Find the last real row
-                    int excelLastRow = xlWorkSheet.Cells.Find("*", System.Reflection.Missing.Value,
-                    System.Reflection.Missing.Value, System.Reflection.Missing.Value, Excel.XlSearchOrder.xlByRows, Excel.XlSearchDirection.xlPrevious, false, System.Reflection.Missing.Value, System.Reflection.Missing.Value).Row;
+                    int excelLastRow = getExcelLastRow(xlWorkSheet);
 
                     //Write tool info to last row
                     if (toolID_SC_comboBox.SelectedIndex >= 0)
                         xlWorkSheet = writeToolsInfoToSCExcel(xlWorkSheet, excelLastRow + 1);
+
+                    //Write Peak value if avai.
+                    xlWorkSheet = writePeaktoExcel(xlWorkSheet, currPeakVal);
 
                     Excel.Range datarange = (Excel.Range)xlWorkSheet.Cells[startRow, startCol];
                     datarange = datarange.get_Resize(rowCount - 1, colCount);
                     datarange.set_Value(Excel.XlRangeValueDataType.xlRangeValueDefault, datas);
                     string colName = thisTable.Columns[1].ColumnName;
                     //Assign series Reading to Chart
-                    Excel.Series reading = oSeries.NewSeries();
-                    reading.Name = colName;
-                    reading.Border.Color = Color.Blue;
+                    if (chartType != noChart)
+                    {
+                        Excel.Series reading = oSeries.NewSeries();
+                        reading.Name = colName;
+                        reading.Border.Color = Color.Blue;
 
-                    Excel.Range reading_range = xlWorkSheet.get_Range(begin_reading, range_data);
+                        Excel.Range reading_range = xlWorkSheet.get_Range(begin_reading, range_data);
 
-                    reading.Values = reading_range;
+                        reading.Values = reading_range;
+                    }
                     //add heading for Excel file 
                     xlWorkSheet.Cells[startRow - 1, startCol] = "Point";
                     xlWorkSheet.Cells[startRow - 1, startCol + 1] = colName;
@@ -3053,48 +3348,52 @@ namespace WindowsFormsApplication1
                     ////////////////End writing datas//////////////////////////////
 
                     //Do graph for multiple series
-                    List<Excel.Series> colList = new List<Excel.Series>();
-                    colIndex = 0;
-                    Excel.Range YRange, XRange;
-                    int colListIndex = 0;
-                    while (colIndex < (thisTable.Columns.Count - 1))
+                    if (chartType != 0)
                     {
-                        colList.Add(oSeries.NewSeries());
-                        colName = thisTable.Columns[colIndex + 1].ColumnName;//if single channel, colName=table[col] name
-                        if ((thisTable.Columns[0].ColumnName != "Point"))//if dual table, colName=serieName
-                            colName = getSerieNamefrXorY(colName, dualChart);
-
-                        colList[colListIndex].Name = colName;//assign colName to colList[serie]
-
-                        string YcolLetter = getColLetter(colIndex);
-                        string XcolLetter;
-                        //Assign the right column letter to XcolLetter
-                        if (thisTable.Columns[0].ColumnName == "Point")
-                            //Passed in table is table for 1 channel, XcolLetter is always A
-                            XcolLetter = "A";
-                        else//Passeed in table is dualTable for 2 channel, then XcolLetter is the even numbertable
+                        List<Excel.Series> colList = new List<Excel.Series>();
+                        colIndex = 0;
+                        Excel.Range YRange, XRange;
+                        int colListIndex = 0;
+                        while (colIndex < (thisTable.Columns.Count - 1))
                         {
-                            XcolLetter = getColLetter(colIndex - 1);
+                            colList.Add(oSeries.NewSeries());
+                            colName = thisTable.Columns[colIndex + 1].ColumnName;//if single channel, colName=table[col] name
+                            if ((thisTable.Columns[0].ColumnName != "Point"))//if dual table, colName=serieName
+                                colName = getSerieNamefrXorY(colName, dualChart);
+
+                            colList[colListIndex].Name = colName;//assign colName to colList[serie]
+
+                            string YcolLetter = getColLetter(colIndex);
+                            string XcolLetter;
+                            //Assign the right column letter to XcolLetter
+                            if (thisTable.Columns[0].ColumnName == "Point")
+                                //Passed in table is table for 1 channel, XcolLetter is always A
+                                XcolLetter = "A";
+                            else//Passeed in table is dualTable for 2 channel, then XcolLetter is the even numbertable
+                            {
+                                XcolLetter = getColLetter(colIndex - 1);
+                            }
+                            /////End Assigning///
+                            //Assign X and Y Range for colList[serie]
+                            YRange = xlWorkSheet.get_Range(YcolLetter + (startRow + 1) + ":" + YcolLetter + (thisTable.Rows.Count + startRow));
+                            XRange = xlWorkSheet.get_Range(XcolLetter + (startRow + 1) + ":" + XcolLetter + (thisTable.Rows.Count + startRow));
+                            colList[colListIndex].Values = YRange;
+                            colList[colListIndex].XValues = XRange;
+
+                            //if single channel, coIndex+1, if dual channel, colIndex+2
+                            if (thisTable.Columns[0].ColumnName == "Point")
+                                colIndex += 1;
+                            else
+                                colIndex += 2;
+
+                            colListIndex++;
                         }
-                        /////End Assigning///
-                        //Assign X and Y Range for colList[serie]
-                        YRange = xlWorkSheet.get_Range(YcolLetter + (startRow + 1) + ":" + YcolLetter + (thisTable.Rows.Count + startRow));
-                        XRange = xlWorkSheet.get_Range(XcolLetter + (startRow + 1) + ":" + XcolLetter + (thisTable.Rows.Count + startRow));
-                        colList[colListIndex].Values = YRange;
-                        colList[colListIndex].XValues = XRange;
-
-                        //if single channel, coIndex+1, if dual channel, colIndex+2
-                        if (thisTable.Columns[0].ColumnName == "Point")
-                            colIndex += 1;
-                        else
-                            colIndex += 2;
-
-                        colListIndex++;
                     }
                     isMasterSave = false;
 
                 }
-
+                if (chartType == noChart)
+                    xlCharts.Delete();
                 ///////////End updating graph
 
                 //Save and release Excel object
@@ -3228,9 +3527,9 @@ namespace WindowsFormsApplication1
                 case SMDSingleTabName://if smd single, check if CM and CMK value is checked
                     //if it's checked, add 2 more rows for CM and CMK
                     if (showCMK_chkBox.Checked == true)
-                        returnRow += 3;
+                        returnRow += 4;
                     else
-                        returnRow += 1;//for average row
+                        returnRow += 2;//for average row
                     //if Tool is selected, add 5 more rows for tools info
                     if (toolID_SC_comboBox.SelectedIndex >= 0)
                     {
@@ -3582,6 +3881,7 @@ namespace WindowsFormsApplication1
             }
         }
         bool askToClearData = true;
+        //changed 9/25/20 to changeUI
         private void add_serie_Click(object sender, EventArgs e)
         {
             //Save current run and show on nocurrentGrid
@@ -3616,6 +3916,7 @@ namespace WindowsFormsApplication1
             updateListViewColor(ref singleSeriesListView, singleChart);//update color for seriesListView
 
             changeGridAutoColumnSize(ref masterGrid_noCurrent, colThreshold);
+            currPeakVal = 0;
         }
 
         //delete serie from a chart
@@ -3625,14 +3926,9 @@ namespace WindowsFormsApplication1
             Series serie = chart.Series[serieName];
             chart.Series.Remove(serie);
         }
-
-        //Changed 8/27/17
-        private void delete_column_Click(object sender, EventArgs e)
+        //Added 9/25/20 to streamUI
+        private void deleteRunSingleChannel(string deleteColumn)
         {
-            Form_Delete frm = new Form_Delete();
-            frm.ShowDialog();
-
-            string deleteColumn = Form_Delete.deleteColumn;
             if (deleteColumn.Length > 0)
             {
                 try
@@ -3658,6 +3954,15 @@ namespace WindowsFormsApplication1
             PreventGridSort(ref masterGridView);
             updateCurrentRunAndSingleChanLabel(currColumn);//Update Label for CurrentRunText
             changeGridAutoColumnSize(ref masterGrid_noCurrent, colThreshold);
+        }
+        //Changed 9/25/20 to streamUI
+        private void delete_column_Click(object sender, EventArgs e)
+        {
+            Form_Delete frm = new Form_Delete();
+            frm.ShowDialog();
+
+            string deleteColumn = frm.deleteColumn;
+            deleteRunSingleChannel(deleteColumn);
         }
 
         //return true if passed in colname can be used
@@ -3719,14 +4024,23 @@ namespace WindowsFormsApplication1
         }
 
         //change name of column for mastergrid and table
+        //Changed 9/25/20 to streamUI
         private void rename_col_Click(object sender, EventArgs e)
         {
             var frm = new FormRename();
             frm.ShowDialog();
-            if ((frm.newName.Length > 0) && (frm.oldName.Length > 0))
+            string newName = frm.newName;
+            string oldName = frm.oldName;
+            int columnIndex = frm.columnIndex;
+            renameRun(oldName, newName, columnIndex);
+        }
+        //Added 9/25/20 to streamUI
+        private void renameRun(string oldName, string newName, int columnIndex)
+        {
+            if ((newName.Length > 0) && (oldName.Length > 0))
             {
-                ChangeColName(frm.oldName, frm.newName, frm.columnIndex, ref singleTable);
-                changeCh1ChartName(frm.oldName, frm.newName);
+                ChangeColName(oldName, newName, columnIndex, ref singleTable);
+                changeCh1ChartName(oldName, newName);
                 updateCurrentRunAndSingleChanLabel(currColumn);
             }
             bindTable();
@@ -3737,10 +4051,9 @@ namespace WindowsFormsApplication1
             arr_singleSeries = getListOfSeriesName(singleChart);
             //removeSerieFrCheckList(frm.oldName,ref singleSeriesListView);//Remove the old one
             //AddSerieToCheckList(ref singleSeriesListView, arr_singleSeries);
-            renameSerieInListView(frm.oldName, frm.newName, ref singleSeriesListView);
+            renameSerieInListView(oldName, newName, ref singleSeriesListView);
             updateListViewColor(ref singleSeriesListView, singleChart);//update color for seriesListView
         }
-
         private void masterQuickExport_Click(object sender, EventArgs e)
         {
             clearEmptyRow(ref noCurrentTable);
@@ -3782,6 +4095,14 @@ namespace WindowsFormsApplication1
             channel2MenuButtonUpdate();
 
         }
+        //Added 4/13/21 to addChan3
+        private void openCloseChannel3(ref ListBox thisList)
+        {
+            string currentPort = extractCOM(thisList.SelectedItem.ToString());
+            opencloseChannel3(currentPort, thisList);
+            changeWinSize(TabPages.SelectedTab.Name);//Call this to ping or unping tester
+            channel3MenuButtonUpdate();
+        }
         //Change Menu button and Mode appearance for Second Channel
         private void channel2MenuButtonUpdate()
         {
@@ -3802,6 +4123,27 @@ namespace WindowsFormsApplication1
                 ch2MenuControlBtn_calTab.Enabled = false;
             }
         }
+        //Change Menu button and Mode appearance for Ch3
+        //Added 4/13/21 to addCh3
+        private void channel3MenuButtonUpdate()
+        {
+            if (serialPort3.IsOpen)
+            {
+                ch3Mode_btn.Text = chann3Control.getStringMode();
+                ch3Menu_btn.Enabled = true;
+
+                //ch3ModeControlBtn_calTab.Text = chann2Control.getStringMode();
+                //ch2MenuControlBtn_calTab.Enabled = true;
+            }
+            else
+            {
+                ch3Mode_btn.Text = "Mode";
+                ch3Menu_btn.Enabled = false;
+
+                //ch2ModeControlBtn_calTab.Text = "Mode";
+                //ch2MenuControlBtn_calTab.Enabled = false;
+            }
+        }
         private void refresh_dualTab_Click(object sender, EventArgs e)
         {
             refreshComList();
@@ -3814,8 +4156,8 @@ namespace WindowsFormsApplication1
         }
         private void deleteLineFirst_Click(object sender, EventArgs e)
         {
-            if (firstChannelGrid.RowCount > 0)
-                deleteRow(firstChannelGrid.CurrentCell.RowIndex);
+            if (channel1_gridview.RowCount > 0)
+                deleteRow(channel1_gridview.CurrentCell.RowIndex);
             updateDualTableAndChart();
         }
 
@@ -3839,16 +4181,27 @@ namespace WindowsFormsApplication1
         {
             toTable = frTable.Copy();
         }
-
+        //changed 9/25/20 to streamUI
         private void saveCurrent_button_Click(object sender, EventArgs e)
         {
+            saveCurrentRun();
+        }
+        //added 9/25/20 to streamUI
+        private void saveCurrentRun()
+        {
+            //save name of current run if user changed
+            int currRunColIndex = singleTable.Columns.Count - 1;
+            string newName = currentRunText.Text;
+            string oldName = singleTable.Columns[currRunColIndex].ColumnName;
+            if (newName != oldName)
+                renameRun(oldName, newName, currRunColIndex);
+
             clearEmptyRow(ref singleTable);
             copyTable(ref singleTable, ref noCurrentTable);
             bindTable();
 
             changeGridAutoColumnSize(ref masterGrid_noCurrent, colThreshold);
         }
-
         private void addDualRun_Click(object sender, EventArgs e)
         {
             //Show Form to ask for Serie Name, CHan1 and Chan2 names
@@ -3876,7 +4229,7 @@ namespace WindowsFormsApplication1
                 }
 
                 //clear Current reading for both channels
-                clearGrid(ref firstChannelGrid);
+                clearGrid(ref channel1_gridview);
 
                 //Delete all empty row in secondchannelTable
                 initSecondChannelTable();
@@ -3905,25 +4258,26 @@ namespace WindowsFormsApplication1
         }
 
         //remove a row from secondChannelTable
-        private void removeSecondTableRow(int index)
+        //changed 4/13/21 to addCh3
+        private void removeSecondTableRow(int index,ref DataTable table)
         {
-            if (index < secondChannelTable.Rows.Count)
+            if (index < table.Rows.Count)
             {
-                secondChannelTable.Rows.RemoveAt(index);
+                table.Rows.RemoveAt(index);
             }
         }
 
         //delete button for second channel gridview 
         private void deleteSecond_Click(object sender, EventArgs e)
         {
-            if (secondChannelGridView.Rows.Count > 0)
-                removeSecondTableRow(secondChannelGridView.CurrentCell.RowIndex);
+            if (channel2_gridview.Rows.Count > 0)
+                removeSecondTableRow(channel2_gridview.CurrentCell.RowIndex,ref secondChannelTable);
             updateDualTableAndChart();
         }
 
         private void clearFirst_Click(object sender, EventArgs e)
         {
-            clearGrid(ref firstChannelGrid);
+            clearGrid(ref channel1_gridview);
             updateDualTableAndChart();
         }
 
@@ -4224,7 +4578,6 @@ namespace WindowsFormsApplication1
         {
             if (serialPort1.IsOpen)
                 readFromFirstChannel(serialPort1, chann1Control, 1);
-
         }
 
         /// <summary>
@@ -4286,7 +4639,7 @@ namespace WindowsFormsApplication1
             updateTableandChart(ref singleChart, singleChannel_gridView);
             copyAllFirstChannelGridView(singleChannel_gridView);
             updateSampleNuminGrid(ref singleChannel_gridView, singleChannel_gridView.RowCount - 2);
-            updateSampleNuminGrid(ref firstChannelGrid, firstChannelGrid.RowCount - 2);
+            updateSampleNuminGrid(ref channel1_gridview, channel1_gridview.RowCount - 2);
 
         }
         private void gridview_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -4297,26 +4650,28 @@ namespace WindowsFormsApplication1
         }
         private void firstChannelGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            int beforeRowCount = singleChannel_gridView.RowCount;
+            int beforeRowCount = channel1_gridview.RowCount;
             //updateTableandChart(ref chart1, firstChannelGrid);
             //updateTableandChart(ref singleChart, firstChannelGrid);
             updateDualTableAndChart();
-            copyAllFirstChannelGridView(firstChannelGrid);
+            copyAllFirstChannelGridView(channel1_gridview);
 
-            int afterRowCount = firstChannelGrid.RowCount;
+            int afterRowCount = channel1_gridview.RowCount;
 
             if ((serialPort2.IsOpen) && (afterRowCount > beforeRowCount))
                 readFromSecondChannel();
+            if ((serialPort3.IsOpen) && (afterRowCount > beforeRowCount))
+                readFromChannel3();
 
             updateSampleNuminGrid(ref singleChannel_gridView, singleChannel_gridView.RowCount - 2);
-            updateSampleNuminGrid(ref firstChannelGrid, firstChannelGrid.RowCount - 2);
+            updateSampleNuminGrid(ref channel1_gridview, channel1_gridview.RowCount - 2);
         }
 
         private void secondChannelGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             updateDualTableAndChart();
-            if (firstChannelGrid.CurrentRow.Index >= 0)
-                FocusGridViewRow(ref secondChannelGridView, firstChannelGrid.CurrentRow.Index);
+            if (channel1_gridview.CurrentRow.Index >= 0)
+                FocusGridViewRow(ref channel2_gridview, channel1_gridview.CurrentRow.Index);
         }
         //Focus on a row of gridview
         private void FocusGridViewRow(ref DataGridView thisGrid, int rowIndex)
@@ -4332,7 +4687,8 @@ namespace WindowsFormsApplication1
         {
             try
             {
-                FocusGridViewRow(ref secondChannelGridView, firstChannelGrid.CurrentRow.Index);
+                FocusGridViewRow(ref channel2_gridview, channel1_gridview.CurrentRow.Index);
+                FocusGridViewRow(ref channel3_gridview, channel1_gridview.CurrentRow.Index);
             }
             catch { }
         }
@@ -4350,12 +4706,14 @@ namespace WindowsFormsApplication1
             test_label.Text = convertCharToHexStr('8');
         }
         //if max column is greater than passed in val, change from fill to All Cell
+        //changed 9/25/20 streamUI
         private void changeGridAutoColumnSize(ref DataGridView thisGrid, int thiscolThreshold)
         {
             if (thisGrid.ColumnCount > thiscolThreshold)
                 thisGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             else
                 thisGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            PreventGridSort(ref thisGrid);
         }
 
         private void saveToNoCurrDualTable()
@@ -4410,7 +4768,7 @@ namespace WindowsFormsApplication1
         {
             menuControl(serialPort2, ref chann2Control, channel2);
         }
-
+        //Changed 4/13/21 to addCh3
         private void captureReadingsFromBothChannel()
         {
             if (serialPort1.IsOpen)
@@ -4419,6 +4777,8 @@ namespace WindowsFormsApplication1
             }
             if (serialPort2.IsOpen)
                 readFromSecondChannel();
+            if (serialPort3.IsOpen)
+                readFromChannel3();
         }
         private void chan1_captureControl_button_Click(object sender, EventArgs e)
         {
@@ -4640,12 +5000,13 @@ namespace WindowsFormsApplication1
 
         private void deleteBothRow_button_Click(object sender, EventArgs e)
         {
-            if (firstChannelGrid.RowCount > 0)
+            if (channel1_gridview.RowCount > 0)
             {
                 try
                 {
-                    removeSecondTableRow(firstChannelGrid.CurrentCell.RowIndex);
-                    deleteRow(firstChannelGrid.CurrentCell.RowIndex);
+                    removeSecondTableRow(channel1_gridview.CurrentCell.RowIndex,ref secondChannelTable);
+                    removeSecondTableRow(channel1_gridview.CurrentCell.RowIndex, ref ch3Table);
+                    deleteRow(channel1_gridview.CurrentCell.RowIndex);
                 }
                 catch { }
             }
@@ -4654,8 +5015,9 @@ namespace WindowsFormsApplication1
 
         private void clearBothData_button_Click(object sender, EventArgs e)
         {
-            clearGrid(ref firstChannelGrid);
+            clearGrid(ref channel1_gridview);
             secondChannelTable.Rows.Clear();
+            ch3Table.Rows.Clear();
             updateDualTableAndChart();
         }
 
@@ -4722,22 +5084,24 @@ namespace WindowsFormsApplication1
         {
             string fileName = currentDualSerie + "-" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".xls";
             string path = Path.Combine(getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName), fileName);
-            DataTable tempTable = (copyColumnsFromTable(dualTable, 0, 1)).Copy();
+            updateDualChanTable();
+            DataTable tempTable = (copyColumnsFromTable(dualTable, 0, 2)).Copy();
             if (tempTable.Rows.Count > 0)
             {
                 isMasterSave = true;
-                quickExportToExcel(path, tempTable, pointChart);
+                quickExportToExcel(path, tempTable, noChart);
             }
         }
 
         private void currRunDualSaveExcel_Click(object sender, EventArgs e)
         {
             string path = getSavePathName(currentDualSerie);
-            DataTable tempTable = (copyColumnsFromTable(dualTable, 0, 1)).Copy();
+            updateDualChanTable();
+            DataTable tempTable = (copyColumnsFromTable(dualTable, 0, 2)).Copy();
             if ((path != "") && (tempTable.Rows.Count > 0))
             {
                 isMasterSave = true;
-                saveExcel(path, tempTable, pointChart);
+                saveExcel(path, tempTable, noChart);
             }
         }
 
@@ -4839,8 +5203,9 @@ namespace WindowsFormsApplication1
         //Also call to bind to dualMasterGrid
         private void initDualTable()
         {
-            tableAddCol(ref dualTable, currRunName1, 0);
             tableAddCol(ref dualTable, currRunName2, 0);
+            tableAddCol(ref dualTable, currRunName1, 1);
+            tableAddCol(ref dualTable, currRunName3, 2);
             initChartSerie(ref dualChart, currentDualSerie);//Add thisSerie to dualChart
             updateDualChartSerieXY("Reading", ref dualChart, dualTable, 0, 1);
             arr_dualSeries = getListOfSeriesName(dualChart);//copy dualChart Series Collection Names into arr_dualSeries, this is used to check whether newly added Serie Name already existed
@@ -4868,26 +5233,27 @@ namespace WindowsFormsApplication1
             }
 
         }
-        //Copy current first and second ChannelGrid reading to dualTable
+        //changed 4/13/21 to addCh3
         private void updateDualChanTable()
         {
-            int dualColIndex_CH1, dualColIndex_CH2;
+            int ch1ColIndex, ch2ColIndex, ch3ColIndex=2;
             clearTableColumn(ref dualTable, 0);//clear the first column of dualTable
             clearTableColumn(ref dualTable, 1);//clear the second column of dualTable
+            clearTableColumn(ref dualTable, 2);
             if (xAxis == 1)
             {
-                dualColIndex_CH1 = 0;
-                dualColIndex_CH2 = 1;
+                ch1ColIndex = 0;
+                ch2ColIndex = 1;
             }
             else
             {
-                dualColIndex_CH1 = 1;
-                dualColIndex_CH2 = 0;
+                ch1ColIndex = 1;
+                ch2ColIndex = 0;
             }
 
-            copyCurrentColToDualTable(ref dualTable, dualColIndex_CH1, firstChannelGrid, 1);//copy firstChannelGrid Reading to dualtable
-            copyCurrentColToDualTable(ref dualTable, dualColIndex_CH2, secondChannelGridView, 0);//copy secondChannelGrid Reading to dualtable
-
+            copyCurrentColToDualTable(ref dualTable, ch1ColIndex, channel1_gridview, 1);//copy firstChannelGrid Reading to dualtable
+            copyCurrentColToDualTable(ref dualTable, ch2ColIndex, channel2_gridview, 0);//copy secondChannelGrid Reading to dualtable
+            copyCurrentColToDualTable(ref dualTable, ch3ColIndex, channel3_gridview, 0);
         }
         //return List<string> of all Series Name from passed in chart 
         private List<string> getListOfSeriesName(Chart thisChart)
@@ -8924,27 +9290,29 @@ namespace WindowsFormsApplication1
 
             timer2.Start();
         }
-
+        //changed 9/25/20 to streamUI
+        double currPeakVal = 0;
         private void singleCHStream_btn_Click(object sender, EventArgs e)
         {
             timer2.Stop();
             int channelCount = 1;
-            Form_Streaming streamingForm = new Form_Streaming(serialPort1,channelCount);
+            Form_Streaming streamingForm = new Form_Streaming(serialPort1,channelCount,chann1Control);
             streamingForm.ShowDialog();
 
             //Write to current Test
             if (streamingForm.isSave == true)
             {
+                currPeakVal = 0;
                 populateGridwithDataColumn(ref singleChannel_gridView, streamingForm.streamTableCh1,streamingForm.readingColIndex);
                 updateTableandChart(ref singleChart, singleChannel_gridView);
                 if (streamingForm.savePeak==true)
                 {
-                    double peakVal = streamingForm.peakVal;
-                    if (peakVal != 0)
+                    currPeakVal = streamingForm.peakVal;
+                    if (currPeakVal != 0)
                     {
                         peakVal_lbl.Visible = true;
                         peakLabel_lbl.Visible = true;
-                        peakVal_lbl.Text = peakVal.ToString();
+                        peakVal_lbl.Text = currPeakVal.ToString();
                     }
                 }
                 else
@@ -9100,6 +9468,32 @@ namespace WindowsFormsApplication1
             copyCW_btn.Visible = false;
             copyCCW_btn.Visible = false;
         }
+
+        private void channel3_gridview_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void ch3ZeroClear_btn_Click(object sender, EventArgs e)
+        {
+            zeroControl(serialPort3);
+        }
+
+        private void ch3Menu_btn_Click(object sender, EventArgs e)
+        {
+            menuControl(serialPort3, ref chann3Control, channel3);
+        }
+
+        private void ch3Mode_btn_Click(object sender, EventArgs e)
+        {
+            ch3Mode_btn.Text = modeControl(serialPort3, ref chann3Control);
+        }
+
+        private void ch3Unit_btn_Click(object sender, EventArgs e)
+        {
+            unitControl(serialPort3, ref chann3Control);
+        }
+
         //Added 6/25/20 to changeUI
         private void ALCCW_btn_Click(object sender, EventArgs e)
         {
@@ -9124,6 +9518,29 @@ namespace WindowsFormsApplication1
             if (response == "")
                 response = "No Response";
             response_lbl.Text = response;
+        }
+
+        private void openClosechannel3_btn_Click(object sender, EventArgs e)
+        {
+            openCloseChannel3(ref comList4);
+        }
+
+        //Start new test in Single Channel Tab
+        private void newTest_btn_Click(object sender, EventArgs e)
+        {
+            var isStartNewTest = MessageBox.Show("Start a new test will delete all datas. Continue?", "Start New Test", MessageBoxButtons.YesNo);
+            if (isStartNewTest == DialogResult.Yes)
+            {
+                //Delete all Run
+                //Clear All Data Current Run
+                //Save Current Run
+                while (singleTable.Columns.Count>2)
+                { 
+                    deleteRunSingleChannel(singleTable.Columns[1].ColumnName);
+                }
+                clearCurrRun();
+                saveCurrentRun();
+            }
         }
 
         //Added 4/20/20 to match cal cert dual test label
@@ -9528,7 +9945,7 @@ namespace WindowsFormsApplication1
             updateListViewColor(ref dualSeriesListView, dualChart);
 
             //Write to firstChanGrid
-            populateGridwithDataColumn(ref firstChannelGrid, dualTable, 0);
+            populateGridwithDataColumn(ref channel1_gridview, dualTable, 0);
             //Write to secondChannelgrid
             secondChannelTable.Rows.Clear();
             //copy 2nd row of dualtable into secondchanneltable (most current channel 2 reading)

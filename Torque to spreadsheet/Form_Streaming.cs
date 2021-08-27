@@ -29,6 +29,7 @@ namespace WindowsFormsApplication1
         public bool savePeak = false, saveTrough = false;
         const int ch1vch2 = 0, ch2vch1 = 1, ch1vch2vcount = 2;
         public double peakVal = 0;
+        TesterControl testerControl = new TesterControl();
         //For Cal Cert Tab Stream
         public Form_Streaming(SerialPort ch1Port,SerialPort ch2Port, List<double> targets, int channelToCompare,int channelCount)
         {
@@ -67,12 +68,17 @@ namespace WindowsFormsApplication1
             //autoStartStream(channelCount);//auto start streaming
         }
         //For Single Channel Tab Stream
-        public Form_Streaming(SerialPort ch1Port,int channelCount)
+        public Form_Streaming(SerialPort ch1Port,int channelCount,TesterControl testerControl)
         {
             InitializeComponent();
+            
             chartStyle_comboBox.Visible = false;
             bindFrequencyBox();
             streamingPort1 = ch1Port;
+            
+            this.testerControl = testerControl;
+            frequency_comboBox.Text= testerControl.getcurrFreq();
+
             changeTo250kbaud(ref streamingPort1);
             singleChStream = true;
             this.channelCount = channelCount;
@@ -84,6 +90,9 @@ namespace WindowsFormsApplication1
             
             InitTimer();
             isStream = false;
+
+            this.testerControl = testerControl;
+
         }
         //For future Dual Channel Tab Stream
         public Form_Streaming(SerialPort ch1Port, SerialPort ch2Port,int channelCount)
@@ -864,6 +873,12 @@ namespace WindowsFormsApplication1
         private void streamGridCh2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void frequency_comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Todo: To be implemented
+            //testerControl.getModeAndUnitClass()
         }
 
         private void savePeak_chkBox_CheckedChanged(object sender, EventArgs e)

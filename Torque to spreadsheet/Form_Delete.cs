@@ -11,7 +11,7 @@ namespace WindowsFormsApplication1
 {
     public partial class Form_Delete : Form
     {
-        public static string deleteColumn = "";
+        public string deleteColumn = "";
         public Form_Delete()
         {
             InitializeComponent();

@@ -247,6 +247,7 @@
             this.frequency_comboBox.Name = "frequency_comboBox";
             this.frequency_comboBox.Size = new System.Drawing.Size(125, 21);
             this.frequency_comboBox.TabIndex = 153;
+            this.frequency_comboBox.SelectedIndexChanged += new System.EventHandler(this.frequency_comboBox_SelectedIndexChanged);
             // 
             // chartStyle_comboBox
             // 
@@ -300,7 +301,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 739);
+            this.ClientSize = new System.Drawing.Size(1432, 845);
             this.Controls.Add(this.saveTrough_chkBox);
             this.Controls.Add(this.savePeak_chkBox);
             this.Controls.Add(this.label4);

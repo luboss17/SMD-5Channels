@@ -33,7 +33,7 @@ namespace WindowsFormsApplication1
         /// <param modeMsg="write_command("?M",serialport)"></param>
         /// <param capMsg="write_command("?C",serialport)"></param>
         /// <param unitMsg="write_command("?U",serialport)"></param>
-        public void setModeAndUnitClass(string modeMsg, string capMsg, string unitMsg)
+        public void getModeAndUnitClass(string modeMsg, string capMsg, string unitMsg)
         {
             setInfo(modeMsg);//get AutoClear, Filter Frequency,Peak Blanking, Sign Lock
             setCap(capMsg);
@@ -50,6 +50,7 @@ namespace WindowsFormsApplication1
             return currUnitCode;
         }
         public int getcurrMode()
+
         {
             return currMode;
         }
@@ -259,10 +260,13 @@ namespace WindowsFormsApplication1
                     freq = "500 Hz";
                     break;
                 case '6':
-                    freq = "750 Hz";
+                    freq = "1000 Hz";
                     break;
                 case '7':
                     freq = "1500 Hz";
+                    break;
+                case '8':
+                    freq = "2000 Hz";
                     break;
                 default:
                     freq = "Not found";

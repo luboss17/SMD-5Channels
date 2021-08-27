@@ -85,6 +85,7 @@
             this.Filter_comboBox.Name = "Filter_comboBox";
             this.Filter_comboBox.Size = new System.Drawing.Size(115, 21);
             this.Filter_comboBox.TabIndex = 27;
+            this.Filter_comboBox.SelectedIndexChanged += new System.EventHandler(this.Filter_comboBox_SelectedIndexChanged);
             // 
             // signLock_ori_label
             // 

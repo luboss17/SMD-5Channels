@@ -176,6 +176,9 @@ namespace WindowsFormsApplication1
                 case 4:
                     freq_SL = 70;
                     break;
+                case 5:
+                    freq_SL = 80;
+                    break;
             }
             if (currSignLock==true)
                 checkEmptyComboBox(ref signLock_comboBox,"On");
@@ -206,7 +209,7 @@ namespace WindowsFormsApplication1
         {
             Form1.write_command(setModeCommand(), port);
             Form1.write_command(setUnitCommand(), port);
-            thisTesterControl.setModeAndUnitClass(Form1.write_command("?M;",port),Form1.write_command("?C;",port),Form1.write_command("?U;",port));//update all the info for Passed in TesterControl
+            thisTesterControl.getModeAndUnitClass(Form1.write_command("?M;",port),Form1.write_command("?C;",port),Form1.write_command("?U;",port));//update all the info for Passed in TesterControl
 
             getInitialValues();
             updateOriLabel();
@@ -225,5 +228,9 @@ namespace WindowsFormsApplication1
             resetField();
         }
 
+        private void Filter_comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

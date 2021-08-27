@@ -33,11 +33,11 @@ namespace WindowsFormsApplication1
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -85,6 +85,17 @@ namespace WindowsFormsApplication1
             this.serialPort2 = new System.IO.Ports.SerialPort(this.components);
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.dualChannelTab = new System.Windows.Forms.TabPage();
+            this.dualCh3RunName_Text = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.channel3_gridview = new System.Windows.Forms.DataGridView();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.ch3Unit_lbl = new System.Windows.Forms.Label();
+            this.ch3Reading_lbl = new System.Windows.Forms.Label();
+            this.channel3Connect_lbl = new System.Windows.Forms.Label();
+            this.ch3Menu_btn = new System.Windows.Forms.Button();
+            this.ch3ZeroClear_btn = new System.Windows.Forms.Button();
+            this.ch3Mode_btn = new System.Windows.Forms.Button();
+            this.ch3Unit_btn = new System.Windows.Forms.Button();
             this.dualSeriesListView = new System.Windows.Forms.ListView();
             this.dualRunName2ErrorLabel = new System.Windows.Forms.Label();
             this.dualRunName1ErrorLabel = new System.Windows.Forms.Label();
@@ -113,6 +124,7 @@ namespace WindowsFormsApplication1
             this.chan2_unitControl_button = new System.Windows.Forms.Button();
             this.defineTest = new System.Windows.Forms.Button();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.openClosechannel3_btn = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.comList4 = new System.Windows.Forms.ListBox();
             this.openCloseSecondPort = new System.Windows.Forms.Button();
@@ -150,10 +162,10 @@ namespace WindowsFormsApplication1
             this.dualChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.clearSecond = new System.Windows.Forms.Button();
             this.deleteSecond = new System.Windows.Forms.Button();
-            this.secondChannelGridView = new System.Windows.Forms.DataGridView();
+            this.channel2_gridview = new System.Windows.Forms.DataGridView();
             this.clearFirst = new System.Windows.Forms.Button();
             this.deleteLineFirst = new System.Windows.Forms.Button();
-            this.firstChannelGrid = new System.Windows.Forms.DataGridView();
+            this.channel1_gridview = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -166,6 +178,7 @@ namespace WindowsFormsApplication1
             this.masterGridView = new System.Windows.Forms.DataGridView();
             this.command_text = new System.Windows.Forms.TextBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.newTest_btn = new System.Windows.Forms.Button();
             this.masterGrid_noCurrent = new System.Windows.Forms.DataGridView();
             this.masterSave = new System.Windows.Forms.Button();
             this.masterQuickExport = new System.Windows.Forms.Button();
@@ -225,6 +238,10 @@ namespace WindowsFormsApplication1
             this.label33 = new System.Windows.Forms.Label();
             this.USL_txt = new System.Windows.Forms.TextBox();
             this.LSL_txt = new System.Windows.Forms.TextBox();
+            this.singleChannel_gridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.showCMK_chkBox = new System.Windows.Forms.CheckBox();
             this.CMKVal_lbl = new System.Windows.Forms.Label();
             this.CMK_lbl = new System.Windows.Forms.Label();
@@ -239,10 +256,6 @@ namespace WindowsFormsApplication1
             this.saveCurrRun_1chann_button = new System.Windows.Forms.Button();
             this.quickExport = new System.Windows.Forms.Button();
             this.deleteCh1Row_btn = new System.Windows.Forms.Button();
-            this.singleChannel_gridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simple_col = new System.Windows.Forms.TabPage();
             this.response_lbl = new System.Windows.Forms.Label();
             this.sendTestCmd_btn = new System.Windows.Forms.Button();
@@ -306,18 +319,29 @@ namespace WindowsFormsApplication1
             this.upSize_btn = new System.Windows.Forms.Button();
             this.reading_bigReading_lbl = new System.Windows.Forms.Label();
             this.calibrationTab = new System.Windows.Forms.TabPage();
+            this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.ch2Target_select = new System.Windows.Forms.RadioButton();
+            this.ch1Target_select = new System.Windows.Forms.RadioButton();
+            this.captureBtn_calTab = new System.Windows.Forms.Button();
+            this.stream_btn = new System.Windows.Forms.Button();
+            this.continue_pauseTest_btn = new System.Windows.Forms.Button();
             this.AFCWChart_radio = new System.Windows.Forms.RadioButton();
             this.AFCCWChart_radio = new System.Windows.Forms.RadioButton();
             this.ALCCWChart_radio = new System.Windows.Forms.RadioButton();
             this.AFCWactive_label = new System.Windows.Forms.Label();
-            this.groupBox18 = new System.Windows.Forms.GroupBox();
-            this.ch2Target_select = new System.Windows.Forms.RadioButton();
-            this.ch1Target_select = new System.Windows.Forms.RadioButton();
+            this.ch2Reading_groupBox = new System.Windows.Forms.GroupBox();
+            this.ch2Trough_chckbox = new System.Windows.Forms.CheckBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.ch2UnitLabel_calTab = new System.Windows.Forms.Label();
+            this.ch2ReadingLabel_calTab = new System.Windows.Forms.Label();
+            this.ch2ConnectLabel_calTab = new System.Windows.Forms.Label();
+            this.ch2MenuControlBtn_calTab = new System.Windows.Forms.Button();
+            this.ch2ZeroBtn_calTab = new System.Windows.Forms.Button();
+            this.ch2ModeControlBtn_calTab = new System.Windows.Forms.Button();
+            this.ch2UnitBtn_calTab = new System.Windows.Forms.Button();
             this.copyAllStruct_btn = new System.Windows.Forms.Button();
             this.startTest_btn = new System.Windows.Forms.Button();
             this.ALCWChart_radio = new System.Windows.Forms.RadioButton();
-            this.continue_pauseTest_btn = new System.Windows.Forms.Button();
-            this.captureBtn_calTab = new System.Windows.Forms.Button();
             this.AFCCWactive_label = new System.Windows.Forms.Label();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
             this.ALCCW_btn = new System.Windows.Forms.Button();
@@ -346,7 +370,6 @@ namespace WindowsFormsApplication1
             this.ALCW_lbl = new System.Windows.Forms.Label();
             this.AFCCW_lbl = new System.Windows.Forms.Label();
             this.ALCCW_lbl = new System.Windows.Forms.Label();
-            this.stream_btn = new System.Windows.Forms.Button();
             this.testSetup_groupBox = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label40 = new System.Windows.Forms.Label();
@@ -429,22 +452,15 @@ namespace WindowsFormsApplication1
             this.checkAllReading_radioBtn = new System.Windows.Forms.RadioButton();
             this.testTarget_lbl = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.ch2Reading_groupBox = new System.Windows.Forms.GroupBox();
-            this.ch2Trough_chckbox = new System.Windows.Forms.CheckBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.ch2UnitLabel_calTab = new System.Windows.Forms.Label();
-            this.ch2ReadingLabel_calTab = new System.Windows.Forms.Label();
-            this.ch2ConnectLabel_calTab = new System.Windows.Forms.Label();
-            this.ch2MenuControlBtn_calTab = new System.Windows.Forms.Button();
-            this.ch2ZeroBtn_calTab = new System.Windows.Forms.Button();
-            this.ch2ModeControlBtn_calTab = new System.Windows.Forms.Button();
-            this.ch2UnitBtn_calTab = new System.Windows.Forms.Button();
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
+            this.serialPort3 = new System.IO.Ports.SerialPort(this.components);
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.dualChannelTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.channel3_gridview)).BeginInit();
+            this.groupBox20.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dualMasterGrid)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox15.SuspendLayout();
@@ -454,8 +470,8 @@ namespace WindowsFormsApplication1
             ((System.ComponentModel.ISupportInitialize)(this.noCurrDualMasterGrid)).BeginInit();
             this.groupBox11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dualChart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.secondChannelGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.firstChannelGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.channel2_gridview)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.channel1_gridview)).BeginInit();
             this.big_graph.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.read_graph_col.SuspendLayout();
@@ -487,6 +503,7 @@ namespace WindowsFormsApplication1
             this.groupBox19.SuspendLayout();
             this.calibrationTab.SuspendLayout();
             this.groupBox18.SuspendLayout();
+            this.ch2Reading_groupBox.SuspendLayout();
             this.groupBox17.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AFCW_grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AFCCW_grid)).BeginInit();
@@ -497,7 +514,6 @@ namespace WindowsFormsApplication1
             this.groupBox21.SuspendLayout();
             this.toolInfo_groupBox.SuspendLayout();
             this.target_groupBox.SuspendLayout();
-            this.ch2Reading_groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -513,7 +529,7 @@ namespace WindowsFormsApplication1
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3,
             this.SpreadSheetModeLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(1626, 1349);
+            this.statusStrip1.Location = new System.Drawing.Point(2966, 1556);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1977, 22);
             this.statusStrip1.TabIndex = 5;
@@ -637,6 +653,7 @@ namespace WindowsFormsApplication1
             this.toolsManagerToolStripMenuItem.Name = "toolsManagerToolStripMenuItem";
             this.toolsManagerToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
             this.toolsManagerToolStripMenuItem.Text = "Tools Manager";
+            this.toolsManagerToolStripMenuItem.Visible = false;
             this.toolsManagerToolStripMenuItem.Click += new System.EventHandler(this.toolsManagerToolStripMenuItem_Click);
             // 
             // testManagerToolStripMenuItem
@@ -644,6 +661,7 @@ namespace WindowsFormsApplication1
             this.testManagerToolStripMenuItem.Name = "testManagerToolStripMenuItem";
             this.testManagerToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
             this.testManagerToolStripMenuItem.Text = "Test Manager";
+            this.testManagerToolStripMenuItem.Visible = false;
             this.testManagerToolStripMenuItem.Click += new System.EventHandler(this.testManagerToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
@@ -902,6 +920,10 @@ namespace WindowsFormsApplication1
             // 
             // dualChannelTab
             // 
+            this.dualChannelTab.Controls.Add(this.dualCh3RunName_Text);
+            this.dualChannelTab.Controls.Add(this.label22);
+            this.dualChannelTab.Controls.Add(this.channel3_gridview);
+            this.dualChannelTab.Controls.Add(this.groupBox20);
             this.dualChannelTab.Controls.Add(this.dualSeriesListView);
             this.dualChannelTab.Controls.Add(this.dualRunName2ErrorLabel);
             this.dualChannelTab.Controls.Add(this.dualRunName1ErrorLabel);
@@ -933,16 +955,144 @@ namespace WindowsFormsApplication1
             this.dualChannelTab.Controls.Add(this.dualChart);
             this.dualChannelTab.Controls.Add(this.clearSecond);
             this.dualChannelTab.Controls.Add(this.deleteSecond);
-            this.dualChannelTab.Controls.Add(this.secondChannelGridView);
+            this.dualChannelTab.Controls.Add(this.channel2_gridview);
             this.dualChannelTab.Controls.Add(this.clearFirst);
             this.dualChannelTab.Controls.Add(this.deleteLineFirst);
-            this.dualChannelTab.Controls.Add(this.firstChannelGrid);
+            this.dualChannelTab.Controls.Add(this.channel1_gridview);
             this.dualChannelTab.Location = new System.Drawing.Point(4, 34);
             this.dualChannelTab.Name = "dualChannelTab";
             this.dualChannelTab.Size = new System.Drawing.Size(2501, 1244);
             this.dualChannelTab.TabIndex = 5;
-            this.dualChannelTab.Text = "Dual Channel";
+            this.dualChannelTab.Text = "3-Channels";
             this.dualChannelTab.UseVisualStyleBackColor = true;
+            // 
+            // dualCh3RunName_Text
+            // 
+            this.dualCh3RunName_Text.Location = new System.Drawing.Point(1036, 343);
+            this.dualCh3RunName_Text.Name = "dualCh3RunName_Text";
+            this.dualCh3RunName_Text.Size = new System.Drawing.Size(100, 20);
+            this.dualCh3RunName_Text.TabIndex = 108;
+            this.dualCh3RunName_Text.Visible = false;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(836, 346);
+            this.label22.MaximumSize = new System.Drawing.Size(190, 14);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(99, 14);
+            this.label22.TabIndex = 107;
+            this.label22.Text = "Current Run-CH3";
+            this.label22.Visible = false;
+            // 
+            // channel3_gridview
+            // 
+            this.channel3_gridview.AllowUserToResizeRows = false;
+            this.channel3_gridview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.channel3_gridview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.channel3_gridview.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.channel3_gridview.Location = new System.Drawing.Point(839, 367);
+            this.channel3_gridview.MultiSelect = false;
+            this.channel3_gridview.Name = "channel3_gridview";
+            this.channel3_gridview.RowHeadersVisible = false;
+            this.channel3_gridview.RowHeadersWidth = 82;
+            this.channel3_gridview.Size = new System.Drawing.Size(297, 190);
+            this.channel3_gridview.TabIndex = 106;
+            this.channel3_gridview.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.channel3_gridview_CellContentClick);
+            // 
+            // groupBox20
+            // 
+            this.groupBox20.Controls.Add(this.ch3Unit_lbl);
+            this.groupBox20.Controls.Add(this.ch3Reading_lbl);
+            this.groupBox20.Controls.Add(this.channel3Connect_lbl);
+            this.groupBox20.Controls.Add(this.ch3Menu_btn);
+            this.groupBox20.Controls.Add(this.ch3ZeroClear_btn);
+            this.groupBox20.Controls.Add(this.ch3Mode_btn);
+            this.groupBox20.Controls.Add(this.ch3Unit_btn);
+            this.groupBox20.Location = new System.Drawing.Point(895, 13);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(452, 307);
+            this.groupBox20.TabIndex = 105;
+            this.groupBox20.TabStop = false;
+            // 
+            // ch3Unit_lbl
+            // 
+            this.ch3Unit_lbl.Font = new System.Drawing.Font("Arial", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ch3Unit_lbl.Location = new System.Drawing.Point(52, 182);
+            this.ch3Unit_lbl.Name = "ch3Unit_lbl";
+            this.ch3Unit_lbl.Size = new System.Drawing.Size(392, 56);
+            this.ch3Unit_lbl.TabIndex = 85;
+            this.ch3Unit_lbl.Text = "label13";
+            this.ch3Unit_lbl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ch3Reading_lbl
+            // 
+            this.ch3Reading_lbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.ch3Reading_lbl.AutoSize = true;
+            this.ch3Reading_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 65F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ch3Reading_lbl.Location = new System.Drawing.Point(49, 37);
+            this.ch3Reading_lbl.Name = "ch3Reading_lbl";
+            this.ch3Reading_lbl.Size = new System.Drawing.Size(312, 98);
+            this.ch3Reading_lbl.TabIndex = 73;
+            this.ch3Reading_lbl.Text = "0.0000";
+            // 
+            // channel3Connect_lbl
+            // 
+            this.channel3Connect_lbl.AutoSize = true;
+            this.channel3Connect_lbl.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.channel3Connect_lbl.Location = new System.Drawing.Point(49, 16);
+            this.channel3Connect_lbl.Name = "channel3Connect_lbl";
+            this.channel3Connect_lbl.Size = new System.Drawing.Size(148, 16);
+            this.channel3Connect_lbl.TabIndex = 66;
+            this.channel3Connect_lbl.Text = "No COM Port Connect";
+            // 
+            // ch3Menu_btn
+            // 
+            this.ch3Menu_btn.BackColor = System.Drawing.Color.Transparent;
+            this.ch3Menu_btn.Enabled = false;
+            this.ch3Menu_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ch3Menu_btn.Location = new System.Drawing.Point(133, 278);
+            this.ch3Menu_btn.Name = "ch3Menu_btn";
+            this.ch3Menu_btn.Size = new System.Drawing.Size(75, 23);
+            this.ch3Menu_btn.TabIndex = 2;
+            this.ch3Menu_btn.Text = "Menu";
+            this.ch3Menu_btn.UseVisualStyleBackColor = false;
+            this.ch3Menu_btn.Click += new System.EventHandler(this.ch3Menu_btn_Click);
+            // 
+            // ch3ZeroClear_btn
+            // 
+            this.ch3ZeroClear_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ch3ZeroClear_btn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ch3ZeroClear_btn.Location = new System.Drawing.Point(25, 278);
+            this.ch3ZeroClear_btn.Name = "ch3ZeroClear_btn";
+            this.ch3ZeroClear_btn.Size = new System.Drawing.Size(75, 23);
+            this.ch3ZeroClear_btn.TabIndex = 1;
+            this.ch3ZeroClear_btn.Text = "Zero/Clear";
+            this.ch3ZeroClear_btn.UseVisualStyleBackColor = true;
+            this.ch3ZeroClear_btn.Click += new System.EventHandler(this.ch3ZeroClear_btn_Click);
+            // 
+            // ch3Mode_btn
+            // 
+            this.ch3Mode_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ch3Mode_btn.Location = new System.Drawing.Point(246, 278);
+            this.ch3Mode_btn.Name = "ch3Mode_btn";
+            this.ch3Mode_btn.Size = new System.Drawing.Size(75, 23);
+            this.ch3Mode_btn.TabIndex = 3;
+            this.ch3Mode_btn.Text = "Mode";
+            this.ch3Mode_btn.UseVisualStyleBackColor = true;
+            this.ch3Mode_btn.Click += new System.EventHandler(this.ch3Mode_btn_Click);
+            // 
+            // ch3Unit_btn
+            // 
+            this.ch3Unit_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ch3Unit_btn.Location = new System.Drawing.Point(357, 278);
+            this.ch3Unit_btn.Name = "ch3Unit_btn";
+            this.ch3Unit_btn.Size = new System.Drawing.Size(75, 23);
+            this.ch3Unit_btn.TabIndex = 4;
+            this.ch3Unit_btn.Text = "Unit";
+            this.ch3Unit_btn.UseVisualStyleBackColor = true;
+            this.ch3Unit_btn.Click += new System.EventHandler(this.ch3Unit_btn_Click);
             // 
             // dualSeriesListView
             // 
@@ -952,12 +1102,13 @@ namespace WindowsFormsApplication1
             this.dualSeriesListView.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dualSeriesListView.GridLines = true;
             this.dualSeriesListView.HideSelection = false;
-            this.dualSeriesListView.Location = new System.Drawing.Point(811, 561);
+            this.dualSeriesListView.Location = new System.Drawing.Point(809, 629);
             this.dualSeriesListView.Name = "dualSeriesListView";
             this.dualSeriesListView.Size = new System.Drawing.Size(154, 240);
             this.dualSeriesListView.TabIndex = 104;
             this.dualSeriesListView.UseCompatibleStateImageBehavior = false;
             this.dualSeriesListView.View = System.Windows.Forms.View.List;
+            this.dualSeriesListView.Visible = false;
             this.dualSeriesListView.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.dualSeriesListView_ItemChecked);
             // 
             // dualRunName2ErrorLabel
@@ -1000,6 +1151,7 @@ namespace WindowsFormsApplication1
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(80, 47);
             this.panel1.TabIndex = 15;
+            this.panel1.Visible = false;
             // 
             // label16
             // 
@@ -1033,6 +1185,7 @@ namespace WindowsFormsApplication1
             this.dualCurrRun_Label2.Size = new System.Drawing.Size(99, 14);
             this.dualCurrRun_Label2.TabIndex = 99;
             this.dualCurrRun_Label2.Text = "Current Run-CH2";
+            this.dualCurrRun_Label2.Visible = false;
             // 
             // dualCurrRun_label1
             // 
@@ -1044,6 +1197,7 @@ namespace WindowsFormsApplication1
             this.dualCurrRun_label1.Size = new System.Drawing.Size(99, 14);
             this.dualCurrRun_label1.TabIndex = 98;
             this.dualCurrRun_label1.Text = "Current Run-CH1";
+            this.dualCurrRun_label1.Visible = false;
             // 
             // dualCh2RunName_Text
             // 
@@ -1051,6 +1205,7 @@ namespace WindowsFormsApplication1
             this.dualCh2RunName_Text.Name = "dualCh2RunName_Text";
             this.dualCh2RunName_Text.Size = new System.Drawing.Size(100, 20);
             this.dualCh2RunName_Text.TabIndex = 3;
+            this.dualCh2RunName_Text.Visible = false;
             this.dualCh2RunName_Text.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dualCh2RunName_Text_KeyDown);
             // 
             // dualCh1RunName_Text
@@ -1059,6 +1214,7 @@ namespace WindowsFormsApplication1
             this.dualCh1RunName_Text.Name = "dualCh1RunName_Text";
             this.dualCh1RunName_Text.Size = new System.Drawing.Size(100, 20);
             this.dualCh1RunName_Text.TabIndex = 2;
+            this.dualCh1RunName_Text.Visible = false;
             this.dualCh1RunName_Text.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dualCh1RunName_Text_KeyDown);
             // 
             // switchTestCalMode_button
@@ -1076,9 +1232,9 @@ namespace WindowsFormsApplication1
             // currRunDualSaveExcel
             // 
             this.currRunDualSaveExcel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currRunDualSaveExcel.Location = new System.Drawing.Point(842, 355);
+            this.currRunDualSaveExcel.Location = new System.Drawing.Point(1159, 414);
             this.currRunDualSaveExcel.Name = "currRunDualSaveExcel";
-            this.currRunDualSaveExcel.Size = new System.Drawing.Size(117, 23);
+            this.currRunDualSaveExcel.Size = new System.Drawing.Size(117, 39);
             this.currRunDualSaveExcel.TabIndex = 5;
             this.currRunDualSaveExcel.Text = "Save As && Open";
             this.currRunDualSaveExcel.UseVisualStyleBackColor = true;
@@ -1087,12 +1243,13 @@ namespace WindowsFormsApplication1
             // addDualRun
             // 
             this.addDualRun.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addDualRun.Location = new System.Drawing.Point(843, 474);
+            this.addDualRun.Location = new System.Drawing.Point(1486, 687);
             this.addDualRun.Name = "addDualRun";
             this.addDualRun.Size = new System.Drawing.Size(119, 25);
             this.addDualRun.TabIndex = 7;
             this.addDualRun.Text = "New Run";
             this.addDualRun.UseVisualStyleBackColor = true;
+            this.addDualRun.Visible = false;
             this.addDualRun.Click += new System.EventHandler(this.addDualRun_Click);
             // 
             // dualCertExport_button
@@ -1123,9 +1280,9 @@ namespace WindowsFormsApplication1
             // clearBothData_button
             // 
             this.clearBothData_button.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearBothData_button.Location = new System.Drawing.Point(844, 534);
+            this.clearBothData_button.Location = new System.Drawing.Point(1159, 515);
             this.clearBothData_button.Name = "clearBothData_button";
-            this.clearBothData_button.Size = new System.Drawing.Size(119, 23);
+            this.clearBothData_button.Size = new System.Drawing.Size(119, 41);
             this.clearBothData_button.TabIndex = 9;
             this.clearBothData_button.Text = "Clear All Data";
             this.clearBothData_button.UseVisualStyleBackColor = true;
@@ -1134,9 +1291,9 @@ namespace WindowsFormsApplication1
             // deleteBothRow_button
             // 
             this.deleteBothRow_button.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteBothRow_button.Location = new System.Drawing.Point(844, 505);
+            this.deleteBothRow_button.Location = new System.Drawing.Point(1159, 464);
             this.deleteBothRow_button.Name = "deleteBothRow_button";
-            this.deleteBothRow_button.Size = new System.Drawing.Size(119, 23);
+            this.deleteBothRow_button.Size = new System.Drawing.Size(119, 37);
             this.deleteBothRow_button.TabIndex = 8;
             this.deleteBothRow_button.Text = "Delete Row";
             this.deleteBothRow_button.UseVisualStyleBackColor = true;
@@ -1153,7 +1310,7 @@ namespace WindowsFormsApplication1
             this.groupBox15.Controls.Add(this.chan2_unitControl_button);
             this.groupBox15.Location = new System.Drawing.Point(443, 13);
             this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Size = new System.Drawing.Size(519, 307);
+            this.groupBox15.Size = new System.Drawing.Size(454, 307);
             this.groupBox15.TabIndex = 14;
             this.groupBox15.TabStop = false;
             // 
@@ -1193,7 +1350,7 @@ namespace WindowsFormsApplication1
             this.chan2_menuControl_button.BackColor = System.Drawing.Color.Transparent;
             this.chan2_menuControl_button.Enabled = false;
             this.chan2_menuControl_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.chan2_menuControl_button.Location = new System.Drawing.Point(175, 278);
+            this.chan2_menuControl_button.Location = new System.Drawing.Point(131, 278);
             this.chan2_menuControl_button.Name = "chan2_menuControl_button";
             this.chan2_menuControl_button.Size = new System.Drawing.Size(75, 23);
             this.chan2_menuControl_button.TabIndex = 2;
@@ -1205,7 +1362,7 @@ namespace WindowsFormsApplication1
             // 
             this.chan2_zeroControl_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.chan2_zeroControl_button.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chan2_zeroControl_button.Location = new System.Drawing.Point(67, 278);
+            this.chan2_zeroControl_button.Location = new System.Drawing.Point(23, 278);
             this.chan2_zeroControl_button.Name = "chan2_zeroControl_button";
             this.chan2_zeroControl_button.Size = new System.Drawing.Size(75, 23);
             this.chan2_zeroControl_button.TabIndex = 1;
@@ -1216,7 +1373,7 @@ namespace WindowsFormsApplication1
             // chan2_modeControl_button
             // 
             this.chan2_modeControl_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.chan2_modeControl_button.Location = new System.Drawing.Point(288, 278);
+            this.chan2_modeControl_button.Location = new System.Drawing.Point(244, 278);
             this.chan2_modeControl_button.Name = "chan2_modeControl_button";
             this.chan2_modeControl_button.Size = new System.Drawing.Size(75, 23);
             this.chan2_modeControl_button.TabIndex = 3;
@@ -1227,7 +1384,7 @@ namespace WindowsFormsApplication1
             // chan2_unitControl_button
             // 
             this.chan2_unitControl_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.chan2_unitControl_button.Location = new System.Drawing.Point(399, 278);
+            this.chan2_unitControl_button.Location = new System.Drawing.Point(355, 278);
             this.chan2_unitControl_button.Name = "chan2_unitControl_button";
             this.chan2_unitControl_button.Size = new System.Drawing.Size(75, 23);
             this.chan2_unitControl_button.TabIndex = 4;
@@ -1247,6 +1404,7 @@ namespace WindowsFormsApplication1
             // 
             // groupBox14
             // 
+            this.groupBox14.Controls.Add(this.openClosechannel3_btn);
             this.groupBox14.Controls.Add(this.label14);
             this.groupBox14.Controls.Add(this.comList4);
             this.groupBox14.Controls.Add(this.openCloseSecondPort);
@@ -1254,10 +1412,21 @@ namespace WindowsFormsApplication1
             this.groupBox14.Controls.Add(this.refresh_dualTab);
             this.groupBox14.Location = new System.Drawing.Point(8, 326);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(206, 229);
+            this.groupBox14.Size = new System.Drawing.Size(206, 297);
             this.groupBox14.TabIndex = 1;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "Select available COM";
+            // 
+            // openClosechannel3_btn
+            // 
+            this.openClosechannel3_btn.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openClosechannel3_btn.Location = new System.Drawing.Point(10, 260);
+            this.openClosechannel3_btn.Name = "openClosechannel3_btn";
+            this.openClosechannel3_btn.Size = new System.Drawing.Size(191, 31);
+            this.openClosechannel3_btn.TabIndex = 66;
+            this.openClosechannel3_btn.Text = "Open/Close Channel 3";
+            this.openClosechannel3_btn.UseVisualStyleBackColor = true;
+            this.openClosechannel3_btn.Click += new System.EventHandler(this.openClosechannel3_btn_Click);
             // 
             // label14
             // 
@@ -1275,13 +1444,13 @@ namespace WindowsFormsApplication1
             this.comList4.ItemHeight = 14;
             this.comList4.Location = new System.Drawing.Point(9, 49);
             this.comList4.Name = "comList4";
-            this.comList4.Size = new System.Drawing.Size(191, 60);
+            this.comList4.Size = new System.Drawing.Size(191, 102);
             this.comList4.TabIndex = 1;
             // 
             // openCloseSecondPort
             // 
             this.openCloseSecondPort.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCloseSecondPort.Location = new System.Drawing.Point(9, 189);
+            this.openCloseSecondPort.Location = new System.Drawing.Point(10, 223);
             this.openCloseSecondPort.Name = "openCloseSecondPort";
             this.openCloseSecondPort.Size = new System.Drawing.Size(191, 31);
             this.openCloseSecondPort.TabIndex = 4;
@@ -1292,7 +1461,7 @@ namespace WindowsFormsApplication1
             // openCloseFirstPort
             // 
             this.openCloseFirstPort.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCloseFirstPort.Location = new System.Drawing.Point(9, 152);
+            this.openCloseFirstPort.Location = new System.Drawing.Point(10, 189);
             this.openCloseFirstPort.Name = "openCloseFirstPort";
             this.openCloseFirstPort.Size = new System.Drawing.Size(191, 31);
             this.openCloseFirstPort.TabIndex = 3;
@@ -1303,7 +1472,7 @@ namespace WindowsFormsApplication1
             // refresh_dualTab
             // 
             this.refresh_dualTab.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.refresh_dualTab.Location = new System.Drawing.Point(9, 115);
+            this.refresh_dualTab.Location = new System.Drawing.Point(10, 152);
             this.refresh_dualTab.Name = "refresh_dualTab";
             this.refresh_dualTab.Size = new System.Drawing.Size(191, 31);
             this.refresh_dualTab.TabIndex = 2;
@@ -1361,12 +1530,13 @@ namespace WindowsFormsApplication1
             // saveRun_button
             // 
             this.saveRun_button.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveRun_button.Location = new System.Drawing.Point(843, 445);
+            this.saveRun_button.Location = new System.Drawing.Point(1486, 658);
             this.saveRun_button.Name = "saveRun_button";
             this.saveRun_button.Size = new System.Drawing.Size(119, 23);
             this.saveRun_button.TabIndex = 6;
             this.saveRun_button.Text = "Archive Run";
             this.saveRun_button.UseVisualStyleBackColor = true;
+            this.saveRun_button.Visible = false;
             this.saveRun_button.Click += new System.EventHandler(this.saveRun_button_Click);
             // 
             // label12
@@ -1383,9 +1553,9 @@ namespace WindowsFormsApplication1
             // currRunDualQuickExport
             // 
             this.currRunDualQuickExport.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currRunDualQuickExport.Location = new System.Drawing.Point(843, 326);
+            this.currRunDualQuickExport.Location = new System.Drawing.Point(1159, 368);
             this.currRunDualQuickExport.Name = "currRunDualQuickExport";
-            this.currRunDualQuickExport.Size = new System.Drawing.Size(117, 23);
+            this.currRunDualQuickExport.Size = new System.Drawing.Size(117, 40);
             this.currRunDualQuickExport.TabIndex = 4;
             this.currRunDualQuickExport.Text = "Save && Open";
             this.currRunDualQuickExport.UseVisualStyleBackColor = true;
@@ -1434,7 +1604,7 @@ namespace WindowsFormsApplication1
             this.groupBox16.Controls.Add(this.quickDualExport_button);
             this.groupBox16.Controls.Add(this.renameDualRun);
             this.groupBox16.Controls.Add(this.deleteDualRun_Button);
-            this.groupBox16.Location = new System.Drawing.Point(968, 13);
+            this.groupBox16.Location = new System.Drawing.Point(1563, 343);
             this.groupBox16.Name = "groupBox16";
             this.groupBox16.Size = new System.Drawing.Size(444, 722);
             this.groupBox16.TabIndex = 15;
@@ -1623,16 +1793,17 @@ namespace WindowsFormsApplication1
             // 
             // dualChart
             // 
-            chartArea7.Name = "ChartArea1";
-            this.dualChart.ChartAreas.Add(chartArea7);
-            legend5.Enabled = false;
-            legend5.Name = "Legend1";
-            this.dualChart.Legends.Add(legend5);
-            this.dualChart.Location = new System.Drawing.Point(8, 561);
+            chartArea1.Name = "ChartArea1";
+            this.dualChart.ChartAreas.Add(chartArea1);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.dualChart.Legends.Add(legend1);
+            this.dualChart.Location = new System.Drawing.Point(6, 629);
             this.dualChart.Name = "dualChart";
             this.dualChart.Size = new System.Drawing.Size(798, 219);
             this.dualChart.TabIndex = 74;
             this.dualChart.Text = "chart3";
+            this.dualChart.Visible = false;
             // 
             // clearSecond
             // 
@@ -1656,20 +1827,20 @@ namespace WindowsFormsApplication1
             this.deleteSecond.Visible = false;
             this.deleteSecond.Click += new System.EventHandler(this.deleteSecond_Click);
             // 
-            // secondChannelGridView
+            // channel2_gridview
             // 
-            this.secondChannelGridView.AllowUserToResizeRows = false;
-            this.secondChannelGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.secondChannelGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.secondChannelGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.secondChannelGridView.Location = new System.Drawing.Point(533, 367);
-            this.secondChannelGridView.MultiSelect = false;
-            this.secondChannelGridView.Name = "secondChannelGridView";
-            this.secondChannelGridView.RowHeadersVisible = false;
-            this.secondChannelGridView.RowHeadersWidth = 82;
-            this.secondChannelGridView.Size = new System.Drawing.Size(297, 190);
-            this.secondChannelGridView.TabIndex = 12;
-            this.secondChannelGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.secondChannelGridView_CellEndEdit);
+            this.channel2_gridview.AllowUserToResizeRows = false;
+            this.channel2_gridview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.channel2_gridview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.channel2_gridview.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.channel2_gridview.Location = new System.Drawing.Point(533, 367);
+            this.channel2_gridview.MultiSelect = false;
+            this.channel2_gridview.Name = "channel2_gridview";
+            this.channel2_gridview.RowHeadersVisible = false;
+            this.channel2_gridview.RowHeadersWidth = 82;
+            this.channel2_gridview.Size = new System.Drawing.Size(297, 190);
+            this.channel2_gridview.TabIndex = 12;
+            this.channel2_gridview.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.secondChannelGridView_CellEndEdit);
             // 
             // clearFirst
             // 
@@ -1693,25 +1864,25 @@ namespace WindowsFormsApplication1
             this.deleteLineFirst.Visible = false;
             this.deleteLineFirst.Click += new System.EventHandler(this.deleteLineFirst_Click);
             // 
-            // firstChannelGrid
+            // channel1_gridview
             // 
-            this.firstChannelGrid.AllowUserToDeleteRows = false;
-            this.firstChannelGrid.AllowUserToResizeRows = false;
-            this.firstChannelGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.firstChannelGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.firstChannelGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.channel1_gridview.AllowUserToDeleteRows = false;
+            this.channel1_gridview.AllowUserToResizeRows = false;
+            this.channel1_gridview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.channel1_gridview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.channel1_gridview.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column3});
-            this.firstChannelGrid.Location = new System.Drawing.Point(230, 367);
-            this.firstChannelGrid.MultiSelect = false;
-            this.firstChannelGrid.Name = "firstChannelGrid";
-            this.firstChannelGrid.RowHeadersWidth = 82;
-            this.firstChannelGrid.Size = new System.Drawing.Size(297, 190);
-            this.firstChannelGrid.TabIndex = 11;
-            this.firstChannelGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.firstChannelGrid_CellContentClick);
-            this.firstChannelGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.firstChannelGrid_CellEndEdit);
-            this.firstChannelGrid.SelectionChanged += new System.EventHandler(this.firstChannelGridSelect);
+            this.channel1_gridview.Location = new System.Drawing.Point(230, 367);
+            this.channel1_gridview.MultiSelect = false;
+            this.channel1_gridview.Name = "channel1_gridview";
+            this.channel1_gridview.RowHeadersWidth = 82;
+            this.channel1_gridview.Size = new System.Drawing.Size(297, 190);
+            this.channel1_gridview.TabIndex = 11;
+            this.channel1_gridview.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.firstChannelGrid_CellContentClick);
+            this.channel1_gridview.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.firstChannelGrid_CellEndEdit);
+            this.channel1_gridview.SelectionChanged += new System.EventHandler(this.firstChannelGridSelect);
             // 
             // Column1
             // 
@@ -1759,8 +1930,8 @@ namespace WindowsFormsApplication1
             // 
             // chart1
             // 
-            chartArea8.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea8);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.chart1.Location = new System.Drawing.Point(0, 791);
             this.chart1.Name = "chart1";
@@ -1798,7 +1969,7 @@ namespace WindowsFormsApplication1
             this.singleSeriesListView.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.singleSeriesListView.GridLines = true;
             this.singleSeriesListView.HideSelection = false;
-            this.singleSeriesListView.Location = new System.Drawing.Point(808, 521);
+            this.singleSeriesListView.Location = new System.Drawing.Point(795, 521);
             this.singleSeriesListView.Name = "singleSeriesListView";
             this.singleSeriesListView.Size = new System.Drawing.Size(154, 214);
             this.singleSeriesListView.TabIndex = 105;
@@ -1823,7 +1994,7 @@ namespace WindowsFormsApplication1
             this.masterGridView.AllowUserToDeleteRows = false;
             this.masterGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.masterGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.masterGridView.Location = new System.Drawing.Point(1713, 67);
+            this.masterGridView.Location = new System.Drawing.Point(1697, 216);
             this.masterGridView.Name = "masterGridView";
             this.masterGridView.ReadOnly = true;
             this.masterGridView.RowHeadersWidth = 82;
@@ -1842,6 +2013,7 @@ namespace WindowsFormsApplication1
             // 
             // groupBox10
             // 
+            this.groupBox10.Controls.Add(this.newTest_btn);
             this.groupBox10.Controls.Add(this.masterGrid_noCurrent);
             this.groupBox10.Controls.Add(this.masterSave);
             this.groupBox10.Controls.Add(this.masterQuickExport);
@@ -1849,12 +2021,24 @@ namespace WindowsFormsApplication1
             this.groupBox10.Controls.Add(this.delete_column);
             this.groupBox10.Controls.Add(this.label4);
             this.groupBox10.Controls.Add(this.testName_Text);
-            this.groupBox10.Location = new System.Drawing.Point(999, 13);
+            this.groupBox10.Location = new System.Drawing.Point(1578, 531);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(444, 722);
             this.groupBox10.TabIndex = 5;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Recent Runs";
+            this.groupBox10.Visible = false;
+            // 
+            // newTest_btn
+            // 
+            this.newTest_btn.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newTest_btn.Location = new System.Drawing.Point(311, 681);
+            this.newTest_btn.Name = "newTest_btn";
+            this.newTest_btn.Size = new System.Drawing.Size(110, 35);
+            this.newTest_btn.TabIndex = 59;
+            this.newTest_btn.Text = "New Test";
+            this.newTest_btn.UseVisualStyleBackColor = true;
+            this.newTest_btn.Click += new System.EventHandler(this.newTest_btn_Click);
             // 
             // masterGrid_noCurrent
             // 
@@ -1892,7 +2076,7 @@ namespace WindowsFormsApplication1
             // rename_col
             // 
             this.rename_col.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rename_col.Location = new System.Drawing.Point(93, 681);
+            this.rename_col.Location = new System.Drawing.Point(17, 681);
             this.rename_col.Name = "rename_col";
             this.rename_col.Size = new System.Drawing.Size(110, 35);
             this.rename_col.TabIndex = 5;
@@ -1903,7 +2087,7 @@ namespace WindowsFormsApplication1
             // delete_column
             // 
             this.delete_column.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.delete_column.Location = new System.Drawing.Point(275, 681);
+            this.delete_column.Location = new System.Drawing.Point(166, 681);
             this.delete_column.Name = "delete_column";
             this.delete_column.Size = new System.Drawing.Size(110, 35);
             this.delete_column.TabIndex = 6;
@@ -1938,14 +2122,14 @@ namespace WindowsFormsApplication1
             // 
             // singleChart
             // 
-            chartArea9.Name = "ChartArea1";
-            this.singleChart.ChartAreas.Add(chartArea9);
-            legend6.Enabled = false;
-            legend6.Name = "Legend1";
-            this.singleChart.Legends.Add(legend6);
+            chartArea3.Name = "ChartArea1";
+            this.singleChart.ChartAreas.Add(chartArea3);
+            legend2.Enabled = false;
+            legend2.Name = "Legend1";
+            this.singleChart.Legends.Add(legend2);
             this.singleChart.Location = new System.Drawing.Point(8, 516);
             this.singleChart.Name = "singleChart";
-            this.singleChart.Size = new System.Drawing.Size(794, 219);
+            this.singleChart.Size = new System.Drawing.Size(778, 219);
             this.singleChart.TabIndex = 55;
             this.singleChart.Text = "chart2";
             // 
@@ -2370,6 +2554,7 @@ namespace WindowsFormsApplication1
             this.groupBox3.Controls.Add(this.label33);
             this.groupBox3.Controls.Add(this.USL_txt);
             this.groupBox3.Controls.Add(this.LSL_txt);
+            this.groupBox3.Controls.Add(this.singleChannel_gridView);
             this.groupBox3.Controls.Add(this.showCMK_chkBox);
             this.groupBox3.Controls.Add(this.CMKVal_lbl);
             this.groupBox3.Controls.Add(this.CMK_lbl);
@@ -2384,12 +2569,11 @@ namespace WindowsFormsApplication1
             this.groupBox3.Controls.Add(this.saveCurrRun_1chann_button);
             this.groupBox3.Controls.Add(this.quickExport);
             this.groupBox3.Controls.Add(this.deleteCh1Row_btn);
-            this.groupBox3.Controls.Add(this.singleChannel_gridView);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(449, 13);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox3.Size = new System.Drawing.Size(544, 502);
+            this.groupBox3.Size = new System.Drawing.Size(500, 502);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Current Run\'s Readings";
@@ -2397,7 +2581,7 @@ namespace WindowsFormsApplication1
             // peakVal_lbl
             // 
             this.peakVal_lbl.AutoSize = true;
-            this.peakVal_lbl.Location = new System.Drawing.Point(108, 423);
+            this.peakVal_lbl.Location = new System.Drawing.Point(405, 396);
             this.peakVal_lbl.Name = "peakVal_lbl";
             this.peakVal_lbl.Size = new System.Drawing.Size(0, 14);
             this.peakVal_lbl.TabIndex = 156;
@@ -2406,7 +2590,7 @@ namespace WindowsFormsApplication1
             // peakLabel_lbl
             // 
             this.peakLabel_lbl.AutoSize = true;
-            this.peakLabel_lbl.Location = new System.Drawing.Point(35, 423);
+            this.peakLabel_lbl.Location = new System.Drawing.Point(360, 396);
             this.peakLabel_lbl.Name = "peakLabel_lbl";
             this.peakLabel_lbl.Size = new System.Drawing.Size(33, 14);
             this.peakLabel_lbl.TabIndex = 155;
@@ -2416,7 +2600,7 @@ namespace WindowsFormsApplication1
             // singleCHStream_btn
             // 
             this.singleCHStream_btn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.singleCHStream_btn.Location = new System.Drawing.Point(405, 462);
+            this.singleCHStream_btn.Location = new System.Drawing.Point(394, 464);
             this.singleCHStream_btn.Name = "singleCHStream_btn";
             this.singleCHStream_btn.Size = new System.Drawing.Size(88, 33);
             this.singleCHStream_btn.TabIndex = 154;
@@ -2428,7 +2612,7 @@ namespace WindowsFormsApplication1
             // 
             this.notNumberWarning_lbl.AutoSize = true;
             this.notNumberWarning_lbl.ForeColor = System.Drawing.Color.Red;
-            this.notNumberWarning_lbl.Location = new System.Drawing.Point(399, 159);
+            this.notNumberWarning_lbl.Location = new System.Drawing.Point(367, 159);
             this.notNumberWarning_lbl.Name = "notNumberWarning_lbl";
             this.notNumberWarning_lbl.Size = new System.Drawing.Size(0, 14);
             this.notNumberWarning_lbl.TabIndex = 153;
@@ -2436,7 +2620,7 @@ namespace WindowsFormsApplication1
             // useLimit_chkbox
             // 
             this.useLimit_chkbox.AutoSize = true;
-            this.useLimit_chkbox.Location = new System.Drawing.Point(394, 133);
+            this.useLimit_chkbox.Location = new System.Drawing.Point(362, 133);
             this.useLimit_chkbox.Name = "useLimit_chkbox";
             this.useLimit_chkbox.Size = new System.Drawing.Size(118, 18);
             this.useLimit_chkbox.TabIndex = 141;
@@ -2447,7 +2631,7 @@ namespace WindowsFormsApplication1
             // label46
             // 
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(392, 67);
+            this.label46.Location = new System.Drawing.Point(360, 67);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(59, 14);
             this.label46.TabIndex = 152;
@@ -2458,7 +2642,7 @@ namespace WindowsFormsApplication1
             this.toolID_SC_comboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.toolID_SC_comboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.toolID_SC_comboBox.FormattingEnabled = true;
-            this.toolID_SC_comboBox.Location = new System.Drawing.Point(394, 85);
+            this.toolID_SC_comboBox.Location = new System.Drawing.Point(362, 85);
             this.toolID_SC_comboBox.Name = "toolID_SC_comboBox";
             this.toolID_SC_comboBox.Size = new System.Drawing.Size(133, 22);
             this.toolID_SC_comboBox.TabIndex = 139;
@@ -2466,7 +2650,7 @@ namespace WindowsFormsApplication1
             // average_lbl
             // 
             this.average_lbl.AutoSize = true;
-            this.average_lbl.Location = new System.Drawing.Point(437, 358);
+            this.average_lbl.Location = new System.Drawing.Point(405, 358);
             this.average_lbl.Name = "average_lbl";
             this.average_lbl.Size = new System.Drawing.Size(49, 14);
             this.average_lbl.TabIndex = 151;
@@ -2475,7 +2659,7 @@ namespace WindowsFormsApplication1
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(391, 358);
+            this.label47.Location = new System.Drawing.Point(359, 358);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(30, 14);
             this.label47.TabIndex = 150;
@@ -2484,7 +2668,7 @@ namespace WindowsFormsApplication1
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(392, 229);
+            this.label43.Location = new System.Drawing.Point(360, 229);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(26, 14);
             this.label43.TabIndex = 149;
@@ -2493,7 +2677,7 @@ namespace WindowsFormsApplication1
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(391, 189);
+            this.label33.Location = new System.Drawing.Point(359, 189);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(27, 14);
             this.label33.TabIndex = 148;
@@ -2501,24 +2685,63 @@ namespace WindowsFormsApplication1
             // 
             // USL_txt
             // 
-            this.USL_txt.Location = new System.Drawing.Point(425, 186);
+            this.USL_txt.Location = new System.Drawing.Point(393, 186);
             this.USL_txt.Name = "USL_txt";
             this.USL_txt.Size = new System.Drawing.Size(100, 20);
             this.USL_txt.TabIndex = 142;
             // 
             // LSL_txt
             // 
-            this.LSL_txt.Location = new System.Drawing.Point(425, 226);
+            this.LSL_txt.Location = new System.Drawing.Point(393, 226);
             this.LSL_txt.Name = "LSL_txt";
             this.LSL_txt.Size = new System.Drawing.Size(100, 20);
             this.LSL_txt.TabIndex = 143;
+            // 
+            // singleChannel_gridView
+            // 
+            this.singleChannel_gridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.singleChannel_gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.singleChannel_gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3});
+            this.singleChannel_gridView.Location = new System.Drawing.Point(8, 64);
+            this.singleChannel_gridView.Name = "singleChannel_gridView";
+            this.singleChannel_gridView.ReadOnly = true;
+            this.singleChannel_gridView.RowHeadersWidth = 82;
+            this.singleChannel_gridView.Size = new System.Drawing.Size(337, 339);
+            this.singleChannel_gridView.TabIndex = 4;
+            this.singleChannel_gridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridview1_CellEndEdit);
+            this.singleChannel_gridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.singleChannel_gridView_CellValueChanged);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Sample #";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 10;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Reading";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 10;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Unit";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 10;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
             // showCMK_chkBox
             // 
             this.showCMK_chkBox.AutoSize = true;
             this.showCMK_chkBox.Checked = true;
             this.showCMK_chkBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.showCMK_chkBox.Location = new System.Drawing.Point(394, 113);
+            this.showCMK_chkBox.Location = new System.Drawing.Point(362, 113);
             this.showCMK_chkBox.Name = "showCMK_chkBox";
             this.showCMK_chkBox.Size = new System.Drawing.Size(119, 18);
             this.showCMK_chkBox.TabIndex = 140;
@@ -2528,7 +2751,7 @@ namespace WindowsFormsApplication1
             // CMKVal_lbl
             // 
             this.CMKVal_lbl.AutoSize = true;
-            this.CMKVal_lbl.Location = new System.Drawing.Point(437, 318);
+            this.CMKVal_lbl.Location = new System.Drawing.Point(405, 318);
             this.CMKVal_lbl.Name = "CMKVal_lbl";
             this.CMKVal_lbl.Size = new System.Drawing.Size(58, 14);
             this.CMKVal_lbl.TabIndex = 147;
@@ -2537,7 +2760,7 @@ namespace WindowsFormsApplication1
             // CMK_lbl
             // 
             this.CMK_lbl.AutoSize = true;
-            this.CMK_lbl.Location = new System.Drawing.Point(391, 318);
+            this.CMK_lbl.Location = new System.Drawing.Point(359, 318);
             this.CMK_lbl.Name = "CMK_lbl";
             this.CMK_lbl.Size = new System.Drawing.Size(32, 14);
             this.CMK_lbl.TabIndex = 146;
@@ -2546,7 +2769,7 @@ namespace WindowsFormsApplication1
             // CMVal_lbl
             // 
             this.CMVal_lbl.AutoSize = true;
-            this.CMVal_lbl.Location = new System.Drawing.Point(437, 274);
+            this.CMVal_lbl.Location = new System.Drawing.Point(405, 274);
             this.CMVal_lbl.Name = "CMVal_lbl";
             this.CMVal_lbl.Size = new System.Drawing.Size(51, 14);
             this.CMVal_lbl.TabIndex = 145;
@@ -2555,7 +2778,7 @@ namespace WindowsFormsApplication1
             // CM_lbl
             // 
             this.CM_lbl.AutoSize = true;
-            this.CM_lbl.Location = new System.Drawing.Point(391, 274);
+            this.CM_lbl.Location = new System.Drawing.Point(359, 274);
             this.CM_lbl.Name = "CM_lbl";
             this.CM_lbl.Size = new System.Drawing.Size(25, 14);
             this.CM_lbl.TabIndex = 144;
@@ -2589,7 +2812,7 @@ namespace WindowsFormsApplication1
             // 
             // saveCurrent_button
             // 
-            this.saveCurrent_button.Location = new System.Drawing.Point(198, 462);
+            this.saveCurrent_button.Location = new System.Drawing.Point(187, 464);
             this.saveCurrent_button.Name = "saveCurrent_button";
             this.saveCurrent_button.Size = new System.Drawing.Size(107, 33);
             this.saveCurrent_button.TabIndex = 7;
@@ -2600,7 +2823,7 @@ namespace WindowsFormsApplication1
             // add_serie
             // 
             this.add_serie.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.add_serie.Location = new System.Drawing.Point(311, 462);
+            this.add_serie.Location = new System.Drawing.Point(300, 464);
             this.add_serie.Name = "add_serie";
             this.add_serie.Size = new System.Drawing.Size(88, 33);
             this.add_serie.TabIndex = 8;
@@ -2610,7 +2833,7 @@ namespace WindowsFormsApplication1
             // 
             // clearCh1CurrRun_btn
             // 
-            this.clearCh1CurrRun_btn.Location = new System.Drawing.Point(104, 462);
+            this.clearCh1CurrRun_btn.Location = new System.Drawing.Point(93, 464);
             this.clearCh1CurrRun_btn.Name = "clearCh1CurrRun_btn";
             this.clearCh1CurrRun_btn.Size = new System.Drawing.Size(88, 33);
             this.clearCh1CurrRun_btn.TabIndex = 6;
@@ -2640,52 +2863,13 @@ namespace WindowsFormsApplication1
             // 
             // deleteCh1Row_btn
             // 
-            this.deleteCh1Row_btn.Location = new System.Drawing.Point(11, 462);
+            this.deleteCh1Row_btn.Location = new System.Drawing.Point(0, 464);
             this.deleteCh1Row_btn.Name = "deleteCh1Row_btn";
             this.deleteCh1Row_btn.Size = new System.Drawing.Size(88, 33);
             this.deleteCh1Row_btn.TabIndex = 5;
             this.deleteCh1Row_btn.Text = "Delete Row";
             this.deleteCh1Row_btn.UseVisualStyleBackColor = true;
             this.deleteCh1Row_btn.Click += new System.EventHandler(this.deleteRow_SingleTab_Click);
-            // 
-            // singleChannel_gridView
-            // 
-            this.singleChannel_gridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.singleChannel_gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.singleChannel_gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3});
-            this.singleChannel_gridView.Location = new System.Drawing.Point(40, 71);
-            this.singleChannel_gridView.Name = "singleChannel_gridView";
-            this.singleChannel_gridView.ReadOnly = true;
-            this.singleChannel_gridView.RowHeadersWidth = 82;
-            this.singleChannel_gridView.Size = new System.Drawing.Size(337, 339);
-            this.singleChannel_gridView.TabIndex = 4;
-            this.singleChannel_gridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridview1_CellEndEdit);
-            this.singleChannel_gridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.singleChannel_gridView_CellValueChanged);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Sample #";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 10;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Reading";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 10;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Unit";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 10;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
             // simple_col
             // 
@@ -3407,6 +3591,78 @@ namespace WindowsFormsApplication1
             this.calibrationTab.Text = "Cal Cert";
             this.calibrationTab.UseVisualStyleBackColor = true;
             // 
+            // groupBox18
+            // 
+            this.groupBox18.Controls.Add(this.ch2Target_select);
+            this.groupBox18.Controls.Add(this.ch1Target_select);
+            this.groupBox18.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox18.Location = new System.Drawing.Point(781, 0);
+            this.groupBox18.Name = "groupBox18";
+            this.groupBox18.Size = new System.Drawing.Size(159, 40);
+            this.groupBox18.TabIndex = 34;
+            this.groupBox18.TabStop = false;
+            this.groupBox18.Text = "Target Channel";
+            // 
+            // ch2Target_select
+            // 
+            this.ch2Target_select.AutoSize = true;
+            this.ch2Target_select.Checked = true;
+            this.ch2Target_select.Location = new System.Drawing.Point(86, 16);
+            this.ch2Target_select.Name = "ch2Target_select";
+            this.ch2Target_select.Size = new System.Drawing.Size(79, 18);
+            this.ch2Target_select.TabIndex = 67;
+            this.ch2Target_select.TabStop = true;
+            this.ch2Target_select.Text = "Channel 2";
+            this.ch2Target_select.UseVisualStyleBackColor = true;
+            this.ch2Target_select.CheckedChanged += new System.EventHandler(this.ch2Target_select_CheckedChanged);
+            // 
+            // ch1Target_select
+            // 
+            this.ch1Target_select.AutoSize = true;
+            this.ch1Target_select.Location = new System.Drawing.Point(3, 16);
+            this.ch1Target_select.Name = "ch1Target_select";
+            this.ch1Target_select.Size = new System.Drawing.Size(79, 18);
+            this.ch1Target_select.TabIndex = 65;
+            this.ch1Target_select.Text = "Channel 1";
+            this.ch1Target_select.UseVisualStyleBackColor = true;
+            this.ch1Target_select.CheckedChanged += new System.EventHandler(this.ch1Target_select_CheckedChanged);
+            // 
+            // captureBtn_calTab
+            // 
+            this.captureBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.captureBtn_calTab.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.captureBtn_calTab.Location = new System.Drawing.Point(813, 257);
+            this.captureBtn_calTab.Name = "captureBtn_calTab";
+            this.captureBtn_calTab.Size = new System.Drawing.Size(95, 42);
+            this.captureBtn_calTab.TabIndex = 5;
+            this.captureBtn_calTab.Text = "Capture";
+            this.captureBtn_calTab.UseVisualStyleBackColor = true;
+            this.captureBtn_calTab.Click += new System.EventHandler(this.captureBtn_calTab_Click);
+            // 
+            // stream_btn
+            // 
+            this.stream_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.stream_btn.Location = new System.Drawing.Point(813, 205);
+            this.stream_btn.Name = "stream_btn";
+            this.stream_btn.Size = new System.Drawing.Size(95, 38);
+            this.stream_btn.TabIndex = 66;
+            this.stream_btn.Text = "Stream";
+            this.stream_btn.UseVisualStyleBackColor = true;
+            this.stream_btn.Click += new System.EventHandler(this.stream_btn_Click);
+            // 
+            // continue_pauseTest_btn
+            // 
+            this.continue_pauseTest_btn.BackColor = System.Drawing.Color.Green;
+            this.continue_pauseTest_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.continue_pauseTest_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.continue_pauseTest_btn.Location = new System.Drawing.Point(813, 150);
+            this.continue_pauseTest_btn.Name = "continue_pauseTest_btn";
+            this.continue_pauseTest_btn.Size = new System.Drawing.Size(95, 42);
+            this.continue_pauseTest_btn.TabIndex = 32;
+            this.continue_pauseTest_btn.Text = "Pause Test";
+            this.continue_pauseTest_btn.UseVisualStyleBackColor = false;
+            this.continue_pauseTest_btn.Click += new System.EventHandler(this.continue_pause_btn_Click);
+            // 
             // AFCWChart_radio
             // 
             this.AFCWChart_radio.AutoSize = true;
@@ -3455,41 +3711,122 @@ namespace WindowsFormsApplication1
             this.AFCWactive_label.Text = "ACTIVE";
             this.AFCWactive_label.Visible = false;
             // 
-            // groupBox18
+            // ch2Reading_groupBox
             // 
-            this.groupBox18.Controls.Add(this.ch2Target_select);
-            this.groupBox18.Controls.Add(this.ch1Target_select);
-            this.groupBox18.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox18.Location = new System.Drawing.Point(781, 0);
-            this.groupBox18.Name = "groupBox18";
-            this.groupBox18.Size = new System.Drawing.Size(159, 40);
-            this.groupBox18.TabIndex = 34;
-            this.groupBox18.TabStop = false;
-            this.groupBox18.Text = "Target Channel";
+            this.ch2Reading_groupBox.Controls.Add(this.ch2Trough_chckbox);
+            this.ch2Reading_groupBox.Controls.Add(this.label39);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2UnitLabel_calTab);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2ReadingLabel_calTab);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2ConnectLabel_calTab);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2MenuControlBtn_calTab);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2ZeroBtn_calTab);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2ModeControlBtn_calTab);
+            this.ch2Reading_groupBox.Controls.Add(this.ch2UnitBtn_calTab);
+            this.ch2Reading_groupBox.Location = new System.Drawing.Point(860, 0);
+            this.ch2Reading_groupBox.Name = "ch2Reading_groupBox";
+            this.ch2Reading_groupBox.Size = new System.Drawing.Size(486, 307);
+            this.ch2Reading_groupBox.TabIndex = 25;
+            this.ch2Reading_groupBox.TabStop = false;
             // 
-            // ch2Target_select
+            // ch2Trough_chckbox
             // 
-            this.ch2Target_select.AutoSize = true;
-            this.ch2Target_select.Checked = true;
-            this.ch2Target_select.Location = new System.Drawing.Point(86, 16);
-            this.ch2Target_select.Name = "ch2Target_select";
-            this.ch2Target_select.Size = new System.Drawing.Size(79, 18);
-            this.ch2Target_select.TabIndex = 67;
-            this.ch2Target_select.TabStop = true;
-            this.ch2Target_select.Text = "Channel 2";
-            this.ch2Target_select.UseVisualStyleBackColor = true;
-            this.ch2Target_select.CheckedChanged += new System.EventHandler(this.ch2Target_select_CheckedChanged);
+            this.ch2Trough_chckbox.AutoSize = true;
+            this.ch2Trough_chckbox.Location = new System.Drawing.Point(60, 252);
+            this.ch2Trough_chckbox.Name = "ch2Trough_chckbox";
+            this.ch2Trough_chckbox.Size = new System.Drawing.Size(89, 18);
+            this.ch2Trough_chckbox.TabIndex = 87;
+            this.ch2Trough_chckbox.Text = "Trough Mode";
+            this.ch2Trough_chckbox.UseVisualStyleBackColor = true;
+            this.ch2Trough_chckbox.CheckedChanged += new System.EventHandler(this.ch2Trough_chckbox_CheckedChanged);
             // 
-            // ch1Target_select
+            // label39
             // 
-            this.ch1Target_select.AutoSize = true;
-            this.ch1Target_select.Location = new System.Drawing.Point(3, 16);
-            this.ch1Target_select.Name = "ch1Target_select";
-            this.ch1Target_select.Size = new System.Drawing.Size(79, 18);
-            this.ch1Target_select.TabIndex = 65;
-            this.ch1Target_select.Text = "Channel 1";
-            this.ch1Target_select.UseVisualStyleBackColor = true;
-            this.ch1Target_select.CheckedChanged += new System.EventHandler(this.ch1Target_select_CheckedChanged);
+            this.label39.AutoSize = true;
+            this.label39.BackColor = System.Drawing.Color.White;
+            this.label39.Location = new System.Drawing.Point(185, 2);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(97, 14);
+            this.label39.TabIndex = 86;
+            this.label39.Text = "Channel 2 Reading";
+            // 
+            // ch2UnitLabel_calTab
+            // 
+            this.ch2UnitLabel_calTab.Font = new System.Drawing.Font("Arial", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ch2UnitLabel_calTab.Location = new System.Drawing.Point(3, 182);
+            this.ch2UnitLabel_calTab.Name = "ch2UnitLabel_calTab";
+            this.ch2UnitLabel_calTab.Size = new System.Drawing.Size(392, 56);
+            this.ch2UnitLabel_calTab.TabIndex = 85;
+            this.ch2UnitLabel_calTab.Text = "label13";
+            this.ch2UnitLabel_calTab.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // ch2ReadingLabel_calTab
+            // 
+            this.ch2ReadingLabel_calTab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.ch2ReadingLabel_calTab.AutoSize = true;
+            this.ch2ReadingLabel_calTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 65F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ch2ReadingLabel_calTab.ForeColor = System.Drawing.Color.Blue;
+            this.ch2ReadingLabel_calTab.Location = new System.Drawing.Point(6, 37);
+            this.ch2ReadingLabel_calTab.Name = "ch2ReadingLabel_calTab";
+            this.ch2ReadingLabel_calTab.Size = new System.Drawing.Size(312, 98);
+            this.ch2ReadingLabel_calTab.TabIndex = 73;
+            this.ch2ReadingLabel_calTab.Text = "0.0000";
+            // 
+            // ch2ConnectLabel_calTab
+            // 
+            this.ch2ConnectLabel_calTab.AutoSize = true;
+            this.ch2ConnectLabel_calTab.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ch2ConnectLabel_calTab.Location = new System.Drawing.Point(248, 22);
+            this.ch2ConnectLabel_calTab.Name = "ch2ConnectLabel_calTab";
+            this.ch2ConnectLabel_calTab.Size = new System.Drawing.Size(148, 16);
+            this.ch2ConnectLabel_calTab.TabIndex = 66;
+            this.ch2ConnectLabel_calTab.Text = "No COM Port Connect";
+            // 
+            // ch2MenuControlBtn_calTab
+            // 
+            this.ch2MenuControlBtn_calTab.BackColor = System.Drawing.Color.Transparent;
+            this.ch2MenuControlBtn_calTab.Enabled = false;
+            this.ch2MenuControlBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ch2MenuControlBtn_calTab.Location = new System.Drawing.Point(175, 276);
+            this.ch2MenuControlBtn_calTab.Name = "ch2MenuControlBtn_calTab";
+            this.ch2MenuControlBtn_calTab.Size = new System.Drawing.Size(75, 23);
+            this.ch2MenuControlBtn_calTab.TabIndex = 2;
+            this.ch2MenuControlBtn_calTab.Text = "Menu";
+            this.ch2MenuControlBtn_calTab.UseVisualStyleBackColor = false;
+            this.ch2MenuControlBtn_calTab.Click += new System.EventHandler(this.ch2MenuControlBtn_calTab_Click);
+            // 
+            // ch2ZeroBtn_calTab
+            // 
+            this.ch2ZeroBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ch2ZeroBtn_calTab.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ch2ZeroBtn_calTab.Location = new System.Drawing.Point(60, 276);
+            this.ch2ZeroBtn_calTab.Name = "ch2ZeroBtn_calTab";
+            this.ch2ZeroBtn_calTab.Size = new System.Drawing.Size(75, 23);
+            this.ch2ZeroBtn_calTab.TabIndex = 1;
+            this.ch2ZeroBtn_calTab.Text = "Zero/Clear";
+            this.ch2ZeroBtn_calTab.UseVisualStyleBackColor = true;
+            this.ch2ZeroBtn_calTab.Click += new System.EventHandler(this.ch2ZeroBtn_calTab_Click);
+            // 
+            // ch2ModeControlBtn_calTab
+            // 
+            this.ch2ModeControlBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ch2ModeControlBtn_calTab.Location = new System.Drawing.Point(288, 276);
+            this.ch2ModeControlBtn_calTab.Name = "ch2ModeControlBtn_calTab";
+            this.ch2ModeControlBtn_calTab.Size = new System.Drawing.Size(75, 23);
+            this.ch2ModeControlBtn_calTab.TabIndex = 3;
+            this.ch2ModeControlBtn_calTab.Text = "Mode";
+            this.ch2ModeControlBtn_calTab.UseVisualStyleBackColor = true;
+            this.ch2ModeControlBtn_calTab.Click += new System.EventHandler(this.ch2ModeControlBtn_calTab_Click);
+            // 
+            // ch2UnitBtn_calTab
+            // 
+            this.ch2UnitBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ch2UnitBtn_calTab.Location = new System.Drawing.Point(399, 276);
+            this.ch2UnitBtn_calTab.Name = "ch2UnitBtn_calTab";
+            this.ch2UnitBtn_calTab.Size = new System.Drawing.Size(75, 23);
+            this.ch2UnitBtn_calTab.TabIndex = 4;
+            this.ch2UnitBtn_calTab.Text = "Unit";
+            this.ch2UnitBtn_calTab.UseVisualStyleBackColor = true;
+            this.ch2UnitBtn_calTab.Click += new System.EventHandler(this.ch2UnitBtn_calTab_Click);
             // 
             // copyAllStruct_btn
             // 
@@ -3526,31 +3863,6 @@ namespace WindowsFormsApplication1
             this.ALCWChart_radio.Text = "Graph";
             this.ALCWChart_radio.UseVisualStyleBackColor = true;
             this.ALCWChart_radio.Visible = false;
-            // 
-            // continue_pauseTest_btn
-            // 
-            this.continue_pauseTest_btn.BackColor = System.Drawing.Color.Green;
-            this.continue_pauseTest_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.continue_pauseTest_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.continue_pauseTest_btn.Location = new System.Drawing.Point(813, 150);
-            this.continue_pauseTest_btn.Name = "continue_pauseTest_btn";
-            this.continue_pauseTest_btn.Size = new System.Drawing.Size(95, 42);
-            this.continue_pauseTest_btn.TabIndex = 32;
-            this.continue_pauseTest_btn.Text = "Pause Test";
-            this.continue_pauseTest_btn.UseVisualStyleBackColor = false;
-            this.continue_pauseTest_btn.Click += new System.EventHandler(this.continue_pause_btn_Click);
-            // 
-            // captureBtn_calTab
-            // 
-            this.captureBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.captureBtn_calTab.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.captureBtn_calTab.Location = new System.Drawing.Point(813, 257);
-            this.captureBtn_calTab.Name = "captureBtn_calTab";
-            this.captureBtn_calTab.Size = new System.Drawing.Size(95, 42);
-            this.captureBtn_calTab.TabIndex = 5;
-            this.captureBtn_calTab.Text = "Capture";
-            this.captureBtn_calTab.UseVisualStyleBackColor = true;
-            this.captureBtn_calTab.Click += new System.EventHandler(this.captureBtn_calTab_Click);
             // 
             // AFCCWactive_label
             // 
@@ -3874,17 +4186,6 @@ namespace WindowsFormsApplication1
             this.ALCCW_lbl.TabIndex = 31;
             this.ALCCW_lbl.Text = "As Left-CCW";
             this.ALCCW_lbl.Visible = false;
-            // 
-            // stream_btn
-            // 
-            this.stream_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            this.stream_btn.Location = new System.Drawing.Point(813, 205);
-            this.stream_btn.Name = "stream_btn";
-            this.stream_btn.Size = new System.Drawing.Size(95, 38);
-            this.stream_btn.TabIndex = 66;
-            this.stream_btn.Text = "Stream";
-            this.stream_btn.UseVisualStyleBackColor = true;
-            this.stream_btn.Click += new System.EventHandler(this.stream_btn_Click);
             // 
             // testSetup_groupBox
             // 
@@ -4753,122 +5054,9 @@ namespace WindowsFormsApplication1
             this.label13.TabIndex = 0;
             this.label13.Text = "Next Target";
             // 
-            // ch2Reading_groupBox
+            // serialPort3
             // 
-            this.ch2Reading_groupBox.Controls.Add(this.ch2Trough_chckbox);
-            this.ch2Reading_groupBox.Controls.Add(this.label39);
-            this.ch2Reading_groupBox.Controls.Add(this.ch2UnitLabel_calTab);
-            this.ch2Reading_groupBox.Controls.Add(this.ch2ReadingLabel_calTab);
-            this.ch2Reading_groupBox.Controls.Add(this.ch2ConnectLabel_calTab);
-            this.ch2Reading_groupBox.Controls.Add(this.ch2MenuControlBtn_calTab);
-            this.ch2Reading_groupBox.Controls.Add(this.ch2ZeroBtn_calTab);
-            this.ch2Reading_groupBox.Controls.Add(this.ch2ModeControlBtn_calTab);
-            this.ch2Reading_groupBox.Controls.Add(this.ch2UnitBtn_calTab);
-            this.ch2Reading_groupBox.Location = new System.Drawing.Point(860, 0);
-            this.ch2Reading_groupBox.Name = "ch2Reading_groupBox";
-            this.ch2Reading_groupBox.Size = new System.Drawing.Size(486, 307);
-            this.ch2Reading_groupBox.TabIndex = 25;
-            this.ch2Reading_groupBox.TabStop = false;
-            // 
-            // ch2Trough_chckbox
-            // 
-            this.ch2Trough_chckbox.AutoSize = true;
-            this.ch2Trough_chckbox.Location = new System.Drawing.Point(60, 252);
-            this.ch2Trough_chckbox.Name = "ch2Trough_chckbox";
-            this.ch2Trough_chckbox.Size = new System.Drawing.Size(89, 18);
-            this.ch2Trough_chckbox.TabIndex = 87;
-            this.ch2Trough_chckbox.Text = "Trough Mode";
-            this.ch2Trough_chckbox.UseVisualStyleBackColor = true;
-            this.ch2Trough_chckbox.CheckedChanged += new System.EventHandler(this.ch2Trough_chckbox_CheckedChanged);
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.BackColor = System.Drawing.Color.White;
-            this.label39.Location = new System.Drawing.Point(185, 2);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(97, 14);
-            this.label39.TabIndex = 86;
-            this.label39.Text = "Channel 2 Reading";
-            // 
-            // ch2UnitLabel_calTab
-            // 
-            this.ch2UnitLabel_calTab.Font = new System.Drawing.Font("Arial", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ch2UnitLabel_calTab.Location = new System.Drawing.Point(3, 182);
-            this.ch2UnitLabel_calTab.Name = "ch2UnitLabel_calTab";
-            this.ch2UnitLabel_calTab.Size = new System.Drawing.Size(392, 56);
-            this.ch2UnitLabel_calTab.TabIndex = 85;
-            this.ch2UnitLabel_calTab.Text = "label13";
-            this.ch2UnitLabel_calTab.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // ch2ReadingLabel_calTab
-            // 
-            this.ch2ReadingLabel_calTab.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.ch2ReadingLabel_calTab.AutoSize = true;
-            this.ch2ReadingLabel_calTab.Font = new System.Drawing.Font("Microsoft Sans Serif", 65F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ch2ReadingLabel_calTab.ForeColor = System.Drawing.Color.Blue;
-            this.ch2ReadingLabel_calTab.Location = new System.Drawing.Point(6, 37);
-            this.ch2ReadingLabel_calTab.Name = "ch2ReadingLabel_calTab";
-            this.ch2ReadingLabel_calTab.Size = new System.Drawing.Size(312, 98);
-            this.ch2ReadingLabel_calTab.TabIndex = 73;
-            this.ch2ReadingLabel_calTab.Text = "0.0000";
-            // 
-            // ch2ConnectLabel_calTab
-            // 
-            this.ch2ConnectLabel_calTab.AutoSize = true;
-            this.ch2ConnectLabel_calTab.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ch2ConnectLabel_calTab.Location = new System.Drawing.Point(248, 22);
-            this.ch2ConnectLabel_calTab.Name = "ch2ConnectLabel_calTab";
-            this.ch2ConnectLabel_calTab.Size = new System.Drawing.Size(148, 16);
-            this.ch2ConnectLabel_calTab.TabIndex = 66;
-            this.ch2ConnectLabel_calTab.Text = "No COM Port Connect";
-            // 
-            // ch2MenuControlBtn_calTab
-            // 
-            this.ch2MenuControlBtn_calTab.BackColor = System.Drawing.Color.Transparent;
-            this.ch2MenuControlBtn_calTab.Enabled = false;
-            this.ch2MenuControlBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ch2MenuControlBtn_calTab.Location = new System.Drawing.Point(175, 276);
-            this.ch2MenuControlBtn_calTab.Name = "ch2MenuControlBtn_calTab";
-            this.ch2MenuControlBtn_calTab.Size = new System.Drawing.Size(75, 23);
-            this.ch2MenuControlBtn_calTab.TabIndex = 2;
-            this.ch2MenuControlBtn_calTab.Text = "Menu";
-            this.ch2MenuControlBtn_calTab.UseVisualStyleBackColor = false;
-            this.ch2MenuControlBtn_calTab.Click += new System.EventHandler(this.ch2MenuControlBtn_calTab_Click);
-            // 
-            // ch2ZeroBtn_calTab
-            // 
-            this.ch2ZeroBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ch2ZeroBtn_calTab.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ch2ZeroBtn_calTab.Location = new System.Drawing.Point(60, 276);
-            this.ch2ZeroBtn_calTab.Name = "ch2ZeroBtn_calTab";
-            this.ch2ZeroBtn_calTab.Size = new System.Drawing.Size(75, 23);
-            this.ch2ZeroBtn_calTab.TabIndex = 1;
-            this.ch2ZeroBtn_calTab.Text = "Zero/Clear";
-            this.ch2ZeroBtn_calTab.UseVisualStyleBackColor = true;
-            this.ch2ZeroBtn_calTab.Click += new System.EventHandler(this.ch2ZeroBtn_calTab_Click);
-            // 
-            // ch2ModeControlBtn_calTab
-            // 
-            this.ch2ModeControlBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ch2ModeControlBtn_calTab.Location = new System.Drawing.Point(288, 276);
-            this.ch2ModeControlBtn_calTab.Name = "ch2ModeControlBtn_calTab";
-            this.ch2ModeControlBtn_calTab.Size = new System.Drawing.Size(75, 23);
-            this.ch2ModeControlBtn_calTab.TabIndex = 3;
-            this.ch2ModeControlBtn_calTab.Text = "Mode";
-            this.ch2ModeControlBtn_calTab.UseVisualStyleBackColor = true;
-            this.ch2ModeControlBtn_calTab.Click += new System.EventHandler(this.ch2ModeControlBtn_calTab_Click);
-            // 
-            // ch2UnitBtn_calTab
-            // 
-            this.ch2UnitBtn_calTab.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ch2UnitBtn_calTab.Location = new System.Drawing.Point(399, 276);
-            this.ch2UnitBtn_calTab.Name = "ch2UnitBtn_calTab";
-            this.ch2UnitBtn_calTab.Size = new System.Drawing.Size(75, 23);
-            this.ch2UnitBtn_calTab.TabIndex = 4;
-            this.ch2UnitBtn_calTab.Text = "Unit";
-            this.ch2UnitBtn_calTab.UseVisualStyleBackColor = true;
-            this.ch2UnitBtn_calTab.Click += new System.EventHandler(this.ch2UnitBtn_calTab_Click);
+            this.serialPort3.PortName = "COM3";
             // 
             // Form1
             // 
@@ -4876,7 +5064,7 @@ namespace WindowsFormsApplication1
             this.AutoScroll = true;
             this.AutoScrollMinSize = new System.Drawing.Size(1473, 945);
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1797, 972);
+            this.ClientSize = new System.Drawing.Size(2001, 1235);
             this.Controls.Add(this.TabPages);
             this.Controls.Add(this.testerType);
             this.Controls.Add(this.groupBox1);
@@ -4902,6 +5090,9 @@ namespace WindowsFormsApplication1
             this.flowLayoutPanel1.PerformLayout();
             this.dualChannelTab.ResumeLayout(false);
             this.dualChannelTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.channel3_gridview)).EndInit();
+            this.groupBox20.ResumeLayout(false);
+            this.groupBox20.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dualMasterGrid)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -4916,8 +5107,8 @@ namespace WindowsFormsApplication1
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dualChart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.secondChannelGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.firstChannelGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.channel2_gridview)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.channel1_gridview)).EndInit();
             this.big_graph.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.read_graph_col.ResumeLayout(false);
@@ -4966,6 +5157,8 @@ namespace WindowsFormsApplication1
             this.calibrationTab.PerformLayout();
             this.groupBox18.ResumeLayout(false);
             this.groupBox18.PerformLayout();
+            this.ch2Reading_groupBox.ResumeLayout(false);
+            this.ch2Reading_groupBox.PerformLayout();
             this.groupBox17.ResumeLayout(false);
             this.groupBox17.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AFCW_grid)).EndInit();
@@ -4982,8 +5175,6 @@ namespace WindowsFormsApplication1
             this.toolInfo_groupBox.PerformLayout();
             this.target_groupBox.ResumeLayout(false);
             this.target_groupBox.PerformLayout();
-            this.ch2Reading_groupBox.ResumeLayout(false);
-            this.ch2Reading_groupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5050,10 +5241,10 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.Button deleteDualRun_Button;
         private System.Windows.Forms.Button clearSecond;
         private System.Windows.Forms.Button deleteSecond;
-        private System.Windows.Forms.DataGridView secondChannelGridView;
+        private System.Windows.Forms.DataGridView channel2_gridview;
         private System.Windows.Forms.Button clearFirst;
         private System.Windows.Forms.Button deleteLineFirst;
-        private System.Windows.Forms.DataGridView firstChannelGrid;
+        private System.Windows.Forms.DataGridView channel1_gridview;
         private System.Windows.Forms.Button refresh_dualTab;
         private System.Windows.Forms.Button openCloseFirstPort;
         private System.Windows.Forms.ListBox comList4;
@@ -5398,6 +5589,20 @@ namespace WindowsFormsApplication1
         private Button sendTestCmd_btn;
         private TextBox testCommand_txtBox;
         private Label response_lbl;
+        private Button newTest_btn;
+        private Label label22;
+        private DataGridView channel3_gridview;
+        private GroupBox groupBox20;
+        private Label ch3Unit_lbl;
+        private Label ch3Reading_lbl;
+        private Label channel3Connect_lbl;
+        private Button ch3Menu_btn;
+        private Button ch3ZeroClear_btn;
+        private Button ch3Mode_btn;
+        private Button ch3Unit_btn;
+        private Button openClosechannel3_btn;
+        private System.IO.Ports.SerialPort serialPort3;
+        private TextBox dualCh3RunName_Text;
     }
 }
 

@@ -9,11 +9,11 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WindowsFormsApplication1</RootNamespace>
-    <AssemblyName>Torque to spreadsheet</AssemblyName>
+    <AssemblyName>SMD-3Channels</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>aws.ico</ApplicationIcon>
-    <ManifestCertificateThumbprint>EE2F4061E9187D629B693A15FED06A1E75CBBAD3</ManifestCertificateThumbprint>
-    <ManifestKeyFile>Torque to spreadsheet_4_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>B5A574BEE12181E214F5E0DCB6C5D4F21F034C9D</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Torque to spreadsheet_5_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <IsWebBootstrapper>true</IsWebBootstrapper>
@@ -28,7 +28,7 @@
     <TargetFrameworkProfile />
     <OldToolsVersion>3.5</OldToolsVersion>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <PublishUrl>ftp://awitness%40ftp.awitness.com/awitness.com/SMD-Software/SMD-TTS-dev/</PublishUrl>
+    <PublishUrl>ftp://awitness%40ftp.awitness.com/awitness.com/SMD-Software/SMD-3channels/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -38,14 +38,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://awitness.com/SMD-Software/SMD-TTS-dev/</InstallUrl>
-    <ProductName>SMD-Tools %28Dev%29</ProductName>
+    <InstallUrl>http://awitness.com/SMD-Software/SMD-3channels/</InstallUrl>
+    <ProductName>SMD-3Channels</ProductName>
     <PublisherName>SMD, Inc.</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>40</ApplicationRevision>
-    <ApplicationVersion>6.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationVersion>7.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -76,7 +76,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Torque to spreadsheet_4_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Torque to spreadsheet_5_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Excel, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7b835b529fb706c3, processorArchitecture=MSIL">
@@ -334,6 +334,7 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <None Include="Torque to spreadsheet_4_TemporaryKey.pfx" />
+    <None Include="Torque to spreadsheet_5_TemporaryKey.pfx" />
     <None Include="torque.pfx" />
   </ItemGroup>
   <ItemGroup>
