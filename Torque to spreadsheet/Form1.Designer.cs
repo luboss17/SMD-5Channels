@@ -54,8 +54,6 @@ namespace WindowsFormsApplication1
             this.streamDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.testManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startMinimizedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,6 +67,8 @@ namespace WindowsFormsApplication1
             this.forceAutoClearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoUpdateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printToolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tester_Type_Label = new System.Windows.Forms.Label();
             this.checkBox_millivolt = new System.Windows.Forms.CheckBox();
@@ -85,6 +85,17 @@ namespace WindowsFormsApplication1
             this.serialPort2 = new System.IO.Ports.SerialPort(this.components);
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.dualChannelTab = new System.Windows.Forms.TabPage();
+            this.LiveReadings_txtBox = new System.Windows.Forms.TextBox();
+            this.Data5Channels_listBox = new System.Windows.Forms.ListBox();
+            this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.Menu_btn = new System.Windows.Forms.Button();
+            this.Mode_btn = new System.Windows.Forms.Button();
+            this.Unit_btn = new System.Windows.Forms.Button();
+            this.Zero_btn = new System.Windows.Forms.Button();
+            this.Export_btn = new System.Windows.Forms.Button();
+            this.Clear_btn = new System.Windows.Forms.Button();
+            this.Delete_btn = new System.Windows.Forms.Button();
+            this.Capture_btn = new System.Windows.Forms.Button();
             this.dualCh3RunName_Text = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.channel3_gridview = new System.Windows.Forms.DataGridView();
@@ -93,9 +104,10 @@ namespace WindowsFormsApplication1
             this.ch3Reading_lbl = new System.Windows.Forms.Label();
             this.channel3Connect_lbl = new System.Windows.Forms.Label();
             this.ch3Menu_btn = new System.Windows.Forms.Button();
-            this.ch3ZeroClear_btn = new System.Windows.Forms.Button();
             this.ch3Mode_btn = new System.Windows.Forms.Button();
             this.ch3Unit_btn = new System.Windows.Forms.Button();
+            this.ch3ZeroClear_btn = new System.Windows.Forms.Button();
+            this.chan2_zeroControl_button = new System.Windows.Forms.Button();
             this.dualSeriesListView = new System.Windows.Forms.ListView();
             this.dualRunName2ErrorLabel = new System.Windows.Forms.Label();
             this.dualRunName1ErrorLabel = new System.Windows.Forms.Label();
@@ -119,11 +131,12 @@ namespace WindowsFormsApplication1
             this.dataCh2DualChTab_lbl = new System.Windows.Forms.Label();
             this.secondComConnect = new System.Windows.Forms.Label();
             this.chan2_menuControl_button = new System.Windows.Forms.Button();
-            this.chan2_zeroControl_button = new System.Windows.Forms.Button();
             this.chan2_modeControl_button = new System.Windows.Forms.Button();
             this.chan2_unitControl_button = new System.Windows.Forms.Button();
             this.defineTest = new System.Windows.Forms.Button();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.openClosechannel5_btn = new System.Windows.Forms.Button();
+            this.openClosechannel4_btn = new System.Windows.Forms.Button();
             this.openClosechannel3_btn = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.comList4 = new System.Windows.Forms.ListBox();
@@ -454,11 +467,14 @@ namespace WindowsFormsApplication1
             this.label13 = new System.Windows.Forms.Label();
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.serialPort3 = new System.IO.Ports.SerialPort(this.components);
+            this.serialPort4 = new System.IO.Ports.SerialPort(this.components);
+            this.serialPort5 = new System.IO.Ports.SerialPort(this.components);
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.dualChannelTab.SuspendLayout();
+            this.groupBox22.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.channel3_gridview)).BeginInit();
             this.groupBox20.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dualMasterGrid)).BeginInit();
@@ -540,7 +556,7 @@ namespace WindowsFormsApplication1
             // 
             this.toolStripStatusLabel1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(40, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(39, 17);
             this.toolStripStatusLabel1.Text = "Port: ";
             this.toolStripStatusLabel1.MouseHover += new System.EventHandler(this.toolStripStatusLabel1_MouseHover);
             // 
@@ -558,21 +574,21 @@ namespace WindowsFormsApplication1
             // 
             this.toolStripStatusLabel2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(98, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(97, 17);
             this.toolStripStatusLabel2.Text = " Status: Closed";
             // 
             // toolStripStatusLabel3
             // 
             this.toolStripStatusLabel3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(125, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(124, 17);
             this.toolStripStatusLabel3.Text = " Spreadsheet Mode:";
             // 
             // SpreadSheetModeLabel
             // 
             this.SpreadSheetModeLabel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SpreadSheetModeLabel.Name = "SpreadSheetModeLabel";
-            this.SpreadSheetModeLabel.Size = new System.Drawing.Size(75, 17);
+            this.SpreadSheetModeLabel.Size = new System.Drawing.Size(74, 17);
             this.SpreadSheetModeLabel.Text = "Deactivated";
             // 
             // menuStrip1
@@ -580,9 +596,9 @@ namespace WindowsFormsApplication1
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openMenuItem,
+            this.optionsToolStripMenuItem,
             this.toolsManagerToolStripMenuItem,
             this.testManagerToolStripMenuItem,
-            this.optionsToolStripMenuItem,
             this.printToolToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -647,22 +663,6 @@ namespace WindowsFormsApplication1
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // toolsManagerToolStripMenuItem
-            // 
-            this.toolsManagerToolStripMenuItem.Name = "toolsManagerToolStripMenuItem";
-            this.toolsManagerToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
-            this.toolsManagerToolStripMenuItem.Text = "Tools Manager";
-            this.toolsManagerToolStripMenuItem.Visible = false;
-            this.toolsManagerToolStripMenuItem.Click += new System.EventHandler(this.toolsManagerToolStripMenuItem_Click);
-            // 
-            // testManagerToolStripMenuItem
-            // 
-            this.testManagerToolStripMenuItem.Name = "testManagerToolStripMenuItem";
-            this.testManagerToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
-            this.testManagerToolStripMenuItem.Text = "Test Manager";
-            this.testManagerToolStripMenuItem.Visible = false;
-            this.testManagerToolStripMenuItem.Click += new System.EventHandler(this.testManagerToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
@@ -782,6 +782,22 @@ namespace WindowsFormsApplication1
             this.updateToolStripMenuItem.Text = "Manual Update";
             this.updateToolStripMenuItem.Visible = false;
             this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
+            // 
+            // toolsManagerToolStripMenuItem
+            // 
+            this.toolsManagerToolStripMenuItem.Name = "toolsManagerToolStripMenuItem";
+            this.toolsManagerToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
+            this.toolsManagerToolStripMenuItem.Text = "Tools Manager";
+            this.toolsManagerToolStripMenuItem.Visible = false;
+            this.toolsManagerToolStripMenuItem.Click += new System.EventHandler(this.toolsManagerToolStripMenuItem_Click);
+            // 
+            // testManagerToolStripMenuItem
+            // 
+            this.testManagerToolStripMenuItem.Name = "testManagerToolStripMenuItem";
+            this.testManagerToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
+            this.testManagerToolStripMenuItem.Text = "Test Manager";
+            this.testManagerToolStripMenuItem.Visible = false;
+            this.testManagerToolStripMenuItem.Click += new System.EventHandler(this.testManagerToolStripMenuItem_Click);
             // 
             // printToolToolStripMenuItem
             // 
@@ -920,10 +936,19 @@ namespace WindowsFormsApplication1
             // 
             // dualChannelTab
             // 
+            this.dualChannelTab.Controls.Add(this.LiveReadings_txtBox);
+            this.dualChannelTab.Controls.Add(this.Data5Channels_listBox);
+            this.dualChannelTab.Controls.Add(this.groupBox22);
+            this.dualChannelTab.Controls.Add(this.Export_btn);
+            this.dualChannelTab.Controls.Add(this.Clear_btn);
+            this.dualChannelTab.Controls.Add(this.Delete_btn);
+            this.dualChannelTab.Controls.Add(this.Capture_btn);
             this.dualChannelTab.Controls.Add(this.dualCh3RunName_Text);
             this.dualChannelTab.Controls.Add(this.label22);
             this.dualChannelTab.Controls.Add(this.channel3_gridview);
             this.dualChannelTab.Controls.Add(this.groupBox20);
+            this.dualChannelTab.Controls.Add(this.ch3ZeroClear_btn);
+            this.dualChannelTab.Controls.Add(this.chan2_zeroControl_button);
             this.dualChannelTab.Controls.Add(this.dualSeriesListView);
             this.dualChannelTab.Controls.Add(this.dualRunName2ErrorLabel);
             this.dualChannelTab.Controls.Add(this.dualRunName1ErrorLabel);
@@ -963,12 +988,141 @@ namespace WindowsFormsApplication1
             this.dualChannelTab.Name = "dualChannelTab";
             this.dualChannelTab.Size = new System.Drawing.Size(2501, 1244);
             this.dualChannelTab.TabIndex = 5;
-            this.dualChannelTab.Text = "3-Channels";
+            this.dualChannelTab.Text = "5-Channels";
             this.dualChannelTab.UseVisualStyleBackColor = true;
+            // 
+            // LiveReadings_txtBox
+            // 
+            this.LiveReadings_txtBox.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LiveReadings_txtBox.Location = new System.Drawing.Point(15, 12);
+            this.LiveReadings_txtBox.Name = "LiveReadings_txtBox";
+            this.LiveReadings_txtBox.ReadOnly = true;
+            this.LiveReadings_txtBox.Size = new System.Drawing.Size(636, 27);
+            this.LiveReadings_txtBox.TabIndex = 119;
+            this.LiveReadings_txtBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // Data5Channels_listBox
+            // 
+            this.Data5Channels_listBox.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Data5Channels_listBox.FormattingEnabled = true;
+            this.Data5Channels_listBox.ItemHeight = 17;
+            this.Data5Channels_listBox.Location = new System.Drawing.Point(15, 65);
+            this.Data5Channels_listBox.Name = "Data5Channels_listBox";
+            this.Data5Channels_listBox.Size = new System.Drawing.Size(636, 174);
+            this.Data5Channels_listBox.TabIndex = 118;
+            // 
+            // groupBox22
+            // 
+            this.groupBox22.Controls.Add(this.Menu_btn);
+            this.groupBox22.Controls.Add(this.Mode_btn);
+            this.groupBox22.Controls.Add(this.Unit_btn);
+            this.groupBox22.Controls.Add(this.Zero_btn);
+            this.groupBox22.Location = new System.Drawing.Point(469, 326);
+            this.groupBox22.Name = "groupBox22";
+            this.groupBox22.Size = new System.Drawing.Size(182, 240);
+            this.groupBox22.TabIndex = 115;
+            this.groupBox22.TabStop = false;
+            this.groupBox22.Text = "Transducer Control";
+            // 
+            // Menu_btn
+            // 
+            this.Menu_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Menu_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Menu_btn.Location = new System.Drawing.Point(25, 188);
+            this.Menu_btn.Name = "Menu_btn";
+            this.Menu_btn.Size = new System.Drawing.Size(130, 42);
+            this.Menu_btn.TabIndex = 117;
+            this.Menu_btn.Text = "Menu";
+            this.Menu_btn.UseVisualStyleBackColor = true;
+            this.Menu_btn.Click += new System.EventHandler(this.Menu_btn_Click);
+            // 
+            // Mode_btn
+            // 
+            this.Mode_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Mode_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Mode_btn.Location = new System.Drawing.Point(25, 133);
+            this.Mode_btn.Name = "Mode_btn";
+            this.Mode_btn.Size = new System.Drawing.Size(130, 42);
+            this.Mode_btn.TabIndex = 116;
+            this.Mode_btn.Text = "Mode";
+            this.Mode_btn.UseVisualStyleBackColor = true;
+            this.Mode_btn.Click += new System.EventHandler(this.Mode_btn_Click);
+            // 
+            // Unit_btn
+            // 
+            this.Unit_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Unit_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Unit_btn.Location = new System.Drawing.Point(25, 80);
+            this.Unit_btn.Name = "Unit_btn";
+            this.Unit_btn.Size = new System.Drawing.Size(130, 42);
+            this.Unit_btn.TabIndex = 115;
+            this.Unit_btn.Text = "Unit";
+            this.Unit_btn.UseVisualStyleBackColor = true;
+            this.Unit_btn.Click += new System.EventHandler(this.Unit_btn_Click);
+            // 
+            // Zero_btn
+            // 
+            this.Zero_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Zero_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Zero_btn.Location = new System.Drawing.Point(25, 26);
+            this.Zero_btn.Name = "Zero_btn";
+            this.Zero_btn.Size = new System.Drawing.Size(130, 42);
+            this.Zero_btn.TabIndex = 114;
+            this.Zero_btn.Text = "Zero";
+            this.Zero_btn.UseVisualStyleBackColor = true;
+            this.Zero_btn.Click += new System.EventHandler(this.Zero_btn_Click);
+            // 
+            // Export_btn
+            // 
+            this.Export_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Export_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Export_btn.Location = new System.Drawing.Point(494, 254);
+            this.Export_btn.Name = "Export_btn";
+            this.Export_btn.Size = new System.Drawing.Size(130, 42);
+            this.Export_btn.TabIndex = 113;
+            this.Export_btn.Text = "Excel Export";
+            this.Export_btn.UseVisualStyleBackColor = true;
+            this.Export_btn.Click += new System.EventHandler(this.Export_btn_Click);
+            // 
+            // Clear_btn
+            // 
+            this.Clear_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Clear_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Clear_btn.Location = new System.Drawing.Point(340, 254);
+            this.Clear_btn.Name = "Clear_btn";
+            this.Clear_btn.Size = new System.Drawing.Size(130, 42);
+            this.Clear_btn.TabIndex = 112;
+            this.Clear_btn.Text = "Clear Readings";
+            this.Clear_btn.UseVisualStyleBackColor = true;
+            this.Clear_btn.Click += new System.EventHandler(this.Clear_btn_Click);
+            // 
+            // Delete_btn
+            // 
+            this.Delete_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Delete_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Delete_btn.Location = new System.Drawing.Point(187, 254);
+            this.Delete_btn.Name = "Delete_btn";
+            this.Delete_btn.Size = new System.Drawing.Size(130, 42);
+            this.Delete_btn.TabIndex = 111;
+            this.Delete_btn.Text = "Delete Line";
+            this.Delete_btn.UseVisualStyleBackColor = true;
+            this.Delete_btn.Click += new System.EventHandler(this.Delete_btn_Click);
+            // 
+            // Capture_btn
+            // 
+            this.Capture_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Capture_btn.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Capture_btn.Location = new System.Drawing.Point(31, 254);
+            this.Capture_btn.Name = "Capture_btn";
+            this.Capture_btn.Size = new System.Drawing.Size(130, 42);
+            this.Capture_btn.TabIndex = 109;
+            this.Capture_btn.Text = "Capture";
+            this.Capture_btn.UseVisualStyleBackColor = true;
+            this.Capture_btn.Click += new System.EventHandler(this.Capture_btn_Click);
             // 
             // dualCh3RunName_Text
             // 
-            this.dualCh3RunName_Text.Location = new System.Drawing.Point(1036, 343);
+            this.dualCh3RunName_Text.Location = new System.Drawing.Point(1896, 620);
             this.dualCh3RunName_Text.Name = "dualCh3RunName_Text";
             this.dualCh3RunName_Text.Size = new System.Drawing.Size(100, 20);
             this.dualCh3RunName_Text.TabIndex = 108;
@@ -978,7 +1132,7 @@ namespace WindowsFormsApplication1
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(836, 346);
+            this.label22.Location = new System.Drawing.Point(1696, 623);
             this.label22.MaximumSize = new System.Drawing.Size(190, 14);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(99, 14);
@@ -992,13 +1146,14 @@ namespace WindowsFormsApplication1
             this.channel3_gridview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.channel3_gridview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.channel3_gridview.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.channel3_gridview.Location = new System.Drawing.Point(839, 367);
+            this.channel3_gridview.Location = new System.Drawing.Point(1699, 644);
             this.channel3_gridview.MultiSelect = false;
             this.channel3_gridview.Name = "channel3_gridview";
             this.channel3_gridview.RowHeadersVisible = false;
             this.channel3_gridview.RowHeadersWidth = 82;
             this.channel3_gridview.Size = new System.Drawing.Size(297, 190);
             this.channel3_gridview.TabIndex = 106;
+            this.channel3_gridview.Visible = false;
             this.channel3_gridview.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.channel3_gridview_CellContentClick);
             // 
             // groupBox20
@@ -1007,14 +1162,14 @@ namespace WindowsFormsApplication1
             this.groupBox20.Controls.Add(this.ch3Reading_lbl);
             this.groupBox20.Controls.Add(this.channel3Connect_lbl);
             this.groupBox20.Controls.Add(this.ch3Menu_btn);
-            this.groupBox20.Controls.Add(this.ch3ZeroClear_btn);
             this.groupBox20.Controls.Add(this.ch3Mode_btn);
             this.groupBox20.Controls.Add(this.ch3Unit_btn);
-            this.groupBox20.Location = new System.Drawing.Point(895, 13);
+            this.groupBox20.Location = new System.Drawing.Point(1881, 646);
             this.groupBox20.Name = "groupBox20";
             this.groupBox20.Size = new System.Drawing.Size(452, 307);
             this.groupBox20.TabIndex = 105;
             this.groupBox20.TabStop = false;
+            this.groupBox20.Visible = false;
             // 
             // ch3Unit_lbl
             // 
@@ -1043,7 +1198,7 @@ namespace WindowsFormsApplication1
             this.channel3Connect_lbl.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.channel3Connect_lbl.Location = new System.Drawing.Point(49, 16);
             this.channel3Connect_lbl.Name = "channel3Connect_lbl";
-            this.channel3Connect_lbl.Size = new System.Drawing.Size(148, 16);
+            this.channel3Connect_lbl.Size = new System.Drawing.Size(147, 16);
             this.channel3Connect_lbl.TabIndex = 66;
             this.channel3Connect_lbl.Text = "No COM Port Connect";
             // 
@@ -1052,7 +1207,7 @@ namespace WindowsFormsApplication1
             this.ch3Menu_btn.BackColor = System.Drawing.Color.Transparent;
             this.ch3Menu_btn.Enabled = false;
             this.ch3Menu_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ch3Menu_btn.Location = new System.Drawing.Point(133, 278);
+            this.ch3Menu_btn.Location = new System.Drawing.Point(82, 278);
             this.ch3Menu_btn.Name = "ch3Menu_btn";
             this.ch3Menu_btn.Size = new System.Drawing.Size(75, 23);
             this.ch3Menu_btn.TabIndex = 2;
@@ -1060,22 +1215,10 @@ namespace WindowsFormsApplication1
             this.ch3Menu_btn.UseVisualStyleBackColor = false;
             this.ch3Menu_btn.Click += new System.EventHandler(this.ch3Menu_btn_Click);
             // 
-            // ch3ZeroClear_btn
-            // 
-            this.ch3ZeroClear_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ch3ZeroClear_btn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ch3ZeroClear_btn.Location = new System.Drawing.Point(25, 278);
-            this.ch3ZeroClear_btn.Name = "ch3ZeroClear_btn";
-            this.ch3ZeroClear_btn.Size = new System.Drawing.Size(75, 23);
-            this.ch3ZeroClear_btn.TabIndex = 1;
-            this.ch3ZeroClear_btn.Text = "Zero/Clear";
-            this.ch3ZeroClear_btn.UseVisualStyleBackColor = true;
-            this.ch3ZeroClear_btn.Click += new System.EventHandler(this.ch3ZeroClear_btn_Click);
-            // 
             // ch3Mode_btn
             // 
             this.ch3Mode_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ch3Mode_btn.Location = new System.Drawing.Point(246, 278);
+            this.ch3Mode_btn.Location = new System.Drawing.Point(195, 278);
             this.ch3Mode_btn.Name = "ch3Mode_btn";
             this.ch3Mode_btn.Size = new System.Drawing.Size(75, 23);
             this.ch3Mode_btn.TabIndex = 3;
@@ -1086,13 +1229,39 @@ namespace WindowsFormsApplication1
             // ch3Unit_btn
             // 
             this.ch3Unit_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ch3Unit_btn.Location = new System.Drawing.Point(357, 278);
+            this.ch3Unit_btn.Location = new System.Drawing.Point(306, 278);
             this.ch3Unit_btn.Name = "ch3Unit_btn";
             this.ch3Unit_btn.Size = new System.Drawing.Size(75, 23);
             this.ch3Unit_btn.TabIndex = 4;
             this.ch3Unit_btn.Text = "Unit";
             this.ch3Unit_btn.UseVisualStyleBackColor = true;
             this.ch3Unit_btn.Click += new System.EventHandler(this.ch3Unit_btn_Click);
+            // 
+            // ch3ZeroClear_btn
+            // 
+            this.ch3ZeroClear_btn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ch3ZeroClear_btn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ch3ZeroClear_btn.Location = new System.Drawing.Point(1403, 394);
+            this.ch3ZeroClear_btn.Name = "ch3ZeroClear_btn";
+            this.ch3ZeroClear_btn.Size = new System.Drawing.Size(75, 23);
+            this.ch3ZeroClear_btn.TabIndex = 1;
+            this.ch3ZeroClear_btn.Text = "Zero/Clear";
+            this.ch3ZeroClear_btn.UseVisualStyleBackColor = true;
+            this.ch3ZeroClear_btn.Visible = false;
+            this.ch3ZeroClear_btn.Click += new System.EventHandler(this.ch3ZeroClear_btn_Click);
+            // 
+            // chan2_zeroControl_button
+            // 
+            this.chan2_zeroControl_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.chan2_zeroControl_button.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chan2_zeroControl_button.Location = new System.Drawing.Point(1403, 343);
+            this.chan2_zeroControl_button.Name = "chan2_zeroControl_button";
+            this.chan2_zeroControl_button.Size = new System.Drawing.Size(75, 23);
+            this.chan2_zeroControl_button.TabIndex = 1;
+            this.chan2_zeroControl_button.Text = "Zero/Clear";
+            this.chan2_zeroControl_button.UseVisualStyleBackColor = true;
+            this.chan2_zeroControl_button.Visible = false;
+            this.chan2_zeroControl_button.Click += new System.EventHandler(this.chan2_zeroControl_button_Click);
             // 
             // dualSeriesListView
             // 
@@ -1115,10 +1284,11 @@ namespace WindowsFormsApplication1
             // 
             this.dualRunName2ErrorLabel.AutoSize = true;
             this.dualRunName2ErrorLabel.ForeColor = System.Drawing.Color.Red;
-            this.dualRunName2ErrorLabel.Location = new System.Drawing.Point(530, 325);
+            this.dualRunName2ErrorLabel.Location = new System.Drawing.Point(1390, 602);
             this.dualRunName2ErrorLabel.Name = "dualRunName2ErrorLabel";
             this.dualRunName2ErrorLabel.Size = new System.Drawing.Size(0, 14);
             this.dualRunName2ErrorLabel.TabIndex = 103;
+            this.dualRunName2ErrorLabel.Visible = false;
             // 
             // dualRunName1ErrorLabel
             // 
@@ -1147,7 +1317,7 @@ namespace WindowsFormsApplication1
             // 
             this.panel1.Controls.Add(this.label16);
             this.panel1.Controls.Add(this.xySwitch_button);
-            this.panel1.Location = new System.Drawing.Point(403, 20);
+            this.panel1.Location = new System.Drawing.Point(1389, 653);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(80, 47);
             this.panel1.TabIndex = 15;
@@ -1179,7 +1349,7 @@ namespace WindowsFormsApplication1
             // 
             this.dualCurrRun_Label2.AutoSize = true;
             this.dualCurrRun_Label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dualCurrRun_Label2.Location = new System.Drawing.Point(530, 346);
+            this.dualCurrRun_Label2.Location = new System.Drawing.Point(1390, 623);
             this.dualCurrRun_Label2.MaximumSize = new System.Drawing.Size(190, 14);
             this.dualCurrRun_Label2.Name = "dualCurrRun_Label2";
             this.dualCurrRun_Label2.Size = new System.Drawing.Size(99, 14);
@@ -1191,7 +1361,7 @@ namespace WindowsFormsApplication1
             // 
             this.dualCurrRun_label1.AutoSize = true;
             this.dualCurrRun_label1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dualCurrRun_label1.Location = new System.Drawing.Point(227, 346);
+            this.dualCurrRun_label1.Location = new System.Drawing.Point(1087, 623);
             this.dualCurrRun_label1.MaximumSize = new System.Drawing.Size(190, 14);
             this.dualCurrRun_label1.Name = "dualCurrRun_label1";
             this.dualCurrRun_label1.Size = new System.Drawing.Size(99, 14);
@@ -1201,7 +1371,7 @@ namespace WindowsFormsApplication1
             // 
             // dualCh2RunName_Text
             // 
-            this.dualCh2RunName_Text.Location = new System.Drawing.Point(730, 343);
+            this.dualCh2RunName_Text.Location = new System.Drawing.Point(1590, 620);
             this.dualCh2RunName_Text.Name = "dualCh2RunName_Text";
             this.dualCh2RunName_Text.Size = new System.Drawing.Size(100, 20);
             this.dualCh2RunName_Text.TabIndex = 3;
@@ -1210,7 +1380,7 @@ namespace WindowsFormsApplication1
             // 
             // dualCh1RunName_Text
             // 
-            this.dualCh1RunName_Text.Location = new System.Drawing.Point(427, 343);
+            this.dualCh1RunName_Text.Location = new System.Drawing.Point(1287, 620);
             this.dualCh1RunName_Text.Name = "dualCh1RunName_Text";
             this.dualCh1RunName_Text.Size = new System.Drawing.Size(100, 20);
             this.dualCh1RunName_Text.TabIndex = 2;
@@ -1232,12 +1402,13 @@ namespace WindowsFormsApplication1
             // currRunDualSaveExcel
             // 
             this.currRunDualSaveExcel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currRunDualSaveExcel.Location = new System.Drawing.Point(1159, 414);
+            this.currRunDualSaveExcel.Location = new System.Drawing.Point(2019, 691);
             this.currRunDualSaveExcel.Name = "currRunDualSaveExcel";
             this.currRunDualSaveExcel.Size = new System.Drawing.Size(117, 39);
             this.currRunDualSaveExcel.TabIndex = 5;
             this.currRunDualSaveExcel.Text = "Save As && Open";
             this.currRunDualSaveExcel.UseVisualStyleBackColor = true;
+            this.currRunDualSaveExcel.Visible = false;
             this.currRunDualSaveExcel.Click += new System.EventHandler(this.currRunDualSaveExcel_Click);
             // 
             // addDualRun
@@ -1280,23 +1451,25 @@ namespace WindowsFormsApplication1
             // clearBothData_button
             // 
             this.clearBothData_button.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearBothData_button.Location = new System.Drawing.Point(1159, 515);
+            this.clearBothData_button.Location = new System.Drawing.Point(2019, 792);
             this.clearBothData_button.Name = "clearBothData_button";
             this.clearBothData_button.Size = new System.Drawing.Size(119, 41);
             this.clearBothData_button.TabIndex = 9;
             this.clearBothData_button.Text = "Clear All Data";
             this.clearBothData_button.UseVisualStyleBackColor = true;
+            this.clearBothData_button.Visible = false;
             this.clearBothData_button.Click += new System.EventHandler(this.clearBothData_button_Click);
             // 
             // deleteBothRow_button
             // 
             this.deleteBothRow_button.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteBothRow_button.Location = new System.Drawing.Point(1159, 464);
+            this.deleteBothRow_button.Location = new System.Drawing.Point(2019, 741);
             this.deleteBothRow_button.Name = "deleteBothRow_button";
             this.deleteBothRow_button.Size = new System.Drawing.Size(119, 37);
             this.deleteBothRow_button.TabIndex = 8;
             this.deleteBothRow_button.Text = "Delete Row";
             this.deleteBothRow_button.UseVisualStyleBackColor = true;
+            this.deleteBothRow_button.Visible = false;
             this.deleteBothRow_button.Click += new System.EventHandler(this.deleteBothRow_button_Click);
             // 
             // groupBox15
@@ -1305,14 +1478,14 @@ namespace WindowsFormsApplication1
             this.groupBox15.Controls.Add(this.dataCh2DualChTab_lbl);
             this.groupBox15.Controls.Add(this.secondComConnect);
             this.groupBox15.Controls.Add(this.chan2_menuControl_button);
-            this.groupBox15.Controls.Add(this.chan2_zeroControl_button);
             this.groupBox15.Controls.Add(this.chan2_modeControl_button);
             this.groupBox15.Controls.Add(this.chan2_unitControl_button);
-            this.groupBox15.Location = new System.Drawing.Point(443, 13);
+            this.groupBox15.Location = new System.Drawing.Point(1429, 646);
             this.groupBox15.Name = "groupBox15";
             this.groupBox15.Size = new System.Drawing.Size(454, 307);
             this.groupBox15.TabIndex = 14;
             this.groupBox15.TabStop = false;
+            this.groupBox15.Visible = false;
             // 
             // unitCH2DualCHTab_lbl
             // 
@@ -1341,7 +1514,7 @@ namespace WindowsFormsApplication1
             this.secondComConnect.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.secondComConnect.Location = new System.Drawing.Point(49, 16);
             this.secondComConnect.Name = "secondComConnect";
-            this.secondComConnect.Size = new System.Drawing.Size(148, 16);
+            this.secondComConnect.Size = new System.Drawing.Size(147, 16);
             this.secondComConnect.TabIndex = 66;
             this.secondComConnect.Text = "No COM Port Connect";
             // 
@@ -1350,7 +1523,7 @@ namespace WindowsFormsApplication1
             this.chan2_menuControl_button.BackColor = System.Drawing.Color.Transparent;
             this.chan2_menuControl_button.Enabled = false;
             this.chan2_menuControl_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.chan2_menuControl_button.Location = new System.Drawing.Point(131, 278);
+            this.chan2_menuControl_button.Location = new System.Drawing.Point(74, 278);
             this.chan2_menuControl_button.Name = "chan2_menuControl_button";
             this.chan2_menuControl_button.Size = new System.Drawing.Size(75, 23);
             this.chan2_menuControl_button.TabIndex = 2;
@@ -1358,22 +1531,10 @@ namespace WindowsFormsApplication1
             this.chan2_menuControl_button.UseVisualStyleBackColor = false;
             this.chan2_menuControl_button.Click += new System.EventHandler(this.chan2_menuControl_button_Click);
             // 
-            // chan2_zeroControl_button
-            // 
-            this.chan2_zeroControl_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.chan2_zeroControl_button.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chan2_zeroControl_button.Location = new System.Drawing.Point(23, 278);
-            this.chan2_zeroControl_button.Name = "chan2_zeroControl_button";
-            this.chan2_zeroControl_button.Size = new System.Drawing.Size(75, 23);
-            this.chan2_zeroControl_button.TabIndex = 1;
-            this.chan2_zeroControl_button.Text = "Zero/Clear";
-            this.chan2_zeroControl_button.UseVisualStyleBackColor = true;
-            this.chan2_zeroControl_button.Click += new System.EventHandler(this.chan2_zeroControl_button_Click);
-            // 
             // chan2_modeControl_button
             // 
             this.chan2_modeControl_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.chan2_modeControl_button.Location = new System.Drawing.Point(244, 278);
+            this.chan2_modeControl_button.Location = new System.Drawing.Point(187, 278);
             this.chan2_modeControl_button.Name = "chan2_modeControl_button";
             this.chan2_modeControl_button.Size = new System.Drawing.Size(75, 23);
             this.chan2_modeControl_button.TabIndex = 3;
@@ -1384,7 +1545,7 @@ namespace WindowsFormsApplication1
             // chan2_unitControl_button
             // 
             this.chan2_unitControl_button.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.chan2_unitControl_button.Location = new System.Drawing.Point(355, 278);
+            this.chan2_unitControl_button.Location = new System.Drawing.Point(298, 278);
             this.chan2_unitControl_button.Name = "chan2_unitControl_button";
             this.chan2_unitControl_button.Size = new System.Drawing.Size(75, 23);
             this.chan2_unitControl_button.TabIndex = 4;
@@ -1404,6 +1565,8 @@ namespace WindowsFormsApplication1
             // 
             // groupBox14
             // 
+            this.groupBox14.Controls.Add(this.openClosechannel5_btn);
+            this.groupBox14.Controls.Add(this.openClosechannel4_btn);
             this.groupBox14.Controls.Add(this.openClosechannel3_btn);
             this.groupBox14.Controls.Add(this.label14);
             this.groupBox14.Controls.Add(this.comList4);
@@ -1412,15 +1575,37 @@ namespace WindowsFormsApplication1
             this.groupBox14.Controls.Add(this.refresh_dualTab);
             this.groupBox14.Location = new System.Drawing.Point(8, 326);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(206, 297);
+            this.groupBox14.Size = new System.Drawing.Size(435, 240);
             this.groupBox14.TabIndex = 1;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "Select available COM";
             // 
+            // openClosechannel5_btn
+            // 
+            this.openClosechannel5_btn.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openClosechannel5_btn.Location = new System.Drawing.Point(222, 194);
+            this.openClosechannel5_btn.Name = "openClosechannel5_btn";
+            this.openClosechannel5_btn.Size = new System.Drawing.Size(191, 31);
+            this.openClosechannel5_btn.TabIndex = 68;
+            this.openClosechannel5_btn.Text = "Open/Close Channel 5";
+            this.openClosechannel5_btn.UseVisualStyleBackColor = true;
+            this.openClosechannel5_btn.Click += new System.EventHandler(this.openClosechannel5_btn_Click);
+            // 
+            // openClosechannel4_btn
+            // 
+            this.openClosechannel4_btn.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openClosechannel4_btn.Location = new System.Drawing.Point(222, 157);
+            this.openClosechannel4_btn.Name = "openClosechannel4_btn";
+            this.openClosechannel4_btn.Size = new System.Drawing.Size(191, 31);
+            this.openClosechannel4_btn.TabIndex = 67;
+            this.openClosechannel4_btn.Text = "Open/Close Channel 4";
+            this.openClosechannel4_btn.UseVisualStyleBackColor = true;
+            this.openClosechannel4_btn.Click += new System.EventHandler(this.openClosechannel4_btn_Click);
+            // 
             // openClosechannel3_btn
             // 
             this.openClosechannel3_btn.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openClosechannel3_btn.Location = new System.Drawing.Point(10, 260);
+            this.openClosechannel3_btn.Location = new System.Drawing.Point(222, 120);
             this.openClosechannel3_btn.Name = "openClosechannel3_btn";
             this.openClosechannel3_btn.Size = new System.Drawing.Size(191, 31);
             this.openClosechannel3_btn.TabIndex = 66;
@@ -1444,13 +1629,13 @@ namespace WindowsFormsApplication1
             this.comList4.ItemHeight = 14;
             this.comList4.Location = new System.Drawing.Point(9, 49);
             this.comList4.Name = "comList4";
-            this.comList4.Size = new System.Drawing.Size(191, 102);
+            this.comList4.Size = new System.Drawing.Size(207, 172);
             this.comList4.TabIndex = 1;
             // 
             // openCloseSecondPort
             // 
             this.openCloseSecondPort.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCloseSecondPort.Location = new System.Drawing.Point(10, 223);
+            this.openCloseSecondPort.Location = new System.Drawing.Point(222, 83);
             this.openCloseSecondPort.Name = "openCloseSecondPort";
             this.openCloseSecondPort.Size = new System.Drawing.Size(191, 31);
             this.openCloseSecondPort.TabIndex = 4;
@@ -1461,7 +1646,7 @@ namespace WindowsFormsApplication1
             // openCloseFirstPort
             // 
             this.openCloseFirstPort.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openCloseFirstPort.Location = new System.Drawing.Point(10, 189);
+            this.openCloseFirstPort.Location = new System.Drawing.Point(222, 49);
             this.openCloseFirstPort.Name = "openCloseFirstPort";
             this.openCloseFirstPort.Size = new System.Drawing.Size(191, 31);
             this.openCloseFirstPort.TabIndex = 3;
@@ -1472,7 +1657,7 @@ namespace WindowsFormsApplication1
             // refresh_dualTab
             // 
             this.refresh_dualTab.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.refresh_dualTab.Location = new System.Drawing.Point(10, 152);
+            this.refresh_dualTab.Location = new System.Drawing.Point(222, 12);
             this.refresh_dualTab.Name = "refresh_dualTab";
             this.refresh_dualTab.Size = new System.Drawing.Size(191, 31);
             this.refresh_dualTab.TabIndex = 2;
@@ -1545,7 +1730,7 @@ namespace WindowsFormsApplication1
             this.label12.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(1526, 610);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(92, 16);
+            this.label12.Size = new System.Drawing.Size(91, 16);
             this.label12.TabIndex = 87;
             this.label12.Text = "List of all Runs:";
             this.label12.Visible = false;
@@ -1553,12 +1738,13 @@ namespace WindowsFormsApplication1
             // currRunDualQuickExport
             // 
             this.currRunDualQuickExport.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currRunDualQuickExport.Location = new System.Drawing.Point(1159, 368);
+            this.currRunDualQuickExport.Location = new System.Drawing.Point(1078, 394);
             this.currRunDualQuickExport.Name = "currRunDualQuickExport";
             this.currRunDualQuickExport.Size = new System.Drawing.Size(117, 40);
             this.currRunDualQuickExport.TabIndex = 4;
             this.currRunDualQuickExport.Text = "Save && Open";
             this.currRunDualQuickExport.UseVisualStyleBackColor = true;
+            this.currRunDualQuickExport.Visible = false;
             this.currRunDualQuickExport.Click += new System.EventHandler(this.currRunDualQuickExport_Click);
             // 
             // serieListBox
@@ -1594,6 +1780,7 @@ namespace WindowsFormsApplication1
             this.save_button.Text = "Save and Open Excel";
             this.save_button.UseVisualStyleBackColor = true;
             this.save_button.Visible = false;
+            this.save_button.Click += new System.EventHandler(this.save_button_Click);
             // 
             // groupBox16
             // 
@@ -1610,6 +1797,7 @@ namespace WindowsFormsApplication1
             this.groupBox16.TabIndex = 15;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "Recent Runs";
+            this.groupBox16.Visible = false;
             // 
             // noCurrDualMasterGrid
             // 
@@ -1695,11 +1883,12 @@ namespace WindowsFormsApplication1
             this.groupBox11.Controls.Add(this.chan1_menuControl_button);
             this.groupBox11.Controls.Add(this.dataCh1DualChanTab_lbl);
             this.groupBox11.Controls.Add(this.firstComConnect);
-            this.groupBox11.Location = new System.Drawing.Point(8, 13);
+            this.groupBox11.Location = new System.Drawing.Point(994, 646);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(435, 307);
             this.groupBox11.TabIndex = 13;
             this.groupBox11.TabStop = false;
+            this.groupBox11.Visible = false;
             // 
             // unitCH1DualCHTab_lbl
             // 
@@ -1787,7 +1976,7 @@ namespace WindowsFormsApplication1
             this.firstComConnect.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.firstComConnect.Location = new System.Drawing.Point(0, 16);
             this.firstComConnect.Name = "firstComConnect";
-            this.firstComConnect.Size = new System.Drawing.Size(148, 16);
+            this.firstComConnect.Size = new System.Drawing.Size(147, 16);
             this.firstComConnect.TabIndex = 65;
             this.firstComConnect.Text = "No COM Port Connect";
             // 
@@ -1833,13 +2022,14 @@ namespace WindowsFormsApplication1
             this.channel2_gridview.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.channel2_gridview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.channel2_gridview.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.channel2_gridview.Location = new System.Drawing.Point(533, 367);
+            this.channel2_gridview.Location = new System.Drawing.Point(1393, 644);
             this.channel2_gridview.MultiSelect = false;
             this.channel2_gridview.Name = "channel2_gridview";
             this.channel2_gridview.RowHeadersVisible = false;
             this.channel2_gridview.RowHeadersWidth = 82;
             this.channel2_gridview.Size = new System.Drawing.Size(297, 190);
             this.channel2_gridview.TabIndex = 12;
+            this.channel2_gridview.Visible = false;
             this.channel2_gridview.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.secondChannelGridView_CellEndEdit);
             // 
             // clearFirst
@@ -1874,12 +2064,13 @@ namespace WindowsFormsApplication1
             this.Column1,
             this.Column2,
             this.Column3});
-            this.channel1_gridview.Location = new System.Drawing.Point(230, 367);
+            this.channel1_gridview.Location = new System.Drawing.Point(1090, 644);
             this.channel1_gridview.MultiSelect = false;
             this.channel1_gridview.Name = "channel1_gridview";
             this.channel1_gridview.RowHeadersWidth = 82;
             this.channel1_gridview.Size = new System.Drawing.Size(297, 190);
             this.channel1_gridview.TabIndex = 11;
+            this.channel1_gridview.Visible = false;
             this.channel1_gridview.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.firstChannelGrid_CellContentClick);
             this.channel1_gridview.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.firstChannelGrid_CellEndEdit);
             this.channel1_gridview.SelectionChanged += new System.EventHandler(this.firstChannelGridSelect);
@@ -2154,7 +2345,7 @@ namespace WindowsFormsApplication1
             this.label10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(15, 56);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(115, 16);
+            this.label10.Size = new System.Drawing.Size(114, 16);
             this.label10.TabIndex = 44;
             this.label10.Text = "Readings Per Row";
             // 
@@ -2296,7 +2487,7 @@ namespace WindowsFormsApplication1
             this.COMconnect.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.COMconnect.Location = new System.Drawing.Point(0, 16);
             this.COMconnect.Name = "COMconnect";
-            this.COMconnect.Size = new System.Drawing.Size(148, 16);
+            this.COMconnect.Size = new System.Drawing.Size(147, 16);
             this.COMconnect.TabIndex = 41;
             this.COMconnect.Text = "No COM Port Connect";
             // 
@@ -2959,7 +3150,7 @@ namespace WindowsFormsApplication1
             this.checkBox6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox6.Location = new System.Drawing.Point(25, 212);
             this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(139, 20);
+            this.checkBox6.Size = new System.Drawing.Size(138, 20);
             this.checkBox6.TabIndex = 29;
             this.checkBox6.Text = "Send Reading Only";
             this.checkBox6.UseVisualStyleBackColor = true;
@@ -3003,7 +3194,7 @@ namespace WindowsFormsApplication1
             this.label6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(319, 122);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(115, 16);
+            this.label6.Size = new System.Drawing.Size(114, 16);
             this.label6.TabIndex = 31;
             this.label6.Text = "Readings Per Row";
             // 
@@ -3196,7 +3387,7 @@ namespace WindowsFormsApplication1
             this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(16, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 16);
+            this.label1.Size = new System.Drawing.Size(85, 16);
             this.label1.TabIndex = 9;
             this.label1.Text = "Readings/row";
             // 
@@ -3219,7 +3410,7 @@ namespace WindowsFormsApplication1
             this.Reading_Only_Box.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Reading_Only_Box.Location = new System.Drawing.Point(118, 91);
             this.Reading_Only_Box.Name = "Reading_Only_Box";
-            this.Reading_Only_Box.Size = new System.Drawing.Size(139, 20);
+            this.Reading_Only_Box.Size = new System.Drawing.Size(138, 20);
             this.Reading_Only_Box.TabIndex = 4;
             this.Reading_Only_Box.Text = "Send Reading Only";
             this.Reading_Only_Box.UseVisualStyleBackColor = true;
@@ -3261,7 +3452,7 @@ namespace WindowsFormsApplication1
             this.COMconnect2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.COMconnect2.Location = new System.Drawing.Point(0, 16);
             this.COMconnect2.Name = "COMconnect2";
-            this.COMconnect2.Size = new System.Drawing.Size(138, 16);
+            this.COMconnect2.Size = new System.Drawing.Size(137, 16);
             this.COMconnect2.TabIndex = 41;
             this.COMconnect2.Text = "No COM Port Connect";
             // 
@@ -3777,7 +3968,7 @@ namespace WindowsFormsApplication1
             this.ch2ConnectLabel_calTab.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ch2ConnectLabel_calTab.Location = new System.Drawing.Point(248, 22);
             this.ch2ConnectLabel_calTab.Name = "ch2ConnectLabel_calTab";
-            this.ch2ConnectLabel_calTab.Size = new System.Drawing.Size(148, 16);
+            this.ch2ConnectLabel_calTab.Size = new System.Drawing.Size(147, 16);
             this.ch2ConnectLabel_calTab.TabIndex = 66;
             this.ch2ConnectLabel_calTab.Text = "No COM Port Connect";
             // 
@@ -4758,7 +4949,7 @@ namespace WindowsFormsApplication1
             this.ch1ConnectLabel_calTab.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ch1ConnectLabel_calTab.Location = new System.Drawing.Point(6, 16);
             this.ch1ConnectLabel_calTab.Name = "ch1ConnectLabel_calTab";
-            this.ch1ConnectLabel_calTab.Size = new System.Drawing.Size(148, 16);
+            this.ch1ConnectLabel_calTab.Size = new System.Drawing.Size(147, 16);
             this.ch1ConnectLabel_calTab.TabIndex = 65;
             this.ch1ConnectLabel_calTab.Text = "No COM Port Connect";
             // 
@@ -5064,7 +5255,7 @@ namespace WindowsFormsApplication1
             this.AutoScroll = true;
             this.AutoScrollMinSize = new System.Drawing.Size(1473, 945);
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(2001, 1235);
+            this.ClientSize = new System.Drawing.Size(1924, 1061);
             this.Controls.Add(this.TabPages);
             this.Controls.Add(this.testerType);
             this.Controls.Add(this.groupBox1);
@@ -5090,6 +5281,7 @@ namespace WindowsFormsApplication1
             this.flowLayoutPanel1.PerformLayout();
             this.dualChannelTab.ResumeLayout(false);
             this.dualChannelTab.PerformLayout();
+            this.groupBox22.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.channel3_gridview)).EndInit();
             this.groupBox20.ResumeLayout(false);
             this.groupBox20.PerformLayout();
@@ -5603,6 +5795,21 @@ namespace WindowsFormsApplication1
         private Button openClosechannel3_btn;
         private System.IO.Ports.SerialPort serialPort3;
         private TextBox dualCh3RunName_Text;
+        private System.IO.Ports.SerialPort serialPort4;
+        private System.IO.Ports.SerialPort serialPort5;
+        private Button openClosechannel5_btn;
+        private Button openClosechannel4_btn;
+        private GroupBox groupBox22;
+        private Button Zero_btn;
+        private Button Export_btn;
+        private Button Clear_btn;
+        private Button Delete_btn;
+        private Button Capture_btn;
+        private Button Menu_btn;
+        private Button Mode_btn;
+        private Button Unit_btn;
+        private ListBox Data5Channels_listBox;
+        private TextBox LiveReadings_txtBox;
     }
 }
 

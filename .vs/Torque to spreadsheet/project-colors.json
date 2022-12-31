@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "12bd779a-be11-4d0c-8068-4b143e32f208": {
+      "ProjectGuid": "12bd779a-be11-4d0c-8068-4b143e32f208",
+      "DisplayName": "Torque to spreadsheet",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

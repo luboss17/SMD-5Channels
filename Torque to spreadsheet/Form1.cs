@@ -50,21 +50,23 @@ namespace WindowsFormsApplication1
         private string secondChannelReading = "";
         private DataTable secondChannelTable = new DataTable();
         private DataTable ch3Table = new DataTable();
-        private string secondUnit, firstUnit,ch3Unit;//decoded unit for live channel
-        private float secondReading, firstReading,ch3Reading;//decoded reading for live channel
+        private string ch2Unit, ch1Unit, ch3Unit, ch4Unit, ch5Unit;//decoded unit for live channel
+        private float ch2Reading, ch1Reading, ch3Reading, ch4Reading, ch5Reading;//decoded reading for live channel
         private bool readSuccess = false;//true if successfully read from second channel
         private string firstChannelFullCap = "";
-        private bool pauseLiveReading1 = false;
+        private bool pauseLiveReading = false;
         private BindingList<string> FSList = new BindingList<string>();
         private float FSReading;
         private string FSUnit;
         private const string noComConnectMessage = "No Transducer is connected";
         public static List<string> arr_dualSeries = new List<string>();
         public static List<string> arr_singleSeries = new List<string>();
-        private const string tail_Channel1 = "-CH1", tail_Channel2 = "-CH2", tail_Channel3 = "-CH3";//used to affix or remove to connecting Com to Channel1 or 2
+        private const string tail_Channel1 = "-CH1", tail_Channel2 = "-CH2", tail_Channel3 = "-CH3", tail_Channel4 = "-CH4", tail_Channel5 = "-CH5";//used to affix or remove to connecting Com to Channel1 or 2
         public static TesterControl chann1Control = new TesterControl();
         public static TesterControl chann2Control = new TesterControl();
         public static TesterControl chann3Control = new TesterControl();
+        public static TesterControl chann4Control = new TesterControl();
+        public static TesterControl chann5Control = new TesterControl();
         public static TesterControl commonChanControl = new TesterControl();
         private const int TTS = 0, smdSingle = 2, smdDual = 5;//use to set registry value for defaultTab
         private const string userRoot = "HKEY_CURRENT_USER";
@@ -90,7 +92,7 @@ namespace WindowsFormsApplication1
         private const string dataLoggerPath = @"C:\datalog\win232.exe";
         private const string dataLoggerTextPath = @"data.txt";
         private static string lastPathName = @"C:\";
-        private bool pauseLiveReading2 = false,pauseLiveReading3=false;
+        //private bool pauseLiveReading2 = false,pauseLiveReading3=false, pauseLiveReading4 = false, pauseLiveReading5 = false;
         private const int lineChart = 1;
         private const int pointChart = 2;
         private const int noChart = 0;
@@ -98,6 +100,8 @@ namespace WindowsFormsApplication1
         private const string channel1 = "Channel 1";
         private const string channel2 = "Channel 2";
         private const string channel3 = "Channel 3";
+        private const string channel4 = "Channel 4";
+        private const string channel5 = "Channel 5";
         private int xAxis = 2;
         private int yAxis = 1;
         private const int maxReadTimeOut = 100;
@@ -107,6 +111,7 @@ namespace WindowsFormsApplication1
 
 
         private const string autoUpdate_yesStr = "Yes", autoUpdate_noStr = "No";
+        private BindingList<string> allDataCapturedList = new BindingList<string>();//contains captured readings for 5 channels   
 
         public Form1()
         {
@@ -164,12 +169,15 @@ namespace WindowsFormsApplication1
             unifyScroll(ref channel3_gridview, ref channel2_gridview);
         }
         //changed 4/13/21 to add ch3
+        //Changed 11/3/22 to add 5channels
         private void Form1_Load(object sender, EventArgs e)
         {
             serialPort1.PortName = "COM101";
             serialPort2.PortName = "COM102";
             serialPort3.PortName = "COM103";
-            loadALLCalibrationTabSetting();
+            serialPort4.PortName = "COM104";
+            serialPort5.PortName = "COM105";
+            //loadALLCalibrationTabSetting();
             target_groupBox.Size = new Size(486, 307);
             singleChannel_gridView.RowsAdded += Gridview1_RowsAdded;
             channel1_gridview.RowsAdded += FirstChannelGrid_RowsAdded;
@@ -467,8 +475,7 @@ namespace WindowsFormsApplication1
             FSList.Clear();
             foreach (string com in testerList)
             {
-                if (serialPort1.PortName != com)
-                    serialPort1.PortName = com;
+                serialPort1.PortName = com;
                 try
                 {
                     if (serialPort1.IsOpen == false)
@@ -862,7 +869,7 @@ namespace WindowsFormsApplication1
                     break;
                 case SMDDualTabName:
                     this.Size = new Size(1475, 943);
-                    this.Text = "SMD  3-Channels";
+                    this.Text = "SMD  5-Channels";
                     pingTester(serialPort1);//Lock UI from Tester
                     pingTester(serialPort2);//Lock UI from Tester
                     break;
@@ -944,6 +951,7 @@ namespace WindowsFormsApplication1
         //if passed in ComtoDisconnect contain -Channel1 or -Channel2(depends on channelNumber passed in), then remove that part
         //This method is called after a Comlist is closed
         //Added 4/19/21 for 3 channels
+        //Changed 11/3/22 to add 5channels
         private BindingList<string> removeChannelfromComList(int channelNumber, BindingList<string> list, int index)
         {
             string channel = "DMSOMDJNFSDSNDKJW";//Bogus string, just for the heck of it
@@ -953,6 +961,10 @@ namespace WindowsFormsApplication1
                 channel = tail_Channel2;
             else if (channelNumber == 3)
                 channel = tail_Channel3;
+            else if (channelNumber == 4)
+                channel = tail_Channel4;
+            else if (channelNumber == 5)
+                channel=tail_Channel5;
             list[index] = list[index].Replace(channel, "");
 
             return list;
@@ -975,7 +987,7 @@ namespace WindowsFormsApplication1
             string displaySNandFS = "";
             string firstChannelSerialNum = "";
             bool readCapSuccess;
-            pauseLiveReading1 = true;
+            pauseLiveReading = true;
             try
             {
                 if (list.Items.Count > 0)
@@ -988,7 +1000,7 @@ namespace WindowsFormsApplication1
                     if ((serialPort1.IsOpen == false) || (portcheck == false))
                     {
                         //if selecting port is not same as port 2 or port 2 is not opened, Open port 1
-                        if ((!(currentPort == serialPort2.PortName)) || (!serialPort2.IsOpen))
+                        if ((currentPort != serialPort3.PortName) && (currentPort != serialPort2.PortName) && (currentPort != serialPort4.PortName) && (currentPort != serialPort5.PortName))
                         {
                             openport(currentPort,ref serialPort1);
                             changeWinSize(TabPages.SelectedTab.Name);//Call this to ping or unping tester
@@ -1038,8 +1050,7 @@ namespace WindowsFormsApplication1
                     }
                     else
                     {
-                        closeport(currentPort);
-                        serialPort1.PortName = "COM101"; //assign bogus COM name after closing port.
+                        closePort(ref serialPort1, 1);
                         showComConnect_FirstChan(noComConnectMessage);
                     }
                 }
@@ -1052,9 +1063,9 @@ namespace WindowsFormsApplication1
                 {
                     showComConnect_FirstChan(noComConnectMessage);
                 }
-                pauseLiveReading1 = false;
+                pauseLiveReading = false;
             }
-            pauseLiveReading1 = false;
+            pauseLiveReading = false;
         }
         //Open or close 2nd Com for Dual channel
         //changed 4/13/21 to addCh3
@@ -1068,15 +1079,11 @@ namespace WindowsFormsApplication1
             toolStripStatusLabel1.Text = "Port: " + currentPort;
             if ((serialPort2.IsOpen == false) || (portcheck == false))
             {//if serial port is not open, OR current selected port is not is different from the SerialPort2
-                if ((serialPort1.PortName == currentPort) && (serialPort1.IsOpen == false))
-                {
-                    serialPort1.PortName = "COM101";
-                }
-                if ((serialPort3.PortName == currentPort) && (serialPort3.IsOpen == false))
-                {
-                    serialPort3.PortName = "COM103";
-                }
-                if (currentPort != serialPort1.PortName)
+                assignDefaultPortIfDuplicate(ref serialPort1, currentPort);
+                assignDefaultPortIfDuplicate(ref serialPort4, currentPort);
+                assignDefaultPortIfDuplicate(ref serialPort3, currentPort);
+                assignDefaultPortIfDuplicate(ref serialPort5, currentPort);
+                if ((currentPort != serialPort1.PortName) && (currentPort != serialPort3.PortName) && (currentPort != serialPort4.PortName) && (currentPort != serialPort5.PortName))
                 {
                     openSecondport(currentPort);
                     secondChannelSerialNum = write_command("?S;", serialPort2);
@@ -1116,8 +1123,7 @@ namespace WindowsFormsApplication1
             }
             else
             {
-                closeSecondport(currentPort);
-                serialPort2.PortName = "COM102";//assign bogus COM name after closing port.
+                closePort(ref serialPort2, 2);
                 showComConnect_SecondChan(noComConnectMessage);
             }
         }
@@ -1133,17 +1139,11 @@ namespace WindowsFormsApplication1
             bool portcheck = currentPort.Equals(serialPort3.PortName);
             if ((serialPort3.IsOpen == false) || (portcheck == false))
             {//if serial port is not open, OR current selected port is not is different from the SerialPort3
-                //openport(currentPort,ref serialPort3);
-                //closeCh3Port(currentPort);
-                if ((serialPort1.PortName == currentPort) && (serialPort1.IsOpen == false))
-                {
-                    serialPort1.PortName = "COM101";
-                }
-                if ((serialPort2.PortName == currentPort) && (serialPort2.IsOpen == false))
-                {
-                    serialPort2.PortName = "COM102";
-                }
-                if ((currentPort != serialPort1.PortName) && (currentPort!=serialPort2.PortName))
+                assignDefaultPortIfDuplicate(ref serialPort1, currentPort);
+                assignDefaultPortIfDuplicate(ref serialPort2, currentPort);
+                assignDefaultPortIfDuplicate(ref serialPort4, currentPort);
+                assignDefaultPortIfDuplicate(ref serialPort5, currentPort);
+                if ((currentPort != serialPort1.PortName) && (currentPort!=serialPort2.PortName) && (currentPort != serialPort4.PortName) && (currentPort != serialPort5.PortName))
                 {
                     openCh3Port(currentPort);
                     ch3SN = write_command("?S;", serialPort3);
@@ -1182,9 +1182,118 @@ namespace WindowsFormsApplication1
             }
             else
             {
-                closeCh3Port(currentPort);
-                serialPort3.PortName = "COM103";//assign bogus COM name after closing port.
+                closePort(ref serialPort3, 3);
                 showComConnect_Channel3(noComConnectMessage);
+            }
+        }
+        private void assignDefaultPortIfDuplicate(ref SerialPort port, string portToCompare)
+        {
+            string defaultPortName = "COM101";
+            if ((port.PortName == portToCompare) && (port.IsOpen == false))
+            {
+                port.PortName = defaultPortName;
+            }
+        }
+        //Open or close Channel4
+        //Changed 11/3/22 to add 5channels
+        private void opencloseChannel4(string currentPort, ListBox list)
+        {
+            
+            bool readCapSuccess;
+            string ch4SN;
+            string ch4FS;
+            string ch4SN_FS;
+            bool portcheck = currentPort.Equals(serialPort4.PortName);
+            if ((serialPort4.IsOpen == false) || (portcheck == false))
+            {//if serial port is not open, OR current selected port is not is different from the SerialPort3
+                assignDefaultPortIfDuplicate(ref serialPort1, currentPort);
+                assignDefaultPortIfDuplicate(ref serialPort2, currentPort);
+                assignDefaultPortIfDuplicate(ref serialPort3, currentPort);
+                assignDefaultPortIfDuplicate(ref serialPort5, currentPort);
+                if ((currentPort != serialPort1.PortName) && (currentPort != serialPort2.PortName) && (currentPort != serialPort3.PortName) && (currentPort != serialPort5.PortName))
+                {
+                    openPort(ref serialPort4, currentPort, 4);
+                    ch4SN = write_command("?S;", serialPort4);
+                    ch4FS = write_command("?F;", serialPort4);
+                    resetFSReading();
+                    //Initiate chann4Control
+                    chann4Control = new TesterControl();
+                    string modeMsg = "", CapMsg = "", UnitMsg = "";
+                    modeMsg = write_command("?M;", serialPort4);
+                    CapMsg = write_command("?C;", serialPort4);
+                    UnitMsg = write_command("?U;", serialPort4);
+
+                    chann4Control.getModeAndUnitClass(modeMsg, CapMsg, UnitMsg);//set the currUnitMode and currUnitClass
+
+                    decodeMessage(ch4FS, chann4Control.getcurrUnitClass(), 0);//decode query got back from asking for Full Scale, then pass to FSReading and FSUnit-indicated by passing in 0 value for 2nd param
+
+                    if (FSReading == 0)//if FSReading is 0, that means fail to read FS of tester
+                        readCapSuccess = false;
+                    else
+                        readCapSuccess = true;
+                    ch4SN_FS = serialPort4.PortName + ":";
+                    if (readCapSuccess)
+                        ch4SN_FS += " " + FSReading + " " + FSUnit;
+                    ch4SN_FS += " connected";
+                    FSList[list.SelectedIndex] += tail_Channel4;
+                }
+                else
+                    MessageBox.Show("Other Channel is currently connecting to this COM.\nPlease free the selecting COM first");
+            }
+            else
+            {
+                closePort(ref serialPort4, 4);
+            }
+        }
+        //Open or close Channel4
+        //Changed 11/3/22 to add 5channels
+        private void opencloseChannel5(string currentPort, ListBox list)
+        {
+
+            bool readCapSuccess;
+            string ch5SN;
+            string ch5FS;
+            string ch5SN_FS;
+            bool portcheck = currentPort.Equals(serialPort5.PortName);
+            if ((serialPort5.IsOpen == false) || (portcheck == false))
+            {//if serial port is not open, OR current selected port is not is different from the SerialPort3
+                assignDefaultPortIfDuplicate(ref serialPort1, currentPort);
+                assignDefaultPortIfDuplicate(ref serialPort2, currentPort);
+                assignDefaultPortIfDuplicate(ref serialPort3, currentPort);
+                assignDefaultPortIfDuplicate(ref serialPort4, currentPort);
+                if ((currentPort != serialPort1.PortName) && (currentPort != serialPort2.PortName) && (currentPort != serialPort4.PortName) && (currentPort != serialPort3.PortName))
+                {
+                    openPort(ref serialPort5, currentPort, 5);
+                    ch5SN = write_command("?S;", serialPort5);
+                    ch5FS = write_command("?F;", serialPort5);
+                    resetFSReading();
+                    //Initiate chann4Control
+                    chann5Control = new TesterControl();
+                    string modeMsg = "", CapMsg = "", UnitMsg = "";
+                    modeMsg = write_command("?M;", serialPort5);
+                    CapMsg = write_command("?C;", serialPort5);
+                    UnitMsg = write_command("?U;", serialPort5);
+
+                    chann5Control.getModeAndUnitClass(modeMsg, CapMsg, UnitMsg);//set the currUnitMode and currUnitClass
+
+                    decodeMessage(ch5FS, chann5Control.getcurrUnitClass(), 0);//decode query got back from asking for Full Scale, then pass to FSReading and FSUnit-indicated by passing in 0 value for 2nd param
+
+                    if (FSReading == 0)//if FSReading is 0, that means fail to read FS of tester
+                        readCapSuccess = false;
+                    else
+                        readCapSuccess = true;
+                    ch5SN_FS = serialPort5.PortName + ":";
+                    if (readCapSuccess)
+                        ch5SN_FS += " " + FSReading + " " + FSUnit;
+                    ch5SN_FS += " connected";
+                    FSList[list.SelectedIndex] += tail_Channel5;
+                }
+                else
+                    MessageBox.Show("Other Channel is currently connecting to this COM.\nPlease free the selecting COM first");
+            }
+            else
+            {
+                closePort(ref serialPort5, 5);
             }
         }
         //Display the serial Number that connect to Channel1.
@@ -1198,7 +1307,6 @@ namespace WindowsFormsApplication1
         private void showComConnect_Channel3(string message)
         {
             channel3Connect_lbl.Text = message;
-            //ch2ConnectLabel_calTab.Text = message;
         }
         //Display the serial Number that connect to Channel2.
         private void showComConnect_SecondChan(string message)
@@ -1685,7 +1793,7 @@ namespace WindowsFormsApplication1
         //Write to first Channel Gridview
         private void writeToFirstChanGrid()
         {
-            string[] data = new string[2] { firstReading.ToString(), firstUnit };
+            string[] data = new string[2] { ch1Reading.ToString(), ch1Unit };
             addrow(data);
         }
 
@@ -1710,20 +1818,20 @@ namespace WindowsFormsApplication1
                     (channel2_gridview.Rows[rowIndex].IsNewRow))
                 {
                     //if it is New Row then add to bottom of secondUnit
-                    addToSecondTable(secondUnit, secondReading);
+                    addToSecondTable(ch2Unit, ch2Reading);
                     //assign the secondUnit and secondReading to secondtable     
                     bindSecondChannelTable();
                 }
                 else if (rowIndex < channel2_gridview.RowCount)
                 {
-                    channel2_gridview.Rows[rowIndex].Cells[0].Value = secondReading;
-                    channel2_gridview.Rows[rowIndex].Cells[1].Value = secondUnit;
+                    channel2_gridview.Rows[rowIndex].Cells[0].Value = ch2Reading;
+                    channel2_gridview.Rows[rowIndex].Cells[1].Value = ch2Unit;
                     updateDualTableAndChart();
                 }
             }
             else
             {
-                addToSecondTable(secondUnit, secondReading);
+                addToSecondTable(ch2Unit, ch2Reading);
                 //assign the secondUnit and secondReading to secondtable     
                 bindSecondChannelTable();
             }
@@ -1761,7 +1869,7 @@ namespace WindowsFormsApplication1
         private void readFromSecondChannel()
         {
             readSuccess = false;
-            pauseLiveReading2 = true;//set to true to prevent overlap with getting in live reading from channel2
+            pauseLiveReading = true;//set to true to prevent overlap with getting in live reading from channel2
             try
             {
                 secondChannelReading = write_command("E", serialPort2); //read in second channel reading
@@ -1777,16 +1885,16 @@ namespace WindowsFormsApplication1
             }
             catch
             {
-                pauseLiveReading2 = false;//resume live reading from channel2
+                pauseLiveReading = false;//resume live reading from channel2
             }
-            pauseLiveReading2 = false;//resume live reading from channel2
+            pauseLiveReading = false;//resume live reading from channel2
         }
         //Read from Channel3 and update dualTable and chart
         //Added 4/13/21 to addCh3
         private void readFromChannel3()
         {
             readSuccess = false;
-            pauseLiveReading3 = true;//set to true to prevent overlap with getting in live reading from channel3
+            pauseLiveReading = true;//set to true to prevent overlap with getting in live reading from channel3
             try
             {
                 string ch3Reading = write_command("E", serialPort3); //read in second channel reading
@@ -1802,12 +1910,12 @@ namespace WindowsFormsApplication1
             }
             catch
             {
-                pauseLiveReading3 = false;//resume live reading from channel2
+                pauseLiveReading = false;//resume live reading from channel2
             }
-            pauseLiveReading3 = false;//resume live reading from channel2
+            pauseLiveReading = false;//resume live reading from channel2
         }
-        //update Live Channel Reading for first Channel
-        private void updateFirstChannelLive(float ReadingFloat, string unit)
+        
+        private string formatReading(float ReadingFloat)
         {
             string reading = "";
             if (ReadingFloat == 0)
@@ -1816,6 +1924,12 @@ namespace WindowsFormsApplication1
             {
                 reading = ReadingFloat.ToString();
             }
+            return reading;
+        }
+        //update Live Channel Reading for first Channel
+        private void updateFirstChannelLive(float ReadingFloat, string unit)
+        {
+            string reading = formatReading(ReadingFloat);
 
             //update reading
             DataTTS_lbl.Text = reading;
@@ -1836,13 +1950,7 @@ namespace WindowsFormsApplication1
         //changed 4/13/21 to addCh3
         private void updateSecondChannelLive(float ReadingFloat, string unit)
         {
-            string reading = "";
-            if (ReadingFloat == 0)
-                reading = ReadingFloat.ToString("0.000");
-            else
-            {
-                reading = ReadingFloat.ToString();
-            }
+            string reading = formatReading(ReadingFloat);
 
             dataCh2DualChTab_lbl.Text = reading;
             unitCH2DualCHTab_lbl.Text = unit;
@@ -1853,18 +1961,12 @@ namespace WindowsFormsApplication1
         //Add 4/13/21 to addCh3 
         private void updateCh3Live(float ReadingFloat, string unit)
         {
-            string reading = "";
-            if (ReadingFloat == 0)
-                reading = ReadingFloat.ToString("0.000");
-            else
-            {
-                reading = ReadingFloat.ToString();
-            }
+            string reading = formatReading(ReadingFloat);
 
             ch3Reading_lbl.Text = reading;
             ch3Unit_lbl.Text = unit;
         }
-
+        
         /// <summary>
         /// Start init timer2 to display live reading
         /// </summary>
@@ -1968,9 +2070,9 @@ namespace WindowsFormsApplication1
                         else//caltupre for all other tabs
                         {
                             captureReadingsFromBothChannel();
-                            if (aquire && formActive == false && firstReading != 0)
+                            if (aquire && formActive == false && ch1Reading != 0)
                             {
-                                string[] data = new string[2] { firstReading.ToString(), firstUnit };
+                                string[] data = new string[2] { ch1Reading.ToString(), ch1Unit };
                                 sendDataToKeyboardOutPut(data);
                             }
                         }
@@ -1988,19 +2090,25 @@ namespace WindowsFormsApplication1
 
         //call decodemessage for livechannel reading
         //Changed 4/13/21 to addCh3
+        //Changed 11/3/22 to add 5channels
         private void updateChannelsReadings()
         {
             string ch1Message = "";
             string ch2Message = "";
             string ch3Message = "";
+            string ch4Message = "";
+            string ch5Message = "";
             int CH1Timercounter = 0;
             int CH2Timercounter = 0;
             int Ch3TimerCounter = 0;
+            int Ch4TimerCounter = 0;
+            int Ch5TimerCounter = 0;
             try
             {
                 CH1Timercounter--;
                 CH2Timercounter--;
                 Ch3TimerCounter--;
+                string allChannelsReading = "";
                 if ((serialPort1.IsOpen) && (CH1Timercounter <= 0))
                 {
                     float ReadingToDisplay = 0;
@@ -2014,20 +2122,21 @@ namespace WindowsFormsApplication1
                     //when trough mode is selected
                     if (ch1Trough_chckbox.Checked == false)
                     {
-                        ReadingToDisplay = firstReading;
+                        ReadingToDisplay = ch1Reading;
                     }
                     else
                     {
-                        ch1TroughPoint = getTroughPoint(secondReading, firstReading, ref ch1TroughList);
+                        ch1TroughPoint = getTroughPoint(ch2Reading, ch1Reading, ref ch1TroughList);
                         ReadingToDisplay = ch1TroughPoint;
                     }
-                    updateFirstChannelLive(ReadingToDisplay, firstUnit);
+                    updateFirstChannelLive(ReadingToDisplay, ch1Unit);
+                    allChannelsReading += $" {formatReading(ReadingToDisplay)} {ch1Unit},";
                     updateBigReadingPassFail(ReadingToDisplay);
 
                     if (ReadingToDisplay != 0)
                         checkIfAutoClear(lastReading, ch1Message);//if user set forceAutoClear and reading has been the same for autoClearInteval time then capture data
                 }
-                if ((serialPort2.IsOpen) && (CH2Timercounter <= 0) && (pauseLiveReading2 == false))
+                if ((serialPort2.IsOpen) && (CH2Timercounter <= 0) && (pauseLiveReading == false))
                 {
                     float ReadingToDisplay;
                     ch2Message = write_command("D", serialPort2);
@@ -2039,17 +2148,18 @@ namespace WindowsFormsApplication1
                     //when trough mode is selected
                     if (ch2Trough_chckbox.Checked == false)
                     {
-                        ReadingToDisplay = secondReading;
+                        ReadingToDisplay = ch2Reading;
                     }
                     else
                     {
-                        ch2TroughPoint = getTroughPoint(firstReading, secondReading, ref ch2TroughList);
+                        ch2TroughPoint = getTroughPoint(ch1Reading, ch2Reading, ref ch2TroughList);
                         ReadingToDisplay = ch2TroughPoint;
                     }
 
-                    updateSecondChannelLive(ReadingToDisplay, secondUnit);
+                    updateSecondChannelLive(ReadingToDisplay, ch2Unit);
+                    allChannelsReading += $" {formatReading(ReadingToDisplay)} {ch2Unit},";
                 }
-                if ((serialPort3.IsOpen) && (Ch3TimerCounter <= 0) && (pauseLiveReading3 == false))
+                if ((serialPort3.IsOpen) && (Ch3TimerCounter <= 0) && (pauseLiveReading == false))
                 {
                     float ReadingToDisplay;
                     ch3Message = write_command("D", serialPort3);
@@ -2059,7 +2169,33 @@ namespace WindowsFormsApplication1
 
                     ReadingToDisplay = ch3Reading;
                     updateCh3Live(ReadingToDisplay, ch3Unit);
+                    allChannelsReading += $" {formatReading(ReadingToDisplay)} {ch3Unit},";
                 }
+                if ((serialPort4.IsOpen) && (Ch4TimerCounter <= 0) && (pauseLiveReading == false))
+                {
+                    float ReadingToDisplay;
+                    ch4Message = write_command("D", serialPort4);
+                    Ch4TimerCounter = changeTimerCounter(ch4Message);//change ch2Timercounter to indicate whether tester is connected physically or not
+                    //decode message passed in
+                    decodeChannel4(ch4Message);
+
+                    ReadingToDisplay = ch4Reading;
+                    allChannelsReading += $" {formatReading(ReadingToDisplay)} {ch4Unit},";
+                }
+                if ((serialPort5.IsOpen) && (Ch5TimerCounter <= 0) && (pauseLiveReading == false))
+                {
+                    float ReadingToDisplay;
+                    ch5Message = write_command("D", serialPort5);
+                    Ch5TimerCounter = changeTimerCounter(ch5Message);//change ch2Timercounter to indicate whether tester is connected physically or not
+                    //decode message passed in
+                    decodeChannel5(ch5Message);
+
+                    ReadingToDisplay = ch5Reading;
+                    allChannelsReading += $" {formatReading(ReadingToDisplay)} {ch5Unit}";
+                }
+                allChannelsReading = trimLastCharacterIfMatched(allChannelsReading, ',');
+                //Display Live Reading to LiveReading_txtbox
+                LiveReadings_txtBox.Text = allChannelsReading;
 
                 //Happens when readings from pressing Enter and software send command at same time. This also indicates tester just got pressed Enter
                 if (ch1Message.Length > 15)
@@ -2069,10 +2205,23 @@ namespace WindowsFormsApplication1
                 }
                 else
                 {
-                    captureReadingsIfEnterPress(ch1Message, ch2Message, ch3Message);
+                    //captureReadingsIfEnterPress(ch1Message, ch2Message, ch3Message);
+
+                    //capture and show 5 channels readings
+                    string captureReadingLine= captureReadings5ChannelsIfPressEnter(new List<string> { ch1Message,ch2Message,ch3Message,ch4Message,ch5Message});
+                    captureReadingLine = trimLastCharacterIfMatched(captureReadingLine,',');
+                    if (captureReadingLine!="")
+                        addNewCapturedDataAllChannels(captureReadingLine);//add to list of capture readings and show UI
                 }
             }
             catch { }
+        }
+        //Changed 11/3/22 to add 5channels
+        //add passed in str to readingcapturedList and bind to Data5channel list box
+        private void addNewCapturedDataAllChannels(string capturedDataStr)
+        {
+            allDataCapturedList.Add(capturedDataStr);
+            Data5Channels_listBox.DataSource = allDataCapturedList;
         }
         private bool pauseTest = false;
         //get the lowest point from the passed in float list
@@ -2113,16 +2262,7 @@ namespace WindowsFormsApplication1
             int cutIndex = serialData.IndexOf('\r');
             serialData = serialData.Substring(0, cutIndex);
 
-            serialData = Regex.Replace(serialData, @"\s+", " ");//replace all double or more white space with single white space
-                                                                /*int secondSpaceIndex = 0;
-                                                                try
-                                                                {
-                                                                    secondSpaceIndex=serialData.IndexOf(' ', serialData.IndexOf(' ') + 1);
-                                                                    serialData = serialData.Substring(0, secondSpaceIndex);
-                                                                }
-                                                                catch { }*/
-                                                                //int cutIndex= serialData.IndexOf("\r\n");
-
+            serialData = Regex.Replace(serialData, @"\s+", " ");
 
             return serialData;
         }
@@ -2159,6 +2299,37 @@ namespace WindowsFormsApplication1
                 {
                     writeToCh3Grid(ch3Reading, ch3Unit);
                     write_command("C;", serialPort3);
+                }
+            }
+        }
+        //Changed 11/3/22 to add 5channels
+        private string captureReadings5ChannelsIfPressEnter(List<String> readingList)
+        {
+            bool isCapture = false;
+            string returnStr="";
+            //check if capture was pressed from tester
+            foreach (string reading in readingList)
+            {
+                if ((reading != "") && (reading[0] == 'E'))
+                    isCapture = true;
+            }
+            if (isCapture==true)
+            {
+                //write each reading,unit to returnStr
+                //Clear each channel
+                returnStr = $" {formatReading(ch1Reading)} {ch1Unit}, {formatReading(ch2Reading)} {ch2Unit}, {formatReading(ch3Reading)} {ch3Unit}, {formatReading(ch4Reading)} {ch4Unit}, {formatReading(ch5Reading)} {ch5Unit}";
+                clearReadingSerialPorts(new List<SerialPort> { serialPort1, serialPort2, serialPort3, serialPort4, serialPort5});
+            }
+            return returnStr;
+        }
+        //Changed 11/3/22 to add 5channels
+        private void clearReadingSerialPorts(List<SerialPort> SerialPorts)
+        {
+            foreach (SerialPort serialPort in SerialPorts)
+            {
+                if (serialPort.IsOpen)
+                {
+                    write_command("C;", serialPort);
                 }
             }
         }
@@ -2256,8 +2427,8 @@ namespace WindowsFormsApplication1
             {
                 if (channel == 1)
                 {
-                    firstReading = 0;
-                    firstUnit = "";
+                    ch1Reading = 0;
+                    ch1Unit = "";
                 }
 
                 thismessage = thismessage.TrimEnd(' ');
@@ -2290,13 +2461,13 @@ namespace WindowsFormsApplication1
                 }
                 if (channel == 1)
                 {
-                    firstReading = reading;
-                    firstUnit = unit;
+                    ch1Reading = reading;
+                    ch1Unit = unit;
                 }
                 else if (channel == 2)
                 {
-                    secondReading = reading;
-                    secondUnit = unit;
+                    ch2Reading = reading;
+                    ch2Unit = unit;
                 }
                 else if (channel==3)
                 {
@@ -2310,23 +2481,23 @@ namespace WindowsFormsApplication1
         //pass in reading from channel 2, decode it, then add to secondChannelTable
         private void decodeSecondChannel(string message)
         {
-            secondUnit = "";
-            secondReading = 0;
+            ch2Unit = "";
+            ch2Reading = 0;
             //message=<peak flag><unit><sign><reading>
 
             try
             {
-                secondUnit = getUnit(message[1], chann2Control.getcurrUnitClass());
-                secondReading = Convert.ToSingle(getSign(message[2]) + message.Substring(3));
+                ch2Unit = getUnit(message[1], chann2Control.getcurrUnitClass());
+                ch2Reading = Convert.ToSingle(getSign(message[2]) + message.Substring(3));
                 readSuccess = true;
             }
             catch
             {
                 readSuccess = false;
-                if (pauseLiveReading2)//if this is live reading then we do not display the error message
+                if (pauseLiveReading)//if this is live reading then we do not display the error message
                 {
                     MessageBox.Show("Unable to read reading from " + serialPort2.PortName);
-                    pauseLiveReading2 = false;
+                    pauseLiveReading = false;
                 }
             }
         }
@@ -2347,10 +2518,81 @@ namespace WindowsFormsApplication1
             catch
             {
                 readSuccess = false;
-                if (pauseLiveReading3)//if this is live reading then we do not display the error message
+                if (pauseLiveReading)//if this is live reading then we do not display the error message
                 {
                     MessageBox.Show("Unable to read reading from " + serialPort3.PortName);
-                    pauseLiveReading3 = false;
+                    pauseLiveReading = false;
+                }
+            }
+        }
+        private READING_UNIT decodeChannel(string message,TesterControl testerControl)
+        {
+            READING_UNIT reading_unit = new READING_UNIT();
+            string unit;
+            float reading;
+            try
+            {
+                unit = getUnit(message[1], testerControl.getcurrUnitClass());
+                reading = Convert.ToSingle(getSign(message[2]) + message.Substring(3));
+                reading_unit=new READING_UNIT(reading,unit);
+                readSuccess = true;
+            }
+            catch
+            {
+                readSuccess = false;
+                if (pauseLiveReading)//if this is live reading then we do not display the error message
+                {
+                    MessageBox.Show("Unable to read reading");
+                    pauseLiveReading = false;
+                }
+            }
+            return reading_unit;
+        }
+        //pass in reading from channel 3, decode it, then add to ...
+        //Changed 11/3/22 to add 5channels
+        private void decodeChannel4(string message)
+        {
+            ch4Unit = "";
+            ch4Reading = 0;
+            //message=<peak flag><unit><sign><reading>
+
+            try
+            {
+                ch4Unit = getUnit(message[1], chann4Control.getcurrUnitClass());
+                ch4Reading = Convert.ToSingle(getSign(message[2]) + message.Substring(3));
+                readSuccess = true;
+            }
+            catch
+            {
+                readSuccess = false;
+                if (pauseLiveReading)//if this is live reading then we do not display the error message
+                {
+                    MessageBox.Show("Unable to read reading from " + serialPort4.PortName);
+                    pauseLiveReading = false;
+                }
+            }
+        }
+        //pass in reading from channel 3, decode it, then add to ...
+        //Changed 11/3/22 to add 5channels
+        private void decodeChannel5(string message)
+        {
+            ch5Unit = "";
+            ch5Reading = 0;
+            //message=<peak flag><unit><sign><reading>
+
+            try
+            {
+                ch5Unit = getUnit(message[1], chann5Control.getcurrUnitClass());
+                ch5Reading = Convert.ToSingle(getSign(message[2]) + message.Substring(3));
+                readSuccess = true;
+            }
+            catch
+            {
+                readSuccess = false;
+                if (pauseLiveReading)//if this is live reading then we do not display the error message
+                {
+                    MessageBox.Show("Unable to read reading from " + serialPort5.PortName);
+                    pauseLiveReading = false;
                 }
             }
         }
@@ -2391,7 +2633,7 @@ namespace WindowsFormsApplication1
         //Added 4/19/21 for 3 channels
         private void openCh3Port(string portName)
         {
-            closeCh3Port(serialPort3.PortName);
+            closePort(ref serialPort3, 3);
             serialPort3.PortName = portName;
             try
             {
@@ -2402,10 +2644,25 @@ namespace WindowsFormsApplication1
                 MessageBox.Show(e.Message);
             }
         }
+        //Changed 11/3/22 to add 5channels
+        private void openPort(ref SerialPort port,string portName, int channelNum)
+        {
+            closePort(ref port, channelNum);
+            port.PortName = portName;
+            try
+            {
+                port.Open();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
         //open second port
         private void openSecondport(string port1)
         {
-            closeSecondport(serialPort2.PortName);
+            closePort(ref serialPort2, 2);
             serialPort2.PortName = port1;
             try
             {
@@ -2419,7 +2676,7 @@ namespace WindowsFormsApplication1
         //open port, assign port name to serialPort1, change status label to open or give error openning, call Runbgw to run background worker
         private void openport(string port1,ref SerialPort port)
         {
-            closeport(port.PortName);
+            closePort(ref serialPort1, 1);
 
             port.PortName = port1;
             try
@@ -2433,39 +2690,17 @@ namespace WindowsFormsApplication1
             }
 
         }
-        //close second port, assign passed in port2 name to serialport2
-        private void closeSecondport(string port2)
+        //Changed 11/3/22 to add 5channels
+        private void closePort(ref SerialPort port, int channelNumber)
         {
-            if (serialPort2.IsOpen)
+            if (port.IsOpen)
             {
-                serialPort2.Close();
-                updateDisconnectCOMList(serialPort2.PortName, 2);//remove -Channel1 from comList for currentPort
-            }
-            serialPort2.PortName = port2;
-        }
-        //Added 4/19/21 for 3 channels
-        private void closeCh3Port(string port)
-        {
-            if (serialPort3.IsOpen)
-            {
-                serialPort3.Close();
-                updateDisconnectCOMList(serialPort3.PortName, 3);//remove -Channel1 from comList for currentPort
-            }
-            serialPort3.PortName = port;
-        }
-        //close port from channel 1, change status label to close
-        private void closeport(string port1)
-        {
-            if (serialPort1.IsOpen)
-            {
-                serialPort1.Close();
-                toolStripStatusLabel2.Text = " Status: Closed";
-                updateDisconnectCOMList(serialPort1.PortName, 1);//remove -Channel1 from comList for currentPort
+                port.Close();
+                updateDisconnectCOMList(port.PortName, channelNumber);//remove -Channel1 from comList for currentPort
             }
 
-            serialPort1.PortName = port1;
+            port.PortName = "COM101";
         }
-
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             if (enableLiveReadingToolStripMenuItem.Checked == false)
@@ -2536,6 +2771,16 @@ namespace WindowsFormsApplication1
                 serialPort3.Close();
                 serialPort3.PortName = "COM103";
                 showComConnect_Channel3(noComConnectMessage);
+            }
+            if (serialPort4.IsOpen)
+            {
+                serialPort4.Close();
+                serialPort4.PortName = "COM104";
+            }
+            if (serialPort5.IsOpen)
+            {
+                serialPort5.Close();
+                serialPort5.PortName = "COM105";
             }
             foreach (string portName in SerialPort.GetPortNames())
             {
@@ -3338,13 +3583,13 @@ namespace WindowsFormsApplication1
                             xlWorkSheet.Cells[rowIndex, colIndex] = dr[dc.ColumnName];
                         }
                         //Write high,low, target to column in Excel
-                        xlWorkSheet.Cells[rowIndex, colIndex + 1] = high;
-                        xlWorkSheet.Cells[rowIndex, colIndex + 2] = low;
-                        xlWorkSheet.Cells[rowIndex, colIndex + 3] = target_value;
+                        //xlWorkSheet.Cells[rowIndex, colIndex + 1] = high;
+                        //xlWorkSheet.Cells[rowIndex, colIndex + 2] = low;
+                        //xlWorkSheet.Cells[rowIndex, colIndex + 3] = target_value;
                     }
-                    xlWorkSheet.Cells[startRow, colIndex + 1] = "High Limit";
-                    xlWorkSheet.Cells[startRow, colIndex + 2] = "Low Limit";
-                    xlWorkSheet.Cells[startRow, colIndex + 3] = "Target";
+                    //xlWorkSheet.Cells[startRow, colIndex + 1] = "High Limit";
+                    //xlWorkSheet.Cells[startRow, colIndex + 2] = "Low Limit";
+                    //xlWorkSheet.Cells[startRow, colIndex + 3] = "Target";
                     ////////////////End writing datas//////////////////////////////
 
                     //Do graph for multiple series
@@ -4084,25 +4329,45 @@ namespace WindowsFormsApplication1
         private void openCloseSecondPort_Click(object sender, EventArgs e)
         {
             openCloseSecondChannel(ref comList4);
+            updateCapturedListHeadersWithPortName(new List<SerialPort> { serialPort1, serialPort2, serialPort3, serialPort4, serialPort5 });
         }
 
         //This method open or close second COM, call whenever Open/Close Second Com button is clicked
+        //Changed 11/3/22 to add 5channels
         private void openCloseSecondChannel(ref ListBox thisList)
         {
             string currentPort = extractCOM(thisList.SelectedItem.ToString());
             opencloseSecondCom(currentPort, thisList);
             changeWinSize(TabPages.SelectedTab.Name);//Call this to ping or unping tester
-            channel2MenuButtonUpdate();
+            //channel2MenuButtonUpdate();
+            updateModeBtnTextAllChannels();
 
         }
         //Added 4/13/21 to addChan3
+        //Changed 11/3/22 to add 5channels
         private void openCloseChannel3(ref ListBox thisList)
         {
             string currentPort = extractCOM(thisList.SelectedItem.ToString());
             opencloseChannel3(currentPort, thisList);
-            changeWinSize(TabPages.SelectedTab.Name);//Call this to ping or unping tester
-            channel3MenuButtonUpdate();
+            //changeWinSize(TabPages.SelectedTab.Name);//Call this to ping or unping tester
+            //channel3MenuButtonUpdate();
+            updateModeBtnTextAllChannels();
         }
+        //Add 11/3/22 to add 5channels
+        private void openCloseChannel4(ref ListBox thisList)
+        {
+            string currentPort = extractCOM(thisList.SelectedItem.ToString());
+            opencloseChannel4(currentPort, thisList);
+            updateModeBtnTextAllChannels();
+        }
+        //Add 11/3/22 to add 5channels
+        private void openCloseChannel5(ref ListBox thisList)
+        {
+            string currentPort = extractCOM(thisList.SelectedItem.ToString());
+            opencloseChannel5(currentPort, thisList);
+            updateModeBtnTextAllChannels();
+        }
+
         //Change Menu button and Mode appearance for Second Channel
         private void channel2MenuButtonUpdate()
         {
@@ -4144,6 +4409,7 @@ namespace WindowsFormsApplication1
                 //ch2MenuControlBtn_calTab.Enabled = false;
             }
         }
+        
         private void refresh_dualTab_Click(object sender, EventArgs e)
         {
             refreshComList();
@@ -4322,11 +4588,34 @@ namespace WindowsFormsApplication1
             updateDualCurrentRunAndChanLabel();
             changeGridAutoColumnSize(ref noCurrDualMasterGrid, colThreshold);
         }
-
+        //show label channel 
+        private void updateCapturedListHeadersWithPortName(List<SerialPort> ports)
+        {
+            string header = "";
+            foreach(SerialPort port in ports)
+            {
+                if((port != null)&&(port.IsOpen))
+                {
+                    header += $" {port.PortName},       ";       
+                }
+            }
+            header = trimLastCharacterIfMatched(header, ',');
+            //only update the header if there is no captured reading yet
+            if (allDataCapturedList.Count<=1)
+            {
+                allDataCapturedList.Clear();
+                allDataCapturedList.Add(header);
+            }
+            //update binding
+            Data5Channels_listBox.DataSource = allDataCapturedList;
+        }
+        //Changed 11/3/22 to add 5channels
         private void openCloseFirstPort_Click(object sender, EventArgs e)
         {
             opencloseFirstCOM(ref comList4);
-            channel1MenuButtonUpdate();
+            //channel1MenuButtonUpdate();
+            updateModeBtnTextAllChannels();
+            updateCapturedListHeadersWithPortName(new List<SerialPort> { serialPort1, serialPort2, serialPort3, serialPort4, serialPort5 });
         }
 
         //Control the visibilities of the passed in Chart's series, based on passed in listBox selection
@@ -4409,7 +4698,7 @@ namespace WindowsFormsApplication1
             zeroControl(serialPort1);
         }
         //call this method to cycle Unit of the tester
-        private void unitControl(SerialPort thisPort, ref TesterControl thisTesterControl)
+        private void NextUnit(SerialPort thisPort, ref TesterControl thisTesterControl)
         {
             if (thisPort.IsOpen)
             {
@@ -4434,9 +4723,40 @@ namespace WindowsFormsApplication1
                 }
             }
         }
+        //Change unit for all channels
+        //Changed 11/3/22 to add 5channels
+        private void NextUnitAllChannels(List<SerialPort> ports,List<TesterControl> controls)
+        {
+            foreach (SerialPort port in ports)
+            {
+                if (port.IsOpen)
+                {
+                    int currUnitCode = -1;
+                    string queryMsg = "";
+                    string message = write_command("?U;", port);
+                    try
+                    {
+                        if (message.Length > 0)
+                        {
+                            currUnitCode = Int32.Parse(message[0].ToString());
+                        }
+                        if (currUnitCode >= 0) //Able to get current Unit
+                        {
+                            int index=ports.IndexOf(port);
+                            queryMsg = controls[index].cycleUnit(currUnitCode);
+                            write_command(queryMsg, port);
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Unable to change Unit");
+                    }
+                }
+            }
+        }
         private void unitControl_button_Click(object sender, EventArgs e)
         {
-            unitControl(serialPort1, ref chann1Control);
+            NextUnit(serialPort1, ref chann1Control);
         }
 
         private void command_text_KeyDown(object sender, KeyEventArgs e)
@@ -4560,7 +4880,7 @@ namespace WindowsFormsApplication1
         //If channel 1 then also add to first channel gridview, not support for channel=2 yet
         private void readFromFirstChannel(SerialPort thisPort, TesterControl testerControl, int channel)
         {
-            pauseLiveReading1 = true;
+            pauseLiveReading = true;
             string ChannMessage = "";
             try
             {
@@ -4570,9 +4890,9 @@ namespace WindowsFormsApplication1
             }
             catch
             {
-                pauseLiveReading1 = false;
+                pauseLiveReading = false;
             }
-            pauseLiveReading1 = false;
+            pauseLiveReading = false;
         }
         private void enterControl_button_Click(object sender, EventArgs e)
         {
@@ -4732,6 +5052,8 @@ namespace WindowsFormsApplication1
         private void chann1_zeroControl_button_Click(object sender, EventArgs e)
         {
             zeroControl(serialPort1);
+            zeroControl(serialPort2);
+            zeroControl(serialPort3);
         }
 
         private void chan2_zeroControl_button_Click(object sender, EventArgs e)
@@ -4741,12 +5063,12 @@ namespace WindowsFormsApplication1
 
         private void chan1_unitControl_button_Click(object sender, EventArgs e)
         {
-            unitControl(serialPort1, ref chann1Control);
+            NextUnit(serialPort1, ref chann1Control);
         }
 
         private void chan2_unitControl_button_Click(object sender, EventArgs e)
         {
-            unitControl(serialPort2, ref chann2Control);
+            NextUnit(serialPort2, ref chann2Control);
         }
 
         private void chan1_modeControl_button_Click(object sender, EventArgs e)
@@ -4784,7 +5106,51 @@ namespace WindowsFormsApplication1
         {
             captureReadingsFromBothChannel();
         }
+        //Changed 11/3/22 to add 5channels
+        private READING_UNIT getReadingUnitFromChannel(SerialPort port, TesterControl control)
+        {
+            readSuccess = false;
+            READING_UNIT reading_unit = new READING_UNIT();
+            pauseLiveReading = true;//set to true to prevent overlap with getting in live reading from channel3
+            try
+            {
+                string Reading = write_command("E", port); //read in second channel reading
+                reading_unit = decodeChannel(Reading, control);
 
+            }
+            catch
+            {
+                pauseLiveReading = false;//resume live reading from channel
+            }
+            pauseLiveReading = false;//resume live reading from channel
+            return reading_unit;
+        }
+        //Changed 11/3/22 to add 5channels
+        //get called when we want to capture all 5 channels at once
+        //Todo: add waiting for all channels to reach peak
+        private string captureReadingsFromAllChannels(List<SerialPort> ports,List<TesterControl> controls)
+        {
+            string returnReadingsUnits = "";
+            foreach (SerialPort port in ports)
+            {
+                if (port.IsOpen)
+                {
+                    READING_UNIT reading_unit = getReadingUnitFromChannel(port, controls[ports.IndexOf(port)]);
+                    returnReadingsUnits += $" {reading_unit.Reading} {reading_unit.Unit},";
+                }
+            }
+            returnReadingsUnits = trimLastCharacterIfMatched(returnReadingsUnits, ',');
+            return returnReadingsUnits;
+        }
+        //delete the last character if it matches w/ passed in char
+        //Changed 11/3/22 to add 5channels
+        private string trimLastCharacterIfMatched(string str,char chrToDelete)
+        {
+            str=str.TrimEnd();
+            if (str.EndsWith(chrToDelete.ToString()))
+                str = str.TrimEnd(chrToDelete);
+            return str;
+        }
         private string showFolderBrowserDialog()
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
@@ -4866,9 +5232,8 @@ namespace WindowsFormsApplication1
             if (serialPort2.IsOpen)
                 wasChan2Open = true;
 
-            closeport(serialPort1.PortName);
-            closeSecondport(serialPort2.PortName);
-
+            closePort(ref serialPort1, 1);
+            closePort(ref serialPort2, 2);
             //run Datalogger
             try
             {
@@ -5032,8 +5397,8 @@ namespace WindowsFormsApplication1
                 if (dialogResult == DialogResult.Yes)
                 {
                     setRegistryValue(defaultTab_keyName, defaultTab_valueName, TabPages.SelectedIndex.ToString());//Set current defaultTab registry
-                    closeport(serialPort1.PortName);
-                    closeSecondport(serialPort2.PortName);
+                    closePort(ref serialPort1, 1);
+                    closePort(ref serialPort2, 2);
                     Process.Start(Application.ExecutablePath);
                     Process.GetCurrentProcess().Kill();
                 }
@@ -5061,6 +5426,7 @@ namespace WindowsFormsApplication1
             updatexyAxisButtonText();
         }
         //copy and return data table that only has Columns index that are passed in
+        //changed 4/13/21 to addCh3
         private DataTable copyColumnsFromTable(DataTable fromTable, int frColIndex, int toColIndex)
         {
             DataTable returnTable = new DataTable();
@@ -5077,6 +5443,8 @@ namespace WindowsFormsApplication1
                 if ((index < frColIndex) || (index > toColIndex))
                     returnTable.Columns.Remove(fromTable.Columns[index].ColumnName);
             }
+            //switch ch1 column to before ch2
+            returnTable.Columns[1].SetOrdinal(0);
             return returnTable;
         }
 
@@ -5429,12 +5797,12 @@ namespace WindowsFormsApplication1
 
         private void ch1UnitBtn_calTab_Click(object sender, EventArgs e)
         {
-            unitControl(serialPort1, ref chann1Control);
+            NextUnit(serialPort1, ref chann1Control);
         }
 
         private void ch2UnitBtn_calTab_Click(object sender, EventArgs e)
         {
-            unitControl(serialPort2, ref chann2Control);
+            NextUnit(serialPort2, ref chann2Control);
         }
 
 
@@ -6862,8 +7230,7 @@ namespace WindowsFormsApplication1
                 return;
 
             //Pause live reading
-            pauseLiveReading2 = true;
-            pauseLiveReading1 = true;
+            pauseLiveReading = true;
 
             string ch1Reading = "", ch2Reading = "";
             string[] reading_arr = new string[] { "" };
@@ -6876,7 +7243,7 @@ namespace WindowsFormsApplication1
                     {//if trough mode is NOT on, or if it was on but the other channel has not escaped threshold 0 yet
                         string message = write_command("E", serialPort1);
                         decodeMessage(message, chann1Control.getcurrUnitClass(), 1); //Write to firstreading
-                        ch1Reading = firstReading.ToString();
+                        ch1Reading = this.ch1Reading.ToString();
                     }
                     else
                     {
@@ -6896,7 +7263,7 @@ namespace WindowsFormsApplication1
                         {//if trough mode is NOT on, or if it was on but the other channel has not escaped threshold 0 yet
                             string message = write_command("E", serialPort2);
                             decodeMessage(message, chann2Control.getcurrUnitClass(), 2); //Write to secondreading
-                            ch2Reading = secondReading.ToString();
+                            ch2Reading = this.ch2Reading.ToString();
                         }
                         else
                         {
@@ -6912,12 +7279,10 @@ namespace WindowsFormsApplication1
             catch
             {
                 //Resume live reading
-                pauseLiveReading1 = false;
-                pauseLiveReading2 = false;
+                pauseLiveReading = false;
             }
             //Resume live reading
-            pauseLiveReading1 = false;
-            pauseLiveReading2 = false;
+            pauseLiveReading = false;
         }
         private void captureBtn_calTab_Click(object sender, EventArgs e)
         {
@@ -8431,8 +8796,8 @@ namespace WindowsFormsApplication1
                 if (dialogResult == DialogResult.Yes)
                 {
                     setRegistryValue(defaultTab_keyName, defaultTab_valueName, TabPages.SelectedIndex.ToString());//Set current defaultTab registry
-                    closeport(serialPort1.PortName);
-                    closeSecondport(serialPort2.PortName);
+                    closePort(ref serialPort1, 1);
+                    closePort(ref serialPort2, 2);
                     Application.Restart();
                 }
             }
@@ -9172,7 +9537,7 @@ namespace WindowsFormsApplication1
                     {//if trough mode is NOT on, or if it was on but the other channel has not escaped threshold 0 yet
                         string message = write_command("E", serialPort2);
                         decodeMessage(message, chann2Control.getcurrUnitClass(), 2); //Write to secondreading
-                        ch2Reading = secondReading.ToString();
+                        ch2Reading = this.ch2Reading.ToString();
                     }
                     else
                     {
@@ -9448,6 +9813,14 @@ namespace WindowsFormsApplication1
             copyCW_btn.Visible = false;
             copyCCW_btn.Visible = false;
         }
+
+        private void Capture_btn_Click(object sender, EventArgs e)
+        {
+            string newCapturedStr= captureReadingsFromAllChannels(new List<SerialPort> { serialPort1, serialPort2, serialPort3, serialPort4, serialPort5 }
+            ,new List<TesterControl> { chann1Control, chann2Control, chann3Control, chann4Control, chann5Control });
+            addNewCapturedDataAllChannels(newCapturedStr);
+        }
+
         //Added 6/25/20 to changeUI
         private void ALCW_btn_Click(object sender, EventArgs e)
         {
@@ -9473,6 +9846,127 @@ namespace WindowsFormsApplication1
         {
 
         }
+        //delete line from captured reading line
+        private void Delete_btn_Click(object sender, EventArgs e)
+        {
+            int selectedLineIndex = Data5Channels_listBox.SelectedIndex;
+            if (selectedLineIndex>0)
+                allDataCapturedList.RemoveAt(selectedLineIndex);
+            Data5Channels_listBox.DataSource = allDataCapturedList;
+        }
+
+        private void Clear_btn_Click(object sender, EventArgs e)
+        {
+            allDataCapturedList.Clear();
+            updateCapturedListHeadersWithPortName(new List<SerialPort> { serialPort1, serialPort2, serialPort3, serialPort4, serialPort5 });
+            Data5Channels_listBox.DataSource = allDataCapturedList;
+        }
+        private void zeroAllChannels(List<SerialPort> ports)
+        {
+            foreach (SerialPort port in ports)
+            {
+                zeroControl(port);
+            }
+        }
+        private void Zero_btn_Click(object sender, EventArgs e)
+        {
+            zeroAllChannels(new List<SerialPort> { serialPort1, serialPort2, serialPort3, serialPort4, serialPort5 });
+        }
+        //Changed 11/3/22 to add 5channels
+        private void Menu_btn_Click(object sender, EventArgs e)
+        {
+            Form_MenuControl frm = new Form_MenuControl(new List<SerialPort> { serialPort1, serialPort2, serialPort3, serialPort4, serialPort5},
+                new List<TesterControl>{ chann1Control, chann2Control, chann3Control, chann4Control, chann5Control });
+            frm.ShowDialog();
+        }
+        //Changed 11/3/22 to add 5channels
+        private void Mode_btn_Click(object sender, EventArgs e)
+        {
+            string modeTxt = "Mode";
+
+            modeTxt = changeModeAllChannels(new List<SerialPort> { serialPort1, serialPort2, serialPort3, serialPort4, serialPort5 }, 
+                new List<TesterControl> { chann1Control, chann2Control, chann3Control, chann4Control, chann5Control });
+            Mode_btn.Text = modeTxt;
+        }
+        //Changed 11/3/22 to add 5channels
+        private void updateModeBtnTextAllChannels()
+        {
+            Mode_btn.Text = getOneModeFromAllChannel(new List<SerialPort> { serialPort1, serialPort2, serialPort3, serialPort4, serialPort5 },
+                new List<TesterControl> { chann1Control, chann2Control, chann3Control, chann4Control, chann5Control });
+        }
+        //Changed 11/3/22 to add 5channels
+        //go through each port, find the first Mode setting and return what it is
+        private string getOneModeFromAllChannel(List<SerialPort> ports, List<TesterControl> controls)
+        {
+            string modeTxt = "Mode";
+            foreach(SerialPort port in ports)
+            {
+                int index = ports.IndexOf(port);
+                if ((port.IsOpen)&&(index<controls.Count))
+                {
+                    modeTxt = controls[index].getStringMode();
+                    break;
+                }
+            }
+            return modeTxt;
+        }
+        //Changed 11/3/22 to add 5channels
+        //set mode for all channels, then return mode string
+        private string changeModeAllChannels(List<SerialPort> ports, List<TesterControl> controls)
+        {
+            string returnMode = "Mode";
+            for (int index=0;index<ports.Count;index++)
+            {
+                TesterControl control=controls[index];
+                returnMode= modeControl(ports[index], ref control);
+            }
+            return returnMode;
+        }
+
+        private void Export_btn_Click(object sender, EventArgs e)
+        {
+            string fileName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".csv";
+            string path = Path.Combine(getRegistryValue(defaultSaveLoc_keyName, saveLoc_valueName), fileName);
+            /*updateDualChanTable();
+            DataTable tempTable = (copyColumnsFromTable(dualTable, 0, 2)).Copy();
+            if (tempTable.Rows.Count > 0)
+            {
+                isMasterSave = true;
+                quickExportToExcel(path, tempTable, noChart);
+            }*/
+            Regex pattern = new Regex("[ ]{2}");
+            
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                for (int i = 0; i < allDataCapturedList.Count; i++)
+                {
+                    string lineToWriteToExcel = allDataCapturedList[i];
+                    while (lineToWriteToExcel.Contains("  "))
+                    {
+                        lineToWriteToExcel = pattern.Replace(lineToWriteToExcel, " ");
+                    }
+                    sw.WriteLine(lineToWriteToExcel);
+                }
+            }
+            Process.Start(path);
+        }
+
+        private void save_button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openClosechannel5_btn_Click(object sender, EventArgs e)
+        {
+            openCloseChannel5(ref comList4);
+            updateCapturedListHeadersWithPortName(new List<SerialPort> { serialPort1, serialPort2, serialPort3, serialPort4, serialPort5 });
+        }
+
+        private void Unit_btn_Click(object sender, EventArgs e)
+        {
+            NextUnitAllChannels(new List<SerialPort> { serialPort1, serialPort2, serialPort3, serialPort4, serialPort5},
+                new List<TesterControl> { chann1Control, chann2Control, chann3Control, chann4Control, chann5Control});
+        }
 
         private void ch3ZeroClear_btn_Click(object sender, EventArgs e)
         {
@@ -9491,7 +9985,13 @@ namespace WindowsFormsApplication1
 
         private void ch3Unit_btn_Click(object sender, EventArgs e)
         {
-            unitControl(serialPort3, ref chann3Control);
+            NextUnit(serialPort3, ref chann3Control);
+        }
+        //Changed 11/3/22 to add 5channels
+        private void openClosechannel4_btn_Click(object sender, EventArgs e)
+        {
+            openCloseChannel4(ref comList4);
+            updateCapturedListHeadersWithPortName(new List<SerialPort> { serialPort1, serialPort2, serialPort3, serialPort4, serialPort5 });
         }
 
         //Added 6/25/20 to changeUI
@@ -9523,6 +10023,7 @@ namespace WindowsFormsApplication1
         private void openClosechannel3_btn_Click(object sender, EventArgs e)
         {
             openCloseChannel3(ref comList4);
+            updateCapturedListHeadersWithPortName(new List<SerialPort> { serialPort1, serialPort2, serialPort3, serialPort4, serialPort5 });
         }
 
         //Start new test in Single Channel Tab

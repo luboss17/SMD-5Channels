@@ -16,9 +16,11 @@ namespace WindowsFormsApplication1
     public partial class Form_MenuControl : Form
     {
         private SerialPort port=new SerialPort();
-        private string formName="Menu Remote Control-";
+        private List<SerialPort> ports=new List<SerialPort>();
+        private string formName="Menu Remote Control ";
         private string[] peakPlanking = new string[49];
         private TesterControl thisTesterControl=new TesterControl();
+        private List<TesterControl> allTesterControlList=new List<TesterControl>();
         private string currMode;
         private string currStrMode;
         private int currAC;
@@ -36,7 +38,15 @@ namespace WindowsFormsApplication1
             formName += channel;
             this.Text = formName;
         }
-
+        public Form_MenuControl(List<SerialPort> ports,List<TesterControl> AllTesterControls)
+        {
+            InitializeComponent();
+            this.ports = ports;
+            port = ports[0];
+            allTesterControlList = AllTesterControls;
+            thisTesterControl = allTesterControlList[0];
+            this.Text = formName;
+        }
         private void Form_MenuControl_Load(object sender, EventArgs e)
         {
             loadInitalForm();
@@ -207,8 +217,19 @@ namespace WindowsFormsApplication1
         
         private void submit_button_Click(object sender, EventArgs e)
         {
-            Form1.write_command(setModeCommand(), port);
-            Form1.write_command(setUnitCommand(), port);
+            if (ports.Count > 0)
+            {
+                foreach (SerialPort port in ports)
+                {
+                    Form1.write_command(setModeCommand(), port);
+                    Form1.write_command(setUnitCommand(), port);
+                }
+            }
+            else
+            {
+                Form1.write_command(setModeCommand(), port);
+                Form1.write_command(setUnitCommand(), port);
+            }
             thisTesterControl.getModeAndUnitClass(Form1.write_command("?M;",port),Form1.write_command("?C;",port),Form1.write_command("?U;",port));//update all the info for Passed in TesterControl
 
             getInitialValues();
